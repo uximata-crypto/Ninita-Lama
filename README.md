@@ -1,64 +1,66 @@
-# Ninita e Lama — Versão Web para Vercel
+# Ninita e Lama — Versão Interativa para Vercel
 
-Versão web do protótipo **Ninita e Lama — A Viagem dos Mundos Mágicos**, preparada para publicação direta no Vercel.
+Esta versão já inclui um primeiro minijogo verdadeiramente interativo.
 
-## Funcionalidades incluídas
+## O que já funciona
 
-- Página inicial;
-- história de Ninita e Lama;
-- galeria dos cenários;
-- mapa com 10 mundos;
-- desbloqueio progressivo;
-- cinco tarefas por mundo;
-- estrelas como recompensa;
+- Ninita movimenta-se no quarto;
+- Lama segue a Ninita;
+- teclas direcionais `↑ ↓ ← →`;
+- teclas alternativas `W A S D`;
+- tecla `Espaço`, `E` ou `Enter` para agarrar e usar;
+- controlos táteis no ecrã para telemóvel e tablet;
+- objetos que podem ser agarrados, transportados e arrumados;
+- cinco tarefas jogáveis no Quarto Encantado;
+- tarefa especial de fazer a cama;
+- zonas de destino iluminadas;
+- música real executada por músicos;
+- gravação real de passos em chão de madeira;
+- efeitos licenciados de botão, agarrar, arrumar e concluir;
+- página própria com créditos e licenças;
+- reguladores separados de música e efeitos;
 - progresso guardado no navegador;
-- adaptação a computador, telemóvel e tablet;
-- instalação como aplicação web;
-- funcionamento offline depois da primeira abertura;
-- configuração `vercel.json`;
-- cabeçalhos de segurança e cache.
+- dez mundos;
+- publicação direta no Vercel;
+- funcionamento offline depois da primeira visita.
 
-## Publicar através do GitHub
+## Tarefas interativas do Quarto Encantado
 
-1. Crie ou abra o repositório do jogo no GitHub.
-2. Carregue o conteúdo desta pasta para a raiz do repositório.
-3. Entre no Vercel.
-4. Escolha **Add New → Project**.
-5. Importe o repositório do GitHub.
-6. Na configuração do projeto use:
-   - **Framework Preset:** Other
-   - **Root Directory:** `./`
-   - **Build Command:** deixe vazio
-   - **Output Directory:** deixe vazio
-   - **Install Command:** deixe vazio
-7. Carregue em **Deploy**.
+1. Fazer a cama;
+2. guardar o brinquedo na caixa;
+3. colocar os livros na estante;
+4. arrumar os sapatos no tapete;
+5. pendurar a mochila.
 
-O Vercel publicará diretamente o `index.html`. Cada novo commit no GitHub criará uma nova publicação automática.
+## Publicar no Vercel através do GitHub
 
-## Publicar sem GitHub
+1. Descompacte o ZIP.
+2. Carregue todos os ficheiros descompactados para a raiz do repositório.
+3. No Vercel, escolha **Add New → Project**.
+4. Importe o repositório.
+5. Use:
+   - Framework Preset: `Other`;
+   - Root Directory: `./`;
+   - Build Command: vazio;
+   - Output Directory: vazio;
+   - Install Command: vazio.
+6. Carregue em **Deploy**.
 
-Com a ferramenta Vercel CLI instalada, execute na pasta do projeto:
+## Observação sobre o som
 
-```bash
-vercel --prod
-```
+Os sons sintetizados da versão anterior foram removidos. Esta versão usa música e gravações reais, provenientes de bibliotecas com licenças CC0 e CC-BY.
 
-## Testar localmente
+Os navegadores não permitem que a música comece automaticamente antes de uma ação do utilizador. A música inicia-se no primeiro clique, toque ou tecla pressionada.
 
-Pode abrir o ficheiro `index.html` diretamente.
+Nesta versão de teste, o áudio é transmitido diretamente das fontes licenciadas. É necessária ligação à Internet para ouvir os sons. Consulte `CREDITOS_AUDIO.md`.
 
-Para testar o modo offline e a instalação como aplicação web, execute:
+## Próximos minijogos
 
-```bash
-python -m http.server 8080
-```
+Depois de testar o Quarto Encantado, poderão ser acrescentados:
 
-Depois abra:
-
-```text
-http://localhost:8080
-```
-
-## Música e efeitos
-
-Esta versão ainda não contém música nem efeitos sonoros. O sistema de áudio será introduzido depois de aprovarmos a estrutura, o grafismo e a jogabilidade inicial.
+- limpar a praia arrastando lixo para os contentores;
+- plantar e regar na floresta;
+- letras, números e puzzles na escola;
+- percursos na piscina;
+- alimentar animais na quinta;
+- conduzir um carrinho no parque.

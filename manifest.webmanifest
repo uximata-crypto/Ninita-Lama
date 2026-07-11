@@ -1,10 +1,11 @@
 {
   "name": "Ninita e Lama — Mundos Mágicos",
   "short_name": "Ninita e Lama",
-  "description": "Jogo infantil educativo de Ninita e Lama.",
+  "description": "Jogo infantil interativo de Ninita e Lama.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "orientation": "landscape-primary",
   "background_color": "#fff8fc",
   "theme_color": "#b23683",
   "icons": [
