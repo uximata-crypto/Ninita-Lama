@@ -202,3 +202,104 @@ img{display:block;max-width:100%}
   text-decoration:none;
   color:#6c4ba8
 }
+
+
+/* --- Ajustes da versão realista vertical --- */
+.home-screen{
+  background:linear-gradient(to bottom,rgba(38,16,47,.15),rgba(38,16,47,.84)),
+  url("./assets/images/quarto.webp") center/cover no-repeat;
+}
+
+.story-hero,
+.level-hero{
+  min-height:380px;
+}
+
+.gallery-card img{
+  aspect-ratio:9/16;
+}
+
+.world-card{
+  min-height:290px;
+}
+
+.level-screen{
+  background-position:center;
+  background-size:cover;
+  background-attachment:scroll;
+}
+
+.game-shell{
+  max-width:640px;
+  margin:0 auto;
+  padding:14px 10px 24px;
+}
+
+.game-layout{
+  grid-template-columns:1fr !important;
+  gap:14px;
+}
+
+.game-stage-wrap{
+  max-width:560px;
+  margin:0 auto;
+  border-radius:26px;
+}
+
+#game-canvas{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:9/16;
+  touch-action:none;
+}
+
+.game-hud{
+  max-width:560px;
+  margin:0 auto;
+}
+
+.game-controls{
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+  gap:16px;
+  margin-top:14px;
+}
+
+.game-instructions{
+  max-width:560px;
+  margin:0 auto 12px;
+}
+
+.action-btn{
+  width:110px;
+  height:110px;
+}
+
+@media (min-width:700px){
+  .game-layout{
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media (max-width:480px){
+  .story-hero,
+  .level-hero{
+    min-height:300px;
+  }
+
+  .world-card{
+    min-height:250px;
+  }
+
+  .game-controls{
+    gap:10px;
+  }
+
+  .action-btn{
+    width:98px;
+    height:98px;
+    font-size:.84rem;
+  }
+}

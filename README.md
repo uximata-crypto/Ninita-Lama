@@ -64,3 +64,12 @@ Depois de testar o Quarto Encantado, poderão ser acrescentados:
 - percursos na piscina;
 - alimentar animais na quinta;
 - conduzir um carrinho no parque.
+
+
+## Atualização desta versão
+
+- cenários substituídos por imagens realistas;
+- jogo adaptado para ecrã vertical;
+- Quarto Encantado com fundo realista no minijogo;
+- canvas interativo em formato 9:16;
+- melhor adaptação para jogar no telemóvel em modo retrato.

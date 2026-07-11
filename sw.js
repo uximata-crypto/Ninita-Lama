@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-sons-reais-v4";
+const CACHE = "ninita-lama-realista-vertical-v5";
 const ASSETS = [
   "./",
   "./index.html",

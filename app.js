@@ -1,5 +1,5 @@
 const worlds = [
-  {id:1,title:"O Quarto Encantado",subtitle:"Minijogo interativo",emoji:"🛏️",image:"./assets/images/quarto.webp",star:"Estrela da Organização",intro:"Move a Ninita, agarra os objetos e coloca-os nos lugares certos."},
+  {id:1,title:"O Quarto Encantado",subtitle:"Minijogo interativo",emoji:"🛏️",image:"./assets/images/quarto.webp",star:"Estrela da Organização",intro:"Move a Ninita no cenário realista, agarra os objetos e arruma tudo nos lugares certos."},
   {id:2,title:"A Casa das Surpresas",subtitle:"Ajudar também é brincar",emoji:"🏠",image:"./assets/images/sala.webp",star:"Estrela da Ajuda",intro:"Cada divisão da casa esconde uma pequena missão para Ninita e Lama.",tasks:["Preparar um pequeno-almoço saudável","Colocar a mesa","Regar as plantas","Separar o lixo para reciclagem","Arrumar a sala"]},
   {id:3,title:"A Escola dos Sonhos",subtitle:"Descobrir e aprender",emoji:"🏫",image:"./assets/images/escola.webp",star:"Estrela do Conhecimento",intro:"As letras, os números e as cores precisam da ajuda da Ninita para regressarem aos livros.",tasks:["Preparar a mochila","Reconhecer letras","Resolver uma conta simples","Completar um puzzle","Partilhar os materiais"]},
   {id:4,title:"A Praia das Conchas",subtitle:"Proteger o oceano",emoji:"🏖️",image:"./assets/images/praia.webp",star:"Estrela do Oceano",intro:"Uma praia paradisíaca precisa de ficar limpa para que os animais marinhos voltem a sorrir.",tasks:["Recolher o lixo da areia","Separar plástico, papel e vidro","Encontrar conchas brilhantes","Ajudar uma tartaruga","Construir um castelo de areia"]},
@@ -419,7 +419,7 @@ function renderBedroomGame(world){
     {id:"toy",label:"Guardar o brinquedo na caixa"},
     {id:"books",label:"Colocar os livros na estante"},
     {id:"shoes",label:"Arrumar os sapatos no tapete"},
-    {id:"backpack",label:"Pendurar a mochila"}
+    {id:"backpack",label:"Arrumar a mochila"}
   ];
 
   app.innerHTML = `
@@ -435,7 +435,7 @@ function renderBedroomGame(world){
       <section class="game-layout">
         <div>
           <div class="game-stage-wrap">
-            <canvas id="game-canvas" width="960" height="540" aria-label="Quarto interativo da Ninita"></canvas>
+            <canvas id="game-canvas" width="540" height="960" aria-label="Quarto interativo vertical da Ninita"></canvas>
             <div id="game-prompt" class="game-prompt">Explora o quarto e aproxima-te de um objeto.</div>
 
             <div id="game-reward" class="game-reward">
@@ -496,6 +496,9 @@ class BedroomGame{
     this.actionButton = document.querySelector("#action-button");
     this.tasks = tasks;
 
+    this.roomImage = new Image();
+    this.roomImage.src = "./assets/images/quarto.webp";
+
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     this.keys = new Set();
@@ -507,8 +510,8 @@ class BedroomGame{
     this.successPlayed = false;
 
     this.player = {
-      x:480,
-      y:390,
+      x:270,
+      y:835,
       radius:22,
       speed:205,
       facing:1,
@@ -516,32 +519,32 @@ class BedroomGame{
     };
 
     this.lama = {
-      x:425,
-      y:420
+      x:220,
+      y:875
     };
 
     this.bed = {
-      x:65,
-      y:155,
+      x:110,
+      y:420,
       width:315,
-      height:165,
-      interactionX:245,
-      interactionY:350,
+      height:240,
+      interactionX:270,
+      interactionY:675,
       made:false
     };
 
     this.targets = {
-      toy:{x:80,y:390,width:115,height:95,label:"CAIXA"},
-      books:{x:760,y:160,width:120,height:145,label:"ESTANTE"},
-      shoes:{x:470,y:465,width:145,height:54,label:"SAPATOS"},
-      backpack:{x:850,y:300,width:85,height:125,label:"MOCHILA"}
+      toy:{x:72,y:326,width:120,height:110,label:"CAIXA"},
+      books:{x:58,y:112,width:182,height:150,label:"LIVROS"},
+      shoes:{x:350,y:872,width:120,height:66,label:"SAPATOS"},
+      backpack:{x:400,y:340,width:90,height:130,label:"MOCHILA"}
     };
 
     this.objects = [
-      {id:"toy",kind:"toy",x:330,y:430,placed:false,radius:25},
-      {id:"books",kind:"books",x:675,y:405,placed:false,radius:27},
-      {id:"shoes",kind:"shoes",x:575,y:365,placed:false,radius:25},
-      {id:"backpack",kind:"backpack",x:735,y:460,placed:false,radius:28}
+      {id:"toy",kind:"toy",x:380,y:760,placed:false,radius:25},
+      {id:"books",kind:"books",x:365,y:585,placed:false,radius:27},
+      {id:"shoes",kind:"shoes",x:120,y:840,placed:false,radius:25},
+      {id:"backpack",kind:"backpack",x:135,y:700,placed:false,radius:28}
     ];
 
     this.boundKeyDown = event=>this.onKeyDown(event);
@@ -665,17 +668,17 @@ class BedroomGame{
     }
 
     this.player.x = Math.max(35, Math.min(this.width - 35, this.player.x));
-    this.player.y = Math.max(205, Math.min(this.height - 35, this.player.y));
+    this.player.y = Math.max(260, Math.min(this.height - 35, this.player.y));
 
     // Lama segue a Ninita de forma suave.
-    const lamaTargetX = this.player.x - 54 * this.player.facing;
-    const lamaTargetY = this.player.y + 25;
+    const lamaTargetX = this.player.x - 46 * this.player.facing;
+    const lamaTargetY = this.player.y + 38;
     this.lama.x += (lamaTargetX - this.lama.x) * Math.min(1, delta * 4.1);
     this.lama.y += (lamaTargetY - this.lama.y) * Math.min(1, delta * 4.1);
 
     if(this.carrying){
       this.carrying.x = this.player.x + 5 * this.player.facing;
-      this.carrying.y = this.player.y - 62;
+      this.carrying.y = this.player.y - 74;
     }
 
     this.updatePrompt();
@@ -699,7 +702,7 @@ class BedroomGame{
       }
 
       // Largar no chão fora do destino.
-      this.carrying.x = this.player.x + 34 * this.player.facing;
+      this.carrying.x = this.player.x + 26 * this.player.facing;
       this.carrying.y = this.player.y + 10;
       this.carrying = null;
       audio.effect("click");
@@ -861,136 +864,19 @@ class BedroomGame{
   drawRoom(){
     const context = this.context;
 
-    // Parede.
-    context.fillStyle = "#f7d9eb";
-    context.fillRect(0,0,this.width,205);
-
-    // Rodapé.
-    context.fillStyle = "#fff8fc";
-    context.fillRect(0,195,this.width,18);
-
-    // Chão de madeira.
-    context.fillStyle = "#dba878";
-    context.fillRect(0,213,this.width,this.height-213);
-
-    for(let x=0;x<this.width;x+=80){
-      context.fillStyle = x%160===0 ? "#e5b585" : "#d29a6b";
-      context.fillRect(x,213,78,this.height-213);
-    }
-
-    for(let y=250;y<this.height;y+=75){
-      context.strokeStyle = "rgba(110,65,43,.18)";
-      context.lineWidth = 2;
-      context.beginPath();
-      context.moveTo(0,y);
-      context.lineTo(this.width,y);
-      context.stroke();
-    }
-
-    // Janela.
-    this.roundedRectangle(415,35,170,120,18,"#bce8ff","#ffffff",8);
-    context.strokeStyle = "#ffffff";
-    context.lineWidth = 6;
-    context.beginPath();
-    context.moveTo(500,40);
-    context.lineTo(500,150);
-    context.moveTo(420,95);
-    context.lineTo(580,95);
-    context.stroke();
-
-    // Cortinas.
-    context.fillStyle = "#c885d8";
-    context.beginPath();
-    context.moveTo(390,22);
-    context.quadraticCurveTo(405,90,392,175);
-    context.lineTo(435,175);
-    context.quadraticCurveTo(426,95,448,22);
-    context.closePath();
-    context.fill();
-
-    context.beginPath();
-    context.moveTo(610,22);
-    context.quadraticCurveTo(595,90,608,175);
-    context.lineTo(565,175);
-    context.quadraticCurveTo(574,95,552,22);
-    context.closePath();
-    context.fill();
-
-    // Cama.
-    const bedColor = this.bed.made ? "#df9bd0" : "#c97fc1";
-    this.roundedRectangle(this.bed.x,this.bed.y,this.bed.width,this.bed.height,24,"#fff5fb","#9a5a91",4);
-    this.roundedRectangle(this.bed.x+15,this.bed.y+32,this.bed.width-30,this.bed.height-47,20,bedColor);
-    this.roundedRectangle(this.bed.x+25,this.bed.y+20,96,48,18,"#fffdfa");
-    this.roundedRectangle(this.bed.x+130,this.bed.y+20,96,48,18,"#f6e9ff");
-
-    if(!this.bed.made){
-      context.strokeStyle = "#8f4d87";
-      context.lineWidth = 5;
-      context.beginPath();
-      context.moveTo(170,230);
-      context.quadraticCurveTo(260,210,345,285);
-      context.stroke();
+    if(this.roomImage.complete){
+      context.drawImage(this.roomImage,0,0,this.width,this.height);
     }else{
-      context.fillStyle = "#fff";
-      context.font = "bold 28px system-ui";
-      context.fillText("★",325,210);
+      context.fillStyle = "#f6d7e8";
+      context.fillRect(0,0,this.width,this.height);
     }
 
-    // Estante.
-    this.roundedRectangle(745,135,150,190,18,"#8f6d9e","#ffffff",5);
-    for(let row=0;row<3;row++){
-      context.fillStyle = "#6f527b";
-      context.fillRect(760,185+row*53,120,7);
-    }
-    const bookColors = ["#ff769f","#78c8dc","#ffe26e","#8ed18d","#ad8de0"];
-    bookColors.forEach((color,index)=>{
-      context.fillStyle = color;
-      context.fillRect(768+index*21,145,15,38);
-    });
-
-    // Tapete central.
-    context.fillStyle = "#e6a5d4";
-    context.beginPath();
-    context.ellipse(500,405,205,100,0,0,Math.PI*2);
-    context.fill();
-    context.fillStyle = "rgba(255,255,255,.38)";
-    context.beginPath();
-    context.ellipse(500,405,165,72,0,0,Math.PI*2);
-    context.fill();
-
-    // Caixa dos brinquedos.
-    this.roundedRectangle(74,390,128,102,18,"#ea78b0","#ffffff",5);
-    context.fillStyle = "#fff";
-    context.font = "bold 18px system-ui";
-    context.fillText("★",125,447);
-
-    // Tapete para sapatos.
-    this.roundedRectangle(470,475,145,45,18,"#b291c5","#ffffff",4);
-
-    // Cabide/mochila.
-    context.strokeStyle = "#805575";
-    context.lineWidth = 9;
-    context.beginPath();
-    context.moveTo(895,250);
-    context.lineTo(895,430);
-    context.stroke();
-    context.fillStyle = "#805575";
-    context.beginPath();
-    context.arc(895,250,14,0,Math.PI*2);
-    context.fill();
-
-    // Mesa.
-    this.roundedRectangle(655,285,155,75,12,"#f1c58d","#ffffff",4);
-    context.fillStyle = "#8a5c39";
-    context.fillRect(675,355,12,95);
-    context.fillRect(780,355,12,95);
-
-    // Estrelas decorativas.
-    context.font = "25px system-ui";
-    context.fillStyle = "#ffffff";
-    context.fillText("★",640,85);
-    context.fillText("★",705,65);
-    context.fillText("★",325,80);
+    const gradient = context.createLinearGradient(0,0,0,this.height);
+    gradient.addColorStop(0,"rgba(255,255,255,.05)");
+    gradient.addColorStop(.62,"rgba(0,0,0,.02)");
+    gradient.addColorStop(1,"rgba(0,0,0,.10)");
+    context.fillStyle = gradient;
+    context.fillRect(0,0,this.width,this.height);
   }
 
   drawTargets(){
