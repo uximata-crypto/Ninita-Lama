@@ -312,3 +312,169 @@ img{display:block;max-width:100%}
     font-size:.84rem;
   }
 }
+
+
+/* --- Comandos visíveis dentro do cenário e toque direto --- */
+.game-stage-wrap{
+  position:relative;
+  overflow:hidden;
+}
+
+.game-controls{
+  display:none !important;
+}
+
+.game-controls-overlay{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+}
+
+.game-controls-overlay .overlay-dpad{
+  position:absolute;
+  left:12px;
+  bottom:14px;
+  grid-template-columns:44px 44px 44px;
+  grid-template-rows:44px 44px 44px;
+  gap:4px;
+  pointer-events:auto;
+}
+
+.game-controls-overlay .control-btn{
+  border-radius:14px;
+  background:rgba(255,255,255,.60);
+  color:var(--purple);
+  box-shadow:0 6px 16px rgba(25,10,30,.18);
+  backdrop-filter:blur(6px);
+  font-size:1.1rem;
+}
+
+.game-controls-overlay .control-btn.active,
+.game-controls-overlay .control-btn:active{
+  background:rgba(72,40,98,.92);
+  color:#fff;
+}
+
+.game-controls-overlay .overlay-action{
+  position:absolute;
+  right:12px;
+  bottom:18px;
+  width:84px;
+  height:84px;
+  padding:8px;
+  font-size:.70rem;
+  line-height:1.08;
+  pointer-events:auto;
+  opacity:.93;
+  box-shadow:0 10px 22px rgba(178,54,131,.32);
+}
+
+.game-prompt{
+  top:12px;
+  bottom:auto;
+  transform:translateX(-50%);
+  max-width:calc(100% - 28px);
+  font-size:.78rem;
+}
+
+@media (max-width:480px){
+  .game-controls-overlay .overlay-dpad{
+    left:10px;
+    bottom:10px;
+    grid-template-columns:40px 40px 40px;
+    grid-template-rows:40px 40px 40px;
+  }
+
+  .game-controls-overlay .control-btn{
+    font-size:1rem;
+    border-radius:12px;
+  }
+
+  .game-controls-overlay .overlay-action{
+    right:10px;
+    bottom:12px;
+    width:76px;
+    height:76px;
+    font-size:.66rem;
+  }
+
+  .game-prompt{
+    font-size:.74rem;
+  }
+}
+
+
+/* --- Joystick redondo e arrasto direto de objetos --- */
+.game-controls-overlay .overlay-dpad{
+  display:none !important;
+}
+
+.virtual-joystick{
+  position:absolute;
+  left:12px;
+  bottom:14px;
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  pointer-events:auto;
+  touch-action:none;
+  opacity:.72;
+  transition:opacity .15s ease;
+}
+
+.virtual-joystick:active{
+  opacity:.96;
+}
+
+.joystick-ring{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.24);
+  border:3px solid rgba(255,255,255,.70);
+  box-shadow:
+    0 7px 20px rgba(25,10,30,.24),
+    inset 0 0 18px rgba(255,255,255,.20);
+  backdrop-filter:blur(5px);
+}
+
+.joystick-knob{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:44px;
+  height:44px;
+  margin-left:-22px;
+  margin-top:-22px;
+  border-radius:50%;
+  background:rgba(108,75,168,.88);
+  border:3px solid rgba(255,255,255,.88);
+  box-shadow:0 5px 14px rgba(35,16,45,.30);
+  transform:translate(0,0);
+  transition:transform .04s linear;
+}
+
+.game-controls-overlay .overlay-action{
+  opacity:.76;
+}
+
+.game-controls-overlay .overlay-action:active{
+  opacity:1;
+}
+
+@media (max-width:480px){
+  .virtual-joystick{
+    left:9px;
+    bottom:10px;
+    width:82px;
+    height:82px;
+  }
+
+  .joystick-knob{
+    width:40px;
+    height:40px;
+    margin-left:-20px;
+    margin-top:-20px;
+  }
+}

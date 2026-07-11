@@ -1,41 +1,42 @@
 # Créditos de áudio
 
-## Música
+## Banda sonora original de aventura familiar
 
-### Good Morning
-- Autor: Cakeflaps @ You're Perfect Studio
-- Licença escolhida para este projeto: CC0
-- Página: https://opengameart.org/content/good-morning
+Esta versão contém onze composições instrumentais originais produzidas
+especificamente para **Ninita e Lama**.
 
-### Town Theme RPG
-- Autor: cynicmusic
-- Licença: CC0
-- Página: https://opengameart.org/content/town-theme-rpg
+A direção musical combina, de forma original:
 
-### Happy flutes, for fantasy setting
-- Autor: Tomasz Kucza / magory.games
-- Baseado no trabalho de piermic
-- Licença: CC-BY 3.0
-- Página: https://opengameart.org/content/happy-flutes-for-fantasy-setting
+- pop tropical;
+- percussão de celebração;
+- marimba, steel drums e guitarra acústica;
+- flautas, metais e cordas;
+- coro sem palavras;
+- energia de musical de animação;
+- ambientes cinematográficos de aventura e descoberta.
 
-## Efeitos
+As referências indicadas pelo utilizador foram usadas apenas para definir
+características gerais, como energia, instrumentação, ambiente de aventura
+e emoção familiar.
 
-### Steps in wood floor
-- Autor: mikeask
-- Licença: CC0
-- Página: https://opengameart.org/content/steps-in-wood-floor
+Não foram copiadas melodias, letras, arranjos ou gravações de músicas
+comerciais.
 
-### Kenney UI Audio
-- Autor: Kenney
-- Licença: CC0
-- Repositório: https://github.com/Calinou/kenney-ui-audio
+## Faixas
 
-### Gem collect SFX
-- Autor: Bobjt
-- Licença: CC0
-- Página: https://opengameart.org/content/gem-collect-sfx
+1. Mundos em Festa — introdução;
+2. Sonho da Lua — Quarto Encantado;
+3. Manhã de Alegria — Casa das Surpresas;
+4. Vamos Descobrir — Escola dos Sonhos;
+5. Oceano Livre — Praia das Conchas;
+6. Coração da Natureza — Floresta Encantada;
+7. Splash Feliz — Piscina Tropical;
+8. Amigos da Natureza — Quinta Feliz;
+9. Dia de Festa — Parque das Aventuras;
+10. Juntos Brilhamos — Cidade Colorida;
+11. Somos Luz — Ilha do Arco-Íris.
 
-## Nota
+## Efeitos sonoros
 
-Os ficheiros são reproduzidos remotamente nesta versão web de teste.
-É necessária uma ligação à Internet para ouvir a música e os efeitos.
+Mantêm-se os efeitos licenciados já descritos na página
+`creditos-audio.html`.

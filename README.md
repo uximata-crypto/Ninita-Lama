@@ -86,3 +86,42 @@ Nesta versão, os dez níveis utilizam o mesmo motor de jogo vertical:
 - cinco tarefas próprias em cada mundo;
 - conclusão, recompensa e desbloqueio do nível seguinte;
 - cenários realistas em formato vertical.
+
+
+## Atualização dos controlos táteis
+
+- comandos reposicionados dentro do cenário, em modo flutuante;
+- botões mais pequenos e sem tapar a ação principal;
+- possibilidade de mover a Ninita diretamente com o dedo no cenário;
+- toque junto dos objetos e zonas de tarefa para agarrar, usar e concluir;
+- continua a existir controlo por teclado e botão AGARRAR/USAR.
+
+
+## Joystick e arrasto direto
+
+- joystick virtual redondo dentro do cenário;
+- movimento contínuo em qualquer direção;
+- os objetos podem ser agarrados e arrastados diretamente com o dedo;
+- quando o objeto chega à zona correta, fica automaticamente colocado;
+- o botão AGARRAR/USAR permanece disponível para teclado e acessibilidade;
+- continua a ser possível mover a Ninita arrastando o dedo no cenário.
+
+
+
+
+## Nova banda sonora de aventura familiar
+
+A banda sonora anterior foi substituída por onze músicas instrumentais
+originais com uma direção mais cinematográfica, tropical e emocional.
+
+Características:
+
+- introdução com energia de celebração e descoberta;
+- pop tropical com guitarra, marimba e percussão;
+- flautas, metais e steel drums;
+- cordas e coro sem palavras nos momentos de maior emoção;
+- faixas próprias para cada cenário;
+- música adequada a crianças abaixo dos 10 anos;
+- sem letras;
+- sem copiar melodias ou gravações comerciais;
+- ficheiros locais preparados para o Vercel.

@@ -61,9 +61,17 @@ function completeWorld(worldId){
 // -------------------------------------------------------------
 const REAL_AUDIO = {
   music: {
-    goodMorning: "https://opengameart.org/sites/default/files/Cakeflaps%20-%20Good%20Morning_0.ogg",
-    townTheme: "https://opengameart.org/sites/default/files/TownTheme.mp3",
-    happyFlutes: "https://opengameart.org/sites/default/files/tkucza-happyflutes.mp3"
+    aventuraIntro: "./assets/audio/intro_mundos_em_festa.mp3",
+    quartoMagico: "./assets/audio/quarto_sonho_da_lua.mp3",
+    casaFeliz: "./assets/audio/casa_manha_de_alegria.mp3",
+    escolaDescobrir: "./assets/audio/escola_vamos_descobrir.mp3",
+    praiaLivre: "./assets/audio/praia_oceano_livre.mp3",
+    florestaCoracao: "./assets/audio/floresta_coracao_da_natureza.mp3",
+    piscinaSplash: "./assets/audio/piscina_splash_feliz.mp3",
+    quintaAmigos: "./assets/audio/quinta_amigos_da_natureza.mp3",
+    parqueFesta: "./assets/audio/parque_dia_de_festa.mp3",
+    cidadeJuntos: "./assets/audio/cidade_juntos_brillhamos.mp3",
+    arcoirisLuz: "./assets/audio/arcoiris_somos_luz.mp3"
   },
   effects: {
     click: "https://raw.githubusercontent.com/Calinou/kenney-ui-audio/master/addons/kenney_ui_audio/click1.wav",
@@ -83,7 +91,7 @@ class AudioManager{
     }catch{}
 
     this.enabled = saved?.enabled ?? true;
-    this.musicVolume = saved?.musicVolume ?? 0.25;
+    this.musicVolume = saved?.musicVolume ?? 0.30;
     this.effectsVolume = saved?.effectsVolume ?? 0.70;
     this.music = null;
     this.currentTrack = "";
@@ -134,7 +142,7 @@ class AudioManager{
     this.music = this.createAudio(url,true);
     this.music.volume = this.musicVolume;
     this.music.play().catch(error=>{
-      console.warn("Não foi possível iniciar a música real:",error);
+      console.warn("Não foi possível iniciar a banda sonora:",error);
     });
   }
 
@@ -195,26 +203,26 @@ class AudioManager{
   routeTrack(){
     const route = parseRoute();
 
-    if(route.name === "home") return "goodMorning";
-    if(route.name === "worlds" || route.name === "gallery") return "happyFlutes";
-    if(route.name === "story") return "goodMorning";
+    if(route.name === "home") return "aventuraIntro";
+    if(route.name === "worlds" || route.name === "gallery") return "arcoirisLuz";
+    if(route.name === "story") return "quartoMagico";
 
     if(route.name === "level"){
       return {
-        1:"goodMorning",
-        2:"townTheme",
-        3:"happyFlutes",
-        4:"happyFlutes",
-        5:"happyFlutes",
-        6:"townTheme",
-        7:"happyFlutes",
-        8:"happyFlutes",
-        9:"townTheme",
-        10:"happyFlutes"
-      }[route.param] || "goodMorning";
+        1:"quartoMagico",
+        2:"casaFeliz",
+        3:"escolaDescobrir",
+        4:"praiaLivre",
+        5:"florestaCoracao",
+        6:"piscinaSplash",
+        7:"quintaAmigos",
+        8:"parqueFesta",
+        9:"cidadeJuntos",
+        10:"arcoirisLuz"
+      }[route.param] || "aventuraIntro";
     }
 
-    return "goodMorning";
+    return "aventuraIntro";
   }
 
   refreshForRoute(){
@@ -1637,12 +1645,13 @@ function renderInteractiveWorld(world,configuration){
   const tasks = configuration.tasks;
 
   app.innerHTML = `
-    ${topbar(`${world.emoji} ${world.title}`,"Usa as setas ou os botões no ecrã")}
+    ${topbar(`${world.emoji} ${world.title}`,"Usa as setas, toca nos botões ou arrasta o dedo no cenário")}
     <main class="game-shell">
       <section class="game-instructions">
         <span class="key-chip">↑ ↓ ← → mover</span>
         <span class="key-chip">W A S D mover</span>
         <span class="key-chip">Espaço ou E: agarrar/usar</span>
+        <span class="key-chip">Joystick ou arrastar no cenário: mover</span>
         <strong>${configuration.instruction}</strong>
       </section>
 
@@ -1657,7 +1666,23 @@ function renderInteractiveWorld(world,configuration){
             ></canvas>
 
             <div id="game-prompt" class="game-prompt">
-              Explora o cenário. Lama acompanha a Ninita.
+              Usa o joystick ou arrasta o dedo para mover. Arrasta diretamente os objetos para os destinos.
+            </div>
+
+            <div class="game-controls-overlay" aria-label="Controlos táteis sobre o cenário">
+              <div
+                id="virtual-joystick"
+                class="virtual-joystick"
+                aria-label="Joystick para mover a Ninita"
+              >
+                <div class="joystick-ring">
+                  <div id="joystick-knob" class="joystick-knob"></div>
+                </div>
+              </div>
+
+              <button id="action-button" class="action-btn overlay-action" aria-label="Agarrar ou usar">
+                AGARRAR<br>USAR
+              </button>
             </div>
 
             <div id="game-reward" class="game-reward">
@@ -1675,19 +1700,6 @@ function renderInteractiveWorld(world,configuration){
                 </button>
               </article>
             </div>
-          </div>
-
-          <div class="game-controls" aria-label="Controlos táteis">
-            <div class="dpad">
-              <button class="control-btn control-up" data-direction="up" aria-label="Cima">▲</button>
-              <button class="control-btn control-left" data-direction="left" aria-label="Esquerda">◀</button>
-              <button class="control-btn control-down" data-direction="down" aria-label="Baixo">▼</button>
-              <button class="control-btn control-right" data-direction="right" aria-label="Direita">▶</button>
-            </div>
-
-            <button id="action-button" class="action-btn" aria-label="Agarrar ou usar">
-              AGARRAR<br>OU USAR
-            </button>
           </div>
         </div>
 
@@ -1738,16 +1750,27 @@ class InteractiveWorldGame{
     this.countElement = document.querySelector("#interactive-count");
     this.rewardElement = document.querySelector("#game-reward");
     this.actionButton = document.querySelector("#action-button");
+    this.joystick = document.querySelector("#virtual-joystick");
+    this.joystickKnob = document.querySelector("#joystick-knob");
 
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     this.keys = new Set();
-    this.touchDirections = new Set();
     this.completed = new Set();
     this.carrying = null;
+    this.draggingObject = null;
     this.lastTime = performance.now();
     this.running = true;
     this.successPlayed = false;
+
+    this.pointerTarget = null;
+    this.pointerActive = false;
+    this.pointerId = null;
+    this.pointerStart = null;
+    this.pointerMoved = false;
+
+    this.joystickPointerId = null;
+    this.joystickVector = {x:0,y:0};
 
     this.background = new Image();
     this.background.src = world.image;
@@ -1781,13 +1804,33 @@ class InteractiveWorldGame{
     this.boundKeyUp = event=>this.onKeyUp(event);
     this.boundVisibility = ()=>this.onVisibilityChange();
 
+    this.boundPointerDown = event=>this.onCanvasPointerDown(event);
+    this.boundPointerMove = event=>this.onCanvasPointerMove(event);
+    this.boundPointerUp = event=>this.onCanvasPointerUp(event);
+
+    this.boundJoystickDown = event=>this.onJoystickPointerDown(event);
+    this.boundJoystickMove = event=>this.onJoystickPointerMove(event);
+    this.boundJoystickUp = event=>this.onJoystickPointerUp(event);
+
     window.addEventListener("keydown",this.boundKeyDown);
     window.addEventListener("keyup",this.boundKeyUp);
     document.addEventListener("visibilitychange",this.boundVisibility);
 
-    this.setupTouchControls();
+    this.canvas.addEventListener("pointerdown",this.boundPointerDown);
+    this.canvas.addEventListener("pointermove",this.boundPointerMove);
+    this.canvas.addEventListener("pointerup",this.boundPointerUp);
+    this.canvas.addEventListener("pointercancel",this.boundPointerUp);
+    this.canvas.addEventListener("pointerleave",this.boundPointerUp);
 
-    this.actionButton.addEventListener("click",()=>{
+    this.joystick.addEventListener("pointerdown",this.boundJoystickDown);
+    this.joystick.addEventListener("pointermove",this.boundJoystickMove);
+    this.joystick.addEventListener("pointerup",this.boundJoystickUp);
+    this.joystick.addEventListener("pointercancel",this.boundJoystickUp);
+    this.joystick.addEventListener("pointerleave",this.boundJoystickUp);
+
+    this.actionButton.addEventListener("click",event=>{
+      event.preventDefault();
+      event.stopPropagation();
       audio.unlock();
       this.interact();
     });
@@ -1803,12 +1846,27 @@ class InteractiveWorldGame{
     window.removeEventListener("keydown",this.boundKeyDown);
     window.removeEventListener("keyup",this.boundKeyUp);
     document.removeEventListener("visibilitychange",this.boundVisibility);
+
+    this.canvas.removeEventListener("pointerdown",this.boundPointerDown);
+    this.canvas.removeEventListener("pointermove",this.boundPointerMove);
+    this.canvas.removeEventListener("pointerup",this.boundPointerUp);
+    this.canvas.removeEventListener("pointercancel",this.boundPointerUp);
+    this.canvas.removeEventListener("pointerleave",this.boundPointerUp);
+
+    this.joystick.removeEventListener("pointerdown",this.boundJoystickDown);
+    this.joystick.removeEventListener("pointermove",this.boundJoystickMove);
+    this.joystick.removeEventListener("pointerup",this.boundJoystickUp);
+    this.joystick.removeEventListener("pointercancel",this.boundJoystickUp);
+    this.joystick.removeEventListener("pointerleave",this.boundJoystickUp);
   }
 
   onVisibilityChange(){
     if(document.hidden){
       this.keys.clear();
-      this.touchDirections.clear();
+      this.pointerActive = false;
+      this.pointerTarget = null;
+      this.draggingObject = null;
+      this.resetJoystick();
       audio.stopFootsteps();
     }
   }
@@ -1838,28 +1896,252 @@ class InteractiveWorldGame{
     this.keys.delete(event.key);
   }
 
-  setupTouchControls(){
-    document.querySelectorAll("[data-direction]").forEach(button=>{
-      const direction = button.dataset.direction;
+  onJoystickPointerDown(event){
+    event.preventDefault();
+    event.stopPropagation();
+    audio.unlock();
 
-      const start = event=>{
-        event.preventDefault();
-        audio.unlock();
-        this.touchDirections.add(direction);
-        button.classList.add("active");
-      };
+    this.joystickPointerId = event.pointerId;
 
-      const stop = event=>{
-        event.preventDefault();
-        this.touchDirections.delete(direction);
-        button.classList.remove("active");
-      };
+    if(this.joystick.setPointerCapture){
+      try{ this.joystick.setPointerCapture(event.pointerId); }catch{}
+    }
 
-      button.addEventListener("pointerdown",start);
-      button.addEventListener("pointerup",stop);
-      button.addEventListener("pointercancel",stop);
-      button.addEventListener("pointerleave",stop);
-    });
+    this.updateJoystick(event);
+  }
+
+  onJoystickPointerMove(event){
+    if(this.joystickPointerId !== event.pointerId) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    this.updateJoystick(event);
+  }
+
+  onJoystickPointerUp(event){
+    if(this.joystickPointerId !== event.pointerId) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if(this.joystick.releasePointerCapture){
+      try{ this.joystick.releasePointerCapture(event.pointerId); }catch{}
+    }
+
+    this.resetJoystick();
+  }
+
+  updateJoystick(event){
+    const rectangle = this.joystick.getBoundingClientRect();
+    const centerX = rectangle.left + rectangle.width / 2;
+    const centerY = rectangle.top + rectangle.height / 2;
+    const maximum = rectangle.width * 0.29;
+
+    let deltaX = event.clientX - centerX;
+    let deltaY = event.clientY - centerY;
+    const distance = Math.hypot(deltaX,deltaY);
+
+    if(distance > maximum){
+      deltaX = deltaX / distance * maximum;
+      deltaY = deltaY / distance * maximum;
+    }
+
+    this.joystickVector.x = deltaX / maximum;
+    this.joystickVector.y = deltaY / maximum;
+
+    this.joystickKnob.style.transform =
+      `translate(${deltaX}px,${deltaY}px)`;
+  }
+
+  resetJoystick(){
+    this.joystickPointerId = null;
+    this.joystickVector.x = 0;
+    this.joystickVector.y = 0;
+
+    if(this.joystickKnob){
+      this.joystickKnob.style.transform = "translate(0,0)";
+    }
+  }
+
+  canvasPoint(event){
+    const rectangle = this.canvas.getBoundingClientRect();
+    const scaleX = this.width / rectangle.width;
+    const scaleY = this.height / rectangle.height;
+
+    return {
+      x:(event.clientX - rectangle.left) * scaleX,
+      y:(event.clientY - rectangle.top) * scaleY
+    };
+  }
+
+  objectAtPoint(point){
+    return this.objects
+      .filter(item=>!item.placed)
+      .map(item=>({
+        item,
+        distance:Math.hypot(point.x-item.x,point.y-item.y)
+      }))
+      .filter(result=>result.distance < 48)
+      .sort((a,b)=>a.distance-b.distance)[0]?.item || null;
+  }
+
+  onCanvasPointerDown(event){
+    event.preventDefault();
+    audio.unlock();
+
+    const point = this.canvasPoint(event);
+    const object = this.objectAtPoint(point);
+
+    this.pointerId = event.pointerId;
+    this.pointerStart = point;
+    this.pointerMoved = false;
+
+    if(object){
+      this.draggingObject = object;
+      this.pointerActive = false;
+      this.pointerTarget = null;
+
+      object.x = point.x;
+      object.y = point.y;
+
+      audio.effect("pickup");
+      this.prompt.textContent =
+        `Arrasta ${object.icon} até à zona iluminada.`;
+    }else{
+      this.pointerActive = true;
+      this.pointerTarget = point;
+    }
+
+    if(this.canvas.setPointerCapture){
+      try{ this.canvas.setPointerCapture(event.pointerId); }catch{}
+    }
+  }
+
+  onCanvasPointerMove(event){
+    if(this.pointerId !== event.pointerId) return;
+
+    event.preventDefault();
+    const point = this.canvasPoint(event);
+
+    if(this.pointerStart){
+      const distance = Math.hypot(
+        point.x-this.pointerStart.x,
+        point.y-this.pointerStart.y
+      );
+
+      if(distance > 12){
+        this.pointerMoved = true;
+      }
+    }
+
+    if(this.draggingObject){
+      this.draggingObject.x = Math.max(
+        30,
+        Math.min(this.width-30,point.x)
+      );
+
+      this.draggingObject.y = Math.max(
+        250,
+        Math.min(this.height-30,point.y)
+      );
+    }else if(this.pointerActive){
+      this.pointerTarget = point;
+    }
+  }
+
+  onCanvasPointerUp(event){
+    if(this.pointerId !== event.pointerId) return;
+
+    event.preventDefault();
+    const point = this.canvasPoint(event);
+
+    if(this.draggingObject){
+      const object = this.draggingObject;
+      const closeToTarget = this.distanceToRectangle(
+        object.x,
+        object.y,
+        object.target
+      ) < 42;
+
+      if(closeToTarget){
+        object.placed = true;
+        object.x = object.target.x + object.target.width / 2;
+        object.y = object.target.y + object.target.height / 2;
+
+        this.completed.add(object.id);
+        audio.effect("place");
+        this.updateTaskHud();
+      }else{
+        audio.effect("click");
+      }
+
+      this.draggingObject = null;
+    }else if(!this.pointerMoved){
+      this.touchInteractAt(point);
+    }
+
+    this.pointerActive = false;
+    this.pointerId = null;
+    this.pointerStart = null;
+    this.pointerMoved = false;
+    this.pointerTarget = null;
+
+    if(this.canvas.releasePointerCapture){
+      try{ this.canvas.releasePointerCapture(event.pointerId); }catch{}
+    }
+  }
+
+  touchInteractAt(point){
+    if(this.completed.size === this.tasks.length) return;
+
+    if(this.carrying){
+      const closeToTarget = this.distanceToRectangle(
+        point.x,
+        point.y,
+        this.carrying.target
+      ) < 52;
+
+      if(closeToTarget){
+        this.carrying.placed = true;
+        this.carrying.x =
+          this.carrying.target.x + this.carrying.target.width / 2;
+        this.carrying.y =
+          this.carrying.target.y + this.carrying.target.height / 2;
+
+        this.completed.add(this.carrying.id);
+        this.carrying = null;
+        audio.effect("place");
+        this.updateTaskHud();
+        return;
+      }
+    }
+
+    const touchedAction = this.tasks
+      .filter(task=>task.type === "use" && !this.completed.has(task.id))
+      .map(task=>({
+        task,
+        distance:this.distanceToRectangle(
+          point.x,
+          point.y,
+          task.target
+        )
+      }))
+      .filter(result=>result.distance < 40)
+      .sort((a,b)=>a.distance-b.distance)[0];
+
+    if(touchedAction){
+      const playerNearAction = this.distanceToRectangle(
+        this.player.x,
+        this.player.y,
+        touchedAction.task.target
+      ) < 100;
+
+      if(playerNearAction){
+        this.completed.add(touchedAction.task.id);
+        audio.effect("place");
+        this.updateTaskHud();
+      }
+    }
   }
 
   loop(time){
@@ -1878,25 +2160,50 @@ class InteractiveWorldGame{
     let horizontal = 0;
     let vertical = 0;
 
-    if(this.keys.has("ArrowLeft") || this.keys.has("a") || this.keys.has("A") || this.touchDirections.has("left")) horizontal -= 1;
-    if(this.keys.has("ArrowRight") || this.keys.has("d") || this.keys.has("D") || this.touchDirections.has("right")) horizontal += 1;
-    if(this.keys.has("ArrowUp") || this.keys.has("w") || this.keys.has("W") || this.touchDirections.has("up")) vertical -= 1;
-    if(this.keys.has("ArrowDown") || this.keys.has("s") || this.keys.has("S") || this.touchDirections.has("down")) vertical += 1;
+    if(this.keys.has("ArrowLeft") || this.keys.has("a") || this.keys.has("A")) horizontal -= 1;
+    if(this.keys.has("ArrowRight") || this.keys.has("d") || this.keys.has("D")) horizontal += 1;
+    if(this.keys.has("ArrowUp") || this.keys.has("w") || this.keys.has("W")) vertical -= 1;
+    if(this.keys.has("ArrowDown") || this.keys.has("s") || this.keys.has("S")) vertical += 1;
 
-    const moving = horizontal !== 0 || vertical !== 0;
+    if(horizontal === 0 && vertical === 0){
+      horizontal = this.joystickVector.x;
+      vertical = this.joystickVector.y;
+    }
+
+    if(
+      horizontal === 0
+      && vertical === 0
+      && this.pointerActive
+      && this.pointerTarget
+      && !this.draggingObject
+    ){
+      const deltaX = this.pointerTarget.x - this.player.x;
+      const deltaY = this.pointerTarget.y - this.player.y;
+      const distance = Math.hypot(deltaX,deltaY);
+
+      if(distance > 12){
+        horizontal = deltaX / distance;
+        vertical = deltaY / distance;
+      }
+    }
+
+    const moving = Math.abs(horizontal) > 0.03 || Math.abs(vertical) > 0.03;
 
     if(moving){
       audio.startFootsteps();
 
       const length = Math.hypot(horizontal,vertical) || 1;
-      horizontal /= length;
-      vertical /= length;
+
+      if(length > 1){
+        horizontal /= length;
+        vertical /= length;
+      }
 
       this.player.x += horizontal * this.player.speed * delta;
       this.player.y += vertical * this.player.speed * delta;
       this.player.walking += delta * 11;
 
-      if(horizontal !== 0){
+      if(Math.abs(horizontal) > 0.05){
         this.player.facing = Math.sign(horizontal);
       }
     }else{
@@ -1943,10 +2250,9 @@ class InteractiveWorldGame{
         return;
       }
 
-      this.carrying.x = this.player.x + 28 * this.player.facing;
+      this.carrying.x = this.player.x + 26 * this.player.facing;
       this.carrying.y = this.player.y + 10;
       this.carrying = null;
-
       audio.effect("click");
       return;
     }
@@ -2015,6 +2321,12 @@ class InteractiveWorldGame{
   }
 
   updatePrompt(){
+    if(this.draggingObject){
+      this.prompt.textContent =
+        `Arrasta ${this.draggingObject.icon} até à zona iluminada.`;
+      return;
+    }
+
     if(this.carrying){
       const nearTarget = this.distanceToRectangle(
         this.player.x,
@@ -2023,7 +2335,7 @@ class InteractiveWorldGame{
       ) < 92;
 
       this.prompt.textContent = nearTarget
-        ? "Carrega em ESPAÇO/E ou em AGARRAR/USAR para colocar."
+        ? "Toca no alvo ou usa AGARRAR/USAR para colocar."
         : `Leva ${this.carrying.icon} até à zona iluminada.`;
       return;
     }
@@ -2038,7 +2350,7 @@ class InteractiveWorldGame{
 
     if(nearObject){
       this.prompt.textContent =
-        "Carrega em ESPAÇO/E ou em AGARRAR/USAR para pegar.";
+        "Arrasta diretamente o objeto ou usa AGARRAR/USAR.";
       return;
     }
 
@@ -2054,12 +2366,12 @@ class InteractiveWorldGame{
 
     if(nearAction){
       this.prompt.textContent =
-        "Carrega em ESPAÇO/E ou em AGARRAR/USAR para realizar a tarefa.";
+        "Toca na zona destacada ou usa AGARRAR/USAR.";
       return;
     }
 
     this.prompt.textContent =
-      "Explora o cenário. Lama acompanha a Ninita.";
+      "Usa o joystick ou arrasta o dedo no cenário para mover.";
   }
 
   distanceToRectangle(x,y,rectangle){
@@ -2108,7 +2420,11 @@ class InteractiveWorldGame{
     this.drawTargets();
 
     const drawable = [
-      ...this.objects.filter(item=>!item.placed && item!==this.carrying),
+      ...this.objects.filter(item=>
+        !item.placed
+        && item !== this.carrying
+        && item !== this.draggingObject
+      ),
       {kind:"lama-character",x:this.lama.x,y:this.lama.y},
       {kind:"ninita-character",x:this.player.x,y:this.player.y}
     ].sort((a,b)=>a.y-b.y);
@@ -2129,6 +2445,10 @@ class InteractiveWorldGame{
 
     if(this.carrying){
       this.drawObject(this.carrying,true);
+    }
+
+    if(this.draggingObject){
+      this.drawObject(this.draggingObject,true);
     }
 
     if(this.completed.size === this.tasks.length){
@@ -2257,7 +2577,6 @@ class InteractiveWorldGame{
     return BedroomGame.prototype.drawCelebration.call(this);
   }
 }
-
 
 // -------------------------------------------------------------
 // Restantes mundos: versão de tarefas tocáveis
