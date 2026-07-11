@@ -1,42 +1,39 @@
-# Créditos de áudio
+# Créditos da banda sonora
 
-## Banda sonora original de aventura familiar
+## Músicas fornecidas para integração
 
-Esta versão contém onze composições instrumentais originais produzidas
-especificamente para **Ninita e Lama**.
+### Intro to Fun Adventures
+- Autor: JoyInSound
+- Utilização: introdução e menu principal
+- Licença indicada: Pixabay Content License
 
-A direção musical combina, de forma original:
+### Best Adventure Ever
+- Autor: Geoff Harvey
+- Utilização: história, escola e Parque das Aventuras
+- Licença indicada: Pixabay Content License
 
-- pop tropical;
-- percussão de celebração;
-- marimba, steel drums e guitarra acústica;
-- flautas, metais e cordas;
-- coro sem palavras;
-- energia de musical de animação;
-- ambientes cinematográficos de aventura e descoberta.
+### Joyful Fun Tropical Music
+- Autor: Sonican
+- Utilização: Praia das Conchas e Piscina Tropical
+- Licença indicada: Pixabay Content License
 
-As referências indicadas pelo utilizador foram usadas apenas para definir
-características gerais, como energia, instrumentação, ambiente de aventura
-e emoção familiar.
+### Magic World
+- Autor: The_Mountain
+- Utilização: Quarto Encantado, seleção de mundos e Ilha do Arco-Íris
+- Licença indicada: Pixabay Content License
 
-Não foram copiadas melodias, letras, arranjos ou gravações de músicas
-comerciais.
+## Outras músicas mantidas
 
-## Faixas
+### Wild Land
+- Autor: Fato Shadow
+- Utilização: floresta e quinta
+- Licença: CC BY 3.0
+- Fonte: OpenGameArt
 
-1. Mundos em Festa — introdução;
-2. Sonho da Lua — Quarto Encantado;
-3. Manhã de Alegria — Casa das Surpresas;
-4. Vamos Descobrir — Escola dos Sonhos;
-5. Oceano Livre — Praia das Conchas;
-6. Coração da Natureza — Floresta Encantada;
-7. Splash Feliz — Piscina Tropical;
-8. Amigos da Natureza — Quinta Feliz;
-9. Dia de Festa — Parque das Aventuras;
-10. Juntos Brilhamos — Cidade Colorida;
-11. Somos Luz — Ilha do Arco-Íris.
+### Bossa Nova
+- Autor: migfus20
+- Utilização: casa e cidade
+- Licença: CC BY 4.0
+- Fonte: OpenGameArt
 
-## Efeitos sonoros
-
-Mantêm-se os efeitos licenciados já descritos na página
-`creditos-audio.html`.
+Guarde os comprovativos de download e licença das faixas obtidas no Pixabay.

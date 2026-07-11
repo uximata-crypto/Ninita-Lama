@@ -125,3 +125,47 @@ Características:
 - sem letras;
 - sem copiar melodias ou gravações comerciais;
 - ficheiros locais preparados para o Vercel.
+
+
+## Versão de teste com músicas gratuitas e licenciadas
+
+Foram substituídas as músicas de introdução, aventura, ambiente tropical
+e mundo mágico por alternativas gratuitas com licenças claras.
+
+Também foram mantidas as escolhas aprovadas:
+
+- Wild Land — Fato Shadow;
+- Bossa Nova — migfus20.
+
+Distribuição:
+
+- introdução: Bombastic Opening, seguida de Tutorial;
+- aventura: Long Road;
+- praia e piscina: Jump and Run - Tropical Mix;
+- floresta e quinta: Wild Land;
+- casa e cidade: Bossa Nova;
+- mundos mágicos: The Sky Clears.
+
+Abra `teste-musicas.html` para ouvir apenas as faixas.
+
+A música desta versão é transmitida pela Internet. Os créditos e licenças
+estão em `CREDITOS_AUDIO.md` e `creditos-audio.html`.
+
+
+## Músicas finais aprovadas
+
+Foram adicionados ao próprio projeto os quatro ficheiros enviados:
+
+- Intro to Fun Adventures — JoyInSound;
+- Best Adventure Ever — Geoff Harvey;
+- Joyful Fun Tropical Music — Sonican;
+- Magic World — The_Mountain.
+
+Mantêm-se:
+
+- Wild Land — Fato Shadow;
+- Bossa Nova — migfus20.
+
+As quatro músicas enviadas funcionam localmente e ficam disponíveis
+depois da atualização da aplicação instalada. Wild Land e Bossa Nova
+continuam a necessitar de ligação à Internet.

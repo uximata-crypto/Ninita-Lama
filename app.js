@@ -21,7 +21,7 @@ const story = [
 ];
 
 const PROGRESS_KEY = "ninita-lama-progress-v2";
-const AUDIO_KEY = "ninita-lama-audio-v2";
+const AUDIO_KEY = "ninita-lama-audio-aprovado-v4";
 const app = document.querySelector("#app");
 
 let activeGame = null;
@@ -61,17 +61,12 @@ function completeWorld(worldId){
 // -------------------------------------------------------------
 const REAL_AUDIO = {
   music: {
-    aventuraIntro: "./assets/audio/intro_mundos_em_festa.mp3",
-    quartoMagico: "./assets/audio/quarto_sonho_da_lua.mp3",
-    casaFeliz: "./assets/audio/casa_manha_de_alegria.mp3",
-    escolaDescobrir: "./assets/audio/escola_vamos_descobrir.mp3",
-    praiaLivre: "./assets/audio/praia_oceano_livre.mp3",
-    florestaCoracao: "./assets/audio/floresta_coracao_da_natureza.mp3",
-    piscinaSplash: "./assets/audio/piscina_splash_feliz.mp3",
-    quintaAmigos: "./assets/audio/quinta_amigos_da_natureza.mp3",
-    parqueFesta: "./assets/audio/parque_dia_de_festa.mp3",
-    cidadeJuntos: "./assets/audio/cidade_juntos_brillhamos.mp3",
-    arcoirisLuz: "./assets/audio/arcoiris_somos_luz.mp3"
+    introAbertura: {url: "./assets/audio/intro_to_fun_adventures.mp3", loop: true},
+    aventuraLivre: {url: "./assets/audio/best_adventure_ever.mp3", loop: true},
+    tropicalLivre: {url: "./assets/audio/joyful_fun_tropical_music.mp3", loop: true},
+    naturezaLivre: {url: "https://opengameart.org/sites/default/files/fato_shadow_-_wild_land.mp3", loop: true},
+    cidadeLivre: {url: "https://opengameart.org/sites/default/files/bossa_nova_raw.mp3", loop: true},
+    magicoLivre: {url: "./assets/audio/magic_world.mp3", loop: true}
   },
   effects: {
     click: "https://raw.githubusercontent.com/Calinou/kenney-ui-audio/master/addons/kenney_ui_audio/click1.wav",
@@ -125,8 +120,20 @@ class AudioManager{
   playMusic(track){
     if(!this.enabled || !this.unlocked || !track) return;
 
-    const url = REAL_AUDIO.music[track];
-    if(!url) return;
+    const configuration = REAL_AUDIO.music[track];
+    if(!configuration) return;
+
+    const url = typeof configuration === "string"
+      ? configuration
+      : configuration.url;
+
+    const loop = typeof configuration === "string"
+      ? true
+      : configuration.loop !== false;
+
+    const nextTrack = typeof configuration === "string"
+      ? ""
+      : configuration.next || "";
 
     if(
       this.currentTrack === track
@@ -139,10 +146,19 @@ class AudioManager{
     this.stopMusic();
 
     this.currentTrack = track;
-    this.music = this.createAudio(url,true);
+    this.music = this.createAudio(url,loop);
     this.music.volume = this.musicVolume;
+
+    if(nextTrack){
+      this.music.addEventListener("ended",()=>{
+        if(this.enabled && this.unlocked && this.currentTrack === track){
+          this.playMusic(nextTrack);
+        }
+      },{once:true});
+    }
+
     this.music.play().catch(error=>{
-      console.warn("Não foi possível iniciar a banda sonora:",error);
+      console.warn("Não foi possível iniciar a banda sonora licenciada:",error);
     });
   }
 
@@ -203,26 +219,26 @@ class AudioManager{
   routeTrack(){
     const route = parseRoute();
 
-    if(route.name === "home") return "aventuraIntro";
-    if(route.name === "worlds" || route.name === "gallery") return "arcoirisLuz";
-    if(route.name === "story") return "quartoMagico";
+    if(route.name === "home") return "introAbertura";
+    if(route.name === "worlds" || route.name === "gallery") return "magicoLivre";
+    if(route.name === "story") return "aventuraLivre";
 
     if(route.name === "level"){
       return {
-        1:"quartoMagico",
-        2:"casaFeliz",
-        3:"escolaDescobrir",
-        4:"praiaLivre",
-        5:"florestaCoracao",
-        6:"piscinaSplash",
-        7:"quintaAmigos",
-        8:"parqueFesta",
-        9:"cidadeJuntos",
-        10:"arcoirisLuz"
-      }[route.param] || "aventuraIntro";
+        1:"magicoLivre",
+        2:"cidadeLivre",
+        3:"aventuraLivre",
+        4:"tropicalLivre",
+        5:"naturezaLivre",
+        6:"tropicalLivre",
+        7:"naturezaLivre",
+        8:"aventuraLivre",
+        9:"cidadeLivre",
+        10:"magicoLivre"
+      }[route.param] || "introAbertura";
     }
 
-    return "aventuraIntro";
+    return "introAbertura";
   }
 
   refreshForRoute(){

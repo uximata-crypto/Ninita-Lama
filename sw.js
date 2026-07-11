@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-aventura-musical-v10";
+const CACHE = "ninita-lama-musicas-aprovadas-v12";
 const ASSETS = [
   "./",
   "./index.html",
@@ -16,17 +16,11 @@ const ASSETS = [
   "./assets/images/floresta.webp",
   "./assets/images/piscina.webp",
   "./assets/images/arcoiris.webp",
-  "./assets/audio/intro_mundos_em_festa.mp3",
-  "./assets/audio/quarto_sonho_da_lua.mp3",
-  "./assets/audio/casa_manha_de_alegria.mp3",
-  "./assets/audio/escola_vamos_descobrir.mp3",
-  "./assets/audio/praia_oceano_livre.mp3",
-  "./assets/audio/floresta_coracao_da_natureza.mp3",
-  "./assets/audio/piscina_splash_feliz.mp3",
-  "./assets/audio/quinta_amigos_da_natureza.mp3",
-  "./assets/audio/parque_dia_de_festa.mp3",
-  "./assets/audio/cidade_juntos_brillhamos.mp3",
-  "./assets/audio/arcoiris_somos_luz.mp3",
+  "./teste-musicas.html",
+  "./assets/audio/intro_to_fun_adventures.mp3",
+  "./assets/audio/best_adventure_ever.mp3",
+  "./assets/audio/joyful_fun_tropical_music.mp3",
+  "./assets/audio/magic_world.mp3",
 ];
 
 self.addEventListener("install", event => {
