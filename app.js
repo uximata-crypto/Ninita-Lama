@@ -315,7 +315,7 @@ function renderHome(){
         <button class="btn btn-text danger" data-action="reset">↻ Recomeçar</button>
       </section>
 
-      <p class="footer-note">Agora com movimento, objetos, tarefas, música e efeitos.</p>
+      <p class="footer-note">Dez mundos interativos com movimento, objetos, tarefas, música e efeitos.</p>
     </main>
   `;
 }
@@ -324,7 +324,7 @@ function renderWorlds(){
   const progress = loadProgress();
 
   app.innerHTML = `
-    ${topbar("Mapa dos Mundos","O primeiro mundo já é um minijogo interativo")}
+    ${topbar("Mapa dos Mundos","Todos os 10 mundos são agora interativos")}
     <main class="content">
       <section class="world-grid">
         ${worlds.map(world=>{
@@ -402,12 +402,14 @@ function renderLevel(worldId){
     return;
   }
 
-  if(world.id === 1){
-    renderBedroomGame(world);
+  const configuration = INTERACTIVE_LEVELS[world.id];
+
+  if(!configuration){
+    routeTo("worlds");
     return;
   }
 
-  renderChecklistLevel(world);
+  renderInteractiveWorld(world,configuration);
 }
 
 // -------------------------------------------------------------
@@ -1163,6 +1165,1100 @@ class BedroomGame{
   }
 }
 
+
+// -------------------------------------------------------------
+// Configuração dos dez mundos interativos
+// -------------------------------------------------------------
+const INTERACTIVE_LEVELS = {
+  1: {
+    instruction:"Arruma o quarto. Aproxima-te, agarra os objetos e leva-os às zonas iluminadas.",
+    start:{x:270,y:835},
+    tasks:[
+      {
+        id:"bed",
+        label:"Fazer a cama",
+        type:"use",
+        icon:"🛏️",
+        target:{x:115,y:470,width:310,height:185,label:"FAZER A CAMA"}
+      },
+      {
+        id:"toy",
+        label:"Guardar o brinquedo na caixa",
+        type:"place",
+        icon:"🧸",
+        start:{x:390,y:780},
+        target:{x:55,y:340,width:125,height:105,label:"CAIXA"}
+      },
+      {
+        id:"books",
+        label:"Colocar os livros na estante",
+        type:"place",
+        icon:"📚",
+        start:{x:350,y:660},
+        target:{x:55,y:155,width:170,height:130,label:"ESTANTE"}
+      },
+      {
+        id:"shoes",
+        label:"Arrumar os sapatos",
+        type:"place",
+        icon:"👟",
+        start:{x:115,y:845},
+        target:{x:360,y:855,width:125,height:70,label:"SAPATOS"}
+      },
+      {
+        id:"backpack",
+        label:"Arrumar a mochila",
+        type:"place",
+        icon:"🎒",
+        start:{x:145,y:720},
+        target:{x:395,y:335,width:95,height:135,label:"MOCHILA"}
+      }
+    ]
+  },
+
+  2: {
+    instruction:"Ajuda em casa: prepara a mesa, cuida das plantas, recicla e arruma a sala.",
+    start:{x:270,y:840},
+    tasks:[
+      {
+        id:"fruit",
+        label:"Levar a fruta para a mesa",
+        type:"place",
+        icon:"🍎",
+        start:{x:105,y:790},
+        target:{x:55,y:330,width:150,height:100,label:"MESA"}
+      },
+      {
+        id:"plate",
+        label:"Colocar o prato na mesa",
+        type:"place",
+        icon:"🍽️",
+        start:{x:425,y:810},
+        target:{x:335,y:330,width:150,height:100,label:"MESA"}
+      },
+      {
+        id:"plant",
+        label:"Regar as plantas",
+        type:"use",
+        icon:"🪴",
+        target:{x:55,y:535,width:145,height:120,label:"REGAR"}
+      },
+      {
+        id:"recycle",
+        label:"Separar a embalagem para reciclagem",
+        type:"place",
+        icon:"🧴",
+        start:{x:365,y:675},
+        target:{x:365,y:535,width:125,height:115,label:"RECICLAR"}
+      },
+      {
+        id:"cushion",
+        label:"Arrumar a almofada no sofá",
+        type:"place",
+        icon:"🛋️",
+        start:{x:145,y:700},
+        target:{x:190,y:720,width:165,height:100,label:"SOFÁ"}
+      }
+    ]
+  },
+
+  3: {
+    instruction:"Organiza a sala de aula e leva cada material ao lugar certo.",
+    start:{x:270,y:850},
+    tasks:[
+      {
+        id:"schoolbook",
+        label:"Guardar o livro na mochila",
+        type:"place",
+        icon:"📘",
+        start:{x:105,y:760},
+        target:{x:55,y:330,width:125,height:110,label:"MOCHILA"}
+      },
+      {
+        id:"letter",
+        label:"Colocar a letra no quadro",
+        type:"place",
+        icon:"🔤",
+        start:{x:425,y:760},
+        target:{x:335,y:290,width:150,height:110,label:"LETRAS"}
+      },
+      {
+        id:"number",
+        label:"Colocar o número no quadro",
+        type:"place",
+        icon:"🔢",
+        start:{x:360,y:625},
+        target:{x:335,y:435,width:150,height:105,label:"NÚMEROS"}
+      },
+      {
+        id:"puzzle",
+        label:"Completar o puzzle",
+        type:"place",
+        icon:"🧩",
+        start:{x:125,y:625},
+        target:{x:55,y:485,width:145,height:105,label:"PUZZLE"}
+      },
+      {
+        id:"pencils",
+        label:"Arrumar os lápis",
+        type:"place",
+        icon:"✏️",
+        start:{x:270,y:720},
+        target:{x:200,y:355,width:140,height:100,label:"LÁPIS"}
+      }
+    ]
+  },
+
+  4: {
+    instruction:"Limpa a praia, protege os animais e constrói um castelo de areia.",
+    start:{x:270,y:850},
+    tasks:[
+      {
+        id:"litter",
+        label:"Colocar o lixo no caixote",
+        type:"place",
+        icon:"🗑️",
+        start:{x:115,y:800},
+        target:{x:55,y:390,width:130,height:110,label:"LIXO"}
+      },
+      {
+        id:"plastic",
+        label:"Reciclar a garrafa de plástico",
+        type:"place",
+        icon:"🧴",
+        start:{x:420,y:815},
+        target:{x:355,y:390,width:130,height:110,label:"PLÁSTICO"}
+      },
+      {
+        id:"shell",
+        label:"Guardar a concha no cesto",
+        type:"place",
+        icon:"🐚",
+        start:{x:150,y:660},
+        target:{x:55,y:555,width:130,height:105,label:"CONCHAS"}
+      },
+      {
+        id:"turtle",
+        label:"Ajudar a tartaruga a chegar ao mar",
+        type:"place",
+        icon:"🐢",
+        start:{x:385,y:665},
+        target:{x:350,y:270,width:145,height:120,label:"MAR"}
+      },
+      {
+        id:"castle",
+        label:"Construir o castelo de areia",
+        type:"use",
+        icon:"🏰",
+        target:{x:200,y:520,width:145,height:125,label:"CONSTRUIR"}
+      }
+    ]
+  },
+
+  5: {
+    instruction:"Cuida da floresta: planta, rega, segue as pistas e ajuda os animais.",
+    start:{x:270,y:850},
+    tasks:[
+      {
+        id:"seedling",
+        label:"Plantar uma árvore",
+        type:"place",
+        icon:"🌱",
+        start:{x:120,y:790},
+        target:{x:55,y:390,width:140,height:115,label:"PLANTAR"}
+      },
+      {
+        id:"flowers",
+        label:"Regar as flores",
+        type:"use",
+        icon:"💧",
+        target:{x:350,y:390,width:140,height:115,label:"REGAR"}
+      },
+      {
+        id:"tracks",
+        label:"Seguir e marcar as pegadas",
+        type:"place",
+        icon:"🐾",
+        start:{x:420,y:700},
+        target:{x:350,y:555,width:140,height:105,label:"PEGADAS"}
+      },
+      {
+        id:"birdhouse",
+        label:"Colocar a casa dos pássaros na árvore",
+        type:"place",
+        icon:"🏠",
+        start:{x:120,y:665},
+        target:{x:55,y:540,width:140,height:125,label:"ÁRVORE"}
+      },
+      {
+        id:"stone",
+        label:"Encontrar a pedra mágica",
+        type:"place",
+        icon:"💎",
+        start:{x:270,y:760},
+        target:{x:205,y:300,width:130,height:110,label:"PEDRA"}
+      }
+    ]
+  },
+
+  6: {
+    instruction:"Prepara a piscina com segurança e ajuda Lama a brincar junto da água.",
+    start:{x:270,y:850},
+    tasks:[
+      {
+        id:"swimsuit",
+        label:"Levar o fato de banho ao balneário",
+        type:"place",
+        icon:"🩱",
+        start:{x:115,y:800},
+        target:{x:55,y:380,width:140,height:115,label:"BALNEÁRIO"}
+      },
+      {
+        id:"vest",
+        label:"Colocar o colete de segurança",
+        type:"place",
+        icon:"🦺",
+        start:{x:420,y:805},
+        target:{x:350,y:380,width:140,height:115,label:"COLETE"}
+      },
+      {
+        id:"shower",
+        label:"Tomar duche antes de entrar",
+        type:"use",
+        icon:"🚿",
+        target:{x:55,y:550,width:140,height:115,label:"DUCHE"}
+      },
+      {
+        id:"ball",
+        label:"Guardar a bola no cesto",
+        type:"place",
+        icon:"🏐",
+        start:{x:390,y:665},
+        target:{x:350,y:555,width:140,height:110,label:"BRINQUEDOS"}
+      },
+      {
+        id:"float",
+        label:"Levar a boia para Lama",
+        type:"place",
+        icon:"🛟",
+        start:{x:140,y:680},
+        target:{x:205,y:320,width:135,height:115,label:"LAMA"}
+      }
+    ]
+  },
+
+  7: {
+    instruction:"Alimenta os animais, cuida da horta e ajuda a quinta a ficar organizada.",
+    start:{x:270,y:850},
+    tasks:[
+      {
+        id:"grain",
+        label:"Dar comida às galinhas",
+        type:"place",
+        icon:"🌾",
+        start:{x:110,y:795},
+        target:{x:55,y:380,width:145,height:115,label:"GALINHAS"}
+      },
+      {
+        id:"carrot",
+        label:"Dar cenoura aos coelhos",
+        type:"place",
+        icon:"🥕",
+        start:{x:425,y:805},
+        target:{x:345,y:380,width:145,height:115,label:"COELHOS"}
+      },
+      {
+        id:"pony",
+        label:"Escovar o pónei",
+        type:"use",
+        icon:"🐴",
+        target:{x:55,y:555,width:145,height:120,label:"ESCOVAR"}
+      },
+      {
+        id:"garden",
+        label:"Regar a horta",
+        type:"use",
+        icon:"🥬",
+        target:{x:345,y:555,width:145,height:120,label:"HORTA"}
+      },
+      {
+        id:"shelter",
+        label:"Levar o sino para o abrigo",
+        type:"place",
+        icon:"🔔",
+        start:{x:270,y:700},
+        target:{x:205,y:305,width:130,height:115,label:"ABRIGO"}
+      }
+    ]
+  },
+
+  8: {
+    instruction:"Explora o parque, conduz, encontra os bilhetes e ajuda quem está perdido.",
+    start:{x:270,y:850},
+    tasks:[
+      {
+        id:"car",
+        label:"Conduzir o carrinho",
+        type:"use",
+        icon:"🚗",
+        target:{x:55,y:360,width:145,height:120,label:"CARRINHO"}
+      },
+      {
+        id:"track",
+        label:"Completar o percurso de obstáculos",
+        type:"use",
+        icon:"🚧",
+        target:{x:345,y:360,width:145,height:120,label:"PERCURSO"}
+      },
+      {
+        id:"carousel",
+        label:"Andar no carrossel",
+        type:"use",
+        icon:"🎠",
+        target:{x:55,y:550,width:145,height:120,label:"CARROSSEL"}
+      },
+      {
+        id:"map",
+        label:"Entregar o mapa à personagem perdida",
+        type:"place",
+        icon:"🗺️",
+        start:{x:410,y:730},
+        target:{x:345,y:550,width:145,height:120,label:"AJUDAR"}
+      },
+      {
+        id:"tickets",
+        label:"Levar os bilhetes à entrada",
+        type:"place",
+        icon:"🎟️",
+        start:{x:135,y:730},
+        target:{x:205,y:300,width:130,height:115,label:"ENTRADA"}
+      }
+    ]
+  },
+
+  9: {
+    instruction:"Ajuda na cidade, atravessa em segurança, faz compras e encontra o animal perdido.",
+    start:{x:270,y:850},
+    tasks:[
+      {
+        id:"crossing",
+        label:"Atravessar na passadeira",
+        type:"use",
+        icon:"🚸",
+        target:{x:55,y:370,width:145,height:115,label:"PASSADEIRA"}
+      },
+      {
+        id:"sign",
+        label:"Colocar o sinal no poste",
+        type:"place",
+        icon:"🛑",
+        start:{x:415,y:790},
+        target:{x:345,y:370,width:145,height:115,label:"SINAL"}
+      },
+      {
+        id:"coin",
+        label:"Fazer uma pequena compra",
+        type:"place",
+        icon:"🪙",
+        start:{x:120,y:790},
+        target:{x:55,y:550,width:145,height:115,label:"LOJA"}
+      },
+      {
+        id:"help",
+        label:"Levar o saco à pessoa que precisa",
+        type:"place",
+        icon:"🛍️",
+        start:{x:390,y:680},
+        target:{x:345,y:550,width:145,height:115,label:"AJUDAR"}
+      },
+      {
+        id:"pet",
+        label:"Levar o animal perdido para casa",
+        type:"place",
+        icon:"🐶",
+        start:{x:145,y:685},
+        target:{x:205,y:300,width:130,height:115,label:"CASA"}
+      }
+    ]
+  },
+
+  10: {
+    instruction:"Conclui a grande missão, devolve as cores à ilha e encontra a última estrela.",
+    start:{x:270,y:850},
+    tasks:[
+      {
+        id:"finalPuzzle",
+        label:"Completar o grande puzzle",
+        type:"place",
+        icon:"🧩",
+        start:{x:110,y:800},
+        target:{x:55,y:380,width:145,height:115,label:"PUZZLE"}
+      },
+      {
+        id:"colors",
+        label:"Recuperar as cores do arco-íris",
+        type:"place",
+        icon:"🎨",
+        start:{x:425,y:805},
+        target:{x:345,y:380,width:145,height:115,label:"CORES"}
+      },
+      {
+        id:"gardenFlowers",
+        label:"Plantar flores na ilha",
+        type:"place",
+        icon:"🌸",
+        start:{x:130,y:675},
+        target:{x:55,y:555,width:145,height:115,label:"JARDIM"}
+      },
+      {
+        id:"cloud",
+        label:"Ajudar a Nuvem Triste",
+        type:"place",
+        icon:"💖",
+        start:{x:405,y:685},
+        target:{x:345,y:555,width:145,height:115,label:"NUVEM"}
+      },
+      {
+        id:"finalStar",
+        label:"Encontrar a última estrela",
+        type:"place",
+        icon:"⭐",
+        start:{x:270,y:745},
+        target:{x:205,y:295,width:130,height:115,label:"ESTRELA"}
+      }
+    ]
+  }
+};
+
+// -------------------------------------------------------------
+// Ecrã comum para todos os minijogos
+// -------------------------------------------------------------
+function renderInteractiveWorld(world,configuration){
+  const tasks = configuration.tasks;
+
+  app.innerHTML = `
+    ${topbar(`${world.emoji} ${world.title}`,"Usa as setas ou os botões no ecrã")}
+    <main class="game-shell">
+      <section class="game-instructions">
+        <span class="key-chip">↑ ↓ ← → mover</span>
+        <span class="key-chip">W A S D mover</span>
+        <span class="key-chip">Espaço ou E: agarrar/usar</span>
+        <strong>${configuration.instruction}</strong>
+      </section>
+
+      <section class="game-layout">
+        <div>
+          <div class="game-stage-wrap">
+            <canvas
+              id="game-canvas"
+              width="540"
+              height="960"
+              aria-label="${world.title} — nível interativo"
+            ></canvas>
+
+            <div id="game-prompt" class="game-prompt">
+              Explora o cenário. Lama acompanha a Ninita.
+            </div>
+
+            <div id="game-reward" class="game-reward">
+              <article class="game-reward-card">
+                <div class="big-star">⭐</div>
+                <h2>Conseguiste!</h2>
+                <h3>${world.star}</h3>
+                <p>Ninita e Lama concluíram todas as tarefas deste mundo.</p>
+                <button
+                  class="btn btn-primary"
+                  data-action="finish-interactive"
+                  data-world="${world.id}"
+                >
+                  ${world.id === 10 ? "Celebrar a aventura" : "Receber estrela e continuar"}
+                </button>
+              </article>
+            </div>
+          </div>
+
+          <div class="game-controls" aria-label="Controlos táteis">
+            <div class="dpad">
+              <button class="control-btn control-up" data-direction="up" aria-label="Cima">▲</button>
+              <button class="control-btn control-left" data-direction="left" aria-label="Esquerda">◀</button>
+              <button class="control-btn control-down" data-direction="down" aria-label="Baixo">▼</button>
+              <button class="control-btn control-right" data-direction="right" aria-label="Direita">▶</button>
+            </div>
+
+            <button id="action-button" class="action-btn" aria-label="Agarrar ou usar">
+              AGARRAR<br>OU USAR
+            </button>
+          </div>
+        </div>
+
+        <aside class="game-hud">
+          <h3>Tarefas — ${world.title}</h3>
+
+          <div class="progress-track">
+            <div id="interactive-progress" class="progress-fill"></div>
+          </div>
+
+          <strong>
+            <span id="interactive-count">0</span> de ${tasks.length} concluídas
+          </strong>
+
+          <div id="interactive-task-list">
+            ${tasks.map(task=>`
+              <div class="game-task" data-game-task="${task.id}">
+                <span class="game-check">✓</span>
+                <span>${task.label}</span>
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="lama-tip">
+            Lama segue a Ninita e ajuda a encontrar cada missão.
+          </div>
+        </aside>
+      </section>
+    </main>
+  `;
+
+  activeGame = new InteractiveWorldGame(world,configuration);
+}
+
+// -------------------------------------------------------------
+// Motor comum de movimento, objetos e tarefas
+// -------------------------------------------------------------
+class InteractiveWorldGame{
+  constructor(world,configuration){
+    this.world = world;
+    this.configuration = configuration;
+    this.tasks = configuration.tasks;
+
+    this.canvas = document.querySelector("#game-canvas");
+    this.context = this.canvas.getContext("2d");
+    this.prompt = document.querySelector("#game-prompt");
+    this.progressElement = document.querySelector("#interactive-progress");
+    this.countElement = document.querySelector("#interactive-count");
+    this.rewardElement = document.querySelector("#game-reward");
+    this.actionButton = document.querySelector("#action-button");
+
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+    this.keys = new Set();
+    this.touchDirections = new Set();
+    this.completed = new Set();
+    this.carrying = null;
+    this.lastTime = performance.now();
+    this.running = true;
+    this.successPlayed = false;
+
+    this.background = new Image();
+    this.background.src = world.image;
+
+    this.player = {
+      x:configuration.start?.x ?? 270,
+      y:configuration.start?.y ?? 840,
+      radius:22,
+      speed:205,
+      facing:1,
+      walking:0
+    };
+
+    this.lama = {
+      x:this.player.x - 48,
+      y:this.player.y + 38
+    };
+
+    this.objects = this.tasks
+      .filter(task=>task.type === "place")
+      .map(task=>({
+        id:task.id,
+        icon:task.icon,
+        x:task.start.x,
+        y:task.start.y,
+        placed:false,
+        target:task.target
+      }));
+
+    this.boundKeyDown = event=>this.onKeyDown(event);
+    this.boundKeyUp = event=>this.onKeyUp(event);
+    this.boundVisibility = ()=>this.onVisibilityChange();
+
+    window.addEventListener("keydown",this.boundKeyDown);
+    window.addEventListener("keyup",this.boundKeyUp);
+    document.addEventListener("visibilitychange",this.boundVisibility);
+
+    this.setupTouchControls();
+
+    this.actionButton.addEventListener("click",()=>{
+      audio.unlock();
+      this.interact();
+    });
+
+    this.animationFrame = requestAnimationFrame(time=>this.loop(time));
+  }
+
+  destroy(){
+    this.running = false;
+    cancelAnimationFrame(this.animationFrame);
+    audio.stopFootsteps(true);
+
+    window.removeEventListener("keydown",this.boundKeyDown);
+    window.removeEventListener("keyup",this.boundKeyUp);
+    document.removeEventListener("visibilitychange",this.boundVisibility);
+  }
+
+  onVisibilityChange(){
+    if(document.hidden){
+      this.keys.clear();
+      this.touchDirections.clear();
+      audio.stopFootsteps();
+    }
+  }
+
+  onKeyDown(event){
+    const movementKeys = [
+      "ArrowUp","ArrowDown","ArrowLeft","ArrowRight",
+      "w","a","s","d","W","A","S","D"
+    ];
+
+    const actionKeys = [" ","e","E","Enter"];
+
+    if(movementKeys.includes(event.key) || actionKeys.includes(event.key)){
+      event.preventDefault();
+      audio.unlock();
+    }
+
+    if(actionKeys.includes(event.key) && !event.repeat){
+      this.interact();
+      return;
+    }
+
+    this.keys.add(event.key);
+  }
+
+  onKeyUp(event){
+    this.keys.delete(event.key);
+  }
+
+  setupTouchControls(){
+    document.querySelectorAll("[data-direction]").forEach(button=>{
+      const direction = button.dataset.direction;
+
+      const start = event=>{
+        event.preventDefault();
+        audio.unlock();
+        this.touchDirections.add(direction);
+        button.classList.add("active");
+      };
+
+      const stop = event=>{
+        event.preventDefault();
+        this.touchDirections.delete(direction);
+        button.classList.remove("active");
+      };
+
+      button.addEventListener("pointerdown",start);
+      button.addEventListener("pointerup",stop);
+      button.addEventListener("pointercancel",stop);
+      button.addEventListener("pointerleave",stop);
+    });
+  }
+
+  loop(time){
+    if(!this.running) return;
+
+    const delta = Math.min(0.034,(time-this.lastTime)/1000);
+    this.lastTime = time;
+
+    this.update(delta);
+    this.draw();
+
+    this.animationFrame = requestAnimationFrame(nextTime=>this.loop(nextTime));
+  }
+
+  update(delta){
+    let horizontal = 0;
+    let vertical = 0;
+
+    if(this.keys.has("ArrowLeft") || this.keys.has("a") || this.keys.has("A") || this.touchDirections.has("left")) horizontal -= 1;
+    if(this.keys.has("ArrowRight") || this.keys.has("d") || this.keys.has("D") || this.touchDirections.has("right")) horizontal += 1;
+    if(this.keys.has("ArrowUp") || this.keys.has("w") || this.keys.has("W") || this.touchDirections.has("up")) vertical -= 1;
+    if(this.keys.has("ArrowDown") || this.keys.has("s") || this.keys.has("S") || this.touchDirections.has("down")) vertical += 1;
+
+    const moving = horizontal !== 0 || vertical !== 0;
+
+    if(moving){
+      audio.startFootsteps();
+
+      const length = Math.hypot(horizontal,vertical) || 1;
+      horizontal /= length;
+      vertical /= length;
+
+      this.player.x += horizontal * this.player.speed * delta;
+      this.player.y += vertical * this.player.speed * delta;
+      this.player.walking += delta * 11;
+
+      if(horizontal !== 0){
+        this.player.facing = Math.sign(horizontal);
+      }
+    }else{
+      audio.stopFootsteps();
+    }
+
+    this.player.x = Math.max(35,Math.min(this.width-35,this.player.x));
+    this.player.y = Math.max(255,Math.min(this.height-35,this.player.y));
+
+    const lamaTargetX = this.player.x - 46 * this.player.facing;
+    const lamaTargetY = this.player.y + 38;
+
+    this.lama.x += (lamaTargetX-this.lama.x) * Math.min(1,delta*4.1);
+    this.lama.y += (lamaTargetY-this.lama.y) * Math.min(1,delta*4.1);
+
+    if(this.carrying){
+      this.carrying.x = this.player.x + 5 * this.player.facing;
+      this.carrying.y = this.player.y - 76;
+    }
+
+    this.updatePrompt();
+  }
+
+  interact(){
+    if(this.completed.size === this.tasks.length) return;
+
+    if(this.carrying){
+      if(this.distanceToRectangle(
+        this.player.x,
+        this.player.y,
+        this.carrying.target
+      ) < 92){
+        this.carrying.placed = true;
+        this.carrying.x =
+          this.carrying.target.x + this.carrying.target.width / 2;
+        this.carrying.y =
+          this.carrying.target.y + this.carrying.target.height / 2;
+
+        this.completed.add(this.carrying.id);
+        this.carrying = null;
+
+        audio.effect("place");
+        this.updateTaskHud();
+        return;
+      }
+
+      this.carrying.x = this.player.x + 28 * this.player.facing;
+      this.carrying.y = this.player.y + 10;
+      this.carrying = null;
+
+      audio.effect("click");
+      return;
+    }
+
+    const nearbyObject = this.objects
+      .filter(item=>!item.placed)
+      .map(item=>({
+        item,
+        distance:Math.hypot(
+          this.player.x-item.x,
+          this.player.y-item.y
+        )
+      }))
+      .filter(result=>result.distance < 74)
+      .sort((a,b)=>a.distance-b.distance)[0];
+
+    if(nearbyObject){
+      this.carrying = nearbyObject.item;
+      audio.effect("pickup");
+      return;
+    }
+
+    const nearbyAction = this.tasks
+      .filter(task=>task.type === "use" && !this.completed.has(task.id))
+      .map(task=>({
+        task,
+        distance:this.distanceToRectangle(
+          this.player.x,
+          this.player.y,
+          task.target
+        )
+      }))
+      .filter(result=>result.distance < 92)
+      .sort((a,b)=>a.distance-b.distance)[0];
+
+    if(nearbyAction){
+      this.completed.add(nearbyAction.task.id);
+      audio.effect("place");
+      this.updateTaskHud();
+      return;
+    }
+
+    audio.effect("click");
+  }
+
+  updateTaskHud(){
+    document.querySelectorAll("[data-game-task]").forEach(element=>{
+      element.classList.toggle(
+        "done",
+        this.completed.has(element.dataset.gameTask)
+      );
+    });
+
+    this.countElement.textContent = this.completed.size;
+    this.progressElement.style.width =
+      `${(this.completed.size/this.tasks.length)*100}%`;
+
+    if(this.completed.size === this.tasks.length){
+      this.rewardElement.classList.add("show");
+
+      if(!this.successPlayed){
+        this.successPlayed = true;
+        audio.effect("success");
+      }
+    }
+  }
+
+  updatePrompt(){
+    if(this.carrying){
+      const nearTarget = this.distanceToRectangle(
+        this.player.x,
+        this.player.y,
+        this.carrying.target
+      ) < 92;
+
+      this.prompt.textContent = nearTarget
+        ? "Carrega em ESPAÇO/E ou em AGARRAR/USAR para colocar."
+        : `Leva ${this.carrying.icon} até à zona iluminada.`;
+      return;
+    }
+
+    const nearObject = this.objects.some(item=>
+      !item.placed
+      && Math.hypot(
+        this.player.x-item.x,
+        this.player.y-item.y
+      ) < 74
+    );
+
+    if(nearObject){
+      this.prompt.textContent =
+        "Carrega em ESPAÇO/E ou em AGARRAR/USAR para pegar.";
+      return;
+    }
+
+    const nearAction = this.tasks.some(task=>
+      task.type === "use"
+      && !this.completed.has(task.id)
+      && this.distanceToRectangle(
+        this.player.x,
+        this.player.y,
+        task.target
+      ) < 92
+    );
+
+    if(nearAction){
+      this.prompt.textContent =
+        "Carrega em ESPAÇO/E ou em AGARRAR/USAR para realizar a tarefa.";
+      return;
+    }
+
+    this.prompt.textContent =
+      "Explora o cenário. Lama acompanha a Ninita.";
+  }
+
+  distanceToRectangle(x,y,rectangle){
+    const closestX = Math.max(
+      rectangle.x,
+      Math.min(x,rectangle.x+rectangle.width)
+    );
+
+    const closestY = Math.max(
+      rectangle.y,
+      Math.min(y,rectangle.y+rectangle.height)
+    );
+
+    return Math.hypot(x-closestX,y-closestY);
+  }
+
+  roundedRectangle(x,y,width,height,radius,fill,stroke=null,lineWidth=2){
+    const context = this.context;
+    const r = Math.min(radius,width/2,height/2);
+
+    context.beginPath();
+    context.moveTo(x+r,y);
+    context.arcTo(x+width,y,x+width,y+height,r);
+    context.arcTo(x+width,y+height,x,y+height,r);
+    context.arcTo(x,y+height,x,y,r);
+    context.arcTo(x,y,x+width,y,r);
+    context.closePath();
+
+    if(fill){
+      context.fillStyle = fill;
+      context.fill();
+    }
+
+    if(stroke){
+      context.strokeStyle = stroke;
+      context.lineWidth = lineWidth;
+      context.stroke();
+    }
+  }
+
+  draw(){
+    const context = this.context;
+    context.clearRect(0,0,this.width,this.height);
+
+    this.drawBackground();
+    this.drawTargets();
+
+    const drawable = [
+      ...this.objects.filter(item=>!item.placed && item!==this.carrying),
+      {kind:"lama-character",x:this.lama.x,y:this.lama.y},
+      {kind:"ninita-character",x:this.player.x,y:this.player.y}
+    ].sort((a,b)=>a.y-b.y);
+
+    for(const item of drawable){
+      if(item.kind === "lama-character"){
+        this.drawLama(item.x,item.y);
+      }else if(item.kind === "ninita-character"){
+        this.drawNinita(item.x,item.y);
+      }else{
+        this.drawObject(item);
+      }
+    }
+
+    for(const item of this.objects.filter(item=>item.placed)){
+      this.drawObject(item);
+    }
+
+    if(this.carrying){
+      this.drawObject(this.carrying,true);
+    }
+
+    if(this.completed.size === this.tasks.length){
+      this.drawCelebration();
+    }
+  }
+
+  drawBackground(){
+    const context = this.context;
+
+    if(this.background.complete && this.background.naturalWidth){
+      context.drawImage(
+        this.background,
+        0,
+        0,
+        this.width,
+        this.height
+      );
+    }else{
+      context.fillStyle = "#f6d7e8";
+      context.fillRect(0,0,this.width,this.height);
+    }
+
+    const gradient = context.createLinearGradient(0,0,0,this.height);
+    gradient.addColorStop(0,"rgba(255,255,255,.03)");
+    gradient.addColorStop(.56,"rgba(0,0,0,.02)");
+    gradient.addColorStop(1,"rgba(0,0,0,.14)");
+
+    context.fillStyle = gradient;
+    context.fillRect(0,0,this.width,this.height);
+  }
+
+  drawTargets(){
+    const context = this.context;
+    context.save();
+
+    context.setLineDash([10,8]);
+    context.lineWidth = 4;
+    context.font = "900 14px system-ui";
+    context.textAlign = "center";
+
+    for(const task of this.tasks){
+      if(this.completed.has(task.id)) continue;
+
+      context.fillStyle = "rgba(255,239,111,.20)";
+      context.strokeStyle = "#ffe15b";
+
+      this.roundedRectangle(
+        task.target.x,
+        task.target.y,
+        task.target.width,
+        task.target.height,
+        15,
+        context.fillStyle,
+        context.strokeStyle,
+        4
+      );
+
+      context.fillStyle = "#40224f";
+      context.shadowColor = "rgba(255,255,255,.95)";
+      context.shadowBlur = 7;
+
+      context.fillText(
+        task.target.label,
+        task.target.x + task.target.width / 2,
+        task.target.y + task.target.height / 2 + 5
+      );
+
+      context.shadowBlur = 0;
+
+      if(task.type === "use"){
+        context.font = "30px system-ui";
+        context.fillText(
+          task.icon,
+          task.target.x + task.target.width / 2,
+          task.target.y + task.target.height / 2 - 20
+        );
+        context.font = "900 14px system-ui";
+      }
+    }
+
+    context.restore();
+  }
+
+  drawObject(object,carried=false){
+    const context = this.context;
+
+    context.save();
+    context.translate(object.x,object.y);
+
+    if(carried){
+      context.shadowColor = "rgba(255,225,91,.95)";
+      context.shadowBlur = 24;
+    }else{
+      context.shadowColor = "rgba(25,10,30,.35)";
+      context.shadowBlur = 10;
+    }
+
+    context.fillStyle = "rgba(255,255,255,.94)";
+    context.beginPath();
+    context.arc(0,0,27,0,Math.PI*2);
+    context.fill();
+
+    context.strokeStyle = "#ff6faf";
+    context.lineWidth = 4;
+    context.stroke();
+
+    context.shadowBlur = 0;
+    context.font = "32px system-ui";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText(object.icon,0,1);
+
+    context.restore();
+  }
+
+  drawNinita(x,y){
+    return BedroomGame.prototype.drawNinita.call(this,x,y);
+  }
+
+  drawLama(x,y){
+    return BedroomGame.prototype.drawLama.call(this,x,y);
+  }
+
+  drawCelebration(){
+    return BedroomGame.prototype.drawCelebration.call(this);
+  }
+}
+
+
 // -------------------------------------------------------------
 // Restantes mundos: versão de tarefas tocáveis
 // -------------------------------------------------------------
@@ -1324,7 +2420,8 @@ document.addEventListener("click",event=>{
   }
 
   if(element.dataset.action === "finish-interactive"){
-    completeWorld(1);
+    const worldId = Number(element.dataset.world) || 1;
+    completeWorld(worldId);
     audio.effect("success");
     routeTo("worlds");
   }

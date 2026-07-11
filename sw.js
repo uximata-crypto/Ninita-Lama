@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-realista-vertical-v5";
+const CACHE = "ninita-lama-todos-niveis-interativos-v6";
 const ASSETS = [
   "./",
   "./index.html",

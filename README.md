@@ -73,3 +73,16 @@ Depois de testar o Quarto Encantado, poderão ser acrescentados:
 - Quarto Encantado com fundo realista no minijogo;
 - canvas interativo em formato 9:16;
 - melhor adaptação para jogar no telemóvel em modo retrato.
+
+
+## Todos os mundos interativos
+
+Nesta versão, os dez níveis utilizam o mesmo motor de jogo vertical:
+
+- movimento da Ninita com teclado e botões táteis;
+- Lama acompanha a Ninita;
+- objetos que podem ser agarrados, transportados e colocados;
+- tarefas de utilização realizadas junto das zonas iluminadas;
+- cinco tarefas próprias em cada mundo;
+- conclusão, recompensa e desbloqueio do nível seguinte;
+- cenários realistas em formato vertical.
