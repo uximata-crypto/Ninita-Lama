@@ -27,107 +27,58 @@ const app = document.querySelector("#app");
 let activeGame = null;
 
 let activeActivityModal = null;
-const ACTIVITY_PROGRESS_KEY = "ninita-lama-activities-v3";
+const ACTIVITY_PROGRESS_KEY = "ninita-lama-activities-v4";
 
 const LEVEL_ACTIVITIES = {
   1:[
-    {id:"care",type:"care",icon:"🧴",title:"Salão da Ninita e de Lama",description:"Retira a esponja do balde e arrasta-a para lavar. Depois usa o secador e o pente, com sons reais e a música mais baixa."},
-    {id:"maze-room",type:"maze",icon:"🌀",title:"Ninita encontra Lama",description:"Move a Ninita pelo labirinto até encontrar Lama."},
-    {id:"letter-room",type:"letter",icon:"🔠",title:"Caça às Letras",description:"Escolhe a letra inicial correta para cada objeto do quarto."},
-    {id:"number-room",type:"number",icon:"🔢",title:"Contar Brinquedos",description:"Conta estrelas, livros e brinquedos e escolhe o número certo."},
-    {id:"word-room",type:"word",icon:"🔤",title:"Palavras do Quarto",description:"Constrói palavras simples, letra a letra."},
-    {id:"math-room",type:"math",icon:"➕",title:"Contas das Estrelas",description:"Resolve adições e subtrações simples."},
-    {id:"color-room",type:"coloring",icon:"🦄",title:"Princesas e Unicórnios",description:"Pinta princesas de contos de fadas, castelos e unicórnios com uma paleta completa."},
-    {id:"memory-room",type:"memory",icon:"🧠",title:"Memória do Quarto",description:"Encontra os pares escondidos no quarto encantado."}
+    {id:"care",type:"care",icon:"🧴",title:"Salão da Ninita e de Lama",description:"Lava, seca e penteia Lama e a Ninita com esponja, secador e pente."},
+    {id:"maze-room",type:"maze",icon:"🌀",title:"Ninita encontra Lama",description:"Move a Ninita no labirinto até encontrar Lama."},
+    {id:"color-room",type:"coloring",icon:"🦄",title:"Princesas e Unicórnios",description:"Pinta desenhos inspirados em princesas e unicórnios."}
   ],
   2:[
-    {id:"cooking",type:"cooking",icon:"👩‍🍳",title:"Cozinhar na Casa das Surpresas",description:"Escolhe uma receita e junta os ingredientes pela ordem certa."},
-    {id:"maze-home",type:"maze",icon:"🌀",title:"Labirinto da Casa Mágica",description:"Ajuda Ninita a encontrar a Família da Casa Mágica."},
-    {id:"letter-home",type:"letter",icon:"🔠",title:"Letras da Casa",description:"Descobre as letras iniciais de objetos domésticos."},
-    {id:"number-home",type:"number",icon:"🔢",title:"Contar na Cozinha",description:"Conta pratos, frutas e copos."},
-    {id:"word-home",type:"word",icon:"🔤",title:"Palavras de Casa",description:"Constrói palavras letra a letra."},
-    {id:"math-home",type:"math",icon:"➕",title:"Contas da Cozinha",description:"Soma e subtrai frutas, pratos e copos."},
-    {id:"color-home",type:"coloring",icon:"🎨",title:"Ateliê dos Contos",description:"Pinta princesas, fadas e unicórnios."},
-    {id:"memory-home",type:"memory",icon:"🧠",title:"Memória da Casa",description:"Encontra os pares de objetos da casa."},
-    {id:"puzzle-home",type:"puzzle",icon:"🧩",title:"Puzzle da Sala",description:"Organiza as peças da casa."}
+    {id:"kitchen-play",type:"cooking",icon:"🍳",title:"Cozinha da Ninita",description:"Faz comida de faz de conta na cozinha da Ninita, inspirada na cozinha de brincar."},
+    {id:"number-home",type:"number",icon:"🔢",title:"Contar na Cozinha",description:"Conta frutas, copos e outros objetos da cozinha."},
+    {id:"memory-home",type:"memory",icon:"🧠",title:"Memória da Casa",description:"Encontra os pares dos objetos da casa."}
   ],
   3:[
-    {id:"letter-school",type:"letter",icon:"🔠",title:"ABC da Escola",description:"Reconhece a primeira letra de cada palavra."},
-    {id:"number-school",type:"number",icon:"🔢",title:"Contar Materiais",description:"Conta lápis, livros e réguas."},
-    {id:"word-school",type:"word",icon:"✏️",title:"Letras da Escola",description:"Forma palavras, letra a letra."},
-    {id:"math-school",type:"math",icon:"➕",title:"Adição e Subtração",description:"Resolve contas simples e ganha estrelas."},
-    {id:"maze-school",type:"maze",icon:"🌀",title:"Labirinto da Princesa do Gelo",description:"Ajuda Ninita a encontrar a princesa entre os cristais."},
-    {id:"memory-school",type:"memory",icon:"🎒",title:"Memória Escolar",description:"Combina materiais iguais."},
-    {id:"puzzle-school",type:"puzzle",icon:"🧩",title:"Puzzle da Escola",description:"Completa o quadro escolar em peças."},
-    {id:"color-school",type:"coloring",icon:"🎨",title:"Desenhos Mágicos",description:"Pinta princesas, fadas, castelos e unicórnios."}
+    {id:"board-school",type:"board",icon:"🧮",title:"Quadro Escolar da Ninita",description:"Letras, números e pequenas sequências num quadro escolar mágico."},
+    {id:"puzzle-school",type:"puzzle",icon:"🧩",title:"Puzzle da Escola",description:"Completa o puzzle do quadro escolar e dos materiais."},
+    {id:"color-school",type:"coloring",icon:"🎨",title:"Desenhos Mágicos",description:"Pinta princesas, unicórnios e outras figuras inspiradas nas imagens."}
   ],
   4:[
     {id:"maze-beach",type:"maze",icon:"🌀",title:"Labirinto da Princesa do Oceano",description:"Ajuda Ninita a chegar à princesa junto ao mar."},
-    {id:"letter-beach",type:"letter",icon:"🔠",title:"Letras da Praia",description:"Descobre a letra inicial de palavras do mar."},
     {id:"number-beach",type:"number",icon:"🔢",title:"Contar Conchas",description:"Conta conchas, peixes e estrelas-do-mar."},
-    {id:"word-beach",type:"word",icon:"🔤",title:"Palavras da Praia",description:"Forma palavras sobre o mar, a areia e as férias."},
-    {id:"math-beach",type:"math",icon:"➕",title:"Contas do Oceano",description:"Soma e subtrai conchas e peixes."},
-    {id:"puzzle-beach",type:"puzzle",icon:"🧩",title:"Puzzle da Praia",description:"Ordena as peças do cenário tropical."},
-    {id:"color-beach",type:"coloring",icon:"🎨",title:"Princesas do Mar e Unicórnios",description:"Pinta páginas mágicas com a paleta de cores."},
-    {id:"memory-beach",type:"memory",icon:"🧠",title:"Memória do Oceano",description:"Encontra pares de animais e objetos marinhos."}
+    {id:"color-beach",type:"coloring",icon:"🎨",title:"Princesas do Mar e Unicórnios",description:"Pinta páginas mágicas com uma paleta completa."}
   ],
   5:[
-    {id:"maze-forest",type:"maze",icon:"🌿",title:"Labirinto do Unicórnio",description:"Ajuda Ninita a encontrar o Unicórnio Arco-Íris."},
-    {id:"letter-forest",type:"letter",icon:"🔠",title:"Letras da Natureza",description:"Escolhe a letra inicial de plantas e animais."},
-    {id:"number-forest",type:"number",icon:"🔢",title:"Contar na Floresta",description:"Conta flores, folhas e borboletas."},
-    {id:"word-forest",type:"word",icon:"🔤",title:"Palavras da Floresta",description:"Constrói palavras ligadas à natureza."},
-    {id:"math-forest",type:"math",icon:"➕",title:"Contas da Floresta",description:"Soma e subtrai elementos da natureza."},
-    {id:"memory-forest",type:"memory",icon:"🦋",title:"Memória da Natureza",description:"Descobre pares de plantas e animais."},
-    {id:"color-forest",type:"coloring",icon:"🖍️",title:"Ateliê Encantado",description:"Pinta páginas de magia gelada, fadas e unicórnios."}
+    {id:"maze-forest",type:"maze",icon:"🌿",title:"Labirinto do Unicórnio",description:"Ajuda Ninita a encontrar o unicórnio mágico."},
+    {id:"word-forest",type:"word",icon:"🔤",title:"Palavras da Floresta",description:"Constrói palavras da natureza, letra a letra."},
+    {id:"color-forest",type:"coloring",icon:"🖍️",title:"Ateliê Encantado",description:"Pinta unicórnios, princesas e fantasia."}
   ],
   6:[
     {id:"maze-pool",type:"maze",icon:"🏊",title:"Labirinto do Unicórnio Estelar",description:"Ajuda Ninita a encontrar o unicórnio junto à piscina."},
-    {id:"letter-pool",type:"letter",icon:"🔠",title:"Letras da Piscina",description:"Descobre as letras de objetos de água e verão."},
-    {id:"number-pool",type:"number",icon:"🔢",title:"Contar Boias",description:"Conta boias, bolas e chapéus."},
-    {id:"word-pool",type:"word",icon:"🔤",title:"Palavras da Piscina",description:"Forma palavras do mundo aquático."},
-    {id:"math-pool",type:"math",icon:"➖",title:"Contas da Piscina",description:"Soma e subtrai boias, bolas e conchas."},
-    {id:"puzzle-pool",type:"puzzle",icon:"🧩",title:"Puzzle Tropical",description:"Desliza as peças até ficarem ordenadas."},
-    {id:"color-pool",type:"coloring",icon:"🎨",title:"Colorir o Verão Mágico",description:"Pinta princesas do mar, castelos e unicórnios."},
-    {id:"memory-pool",type:"memory",icon:"💦",title:"Memória da Piscina",description:"Encontra pares de objetos de água e verão."}
+    {id:"number-pool",type:"number",icon:"🔢",title:"Contar Boias",description:"Conta boias, bolas e gotas de água."},
+    {id:"color-pool",type:"coloring",icon:"🎨",title:"Colorir o Verão Mágico",description:"Pinta princesas, castelos e unicórnios."}
   ],
   7:[
-    {id:"farm-feed",type:"farm",icon:"🐘",title:"Alimentar a Quinta Pedagógica",description:"Alimenta elefantes, macacos, aves, répteis e animais da quinta."},
-    {id:"maze-farm",type:"maze",icon:"🌀",title:"Labirinto da Quinta",description:"Ajuda Ninita a encontrar Lama entre os animais."},
-    {id:"letter-farm",type:"letter",icon:"🔠",title:"Letras dos Animais",description:"Escolhe a letra inicial de cada animal."},
-    {id:"number-farm",type:"number",icon:"🔢",title:"Contar Animais",description:"Conta aves, coelhos, macacos e tartarugas."},
-    {id:"word-farm",type:"word",icon:"🔤",title:"Nomes dos Animais",description:"Constrói os nomes letra a letra."},
-    {id:"math-farm",type:"math",icon:"➕",title:"Contar na Quinta",description:"Faz contas simples com ovos, cenouras e frutos."},
-    {id:"memory-farm",type:"memory",icon:"🐢",title:"Memória dos Animais",description:"Encontra pares de mamíferos, aves e répteis."},
-    {id:"color-farm",type:"coloring",icon:"🎨",title:"Animais e Unicórnios",description:"Pinta animais, princesas e unicórnios."}
+    {id:"farm-feed",type:"farm",icon:"🐘",title:"Alimentar a Quinta Pedagógica",description:"Alimenta mamíferos, aves e répteis da quinta."},
+    {id:"number-farm",type:"number",icon:"🔢",title:"Contar Animais",description:"Conta animais e alimentos da quinta pedagógica."},
+    {id:"memory-farm",type:"memory",icon:"🐢",title:"Memória dos Animais",description:"Encontra os pares dos animais."}
   ],
   8:[
-    {id:"maze-park",type:"maze",icon:"🎠",title:"Labirinto do Castelo",description:"Ajuda Ninita a encontrar o Castelo Encantado."},
-    {id:"letter-park",type:"letter",icon:"🔠",title:"Letras do Parque",description:"Reconhece as letras dos brinquedos."},
-    {id:"number-park",type:"number",icon:"🔢",title:"Contar Brinquedos",description:"Conta bolas, bilhetes e balões."},
-    {id:"word-park",type:"word",icon:"🔤",title:"Palavras da Diversão",description:"Forma palavras do parque."},
-    {id:"math-park",type:"math",icon:"🎟️",title:"Contar Bilhetes",description:"Resolve contas com bilhetes e brinquedos."},
-    {id:"puzzle-park",type:"puzzle",icon:"🧩",title:"Puzzle da Diversão",description:"Organiza as peças do parque."},
-    {id:"memory-park",type:"memory",icon:"🎡",title:"Memória do Parque",description:"Encontra os pares dos brinquedos e atrações."},
-    {id:"color-park",type:"coloring",icon:"🎨",title:"Festa de Princesas e Unicórnios",description:"Pinta páginas de fantasia e diversão."}
+    {id:"maze-park",type:"maze",icon:"🎠",title:"Labirinto do Castelo",description:"Ajuda Ninita a encontrar o castelo encantado."},
+    {id:"number-park",type:"number",icon:"🔢",title:"Contar Brinquedos",description:"Conta bilhetes, balões e brinquedos do parque."},
+    {id:"puzzle-park",type:"puzzle",icon:"🧩",title:"Puzzle da Diversão",description:"Organiza as peças do parque e conclui a imagem."}
   ],
   9:[
-    {id:"maze-city",type:"maze",icon:"🌀",title:"Labirinto da Princesa da Torre",description:"Ajuda Ninita a encontrar a princesa na cidade."},
-    {id:"letter-city",type:"letter",icon:"🔠",title:"Letras da Cidade",description:"Escolhe a letra inicial de lojas e transportes."},
-    {id:"number-city",type:"number",icon:"🔢",title:"Contar na Cidade",description:"Conta carros, sinais e edifícios."},
-    {id:"word-city",type:"word",icon:"🏙️",title:"Palavras da Cidade",description:"Constrói palavras ligadas à comunidade."},
-    {id:"math-city",type:"math",icon:"🛍️",title:"Compras e Trocos",description:"Resolve pequenas adições e subtrações."},
-    {id:"memory-city",type:"memory",icon:"🚦",title:"Memória da Cidade",description:"Encontra pares de sinais, lojas e meios de transporte."},
-    {id:"color-city",type:"coloring",icon:"🎨",title:"Galeria Mágica",description:"Escolhe uma princesa, uma fada ou um unicórnio e pinta livremente."}
+    {id:"maze-city",type:"maze",icon:"🌀",title:"Labirinto da Princesa da Torre",description:"Ajuda Ninita a chegar à princesa na cidade."},
+    {id:"math-city",type:"math",icon:"🛍️",title:"Compras e Trocos",description:"Resolve pequenas contas na cidade colorida."},
+    {id:"color-city",type:"coloring",icon:"🎨",title:"Galeria Mágica",description:"Pinta princesas e unicórnios ao teu gosto."}
   ],
   10:[
-    {id:"maze-rainbow",type:"maze",icon:"🌀",title:"Labirinto Final dos Unicórnios",description:"Ajuda Ninita a encontrar o Unicórnio Arco-Íris."},
-    {id:"letter-rainbow",type:"letter",icon:"🔠",title:"Letras Mágicas",description:"Descobre as letras iniciais do mundo final."},
-    {id:"number-rainbow",type:"number",icon:"🔢",title:"Contar Estrelas",description:"Conta estrelas, nuvens, cristais e unicórnios."},
-    {id:"word-rainbow",type:"word",icon:"🔤",title:"Palavras Mágicas",description:"Constrói palavras do mundo final."},
-    {id:"math-rainbow",type:"math",icon:"➕",title:"Números do Arco-Íris",description:"Resolve contas finais com estrelas, nuvens e cristais."},
-    {id:"color-rainbow",type:"coloring",icon:"🌈",title:"Grande Tela do Arco-Íris",description:"Pinta princesas, castelos e dois unicórnios diferentes."},
-    {id:"memory-rainbow",type:"memory",icon:"⭐",title:"Memória das Estrelas",description:"Encontra todos os pares mágicos."},
-    {id:"puzzle-rainbow",type:"puzzle",icon:"🧩",title:"Puzzle Final",description:"Completa o último desafio da aventura."}
+    {id:"maze-rainbow",type:"maze",icon:"🌀",title:"Labirinto Final dos Unicórnios",description:"Ajuda Ninita a encontrar o unicórnio final."},
+    {id:"math-rainbow",type:"math",icon:"➕",title:"Números do Arco-Íris",description:"Resolve as contas finais com estrelas, nuvens e cristais."},
+    {id:"color-rainbow",type:"coloring",icon:"🌈",title:"Grande Tela do Arco-Íris",description:"Pinta o grande final com princesas e unicórnios."}
   ]
 };
 
@@ -164,7 +115,7 @@ function shuffleItems(items){
 function renderActivityHub(worldId){
   const world = worlds.find(item=>item.id === worldId) || worlds[0];
   const activities = LEVEL_ACTIVITIES[world.id] || [];
-  const completed = completedActivitiesFor(world.id);
+  const completed = completedActivitiesFor(world.id).filter(id=>activities.some(activity=>activity.id===id));
 
   app.innerHTML = `
     ${topbar(`🎮 Atividades — ${world.title}`,"Os desafios originais continuam disponíveis no cenário principal")}
@@ -197,8 +148,8 @@ function renderActivityHub(worldId){
       </section>
 
       <section class="activity-note card">
-        <h3>Desenhos para colorir</h3>
-        <p>As páginas incluem imagens completas e contornos para pintar: Princesa do Gelo, Família da Casa Mágica, Princesa do Oceano, Princesa da Torre, fadas, castelos e unicórnios. São ilustrações originais de fantasia familiar.</p>
+        <h3>Atividades por nível</h3>
+        <p>Cada mundo apresenta agora 3 atividades principais. Nos desenhos, há novas páginas inspiradas nas imagens enviadas: princesa da maçã, unicórnios e fantasia. O Mundo 2 inclui a Cozinha da Ninita e o Mundo 3 o Quadro Escolar da Ninita.</p>
       </section>
 
       <button class="btn btn-primary activity-return" data-action="return-level" data-world="${world.id}">
@@ -243,9 +194,18 @@ function createActivityModal(world,activity){
   return modal.querySelector("#activity-root");
 }
 
+
+function playCorrectAnswer(){
+  audio.effect("applauseCorrect");
+}
+
+function playWrongAnswer(){
+  audio.effect("wrongAnswer");
+}
+
 function finishActivity(world,activity,message){
   markActivityComplete(world.id,activity.id);
-  audio.effect("success");
+  audio.effect("applauseFinal");
   const root = document.querySelector("#activity-root");
   if(!root || root.dataset.finished === "true") return;
   root.dataset.finished = "true";
@@ -280,6 +240,7 @@ function openActivity(worldId,activityId){
   if(activity.type === "coloring") startColoringActivity(root,world,finish);
   if(activity.type === "care") startCareActivity(root,world,finish);
   if(activity.type === "cooking") startCookingActivity(root,world,finish);
+  if(activity.type === "board") startBoardActivity(root,world,finish);
   if(activity.type === "farm") startFarmActivity(root,world,finish);
 }
 
@@ -329,10 +290,11 @@ function startMemoryActivity(root,world,finish){
       buttons[first].classList.add("matched");
       button.classList.add("matched");
       first = null;
-      audio.effect("place");
+      playCorrectAnswer();
       root.querySelector("#memory-feedback").textContent = `${matched.size/2} pares encontrados.`;
       if(matched.size === cards.length) finish("Encontraste todos os pares do jogo da memória!");
     }else{
+      playWrongAnswer();
       locked = true;
       const previous = first;
       first = null;
@@ -418,7 +380,7 @@ function startLetterActivity(root,world,finish){
       root.querySelector("#letter-drop-zone").textContent = letter;
       root.querySelector("#letter-drop-zone").classList.add("correct");
       root.querySelector("#letter-feedback").textContent = `Muito bem: ${item.word} começa por ${letter}.`;
-      audio.effect("place");
+      playCorrectAnswer();
       root.querySelectorAll(".letter-choice").forEach(button=>button.disabled=true);
       setTimeout(()=>{
         round++;
@@ -427,6 +389,7 @@ function startLetterActivity(root,world,finish){
       },650);
     }else{
       root.querySelector("#letter-feedback").textContent = `Essa não é a primeira letra. Observa a palavra ${item.word}.`;
+      playWrongAnswer();
       const wrong = root.querySelector(`[data-letter-choice="${letter}"]`);
       wrong?.classList.add("wrong");
       setTimeout(()=>wrong?.classList.remove("wrong"),350);
@@ -451,83 +414,248 @@ function startLetterActivity(root,world,finish){
   next();
 }
 
-function numberIconFor(worldId){
-  return ({1:"⭐",2:"🍎",3:"✏️",4:"🐚",5:"🌸",6:"🛟",7:"🐇",8:"🎟️",9:"🚗",10:"🦄"})[worldId] || "⭐";
+function numberItemsFor(worldId){
+  const common = [
+    {
+      id:"ninita",
+      singular:"Ninita",
+      plural:"Ninitas",
+      image:"./assets/images/activities/counting/ninita.webp"
+    },
+    {
+      id:"lama",
+      singular:"Lama",
+      plural:"Lamas",
+      image:"./assets/images/activities/counting/lama.webp"
+    },
+    {
+      id:"ice-princess",
+      singular:"princesa do gelo",
+      plural:"princesas do gelo",
+      image:"./assets/images/activities/counting/princesa-gelo.webp"
+    },
+    {
+      id:"magic-family",
+      singular:"família da casa mágica",
+      plural:"famílias da casa mágica",
+      image:"./assets/images/activities/counting/familia-magica.webp"
+    },
+    {
+      id:"sea-princess",
+      singular:"princesa do oceano",
+      plural:"princesas do oceano",
+      image:"./assets/images/activities/counting/princesa-oceano.webp"
+    },
+    {
+      id:"tower-princess",
+      singular:"princesa da torre",
+      plural:"princesas da torre",
+      image:"./assets/images/activities/counting/princesa-torre.webp"
+    },
+    {
+      id:"rainbow-unicorn",
+      singular:"unicórnio arco-íris",
+      plural:"unicórnios arco-íris",
+      image:"./assets/images/activities/counting/unicornio-arcoiris.webp"
+    },
+    {
+      id:"star-unicorn",
+      singular:"unicórnio estelar",
+      plural:"unicórnios estelares",
+      image:"./assets/images/activities/counting/unicornio-estelar.webp"
+    },
+    {
+      id:"castle",
+      singular:"castelo encantado",
+      plural:"castelos encantados",
+      image:"./assets/images/activities/counting/castelo.webp"
+    }
+  ];
+
+  const toysByWorld = {
+    1:[
+      {id:"teddy",singular:"urso de peluche",plural:"ursos de peluche",emoji:"🧸"},
+      {id:"doll",singular:"boneca",plural:"bonecas",emoji:"🪆"},
+      {id:"star",singular:"estrela",plural:"estrelas",emoji:"⭐"}
+    ],
+    2:[
+      {id:"apple",singular:"maçã",plural:"maçãs",emoji:"🍎"},
+      {id:"cup",singular:"copo",plural:"copos",emoji:"🥛"},
+      {id:"cake",singular:"bolo",plural:"bolos",emoji:"🧁"}
+    ],
+    3:[
+      {id:"pencil",singular:"lápis",plural:"lápis",emoji:"✏️"},
+      {id:"book",singular:"livro",plural:"livros",emoji:"📘"},
+      {id:"bag",singular:"mochila",plural:"mochilas",emoji:"🎒"}
+    ],
+    4:[
+      {id:"shell",singular:"concha",plural:"conchas",emoji:"🐚"},
+      {id:"fish",singular:"peixe",plural:"peixes",emoji:"🐟"},
+      {id:"starfish",singular:"estrela-do-mar",plural:"estrelas-do-mar",emoji:"⭐"}
+    ],
+    5:[
+      {id:"flower",singular:"flor",plural:"flores",emoji:"🌸"},
+      {id:"butterfly",singular:"borboleta",plural:"borboletas",emoji:"🦋"},
+      {id:"mushroom",singular:"cogumelo",plural:"cogumelos",emoji:"🍄"}
+    ],
+    6:[
+      {id:"float",singular:"boia",plural:"boias",emoji:"🛟"},
+      {id:"ball",singular:"bola",plural:"bolas",emoji:"🏐"},
+      {id:"drop",singular:"gota de água",plural:"gotas de água",emoji:"💧"}
+    ],
+    7:[
+      {id:"elephant",singular:"elefante",plural:"elefantes",emoji:"🐘"},
+      {id:"monkey",singular:"macaco",plural:"macacos",emoji:"🐒"},
+      {id:"parrot",singular:"papagaio",plural:"papagaios",emoji:"🦜"}
+    ],
+    8:[
+      {id:"ticket",singular:"bilhete",plural:"bilhetes",emoji:"🎟️"},
+      {id:"balloon",singular:"balão",plural:"balões",emoji:"🎈"},
+      {id:"car",singular:"carrinho",plural:"carrinhos",emoji:"🚗"}
+    ],
+    9:[
+      {id:"car-city",singular:"carro",plural:"carros",emoji:"🚗"},
+      {id:"bus",singular:"autocarro",plural:"autocarros",emoji:"🚌"},
+      {id:"bag-city",singular:"saco de compras",plural:"sacos de compras",emoji:"🛍️"}
+    ],
+    10:[
+      {id:"rainbow",singular:"arco-íris",plural:"arco-íris",emoji:"🌈"},
+      {id:"crystal",singular:"cristal",plural:"cristais",emoji:"💎"},
+      {id:"magic-star",singular:"estrela mágica",plural:"estrelas mágicas",emoji:"⭐"}
+    ]
+  };
+
+  return [...common,...(toysByWorld[worldId] || toysByWorld[1])];
 }
 
 function startNumberActivity(root,world,finish){
-  const rounds = 6;
-  const icon = numberIconFor(world.id);
+  const rounds = 7;
+  const items = numberItemsFor(world.id);
   let round = 0;
   let score = 0;
+  let answer = 1;
+  let currentItem = items[0];
+  let previousItemId = "";
 
   root.innerHTML = `
     <div class="learning-score">⭐ <span id="number-score">0</span> de ${rounds}</div>
     <div class="number-challenge">
-      <p class="mini-instruction">Conta os objetos e escolhe ou arrasta o número correto.</p>
-      <div class="counting-objects" id="counting-objects"></div>
+      <p class="mini-instruction" id="counting-instruction">
+        Conta as personagens e os brinquedos e escolhe o número correto.
+      </p>
+      <div class="counting-object-title" id="counting-object-title"></div>
+      <div class="counting-objects counting-objects-varied" id="counting-objects"></div>
       <div class="number-drop-zone" id="number-drop-zone">?</div>
       <div class="number-choice-grid" id="number-choice-grid"></div>
       <p class="mini-feedback" id="number-feedback">Quantos objetos estão no quadro?</p>
     </div>
   `;
 
-  let answer = 1;
+  function chooseNextItem(){
+    const available = items.filter(item=>item.id !== previousItemId);
+    currentItem = available[Math.floor(Math.random()*available.length)] || items[0];
+    previousItemId = currentItem.id;
+  }
+
+  function tokenMarkup(index){
+    if(currentItem.image){
+      return `
+        <span class="counting-token counting-token-image" style="--delay:${index}">
+          <img src="${currentItem.image}" alt="${currentItem.singular}">
+        </span>
+      `;
+    }
+
+    return `
+      <span class="counting-token counting-token-emoji" style="--delay:${index}" aria-label="${currentItem.singular}">
+        ${currentItem.emoji}
+      </span>
+    `;
+  }
+
   function next(){
     if(round >= rounds){
-      finish("Contaste corretamente todos os grupos de objetos!");
+      finish("Contaste corretamente todas as personagens e todos os brinquedos!");
       return;
     }
+
+    chooseNextItem();
     answer = 1 + Math.floor(Math.random()*10);
+
     const choices = new Set([answer]);
     while(choices.size < 4){
       choices.add(1 + Math.floor(Math.random()*10));
     }
-    root.querySelector("#counting-objects").innerHTML = Array.from({length:answer},(_,index)=>`<span style="--delay:${index}">${icon}</span>`).join("");
+
+    const label = answer === 1 ? currentItem.singular : currentItem.plural;
+    root.querySelector("#counting-object-title").textContent = `Conta: ${label}`;
+    root.querySelector("#counting-objects").innerHTML =
+      Array.from({length:answer},(_,index)=>tokenMarkup(index)).join("");
+
     root.querySelector("#number-drop-zone").textContent = "?";
-    root.querySelector("#number-choice-grid").innerHTML = shuffleItems([...choices]).map(value=>`<button class="number-choice" draggable="true" data-number-choice="${value}">${value}</button>`).join("");
-    root.querySelector("#number-feedback").textContent = "Quantos objetos estão no quadro?";
+    root.querySelector("#number-choice-grid").innerHTML =
+      shuffleItems([...choices]).map(value=>`
+        <button class="number-choice" draggable="true" data-number-choice="${value}">${value}</button>
+      `).join("");
+
+    root.querySelector("#number-feedback").textContent =
+      `Quantos ${label} estão no quadro?`;
+
     bind();
   }
 
   function choose(value){
     const number = Number(value);
+    const label = answer === 1 ? currentItem.singular : currentItem.plural;
+
     if(number === answer){
       score++;
       root.querySelector("#number-score").textContent = score;
       root.querySelector("#number-drop-zone").textContent = number;
       root.querySelector("#number-drop-zone").classList.add("correct");
-      root.querySelector("#number-feedback").textContent = `Certo! Há ${answer} ${answer===1 ? "objeto" : "objetos"}.`;
-      audio.effect("place");
+      root.querySelector("#number-feedback").textContent =
+        `Certo! Há ${answer} ${label}.`;
+
+      playCorrectAnswer();
       root.querySelectorAll(".number-choice").forEach(button=>button.disabled=true);
+
       setTimeout(()=>{
         round++;
         root.querySelector("#number-drop-zone")?.classList.remove("correct");
         next();
-      },650);
+      },900);
     }else{
-      root.querySelector("#number-feedback").textContent = "Conta novamente, devagar, um objeto de cada vez.";
+      root.querySelector("#number-feedback").textContent =
+        "Ainda não. Conta devagar, tocando com o dedo em cada imagem.";
+
+      playWrongAnswer();
       const wrong = root.querySelector(`[data-number-choice="${number}"]`);
       wrong?.classList.add("wrong");
-      setTimeout(()=>wrong?.classList.remove("wrong"),350);
+      setTimeout(()=>wrong?.classList.remove("wrong"),500);
     }
   }
 
   function bind(){
     root.querySelectorAll("[data-number-choice]").forEach(button=>{
       button.addEventListener("click",()=>choose(button.dataset.numberChoice));
-      button.addEventListener("dragstart",event=>event.dataTransfer.setData("text/plain",button.dataset.numberChoice));
+      button.addEventListener("dragstart",event=>{
+        event.dataTransfer.setData("text/plain",button.dataset.numberChoice);
+      });
     });
   }
 
   const drop = root.querySelector("#number-drop-zone");
-  drop.addEventListener("dragover",event=>{event.preventDefault();drop.classList.add("drop-ready");});
+  drop.addEventListener("dragover",event=>{
+    event.preventDefault();
+    drop.classList.add("drop-ready");
+  });
   drop.addEventListener("dragleave",()=>drop.classList.remove("drop-ready"));
   drop.addEventListener("drop",event=>{
     event.preventDefault();
     drop.classList.remove("drop-ready");
     choose(event.dataTransfer.getData("text/plain"));
   });
+
   next();
 }
 
@@ -563,6 +691,7 @@ function startWordActivity(root,world,finish){
         root.querySelector(`[data-slot="${built.length-1}"]`).textContent = button.dataset.letter;
         audio.effect("place");
         if(built.length === current.word.length){
+          playCorrectAnswer();
           root.querySelector("#word-feedback").textContent = `Muito bem: ${current.word}!`;
           setTimeout(()=>{
             round++;
@@ -571,6 +700,7 @@ function startWordActivity(root,world,finish){
           },700);
         }
       }else{
+        playWrongAnswer();
         button.classList.add("wrong");
         root.querySelector("#word-feedback").textContent = `Procura a letra ${expected}.`;
         setTimeout(()=>button.classList.remove("wrong"),350);
@@ -611,13 +741,14 @@ function startMathActivity(root,world,finish){
         correct++;
         root.querySelector("#math-score").textContent = correct;
         root.querySelector("#math-feedback").textContent = "Resposta certa!";
-        audio.effect("place");
+        playCorrectAnswer();
         root.querySelectorAll(".math-answer").forEach(item=>item.disabled=true);
         setTimeout(()=>{
           if(correct >= 5) finish("Resolveste cinco contas de adição e subtração!");
           else nextQuestion();
         },550);
       }else{
+        playWrongAnswer();
         button.classList.add("wrong");
         root.querySelector("#math-feedback").textContent = "Vamos tentar outra resposta.";
         setTimeout(()=>button.classList.remove("wrong"),350);
@@ -911,73 +1042,69 @@ function drawStarUnicorn(context){
   });
 }
 
+function startBoardActivity(root,world,finish){
+  const rounds = 6;
+  let round = 0;
+  let score = 0;
+  let current = null;
+  let lastId = "";
+  const challenges = [
+    {id:"l-livro",mode:"letter",prompt:"Qual é a primeira letra de LIVRO?",answer:"L",choices:["L","V","R"],hint:"📘 Livro"},
+    {id:"l-lapis",mode:"letter",prompt:"Qual é a primeira letra de LÁPIS?",answer:"L",choices:["L","P","S"],hint:"✏️ Lápis"},
+    {id:"l-ninita",mode:"letter",prompt:"Qual é a primeira letra de NINITA?",answer:"N",choices:["N","M","T"],hint:"👧 Ninita"},
+    {id:"n-seq1",mode:"number",prompt:"Que número falta? 2, 3, __, 5",answer:"4",choices:["4","6","1"],hint:"Continua a contar"},
+    {id:"n-seq2",mode:"number",prompt:"Que número falta? 7, __, 9",answer:"8",choices:["6","8","10"],hint:"É o número do meio"},
+    {id:"n-seq3",mode:"number",prompt:"Qual é o resultado de 2 + 1?",answer:"3",choices:["3","2","4"],hint:"Soma simples"},
+    {id:"n-seq4",mode:"number",prompt:"Qual é o resultado de 5 - 2?",answer:"3",choices:["2","3","4"],hint:"Subtração simples"},
+    {id:"l-caderno",mode:"letter",prompt:"Qual é a primeira letra de CADERNO?",answer:"C",choices:["C","D","A"],hint:"📒 Caderno"}
+  ];
+  root.innerHTML = `
+    <div class="school-hero card">
+      <img src="./assets/images/activities/quadro-ninita.webp" alt="Quadro escolar da Ninita">
+      <div><h3>Quadro Escolar da Ninita</h3><p>Inspirado no quadro de brincar. Toca na resposta certa para ganhar estrelas.</p></div>
+    </div>
+    <div class="learning-score">⭐ <span id="board-score">0</span> de ${rounds}</div>
+    <div class="school-board-stage">
+      <div class="school-board-card">
+        <div class="school-board-title">${world.title}</div>
+        <div class="school-board-question" id="board-question"></div>
+        <div class="school-board-hint" id="board-hint"></div>
+      </div>
+      <div class="school-board-choices" id="board-choices"></div>
+      <p class="mini-feedback" id="board-feedback">Vamos começar!</p>
+    </div>`;
+  function next(){
+    if(round >= rounds){ finish("Concluíste as atividades do quadro escolar da Ninita!"); return; }
+    const pool = challenges.filter(item=>item.id !== lastId);
+    current = shuffleItems(pool)[0] || challenges[0];
+    lastId = current.id;
+    root.querySelector("#board-question").textContent = current.prompt;
+    root.querySelector("#board-hint").textContent = current.hint;
+    root.querySelector("#board-feedback").textContent = current.mode === "letter" ? "Escolhe a letra correta." : "Escolhe o número correto.";
+    root.querySelector("#board-choices").innerHTML = shuffleItems(current.choices).map(choice=>`<button class="school-choice" data-board-choice="${choice}">${choice}</button>`).join("");
+    root.querySelectorAll("[data-board-choice]").forEach(button=>button.addEventListener("click",()=>check(button.dataset.boardChoice, button)));
+  }
+  function check(value, button){
+    if(value === current.answer){ score++; round++; root.querySelector("#board-score").textContent = score; root.querySelector("#board-feedback").textContent = "Muito bem!"; button.classList.add("correct"); playCorrectAnswer(); root.querySelectorAll("[data-board-choice]").forEach(item=>item.disabled = true); setTimeout(next, 800); }
+    else { root.querySelector("#board-feedback").textContent = "Quase! Tenta outra vez."; button.classList.add("wrong"); playWrongAnswer(); setTimeout(()=>button.classList.remove("wrong"), 420); }
+  }
+  next();
+}
+
 function startColoringActivity(root,world,finish){
   const pages = [
-    {
-      id:"ice-princess",
-      label:"Princesa do Gelo",
-      subtitle:"Magia de neve e cristais",
-      image:"./assets/images/activities/princesa-gelo.jpg",
-      outline:"./assets/images/activities/princesa-gelo-contorno.png"
-    },
-    {
-      id:"magic-family",
-      label:"Família da Casa Mágica",
-      subtitle:"Uma família original cheia de dons",
-      image:"./assets/images/activities/familia-casa-magica.jpg",
-      outline:"./assets/images/activities/familia-casa-magica-contorno.png"
-    },
-    {
-      id:"sea-princess",
-      label:"Princesa do Oceano",
-      subtitle:"Coragem, mar e aventura",
-      image:"./assets/images/activities/princesa-oceano.jpg",
-      outline:"./assets/images/activities/princesa-oceano-contorno.png"
-    },
-    {
-      id:"tower-princess",
-      label:"Princesa da Torre",
-      subtitle:"Luzes, flores e cabelos longos",
-      image:"./assets/images/activities/princesa-torre.jpg",
-      outline:"./assets/images/activities/princesa-torre-contorno.png"
-    },
-    {
-      id:"rainbow-unicorn",
-      label:"Unicórnio Arco-Íris",
-      subtitle:"Cores e fantasia",
-      image:"./assets/images/activities/unicornio-arcoiris.jpg",
-      outline:"./assets/images/activities/unicornio-arcoiris-contorno.png"
-    },
-    {
-      id:"star-unicorn",
-      label:"Unicórnio Estelar",
-      subtitle:"Uma viagem entre as estrelas",
-      image:"./assets/images/activities/unicornio-estelar.jpg",
-      outline:"./assets/images/activities/unicornio-estelar-contorno.png"
-    },
-    {
-      id:"rainbow-fairy",
-      label:"Fada do Arco-Íris",
-      subtitle:"Asas mágicas e amizade",
-      image:"./assets/images/activities/fada-arcoiris.jpg",
-      outline:"./assets/images/activities/fada-arcoiris-contorno.png"
-    },
-    {
-      id:"castle",
-      label:"Castelo Encantado",
-      subtitle:"O grande reino da imaginação",
-      image:"./assets/images/activities/castelo-encantado.jpg",
-      outline:"./assets/images/activities/castelo-encantado-contorno.png"
-    }
+    {id:"princesa-maca",label:"Princesa da Maçã",subtitle:"Inspirada no desenho clássico da princesa com a maçã",image:"./assets/images/activities/princesa-maca.jpg",outline:"./assets/images/activities/princesa-maca-contorno.png"},
+    {id:"unicornio-com-asas",label:"Unicórnio com Asas",subtitle:"Um pequeno unicórnio mágico pronto para ganhar cor",image:"./assets/images/activities/unicornio-com-asas.jpg",outline:"./assets/images/activities/unicornio-com-asas-contorno.png"},
+    {id:"unicornio-coracoes",label:"Unicórnio de Corações",subtitle:"Corações e fantasia para pintar livremente",image:"./assets/images/activities/unicornio-coracoes.jpg",outline:"./assets/images/activities/unicornio-coracoes-contorno.png"},
+    {id:"unicornio-arcoiris-sonho",label:"Unicórnio do Arco-Íris",subtitle:"Um unicórnio sob o arco-íris e as estrelas",image:"./assets/images/activities/unicornio-arcoiris-sonho.jpg",outline:"./assets/images/activities/unicornio-arcoiris-sonho-contorno.png"},
+    {id:"castle",label:"Castelo Encantado",subtitle:"O grande reino da imaginação",image:"./assets/images/activities/castelo-encantado.jpg",outline:"./assets/images/activities/castelo-encantado-contorno.png"}
   ];
-
   let page = pages[0];
   let color = "#f062b2";
   let brush = 28;
   let drawing = false;
   let strokes = 0;
   let previousPoint = null;
-
   root.innerHTML = `
     <div class="coloring-picture-picker" id="coloring-picture-picker">
       ${pages.map(item=>`
@@ -987,156 +1114,45 @@ function startColoringActivity(root,world,finish){
         </button>
       `).join("")}
     </div>
-
     <div class="coloring-workspace">
       <aside class="coloring-reference-card">
         <img id="coloring-reference-image" src="${page.image}" alt="${page.label}">
         <h3 id="coloring-reference-title">${page.label}</h3>
         <p id="coloring-reference-subtitle">${page.subtitle}</p>
-        <small>Observa a imagem colorida e pinta o desenho ao teu gosto.</small>
+        <small>Inspira-te neste desenho e pinta o contorno ao teu gosto.</small>
       </aside>
-
       <section>
         <div class="coloring-toolbar">
           <div class="color-palette" aria-label="Paleta completa de cores">
-            ${[
-              "#f062b2","#ff9ac9","#8b5cf6","#5b36c9","#3b82f6","#38bdf8",
-              "#22c55e","#86d64b","#facc15","#f59e0b","#f97316","#ef4444",
-              "#9f5233","#6b4423","#111827","#64748b","#ffffff"
-            ].map(value=>`
-              <button class="color-swatch" data-color="${value}" style="background:${value}" aria-label="Cor ${value}"></button>
-            `).join("")}
+            ${["#f062b2","#ff9ac9","#8b5cf6","#5b36c9","#3b82f6","#38bdf8","#22c55e","#86d64b","#facc15","#f59e0b","#f97316","#ef4444","#9f5233","#6b4423","#111827","#64748b","#ffffff"].map(value=>`<button class="color-swatch" data-color="${value}" style="background:${value}" aria-label="Cor ${value}"></button>`).join("")}
           </div>
-
           <div class="coloring-controls-row">
-            <label class="brush-control">
-              Tamanho do pincel
-              <input id="brush-size" type="range" min="10" max="65" value="28">
-            </label>
+            <label class="brush-control">Tamanho do pincel<input id="brush-size" type="range" min="10" max="65" value="28"></label>
             <button class="btn btn-secondary" id="clear-coloring">Limpar tela</button>
           </div>
         </div>
-
         <div class="coloring-stage coloring-stage-picture">
           <canvas id="paint-canvas" width="768" height="1024"></canvas>
           <img id="outline-image" class="coloring-outline-image" src="${page.outline}" alt="Contorno para colorir">
         </div>
-
         <button class="btn btn-primary" id="finish-coloring">Terminar desenho</button>
       </section>
-    </div>
-  `;
-
+    </div>`;
   const paint = root.querySelector("#paint-canvas");
   const pctx = paint.getContext("2d");
-
-  function resetPaint(){
-    pctx.clearRect(0,0,paint.width,paint.height);
-    strokes = 0;
-  }
-
-  function position(event){
-    const rect = paint.getBoundingClientRect();
-    return {
-      x:(event.clientX-rect.left)*paint.width/rect.width,
-      y:(event.clientY-rect.top)*paint.height/rect.height
-    };
-  }
-
-  function drawTo(point){
-    pctx.lineCap = "round";
-    pctx.lineJoin = "round";
-    pctx.strokeStyle = color;
-    pctx.fillStyle = color;
-    pctx.lineWidth = brush;
-
-    if(previousPoint){
-      pctx.beginPath();
-      pctx.moveTo(previousPoint.x,previousPoint.y);
-      pctx.lineTo(point.x,point.y);
-      pctx.stroke();
-    }else{
-      pctx.beginPath();
-      pctx.arc(point.x,point.y,brush/2,0,Math.PI*2);
-      pctx.fill();
-    }
-
-    previousPoint = point;
-    strokes++;
-  }
-
-  paint.addEventListener("pointerdown",event=>{
-    drawing = true;
-    previousPoint = null;
-    paint.setPointerCapture(event.pointerId);
-    drawTo(position(event));
-  });
-
-  paint.addEventListener("pointermove",event=>{
-    if(drawing) drawTo(position(event));
-  });
-
-  const stopDrawing = ()=>{
-    drawing = false;
-    previousPoint = null;
-  };
-
-  paint.addEventListener("pointerup",stopDrawing);
-  paint.addEventListener("pointercancel",stopDrawing);
-  paint.addEventListener("pointerleave",event=>{
-    if(event.buttons === 0) stopDrawing();
-  });
-
-  root.querySelectorAll("[data-color]").forEach(button=>{
-    button.addEventListener("click",()=>{
-      color = button.dataset.color;
-      root.querySelectorAll(".color-swatch").forEach(item=>{
-        item.classList.toggle("selected",item === button);
-      });
-    });
-  });
-
-  root.querySelectorAll("[data-color-page]").forEach(button=>{
-    button.addEventListener("click",()=>{
-      page = pages.find(item=>item.id === button.dataset.colorPage) || pages[0];
-
-      root.querySelector("#coloring-reference-image").src = page.image;
-      root.querySelector("#coloring-reference-image").alt = page.label;
-      root.querySelector("#coloring-reference-title").textContent = page.label;
-      root.querySelector("#coloring-reference-subtitle").textContent = page.subtitle;
-      root.querySelector("#outline-image").src = page.outline;
-
-      root.querySelectorAll(".coloring-picture-button").forEach(item=>{
-        item.classList.toggle("selected",item === button);
-      });
-
-      resetPaint();
-      audio.effect("click");
-    });
-  });
-
-  root.querySelector(".coloring-picture-button")?.classList.add("selected");
-  root.querySelector(".color-swatch")?.classList.add("selected");
-
-  root.querySelector("#brush-size").addEventListener("input",event=>{
-    brush = Number(event.target.value);
-  });
-
+  function resetPaint(){ pctx.clearRect(0,0,paint.width,paint.height); strokes = 0; }
+  function position(event){ const rect = paint.getBoundingClientRect(); return {x:(event.clientX-rect.left)*paint.width/rect.width, y:(event.clientY-rect.top)*paint.height/rect.height}; }
+  function drawTo(point){ pctx.lineCap = "round"; pctx.lineJoin = "round"; pctx.strokeStyle = color; pctx.fillStyle = color; pctx.lineWidth = brush; if(previousPoint){ pctx.beginPath(); pctx.moveTo(previousPoint.x,previousPoint.y); pctx.lineTo(point.x,point.y); pctx.stroke(); } else { pctx.beginPath(); pctx.arc(point.x,point.y,brush/2,0,Math.PI*2); pctx.fill(); } previousPoint = point; strokes++; }
+  paint.addEventListener("pointerdown",event=>{ drawing = true; previousPoint = null; paint.setPointerCapture(event.pointerId); drawTo(position(event)); });
+  paint.addEventListener("pointermove",event=>{ if(drawing) drawTo(position(event)); });
+  const stopDrawing = ()=>{ drawing = false; previousPoint = null; };
+  paint.addEventListener("pointerup",stopDrawing); paint.addEventListener("pointercancel",stopDrawing); paint.addEventListener("pointerleave",event=>{ if(event.buttons === 0) stopDrawing(); });
+  root.querySelectorAll("[data-color]").forEach(button=>button.addEventListener("click",()=>{ color = button.dataset.color; root.querySelectorAll(".color-swatch").forEach(item=> item.classList.toggle("selected", item===button)); }));
+  root.querySelectorAll("[data-color-page]").forEach(button=>button.addEventListener("click",()=>{ page = pages.find(item=>item.id === button.dataset.colorPage) || pages[0]; root.querySelector("#coloring-reference-image").src = page.image; root.querySelector("#coloring-reference-image").alt = page.label; root.querySelector("#coloring-reference-title").textContent = page.label; root.querySelector("#coloring-reference-subtitle").textContent = page.subtitle; root.querySelector("#outline-image").src = page.outline; root.querySelectorAll(".coloring-picture-button").forEach(item=> item.classList.toggle("selected", item===button)); resetPaint(); audio.effect("click"); }));
+  root.querySelector(".coloring-picture-button")?.classList.add("selected"); root.querySelector(".color-swatch")?.classList.add("selected");
+  root.querySelector("#brush-size").addEventListener("input",event=>{ brush = Number(event.target.value); });
   root.querySelector("#clear-coloring").addEventListener("click",resetPaint);
-
-  root.querySelector("#finish-coloring").addEventListener("click",()=>{
-    if(strokes < 15){
-      root.querySelector("#finish-coloring").textContent = "Pinta um pouco mais ✨";
-      setTimeout(()=>{
-        const button = root.querySelector("#finish-coloring");
-        if(button) button.textContent = "Terminar desenho";
-      },850);
-      return;
-    }
-
-    finish(`Terminaste o desenho: ${page.label}!`);
-  });
-
+  root.querySelector("#finish-coloring").addEventListener("click",()=>{ if(strokes < 15){ root.querySelector("#finish-coloring").textContent = "Pinta um pouco mais ✨"; setTimeout(()=>{ const button = root.querySelector("#finish-coloring"); if(button) button.textContent = "Terminar desenho"; },850); return; } finish(`Terminaste o desenho: ${page.label}!`); });
   resetPaint();
 }
 
@@ -1226,26 +1242,31 @@ function startCareActivity(root,world,finish){
           <span class="care-bucket-art">${careBucketSvg()}</span>
           <div>
             <strong>Balde com água e espuma</strong>
-            <small>A esponja está dentro do balde. Agarra-a para começar.</small>
+            <small>A esponja está no conjunto fixo de utensílios.</small>
           </div>
-        </div>
-
-        <div class="care-tool-shelf care-tool-shelf-four" aria-label="Utensílios para cuidar das personagens">
-          ${tools.map(tool=>`
-            <button class="care-tool-object ${tool.id==="sponge"?"selected":""}"
-                    data-care-tool="${tool.id}" aria-label="${tool.name}">
-              <span class="care-tool-art">${tool.svg}</span>
-              <strong>${tool.name}</strong>
-              <small>Agarrar e mover</small>
-            </button>
-          `).join("")}
         </div>
       </div>
 
       <p class="mini-feedback care-sound-hint" id="care-feedback">
-        Agarra a esponja do balde e move-a sobre Lama ou Ninita.
-        Enquanto usas um utensílio, a música baixa automaticamente para ouvires o som.
+        Usa os utensílios fixos na parte inferior do ecrã.
+        Arrasta a esponja, o secador ou o pente sobre Lama ou Ninita.
       </p>
+
+      <div
+        class="care-tool-shelf care-tool-shelf-four care-fixed-tool-dock"
+        aria-label="Utensílios fixos para Lama e Ninita"
+      >
+        <span class="care-fixed-tool-label">Utensílios fixos</span>
+
+        ${tools.map(tool=>`
+          <button class="care-tool-object ${tool.id==="sponge"?"selected":""}"
+                  data-care-tool="${tool.id}" aria-label="${tool.name}">
+            <span class="care-tool-art">${tool.svg}</span>
+            <strong>${tool.name}</strong>
+            <small>Agarrar e mover</small>
+          </button>
+        `).join("")}
+      </div>
 
       <div class="care-stage">
         <article class="care-person" data-care-target="lama">
@@ -1492,56 +1513,38 @@ function startCareActivity(root,world,finish){
 
 function startCookingActivity(root,world,finish){
   const recipes = [
-    {id:"fruit",title:"Salada de fruta",emoji:"🍓",steps:["🍎","🍌","🍓","🥝"]},
-    {id:"soup",title:"Sopa de legumes",emoji:"🥣",steps:["🥕","🥔","🧅","💧"]},
-    {id:"sandwich",title:"Sanduíche saudável",emoji:"🥪",steps:["🍞","🧀","🥬","🍅","🍞"]}
+    {id:"fruit",title:"Salada de fruta",emoji:"🍓",steps:["🍎","🍌","🍓","🥝"],serve:"Numa tigela colorida"},
+    {id:"soup",title:"Sopa de legumes",emoji:"🥣",steps:["🥕","🥔","🧅","💧"],serve:"Na panela da Ninita"},
+    {id:"sandwich",title:"Sanduíche saudável",emoji:"🥪",steps:["🍞","🧀","🥬","🍅","🍞"],serve:"Num prato pronto a servir"}
   ];
   let recipe = recipes[0];
   let step = 0;
-
   root.innerHTML = `
+    <div class="kitchen-hero card">
+      <img src="./assets/images/activities/cozinha-ninita.webp" alt="Cozinha da Ninita">
+      <div><h3>Cozinha da Ninita</h3><p>Inspirada na cozinha de brincar. Escolhe uma receita e junta os ingredientes pela ordem certa.</p></div>
+    </div>
     <div class="recipe-choice">${recipes.map(item=>`<button data-recipe="${item.id}">${item.emoji} ${item.title}</button>`).join("")}</div>
-    <div class="cooking-counter">
+    <div class="cooking-counter cooking-counter-play">
+      <div class="kitchen-board-note">Hoje vamos cozinhar de faz de conta com a Ninita!</div>
       <div class="cooking-bowl" id="cooking-bowl">🥣</div>
       <h3 id="recipe-title"></h3>
+      <p class="recipe-serve" id="recipe-serve"></p>
       <div class="recipe-steps" id="recipe-steps"></div>
       <div class="ingredients" id="ingredients"></div>
       <p class="mini-feedback" id="cooking-feedback"></p>
-    </div>
-  `;
-
+    </div>`;
   function drawRecipe(){
-    step=0;
-    root.querySelector("#recipe-title").textContent=recipe.title;
-    root.querySelector("#recipe-steps").innerHTML=recipe.steps.map((item,index)=>`<span data-recipe-step="${index}">${index+1}. ${item}</span>`).join("");
-    root.querySelector("#ingredients").innerHTML=shuffleItems([...new Set(recipe.steps)]).map(item=>`<button class="ingredient" data-ingredient="${item}">${item}</button>`).join("");
-    root.querySelector("#cooking-feedback").textContent="Junta os ingredientes pela ordem apresentada.";
-    bindIngredients();
+    step=0; root.querySelector("#recipe-title").textContent=recipe.title; root.querySelector("#recipe-serve").textContent=recipe.serve; root.querySelector("#recipe-steps").innerHTML=recipe.steps.map((item,index)=>`<span data-recipe-step="${index}">${index+1}. ${item}</span>`).join(""); root.querySelector("#ingredients").innerHTML=shuffleItems([...new Set(recipe.steps)]).map(item=>`<button class="ingredient" data-ingredient="${item}">${item}</button>`).join(""); root.querySelector("#cooking-feedback").textContent="Junta os ingredientes pela ordem apresentada."; root.querySelector("#cooking-bowl").textContent = "🥣"; bindIngredients();
   }
   function bindIngredients(){
     root.querySelectorAll("[data-ingredient]").forEach(button=>button.addEventListener("click",()=>{
       const expected=recipe.steps[step];
-      if(button.dataset.ingredient===expected){
-        root.querySelector(`[data-recipe-step="${step}"]`).classList.add("done");
-        step++;
-        root.querySelector("#cooking-bowl").textContent=step===recipe.steps.length ? recipe.emoji : "🥣✨";
-        audio.effect("place");
-        if(step===recipe.steps.length){
-          root.querySelector("#ingredients").innerHTML='<button class="btn btn-primary" id="mix-recipe">Misturar e servir</button>';
-          root.querySelector("#mix-recipe").addEventListener("click",()=>finish(`Preparaste uma deliciosa ${recipe.title.toLowerCase()}!`));
-        }
-      }else{
-        button.classList.add("wrong");
-        root.querySelector("#cooking-feedback").textContent=`Agora precisamos de ${expected}.`;
-        setTimeout(()=>button.classList.remove("wrong"),350);
-      }
+      if(button.dataset.ingredient===expected){ root.querySelector(`[data-recipe-step="${step}"]`).classList.add("done"); step++; root.querySelector("#cooking-bowl").textContent=step===recipe.steps.length ? recipe.emoji : "🥣✨"; playCorrectAnswer(); if(step===recipe.steps.length){ root.querySelector("#ingredients").innerHTML='<button class="btn btn-primary" id="mix-recipe">Misturar e servir</button>'; root.querySelector("#cooking-feedback").textContent='Receita pronta! Agora serve-a.'; root.querySelector("#mix-recipe").addEventListener("click",()=>finish(`Preparaste uma deliciosa ${recipe.title.toLowerCase()} na Cozinha da Ninita!`)); } }
+      else { playWrongAnswer(); button.classList.add("wrong"); root.querySelector("#cooking-feedback").textContent=`Agora precisamos de ${expected}.`; setTimeout(()=>button.classList.remove("wrong"),350); }
     }));
   }
-  root.querySelectorAll("[data-recipe]").forEach(button=>button.addEventListener("click",()=>{
-    recipe=recipes.find(item=>item.id===button.dataset.recipe) || recipes[0];
-    root.querySelectorAll("[data-recipe]").forEach(item=>item.classList.toggle("selected",item===button));
-    drawRecipe();
-  }));
+  root.querySelectorAll("[data-recipe]").forEach(button=>button.addEventListener("click",()=>{ recipe=recipes.find(item=>item.id===button.dataset.recipe) || recipes[0]; root.querySelectorAll("[data-recipe]").forEach(item=>item.classList.toggle("selected",item===button)); drawRecipe(); }));
   drawRecipe();
 }
 
@@ -1597,9 +1600,10 @@ function startFarmActivity(root,world,finish){
       button.classList.add("fed");
       root.querySelector("#animal-fact").innerHTML=`<strong>${animal.icon} ${animal.name}</strong><p>${animal.fact}</p>`;
       root.querySelector("#farm-feedback").textContent=`Muito bem! Alimentaste ${animal.name}.`;
-      audio.effect("place");
+      playCorrectAnswer();
       if(fed.size===animals.length) finish("Alimentaste mamíferos, aves e répteis da quinta pedagógica!");
     }else{
+      playWrongAnswer();
       root.querySelector("#farm-feedback").textContent=`Esse alimento não é o indicado para ${animal.name}. Tenta outro.`;
       button.classList.add("wrong");
       setTimeout(()=>button.classList.remove("wrong"),400);
@@ -1658,7 +1662,10 @@ const REAL_AUDIO = {
     footsteps: "https://opengameart.org/sites/default/files/steps%20in%20wood%20floor.wav",
     spongeWash: "./assets/audio/effects/esponja_agua.wav",
     hairDryer: "./assets/audio/effects/secador.wav",
-    combBrush: "./assets/audio/effects/pente.wav"
+    combBrush: "./assets/audio/effects/pente.wav",
+    applauseCorrect: "./assets/audio/effects/aplauso_certo.wav",
+    applauseFinal: "./assets/audio/effects/aplauso_final.wav",
+    wrongAnswer: "./assets/audio/effects/resposta_errada.wav"
   }
 };
 
@@ -1933,14 +1940,17 @@ function parseRoute(){
   return {name, param:param ? Number(param) : null};
 }
 
-function topbar(title,subtitle=""){
+function topbar(title,subtitle="",actions=""){
   return `
     <header class="topbar">
       <button class="icon-btn" data-action="back" aria-label="Voltar">←</button>
-      <div>
+
+      <div class="topbar-main">
         <h2>${title}</h2>
         ${subtitle ? `<p>${subtitle}</p>` : ""}
       </div>
+
+      ${actions ? `<div class="topbar-actions">${actions}</div>` : ""}
     </header>
   `;
 }
@@ -1961,7 +1971,9 @@ function render(name,param){
   else if(name === "story") renderStory();
   else if(name === "gallery") renderGallery();
   else if(name === "level") renderLevel(param);
-  else if(name === "activities") renderActivityHub(param);
+  else if(name === "activities"){
+    param ? renderActivityHub(param) : renderActivitiesMap();
+  }
   else renderHome();
 
   window.scrollTo(0,0);
@@ -1970,29 +1982,152 @@ function render(name,param){
 
 function renderHome(){
   const progress = loadProgress();
+  const activityProgress = loadActivityProgress();
+
+  const completedActivities = Object.values(activityProgress)
+    .filter(Array.isArray)
+    .reduce((total, entries)=>total + entries.length,0);
+
+  const totalActivities = Object.values(LEVEL_ACTIVITIES)
+    .reduce((total, entries)=>total + entries.length,0);
 
   app.innerHTML = `
     <main class="screen home-screen">
       <div class="home-overlay"></div>
 
-      <section class="hero-panel">
+      <section class="hero-panel home-hero-panel">
         <div class="logo-badge" aria-hidden="true">🦙</div>
         <h1>Ninita e Lama</h1>
         <p class="subtitle">A Viagem dos Mundos Mágicos</p>
       </section>
 
-      <section class="menu-card glass-card">
-        <button class="btn btn-primary" data-action="play">▶ Jogar</button>
-        <button class="btn btn-secondary" data-action="story">📖 Ler a história</button>
-        <button class="btn btn-secondary" data-action="gallery">🖼️ Ver cenários</button>
-        <div class="progress-summary">
+      <section class="home-main-menu" aria-label="Menu principal">
+        <button class="home-menu-option home-menu-game" data-action="play">
+          <span class="home-menu-icon" aria-hidden="true">🎮</span>
+          <span class="home-menu-copy">
+            <strong>Jogo</strong>
+            <small>Viaja pelos 10 mundos e completa os desafios principais.</small>
+          </span>
+          <span class="home-menu-arrow" aria-hidden="true">›</span>
+        </button>
+
+        <button class="home-menu-option home-menu-activities" data-action="activities-home">
+          <span class="home-menu-icon" aria-hidden="true">🧩</span>
+          <span class="home-menu-copy">
+            <strong>Atividades</strong>
+            <small>Escolhe um mundo e joga as 3 atividades educativas.</small>
+          </span>
+          <span class="home-menu-arrow" aria-hidden="true">›</span>
+        </button>
+
+        <button class="home-menu-option home-menu-story" data-action="story">
+          <span class="home-menu-icon" aria-hidden="true">📖</span>
+          <span class="home-menu-copy">
+            <strong>História</strong>
+            <small>Lê a aventura de Ninita e Lama desde o início.</small>
+          </span>
+          <span class="home-menu-arrow" aria-hidden="true">›</span>
+        </button>
+      </section>
+
+      <section class="home-progress-panel glass-card">
+        <div>
           <strong>${progress.completed.length} de ${worlds.length}</strong>
           <span>mundos concluídos</span>
+        </div>
+        <div>
+          <strong>${Math.min(completedActivities,totalActivities)} de ${totalActivities}</strong>
+          <span>atividades concluídas</span>
         </div>
         <button class="btn btn-text danger" data-action="reset">↻ Recomeçar</button>
       </section>
 
-      <div class="footer-note-block"><p class="footer-note">Dez mundos interativos com desafios, atividades educativas, música e efeitos.</p><p class="footer-credit">©2026 PAI - Fernando Pereira</p></div>
+      <section class="home-how-to-play glass-card" aria-label="Instruções para jogar">
+        <div class="home-how-title">
+          <span aria-hidden="true">🎮</span>
+          <strong>Como jogar</strong>
+        </div>
+
+        <div class="home-control-chips">
+          <span class="key-chip">↑ ↓ ← → mover</span>
+          <span class="key-chip">W A S D mover</span>
+          <span class="key-chip">Espaço ou E: agarrar/usar</span>
+          <span class="key-chip">Joystick ou arrastar no cenário: mover</span>
+        </div>
+
+        <p>
+          Aproxima a Ninita dos objetos, agarra-os e leva-os às zonas iluminadas.
+          No telemóvel também podes arrastar os objetos diretamente.
+        </p>
+      </section>
+
+      <div class="footer-note-block">
+        <p class="footer-note">Jogo, atividades educativas, história, música e efeitos.</p>
+        <p class="footer-credit">©2026 PAI - Fernando Pereira</p>
+      </div>
+    </main>
+  `;
+}
+
+function renderActivitiesMap(){
+  const progress = loadActivityProgress();
+
+  app.innerHTML = `
+    ${topbar("Atividades","Escolhe um mundo — cada nível tem 3 atividades")}
+    <main class="content activities-worlds-page">
+      <section class="activities-intro-card card">
+        <span class="activities-intro-icon" aria-hidden="true">🧩</span>
+        <div>
+          <h1>Atividades de Ninita e Lama</h1>
+          <p>
+            As atividades podem ser repetidas sempre que quiseres.
+            Todos os mundos estão disponíveis neste menu.
+          </p>
+        </div>
+      </section>
+
+      <section class="activities-world-grid">
+        ${worlds.map(world=>{
+          const activities = LEVEL_ACTIVITIES[world.id] || [];
+          const completed = (progress[String(world.id)] || [])
+            .filter(id=>activities.some(activity=>activity.id===id));
+
+          return `
+            <button
+              class="activities-world-card"
+              data-action="activities"
+              data-world="${world.id}"
+              style="--activity-world-image:url('${world.image}')"
+            >
+              <span class="activities-world-shade"></span>
+
+              <span class="activities-world-heading">
+                <span class="activities-world-emoji">${world.emoji}</span>
+                <span>
+                  <small>Mundo ${world.id}</small>
+                  <strong>${world.title}</strong>
+                </span>
+              </span>
+
+              <span class="activities-world-list">
+                ${activities.map(activity=>`
+                  <span>
+                    <b>${activity.icon}</b>
+                    ${activity.title}
+                  </span>
+                `).join("")}
+              </span>
+
+              <span class="activities-world-progress">
+                <strong>${completed.length} de ${activities.length}</strong>
+                <span>concluídas</span>
+              </span>
+
+              <span class="activities-world-open">Abrir atividades →</span>
+            </button>
+          `;
+        }).join("")}
+      </section>
     </main>
   `;
 }
@@ -2102,15 +2237,23 @@ function renderBedroomGame(world){
   ];
 
   app.innerHTML = `
-    ${topbar("🛏️ O Quarto Encantado","Usa as setas ou os botões no ecrã")}
+    ${topbar(
+      "🛏️ O Quarto Encantado",
+      "Arruma o quarto e leva os objetos às zonas iluminadas.",
+      `
+        <button
+          class="topbar-activity-btn"
+          data-action="activities"
+          data-world="${world.id}"
+          aria-label="Abrir atividades educativas deste nível"
+        >
+          <span aria-hidden="true">🎮</span>
+          <span class="topbar-activity-wide">Atividades educativas deste nível</span>
+          <span class="topbar-activity-short">Atividades</span>
+        </button>
+      `
+    )}
     <main class="game-shell">
-      <section class="game-instructions">
-        <span class="key-chip">↑ ↓ ← → mover</span>
-        <span class="key-chip">W A S D mover</span>
-        <span class="key-chip">Espaço ou E: agarrar/usar</span>
-        <strong>Leva cada objeto até à zona iluminada.</strong>
-      </section>
-
       <section class="game-layout">
         <div>
           <div class="game-stage-wrap">
@@ -3314,16 +3457,23 @@ function renderInteractiveWorld(world,configuration){
   const tasks = configuration.tasks;
 
   app.innerHTML = `
-    ${topbar(`${world.emoji} ${world.title}`,"Usa as setas, toca nos botões ou arrasta o dedo no cenário")}
+    ${topbar(
+      `${world.emoji} ${world.title}`,
+      configuration.instruction,
+      `
+        <button
+          class="topbar-activity-btn"
+          data-action="activities"
+          data-world="${world.id}"
+          aria-label="Abrir atividades educativas deste nível"
+        >
+          <span aria-hidden="true">🎮</span>
+          <span class="topbar-activity-wide">Atividades educativas deste nível</span>
+          <span class="topbar-activity-short">Atividades</span>
+        </button>
+      `
+    )}
     <main class="game-shell">
-      <section class="game-instructions">
-        <span class="key-chip">↑ ↓ ← → mover</span>
-        <span class="key-chip">W A S D mover</span>
-        <span class="key-chip">Espaço ou E: agarrar/usar</span>
-        <span class="key-chip">Joystick ou arrastar no cenário: mover</span>
-        <strong>${configuration.instruction}</strong>
-      </section>
-
       <section class="game-layout">
         <div>
           <div class="game-stage-wrap">
@@ -3396,9 +3546,6 @@ function renderInteractiveWorld(world,configuration){
             Lama segue a Ninita e ajuda a encontrar cada missão.
           </div>
 
-          <button class="btn btn-activity-level" data-action="activities" data-world="${world.id}">
-            🎮 Atividades educativas deste nível
-          </button>
         </aside>
       </section>
     </main>
@@ -4392,6 +4539,7 @@ document.addEventListener("click",event=>{
   }
 
   if(element.dataset.action === "play") routeTo("worlds");
+  if(element.dataset.action === "activities-home") routeTo("activities");
   if(element.dataset.action === "story") routeTo("story");
   if(element.dataset.action === "gallery") routeTo("gallery");
   if(element.dataset.action === "reset") showResetDialog();

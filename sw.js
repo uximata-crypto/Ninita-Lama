@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-creditos-pai-fernando-pereira-v17";
+const CACHE = "ninita-lama-instrucoes-header-salao-fixo-v21";
 const ASSETS = [
   "./",
   "./index.html",
@@ -43,6 +43,29 @@ const ASSETS = [
   "./assets/images/activities/fada-arcoiris-contorno.png",
   "./assets/images/activities/castelo-encantado.jpg",
   "./assets/images/activities/castelo-encantado-contorno.png",
+  "./assets/audio/effects/aplauso_certo.wav",
+  "./assets/audio/effects/aplauso_final.wav",
+  "./assets/audio/effects/resposta_errada.wav",
+  "./assets/images/activities/counting/ninita.webp",
+  "./assets/images/activities/counting/lama.webp",
+  "./assets/images/activities/counting/princesa-gelo.webp",
+  "./assets/images/activities/counting/familia-magica.webp",
+  "./assets/images/activities/counting/princesa-oceano.webp",
+  "./assets/images/activities/counting/princesa-torre.webp",
+  "./assets/images/activities/counting/unicornio-arcoiris.webp",
+  "./assets/images/activities/counting/unicornio-estelar.webp",
+  "./assets/images/activities/counting/castelo.webp"
+
+  "./assets/images/activities/cozinha-ninita.webp",
+  "./assets/images/activities/quadro-ninita.webp",
+  "./assets/images/activities/princesa-maca.jpg",
+  "./assets/images/activities/princesa-maca-contorno.png",
+  "./assets/images/activities/unicornio-com-asas.jpg",
+  "./assets/images/activities/unicornio-com-asas-contorno.png",
+  "./assets/images/activities/unicornio-coracoes.jpg",
+  "./assets/images/activities/unicornio-coracoes-contorno.png",
+  "./assets/images/activities/unicornio-arcoiris-sonho.jpg",
+  "./assets/images/activities/unicornio-arcoiris-sonho-contorno.png",
 ];
 
 self.addEventListener("install", event => {

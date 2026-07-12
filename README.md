@@ -243,3 +243,47 @@ As páginas de pintura usam personagens originais inspiradas em fantasia infanti
 
 Projeto: **Ninita e Lama — A Viagem dos Mundos Mágicos**
 
+
+
+## Atualização v18 — redimensionamento, contagem e sons
+
+- Labirintos, desenhos para colorir e personagens do salão foram redimensionados para telemóvel.
+- O labirinto deixa as setas visíveis mais cedo e evita ultrapassar a largura do ecrã.
+- O salão apresenta Lama e Ninita em cartões mais compactos.
+- A contagem é aleatória em cada ronda, tanto na quantidade como na figura.
+- A contagem inclui Ninita, Lama, princesas e unicórnios originais, castelos e brinquedos.
+- Há um aplauso curto quando a resposta está certa.
+- Há um aplauso mais longo quando uma atividade é concluída.
+- Há um som diferente e amigável quando a resposta está errada.
+- Nova cache PWA: ninita-lama-imagens-contagem-sons-v18.
+
+
+## Atualização v19 — 3 atividades por nível
+
+- Cada mundo apresenta agora 3 atividades principais.
+- Mundo 2: nova Cozinha da Ninita inspirada na cozinha de brincar.
+- Mundo 3: novo Quadro Escolar da Ninita com letras e números.
+- Os desenhos para colorir foram atualizados com novas páginas inspiradas nas imagens enviadas.
+- Nova cache PWA: ninita-lama-3atividades-cozinha-quadro-v19.
+
+
+## Atualização v20 — novo menu inicial
+
+O menu inicial apresenta agora três opções principais:
+
+- **Jogo** — abre o mapa dos dez mundos e os desafios principais;
+- **Atividades** — abre um mapa próprio com os dez níveis e as três atividades de cada um;
+- **História** — abre diretamente a história de Ninita e Lama.
+
+O progresso do jogo e das atividades aparece separadamente no ecrã inicial.
+
+Nova cache PWA: `ninita-lama-menu-jogo-atividades-historia-v20`.
+
+
+## Atualização v21
+
+- As instruções de movimento foram retiradas dos níveis e colocadas no menu inicial.
+- O botão **Atividades educativas deste nível** passou para o cabeçalho dos níveis.
+- No salão, a esponja, o secador e o pente ficam num conjunto fixo na parte inferior do ecrã.
+- Os utensílios permanecem visíveis enquanto se cuida de Lama e de Ninita.
+- Nova cache PWA: `ninita-lama-instrucoes-header-salao-fixo-v21`.
