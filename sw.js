@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-salao-labirintos-imagens-v15";
+const CACHE = "ninita-lama-creditos-fernando-pereira-v16";
 const ASSETS = [
   "./",
   "./index.html",

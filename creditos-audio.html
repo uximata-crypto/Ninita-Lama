@@ -3,13 +3,42 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Créditos de áudio — Ninita e Lama</title>
+  <title>Créditos do projeto — Ninita e Lama</title>
   <link rel="stylesheet" href="./styles.css">
-  <style>.credits-shell{max-width:900px;margin:0 auto;padding:22px}.credits-shell .card{margin:14px 0}</style>
+  <style>
+      .credits-shell{max-width:900px;margin:0 auto;padding:22px}
+      .credits-shell .card{margin:14px 0}
+      .creator-credit{
+        padding:24px;
+        text-align:center;
+        border:3px solid #e8b8dc;
+        background:linear-gradient(145deg,#fff7fc,#f3e9ff);
+        box-shadow:0 14px 32px rgba(74,36,86,.16)
+      }
+      .creator-credit h2{
+        margin:5px 0 10px;
+        font-size:2rem;
+        color:#a62f7b
+      }
+      .creator-label{
+        margin:0;
+        font-weight:800;
+        text-transform:uppercase;
+        letter-spacing:.08em;
+        color:#6f4a78
+      }
+    </style>
 </head>
 <body>
   <main class="credits-shell">
-    <h1>Créditos da banda sonora</h1>
+    <h1>Créditos do projeto</h1>
+    <article class="card creator-credit">
+      <p class="creator-label">Criação e autoria do projeto</p>
+      <h2>Fernando Pereira</h2>
+      <p><strong>Projeto:</strong> Ninita e Lama — A Viagem dos Mundos Mágicos</p>
+    </article>
+
+    <h2>Créditos da banda sonora</h2>
     <p>As quatro músicas enviadas foram incluídas localmente no jogo.</p>
     <p><a class="btn btn-primary" href="./teste-musicas.html">Ouvir as músicas</a></p>
     

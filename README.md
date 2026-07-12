@@ -234,3 +234,10 @@ As páginas de pintura usam personagens originais inspiradas em fantasia infanti
 - Enquanto a esponja, o secador ou o pente são utilizados, a música baixa.
 - Foram adicionados sons locais de água/esponja, secador e pente.
 - Nova cache PWA: ninita-lama-salao-labirintos-imagens-v15.
+
+## Créditos do projeto
+
+**Criador do projeto: Fernando Pereira**
+
+Projeto: **Ninita e Lama — A Viagem dos Mundos Mágicos**
+

@@ -1,3 +1,12 @@
+# Créditos do projeto
+
+## Criação do projeto
+
+- **Criador do projeto: Fernando Pereira**
+- Projeto: **Ninita e Lama — A Viagem dos Mundos Mágicos**
+
+---
+
 # Créditos da banda sonora
 
 ## Músicas fornecidas para integração
