@@ -1992,7 +1992,7 @@ function renderHome(){
         <button class="btn btn-text danger" data-action="reset">↻ Recomeçar</button>
       </section>
 
-      <p class="footer-note">Dez mundos interativos com desafios, atividades educativas, música e efeitos.</p>
+      <div class="footer-note-block"><p class="footer-note">Dez mundos interativos com desafios, atividades educativas, música e efeitos.</p><p class="footer-credit">©2026 PAI - Fernando Pereira</p></div>
     </main>
   `;
 }

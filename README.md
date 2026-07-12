@@ -239,5 +239,7 @@ As páginas de pintura usam personagens originais inspiradas em fantasia infanti
 
 **Criador do projeto: Fernando Pereira**
 
+**©2026 PAI - Fernando Pereira**
+
 Projeto: **Ninita e Lama — A Viagem dos Mundos Mágicos**
 

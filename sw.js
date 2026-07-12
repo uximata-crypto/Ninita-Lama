@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-creditos-fernando-pereira-v16";
+const CACHE = "ninita-lama-creditos-pai-fernando-pereira-v17";
 const ASSETS = [
   "./",
   "./index.html",

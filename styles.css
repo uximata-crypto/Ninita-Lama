@@ -1002,3 +1002,18 @@ img{display:block;max-width:100%}
   .care-tool-shelf-four{grid-template-columns:repeat(3,1fr)}
   .care-tool-object strong{font-size:.72rem}
 }
+
+
+.footer-note-block{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+.footer-credit{
+  margin:0;
+  font-size:.92rem;
+  font-weight:800;
+  color:#fff2a8;
+  text-shadow:0 2px 8px rgba(36,18,52,.7);
+}
