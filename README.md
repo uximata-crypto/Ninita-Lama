@@ -194,3 +194,29 @@ Princesa Neve-Luz, Exploradora do Oceano, Leão Corajoso e Fada do Arco-Íris.
 
 A cache da aplicação foi atualizada para
 `ninita-lama-atividades-educativas-v13`.
+
+
+## Atualização das atividades (v14)
+
+Foram acrescentados mais minijogos por nível, incluindo:
+
+- labirintos;
+- puzzles;
+- jogos de memória;
+- jogos de letras, letra a letra;
+- jogos de números com adição e subtração;
+- desenhos para colorir com paleta de cores, páginas de princesas mágicas e unicórnios;
+- atividade de cuidados com balde, secador e pente para Lama e Ninita.
+
+As páginas de pintura usam personagens originais inspiradas em fantasia infantil, sem recorrer a personagens oficiais da Disney.
+
+
+## Atualização: atividades completas e utensílios arrastáveis
+
+- Todos os mundos incluem mais jogos de labirinto, letras, números, palavras, adição/subtração, memória, puzzles e desenho.
+- O nível 1 passou a mostrar imediatamente labirinto, letras, números, palavras, contas, memória, desenhos e o salão de cuidados.
+- O salão usa ilustrações próprias de um balde com água, secador e pente. Cada utensílio pode ser arrastado fisicamente para Lama ou Ninita.
+- Lama e Ninita têm etapas completas de lavar, secar e pentear.
+- A galeria inclui Princesa do Gelo, Princesa do Mar, Princesa da Torre, Princesa do Baile, Fada do Arco-Íris, castelo e dois unicórnios.
+- As personagens de pintura são originais e inspiradas em contos de fadas; não são personagens oficiais de terceiros.
+- Cache atualizada para `ninita-lama-atividades-completas-v14`.

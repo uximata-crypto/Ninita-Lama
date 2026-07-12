@@ -27,54 +27,105 @@ const app = document.querySelector("#app");
 let activeGame = null;
 
 let activeActivityModal = null;
-const ACTIVITY_PROGRESS_KEY = "ninita-lama-activities-v1";
+const ACTIVITY_PROGRESS_KEY = "ninita-lama-activities-v3";
 
 const LEVEL_ACTIVITIES = {
   1:[
-    {id:"care",type:"care",icon:"🫧",title:"Cuidar da Ninita e de Lama",description:"Lava e penteia Lama e penteia o cabelo da Ninita."},
+    {id:"care",type:"care",icon:"🧴",title:"Salão da Ninita e de Lama",description:"Arrasta o balde, o secador e o pente para lavar, secar e pentear as duas personagens."},
+    {id:"maze-room",type:"maze",icon:"🌀",title:"Labirinto do Sonho",description:"Ajuda Ninita a encontrar a lua mágica no quarto."},
+    {id:"letter-room",type:"letter",icon:"🔠",title:"Caça às Letras",description:"Escolhe a letra inicial correta para cada objeto do quarto."},
+    {id:"number-room",type:"number",icon:"🔢",title:"Contar Brinquedos",description:"Conta estrelas, livros e brinquedos e escolhe o número certo."},
+    {id:"word-room",type:"word",icon:"🔤",title:"Palavras do Quarto",description:"Constrói palavras simples, letra a letra."},
+    {id:"math-room",type:"math",icon:"➕",title:"Contas das Estrelas",description:"Resolve adições e subtrações simples."},
+    {id:"color-room",type:"coloring",icon:"🦄",title:"Princesas e Unicórnios",description:"Pinta princesas de contos de fadas, castelos e unicórnios com uma paleta completa."},
     {id:"memory-room",type:"memory",icon:"🧠",title:"Memória do Quarto",description:"Encontra os pares escondidos no quarto encantado."}
   ],
   2:[
     {id:"cooking",type:"cooking",icon:"👩‍🍳",title:"Cozinhar na Casa das Surpresas",description:"Escolhe uma receita e junta os ingredientes pela ordem certa."},
-    {id:"word-home",type:"word",icon:"🔤",title:"Palavras de Casa",description:"Constrói palavras letra a letra."}
+    {id:"maze-home",type:"maze",icon:"🌀",title:"Labirinto da Casa",description:"Leva Lama da sala até à cozinha."},
+    {id:"letter-home",type:"letter",icon:"🔠",title:"Letras da Casa",description:"Descobre as letras iniciais de objetos domésticos."},
+    {id:"number-home",type:"number",icon:"🔢",title:"Contar na Cozinha",description:"Conta pratos, frutas e copos."},
+    {id:"word-home",type:"word",icon:"🔤",title:"Palavras de Casa",description:"Constrói palavras letra a letra."},
+    {id:"math-home",type:"math",icon:"➕",title:"Contas da Cozinha",description:"Soma e subtrai frutas, pratos e copos."},
+    {id:"color-home",type:"coloring",icon:"🎨",title:"Ateliê dos Contos",description:"Pinta princesas, fadas e unicórnios."},
+    {id:"memory-home",type:"memory",icon:"🧠",title:"Memória da Casa",description:"Encontra os pares de objetos da casa."},
+    {id:"puzzle-home",type:"puzzle",icon:"🧩",title:"Puzzle da Sala",description:"Organiza as peças da casa."}
   ],
   3:[
-    {id:"word-school",type:"word",icon:"✏️",title:"Letras da Escola",description:"Forma palavras e reconhece cada letra."},
+    {id:"letter-school",type:"letter",icon:"🔠",title:"ABC da Escola",description:"Reconhece a primeira letra de cada palavra."},
+    {id:"number-school",type:"number",icon:"🔢",title:"Contar Materiais",description:"Conta lápis, livros e réguas."},
+    {id:"word-school",type:"word",icon:"✏️",title:"Letras da Escola",description:"Forma palavras, letra a letra."},
     {id:"math-school",type:"math",icon:"➕",title:"Adição e Subtração",description:"Resolve contas simples e ganha estrelas."},
-    {id:"memory-school",type:"memory",icon:"🎒",title:"Memória Escolar",description:"Combina materiais iguais."}
+    {id:"maze-school",type:"maze",icon:"🌀",title:"Labirinto da Biblioteca",description:"Encontra o caminho até ao livro mágico."},
+    {id:"memory-school",type:"memory",icon:"🎒",title:"Memória Escolar",description:"Combina materiais iguais."},
+    {id:"puzzle-school",type:"puzzle",icon:"🧩",title:"Puzzle da Escola",description:"Completa o quadro escolar em peças."},
+    {id:"color-school",type:"coloring",icon:"🎨",title:"Desenhos Mágicos",description:"Pinta princesas, fadas, castelos e unicórnios."}
   ],
   4:[
     {id:"maze-beach",type:"maze",icon:"🌀",title:"Labirinto das Conchas",description:"Leva a tartaruga até ao mar."},
+    {id:"letter-beach",type:"letter",icon:"🔠",title:"Letras da Praia",description:"Descobre a letra inicial de palavras do mar."},
+    {id:"number-beach",type:"number",icon:"🔢",title:"Contar Conchas",description:"Conta conchas, peixes e estrelas-do-mar."},
+    {id:"word-beach",type:"word",icon:"🔤",title:"Palavras da Praia",description:"Forma palavras sobre o mar, a areia e as férias."},
+    {id:"math-beach",type:"math",icon:"➕",title:"Contas do Oceano",description:"Soma e subtrai conchas e peixes."},
     {id:"puzzle-beach",type:"puzzle",icon:"🧩",title:"Puzzle da Praia",description:"Ordena as peças do cenário tropical."},
-    {id:"color-beach",type:"coloring",icon:"🎨",title:"Colorir Contos Mágicos",description:"Pinta personagens originais de contos de fadas com a paleta de cores."}
+    {id:"color-beach",type:"coloring",icon:"🎨",title:"Princesas do Mar e Unicórnios",description:"Pinta páginas mágicas com a paleta de cores."},
+    {id:"memory-beach",type:"memory",icon:"🧠",title:"Memória do Oceano",description:"Encontra pares de animais e objetos marinhos."}
   ],
   5:[
     {id:"maze-forest",type:"maze",icon:"🌿",title:"Labirinto da Floresta",description:"Encontra o caminho até à árvore brilhante."},
+    {id:"letter-forest",type:"letter",icon:"🔠",title:"Letras da Natureza",description:"Escolhe a letra inicial de plantas e animais."},
+    {id:"number-forest",type:"number",icon:"🔢",title:"Contar na Floresta",description:"Conta flores, folhas e borboletas."},
+    {id:"word-forest",type:"word",icon:"🔤",title:"Palavras da Floresta",description:"Constrói palavras ligadas à natureza."},
+    {id:"math-forest",type:"math",icon:"➕",title:"Contas da Floresta",description:"Soma e subtrai elementos da natureza."},
     {id:"memory-forest",type:"memory",icon:"🦋",title:"Memória da Natureza",description:"Descobre pares de plantas e animais."},
-    {id:"color-forest",type:"coloring",icon:"🖍️",title:"Ateliê Encantado",description:"Pinta a princesa da neve, a fada, o leão e a exploradora do oceano."}
+    {id:"color-forest",type:"coloring",icon:"🖍️",title:"Ateliê Encantado",description:"Pinta páginas de magia gelada, fadas e unicórnios."}
   ],
   6:[
-    {id:"math-pool",type:"math",icon:"➖",title:"Contas da Piscina",description:"Soma e subtrai boias, bolas e conchas."},
     {id:"maze-pool",type:"maze",icon:"🏊",title:"Percurso Seguro",description:"Ajuda Lama a chegar à boia pelo caminho correto."},
-    {id:"puzzle-pool",type:"puzzle",icon:"🧩",title:"Puzzle Tropical",description:"Desliza as peças até ficarem ordenadas."}
+    {id:"letter-pool",type:"letter",icon:"🔠",title:"Letras da Piscina",description:"Descobre as letras de objetos de água e verão."},
+    {id:"number-pool",type:"number",icon:"🔢",title:"Contar Boias",description:"Conta boias, bolas e chapéus."},
+    {id:"word-pool",type:"word",icon:"🔤",title:"Palavras da Piscina",description:"Forma palavras do mundo aquático."},
+    {id:"math-pool",type:"math",icon:"➖",title:"Contas da Piscina",description:"Soma e subtrai boias, bolas e conchas."},
+    {id:"puzzle-pool",type:"puzzle",icon:"🧩",title:"Puzzle Tropical",description:"Desliza as peças até ficarem ordenadas."},
+    {id:"color-pool",type:"coloring",icon:"🎨",title:"Colorir o Verão Mágico",description:"Pinta princesas do mar, castelos e unicórnios."},
+    {id:"memory-pool",type:"memory",icon:"💦",title:"Memória da Piscina",description:"Encontra pares de objetos de água e verão."}
   ],
   7:[
     {id:"farm-feed",type:"farm",icon:"🐘",title:"Alimentar a Quinta Pedagógica",description:"Alimenta elefantes, macacos, aves, répteis e animais da quinta."},
+    {id:"maze-farm",type:"maze",icon:"🌀",title:"Labirinto dos Animais",description:"Ajuda Ninita a chegar ao celeiro."},
+    {id:"letter-farm",type:"letter",icon:"🔠",title:"Letras dos Animais",description:"Escolhe a letra inicial de cada animal."},
+    {id:"number-farm",type:"number",icon:"🔢",title:"Contar Animais",description:"Conta aves, coelhos, macacos e tartarugas."},
+    {id:"word-farm",type:"word",icon:"🔤",title:"Nomes dos Animais",description:"Constrói os nomes letra a letra."},
+    {id:"math-farm",type:"math",icon:"➕",title:"Contar na Quinta",description:"Faz contas simples com ovos, cenouras e frutos."},
     {id:"memory-farm",type:"memory",icon:"🐢",title:"Memória dos Animais",description:"Encontra pares de mamíferos, aves e répteis."},
-    {id:"word-farm",type:"word",icon:"🔤",title:"Nomes dos Animais",description:"Constrói os nomes letra a letra."}
+    {id:"color-farm",type:"coloring",icon:"🎨",title:"Animais e Unicórnios",description:"Pinta animais, princesas e unicórnios."}
   ],
   8:[
     {id:"maze-park",type:"maze",icon:"🎠",title:"Labirinto do Parque",description:"Chega ao carrossel sem tocar nos caminhos fechados."},
+    {id:"letter-park",type:"letter",icon:"🔠",title:"Letras do Parque",description:"Reconhece as letras dos brinquedos."},
+    {id:"number-park",type:"number",icon:"🔢",title:"Contar Brinquedos",description:"Conta bolas, bilhetes e balões."},
+    {id:"word-park",type:"word",icon:"🔤",title:"Palavras da Diversão",description:"Forma palavras do parque."},
+    {id:"math-park",type:"math",icon:"🎟️",title:"Contar Bilhetes",description:"Resolve contas com bilhetes e brinquedos."},
     {id:"puzzle-park",type:"puzzle",icon:"🧩",title:"Puzzle da Diversão",description:"Organiza as peças do parque."},
-    {id:"math-park",type:"math",icon:"🎟️",title:"Contar Bilhetes",description:"Resolve contas com bilhetes e brinquedos."}
+    {id:"memory-park",type:"memory",icon:"🎡",title:"Memória do Parque",description:"Encontra os pares dos brinquedos e atrações."},
+    {id:"color-park",type:"coloring",icon:"🎨",title:"Festa de Princesas e Unicórnios",description:"Pinta páginas de fantasia e diversão."}
   ],
   9:[
+    {id:"maze-city",type:"maze",icon:"🌀",title:"Labirinto da Cidade",description:"Ajuda Ninita a chegar à praça colorida."},
+    {id:"letter-city",type:"letter",icon:"🔠",title:"Letras da Cidade",description:"Escolhe a letra inicial de lojas e transportes."},
+    {id:"number-city",type:"number",icon:"🔢",title:"Contar na Cidade",description:"Conta carros, sinais e edifícios."},
     {id:"word-city",type:"word",icon:"🏙️",title:"Palavras da Cidade",description:"Constrói palavras ligadas à comunidade."},
     {id:"math-city",type:"math",icon:"🛍️",title:"Compras e Trocos",description:"Resolve pequenas adições e subtrações."},
-    {id:"color-city",type:"coloring",icon:"🎨",title:"Galeria Colorida",description:"Escolhe a personagem e pinta livremente."}
+    {id:"memory-city",type:"memory",icon:"🚦",title:"Memória da Cidade",description:"Encontra pares de sinais, lojas e meios de transporte."},
+    {id:"color-city",type:"coloring",icon:"🎨",title:"Galeria Mágica",description:"Escolhe uma princesa, uma fada ou um unicórnio e pinta livremente."}
   ],
   10:[
-    {id:"color-rainbow",type:"coloring",icon:"🌈",title:"Grande Tela do Arco-Íris",description:"Pinta o final mágico com muitas cores."},
+    {id:"maze-rainbow",type:"maze",icon:"🌀",title:"Labirinto do Arco-Íris",description:"Encontra a última estrela da aventura."},
+    {id:"letter-rainbow",type:"letter",icon:"🔠",title:"Letras Mágicas",description:"Descobre as letras iniciais do mundo final."},
+    {id:"number-rainbow",type:"number",icon:"🔢",title:"Contar Estrelas",description:"Conta estrelas, nuvens, cristais e unicórnios."},
+    {id:"word-rainbow",type:"word",icon:"🔤",title:"Palavras Mágicas",description:"Constrói palavras do mundo final."},
+    {id:"math-rainbow",type:"math",icon:"➕",title:"Números do Arco-Íris",description:"Resolve contas finais com estrelas, nuvens e cristais."},
+    {id:"color-rainbow",type:"coloring",icon:"🌈",title:"Grande Tela do Arco-Íris",description:"Pinta princesas, castelos e dois unicórnios diferentes."},
     {id:"memory-rainbow",type:"memory",icon:"⭐",title:"Memória das Estrelas",description:"Encontra todos os pares mágicos."},
     {id:"puzzle-rainbow",type:"puzzle",icon:"🧩",title:"Puzzle Final",description:"Completa o último desafio da aventura."}
   ]
@@ -146,8 +197,8 @@ function renderActivityHub(worldId){
       </section>
 
       <section class="activity-note card">
-        <h3>Personagens para colorir</h3>
-        <p>As páginas de pintura usam personagens originais de contos de fadas: Princesa Neve-Luz, Exploradora do Oceano, Leão Corajoso e Fada do Arco-Íris.</p>
+        <h3>Desenhos para colorir</h3>
+        <p>As páginas de pintura incluem personagens originais inspiradas em contos mágicos de gelo, aventuras do mar, fadas, unicórnios e castelos encantados. Não usam personagens oficiais da Disney, mas mantêm um ambiente semelhante de fantasia infantil.</p>
       </section>
 
       <button class="btn btn-primary activity-return" data-action="return-level" data-world="${world.id}">
@@ -220,6 +271,8 @@ function openActivity(worldId,activityId){
   const finish = message=>finishActivity(world,activity,message);
 
   if(activity.type === "memory") startMemoryActivity(root,world,finish);
+  if(activity.type === "letter") startLetterActivity(root,world,finish);
+  if(activity.type === "number") startNumberActivity(root,world,finish);
   if(activity.type === "word") startWordActivity(root,world,finish);
   if(activity.type === "math") startMathActivity(root,world,finish);
   if(activity.type === "maze") startMazeActivity(root,world,finish);
@@ -235,7 +288,10 @@ function memorySymbolsFor(worldId){
     1:["🛏️","🧸","📚","🎒","👟","🌙"],
     3:["✏️","📘","🔢","🎨","🎒","📏"],
     5:["🌳","🦋","🐦","🌸","🍄","🐿️"],
+    6:["🩱","🛟","🏖️","🩴","💦","🐠"],
     7:["🐘","🐒","🦜","🐢","🦎","🐇"],
+    8:["🎠","🎡","🎟️","🚗","🎈","🍭"],
+    9:["🚦","🏪","🚌","🌳","👫","🛍️"],
     10:["⭐","🌈","☁️","🦄","💎","🪄"]
   })[worldId] || ["🦙","👧🏻","⭐","🌸","🎈","💖"];
 }
@@ -293,11 +349,186 @@ function startMemoryActivity(root,world,finish){
 
 function wordsFor(worldId){
   return ({
+    1:[{word:"CAMA",emoji:"🛏️"},{word:"LIVRO",emoji:"📘"},{word:"LAMA",emoji:"🦙"}],
     2:[{word:"CASA",emoji:"🏠"},{word:"MESA",emoji:"🍽️"},{word:"SOPA",emoji:"🥣"}],
     3:[{word:"LIVRO",emoji:"📘"},{word:"LETRA",emoji:"🔤"},{word:"ESCOLA",emoji:"🏫"}],
+    4:[{word:"PRAIA",emoji:"🏖️"},{word:"MAR",emoji:"🌊"},{word:"CONCHA",emoji:"🐚"}],
+    5:[{word:"ARVORE",emoji:"🌳"},{word:"FLOR",emoji:"🌸"},{word:"BOSQUE",emoji:"🌲"}],
+    6:[{word:"BOIA",emoji:"🛟"},{word:"AGUA",emoji:"💧"},{word:"PISCINA",emoji:"🏊"}],
     7:[{word:"LAMA",emoji:"🦙"},{word:"MACACO",emoji:"🐒"},{word:"ELEFANTE",emoji:"🐘"}],
-    9:[{word:"CIDADE",emoji:"🏙️"},{word:"LOJA",emoji:"🏪"},{word:"AMIGO",emoji:"🤝"}]
+    8:[{word:"PARQUE",emoji:"🎠"},{word:"BOLA",emoji:"⚽"},{word:"BILHETE",emoji:"🎟️"}],
+    9:[{word:"CIDADE",emoji:"🏙️"},{word:"LOJA",emoji:"🏪"},{word:"AMIGO",emoji:"🤝"}],
+    10:[{word:"MAGIA",emoji:"🪄"},{word:"ESTRELA",emoji:"⭐"},{word:"UNICORNIO",emoji:"🦄"}]
   })[worldId] || [{word:"NINITA",emoji:"👧🏻"},{word:"ESTRELA",emoji:"⭐"},{word:"ARCOIRIS",emoji:"🌈"}];
+}
+
+function letterItemsFor(worldId){
+  return ({
+    1:[{word:"CAMA",emoji:"🛏️"},{word:"LAMA",emoji:"🦙"},{word:"LIVRO",emoji:"📘"},{word:"SAPATO",emoji:"👟"},{word:"ESTRELA",emoji:"⭐"},{word:"BONECA",emoji:"🪆"}],
+    2:[{word:"CASA",emoji:"🏠"},{word:"MESA",emoji:"🍽️"},{word:"SOPA",emoji:"🥣"},{word:"PLANTA",emoji:"🪴"},{word:"COPO",emoji:"🥛"},{word:"FRUTA",emoji:"🍎"}],
+    3:[{word:"ESCOLA",emoji:"🏫"},{word:"LIVRO",emoji:"📘"},{word:"REGUA",emoji:"📏"},{word:"LAPIS",emoji:"✏️"},{word:"MOCHILA",emoji:"🎒"},{word:"NUMERO",emoji:"🔢"}],
+    4:[{word:"PRAIA",emoji:"🏖️"},{word:"MAR",emoji:"🌊"},{word:"CONCHA",emoji:"🐚"},{word:"PEIXE",emoji:"🐟"},{word:"AREIA",emoji:"🏝️"},{word:"TARTARUGA",emoji:"🐢"}],
+    5:[{word:"ARVORE",emoji:"🌳"},{word:"FLOR",emoji:"🌸"},{word:"BORBOLETA",emoji:"🦋"},{word:"COGUMELO",emoji:"🍄"},{word:"PASSARO",emoji:"🐦"},{word:"FOLHA",emoji:"🍃"}],
+    6:[{word:"AGUA",emoji:"💧"},{word:"BOIA",emoji:"🛟"},{word:"BOLA",emoji:"🏐"},{word:"CHAPEU",emoji:"👒"},{word:"PISCINA",emoji:"🏊"},{word:"TOALHA",emoji:"🏖️"}],
+    7:[{word:"ELEFANTE",emoji:"🐘"},{word:"MACACO",emoji:"🐒"},{word:"PAPAGAIO",emoji:"🦜"},{word:"TARTARUGA",emoji:"🐢"},{word:"COELHO",emoji:"🐇"},{word:"GALINHA",emoji:"🐔"}],
+    8:[{word:"PARQUE",emoji:"🎠"},{word:"BOLA",emoji:"⚽"},{word:"BILHETE",emoji:"🎟️"},{word:"CARROSSEL",emoji:"🎠"},{word:"BALAO",emoji:"🎈"},{word:"RODA",emoji:"🎡"}],
+    9:[{word:"CIDADE",emoji:"🏙️"},{word:"LOJA",emoji:"🏪"},{word:"CARRO",emoji:"🚗"},{word:"SINAL",emoji:"🚦"},{word:"AUTOCARRO",emoji:"🚌"},{word:"PRACA",emoji:"⛲"}],
+    10:[{word:"ARCOIRIS",emoji:"🌈"},{word:"ESTRELA",emoji:"⭐"},{word:"MAGIA",emoji:"🪄"},{word:"UNICORNIO",emoji:"🦄"},{word:"NUVEM",emoji:"☁️"},{word:"CRISTAL",emoji:"💎"}]
+  })[worldId] || [{word:"NINITA",emoji:"👧🏻"},{word:"LAMA",emoji:"🦙"},{word:"MAGIA",emoji:"🪄"}];
+}
+
+function startLetterActivity(root,world,finish){
+  const items = letterItemsFor(world.id);
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  let round = 0;
+  let score = 0;
+
+  root.innerHTML = `
+    <div class="learning-score">⭐ <span id="letter-score">0</span> de ${items.length}</div>
+    <div class="letter-challenge">
+      <div class="letter-picture" id="letter-picture"></div>
+      <div class="letter-word-display"><span class="letter-drop-zone" id="letter-drop-zone">?</span><span id="letter-word-tail"></span></div>
+      <p class="mini-feedback" id="letter-feedback">Escolhe a primeira letra da palavra.</p>
+      <div class="letter-choice-grid" id="letter-choice-grid"></div>
+    </div>
+  `;
+
+  function next(){
+    if(round >= items.length){
+      finish("Reconheceste todas as letras iniciais!");
+      return;
+    }
+    const item = items[round];
+    const correct = item.word[0];
+    const distractors = shuffleItems(alphabet.filter(letter=>letter!==correct)).slice(0,3);
+    const options = shuffleItems([correct,...distractors]);
+    root.querySelector("#letter-picture").textContent = item.emoji;
+    root.querySelector("#letter-drop-zone").textContent = "?";
+    root.querySelector("#letter-word-tail").textContent = item.word.slice(1);
+    root.querySelector("#letter-feedback").textContent = `Qual é a primeira letra de ${item.word}? Podes clicar ou arrastar.`;
+    root.querySelector("#letter-choice-grid").innerHTML = options.map(letter=>`<button class="letter-choice" draggable="true" data-letter-choice="${letter}">${letter}</button>`).join("");
+    bind();
+  }
+
+  function choose(letter){
+    const item = items[round];
+    if(letter === item.word[0]){
+      score++;
+      root.querySelector("#letter-score").textContent = score;
+      root.querySelector("#letter-drop-zone").textContent = letter;
+      root.querySelector("#letter-drop-zone").classList.add("correct");
+      root.querySelector("#letter-feedback").textContent = `Muito bem: ${item.word} começa por ${letter}.`;
+      audio.effect("place");
+      root.querySelectorAll(".letter-choice").forEach(button=>button.disabled=true);
+      setTimeout(()=>{
+        round++;
+        root.querySelector("#letter-drop-zone")?.classList.remove("correct");
+        next();
+      },650);
+    }else{
+      root.querySelector("#letter-feedback").textContent = `Essa não é a primeira letra. Observa a palavra ${item.word}.`;
+      const wrong = root.querySelector(`[data-letter-choice="${letter}"]`);
+      wrong?.classList.add("wrong");
+      setTimeout(()=>wrong?.classList.remove("wrong"),350);
+    }
+  }
+
+  function bind(){
+    root.querySelectorAll("[data-letter-choice]").forEach(button=>{
+      button.addEventListener("click",()=>choose(button.dataset.letterChoice));
+      button.addEventListener("dragstart",event=>event.dataTransfer.setData("text/plain",button.dataset.letterChoice));
+    });
+  }
+
+  const drop = root.querySelector("#letter-drop-zone");
+  drop.addEventListener("dragover",event=>{event.preventDefault();drop.classList.add("drop-ready");});
+  drop.addEventListener("dragleave",()=>drop.classList.remove("drop-ready"));
+  drop.addEventListener("drop",event=>{
+    event.preventDefault();
+    drop.classList.remove("drop-ready");
+    choose(event.dataTransfer.getData("text/plain"));
+  });
+  next();
+}
+
+function numberIconFor(worldId){
+  return ({1:"⭐",2:"🍎",3:"✏️",4:"🐚",5:"🌸",6:"🛟",7:"🐇",8:"🎟️",9:"🚗",10:"🦄"})[worldId] || "⭐";
+}
+
+function startNumberActivity(root,world,finish){
+  const rounds = 6;
+  const icon = numberIconFor(world.id);
+  let round = 0;
+  let score = 0;
+
+  root.innerHTML = `
+    <div class="learning-score">⭐ <span id="number-score">0</span> de ${rounds}</div>
+    <div class="number-challenge">
+      <p class="mini-instruction">Conta os objetos e escolhe ou arrasta o número correto.</p>
+      <div class="counting-objects" id="counting-objects"></div>
+      <div class="number-drop-zone" id="number-drop-zone">?</div>
+      <div class="number-choice-grid" id="number-choice-grid"></div>
+      <p class="mini-feedback" id="number-feedback">Quantos objetos estão no quadro?</p>
+    </div>
+  `;
+
+  let answer = 1;
+  function next(){
+    if(round >= rounds){
+      finish("Contaste corretamente todos os grupos de objetos!");
+      return;
+    }
+    answer = 1 + Math.floor(Math.random()*10);
+    const choices = new Set([answer]);
+    while(choices.size < 4){
+      choices.add(1 + Math.floor(Math.random()*10));
+    }
+    root.querySelector("#counting-objects").innerHTML = Array.from({length:answer},(_,index)=>`<span style="--delay:${index}">${icon}</span>`).join("");
+    root.querySelector("#number-drop-zone").textContent = "?";
+    root.querySelector("#number-choice-grid").innerHTML = shuffleItems([...choices]).map(value=>`<button class="number-choice" draggable="true" data-number-choice="${value}">${value}</button>`).join("");
+    root.querySelector("#number-feedback").textContent = "Quantos objetos estão no quadro?";
+    bind();
+  }
+
+  function choose(value){
+    const number = Number(value);
+    if(number === answer){
+      score++;
+      root.querySelector("#number-score").textContent = score;
+      root.querySelector("#number-drop-zone").textContent = number;
+      root.querySelector("#number-drop-zone").classList.add("correct");
+      root.querySelector("#number-feedback").textContent = `Certo! Há ${answer} ${answer===1 ? "objeto" : "objetos"}.`;
+      audio.effect("place");
+      root.querySelectorAll(".number-choice").forEach(button=>button.disabled=true);
+      setTimeout(()=>{
+        round++;
+        root.querySelector("#number-drop-zone")?.classList.remove("correct");
+        next();
+      },650);
+    }else{
+      root.querySelector("#number-feedback").textContent = "Conta novamente, devagar, um objeto de cada vez.";
+      const wrong = root.querySelector(`[data-number-choice="${number}"]`);
+      wrong?.classList.add("wrong");
+      setTimeout(()=>wrong?.classList.remove("wrong"),350);
+    }
+  }
+
+  function bind(){
+    root.querySelectorAll("[data-number-choice]").forEach(button=>{
+      button.addEventListener("click",()=>choose(button.dataset.numberChoice));
+      button.addEventListener("dragstart",event=>event.dataTransfer.setData("text/plain",button.dataset.numberChoice));
+    });
+  }
+
+  const drop = root.querySelector("#number-drop-zone");
+  drop.addEventListener("dragover",event=>{event.preventDefault();drop.classList.add("drop-ready");});
+  drop.addEventListener("dragleave",()=>drop.classList.remove("drop-ready"));
+  drop.addEventListener("drop",event=>{
+    event.preventDefault();
+    drop.classList.remove("drop-ready");
+    choose(event.dataTransfer.getData("text/plain"));
+  });
+  next();
 }
 
 function startWordActivity(root,world,finish){
@@ -427,8 +658,8 @@ function startMazeActivity(root,world,finish){
   const cells = makeMaze(size);
   let player = 0;
   const goal = size*size-1;
-  const hero = world.id === 4 ? "🐢" : world.id === 6 ? "🦙" : "👧🏻";
-  const destination = world.id === 4 ? "🌊" : world.id === 6 ? "🛟" : world.id === 8 ? "🎠" : "⭐";
+  const hero = world.id === 4 ? "🐢" : world.id === 6 ? "🦙" : world.id === 7 ? "🐇" : "👧🏻";
+  const destination = ({1:"🌙",2:"🍳",3:"📘",4:"🌊",5:"🌳",6:"🛟",7:"🏡",8:"🎠",9:"⛲",10:"⭐"})[world.id] || "⭐";
 
   root.innerHTML = `
     <div class="mini-instruction">Usa as setas para chegar ao destino.</div>
@@ -512,24 +743,23 @@ function startPuzzleActivity(root,world,finish){
   draw();
 }
 
-function drawSnowPrincess(context){
+function drawIcePrincess(context){
   context.lineWidth=5; context.strokeStyle="#34243d"; context.lineCap="round"; context.lineJoin="round";
   context.beginPath(); context.arc(280,150,62,0,Math.PI*2); context.stroke();
   context.beginPath(); context.moveTo(230,130); context.quadraticCurveTo(280,70,335,130); context.quadraticCurveTo(315,105,280,110); context.quadraticCurveTo(245,105,230,130); context.stroke();
   context.beginPath(); context.moveTo(245,90); context.lineTo(255,55); context.lineTo(280,82); context.lineTo(305,55); context.lineTo(318,92); context.stroke();
   context.beginPath(); context.moveTo(250,205); context.lineTo(205,500); context.lineTo(355,500); context.lineTo(310,205); context.closePath(); context.stroke();
-  context.beginPath(); context.moveTo(250,245); context.lineTo(185,330); context.moveTo(310,245); context.lineTo(375,330); context.stroke();
   [[105,115],[450,120],[120,420],[445,425]].forEach(([x,y])=>{context.beginPath();context.moveTo(x-18,y);context.lineTo(x+18,y);context.moveTo(x,y-18);context.lineTo(x,y+18);context.moveTo(x-13,y-13);context.lineTo(x+13,y+13);context.moveTo(x+13,y-13);context.lineTo(x-13,y+13);context.stroke();});
 }
 
-function drawOceanExplorer(context){
+function drawSeaPrincess(context){
   context.lineWidth=5; context.strokeStyle="#34243d"; context.lineCap="round"; context.lineJoin="round";
   context.beginPath(); context.arc(280,150,60,0,Math.PI*2); context.stroke();
   context.beginPath(); context.moveTo(225,145); context.quadraticCurveTo(215,70,280,80); context.quadraticCurveTo(350,75,340,165); context.stroke();
   context.beginPath(); context.moveTo(245,210); context.lineTo(220,405); context.lineTo(340,405); context.lineTo(315,210); context.closePath(); context.stroke();
-  context.beginPath(); context.moveTo(245,250); context.lineTo(165,330); context.moveTo(315,250); context.lineTo(395,330); context.stroke();
+  context.beginPath(); context.moveTo(265,405); context.quadraticCurveTo(280,485,200,535); context.moveTo(295,405); context.quadraticCurveTo(280,485,360,535); context.stroke();
+  context.beginPath(); context.moveTo(200,535); context.quadraticCurveTo(280,575,360,535); context.stroke();
   context.beginPath(); context.moveTo(85,490); context.quadraticCurveTo(150,445,215,490); context.quadraticCurveTo(280,535,345,490); context.quadraticCurveTo(410,445,475,490); context.stroke();
-  context.beginPath(); context.moveTo(375,330); context.lineTo(430,370); context.lineTo(390,405); context.closePath(); context.stroke();
 }
 
 function drawBraveLion(context){
@@ -553,12 +783,82 @@ function drawRainbowFairy(context){
   for(let radius=70;radius<=140;radius+=24){context.beginPath();context.arc(280,540,radius,Math.PI,Math.PI*2);context.stroke();}
 }
 
+function drawUnicorn(context){
+  context.lineWidth=5; context.strokeStyle="#34243d"; context.lineCap="round"; context.lineJoin="round";
+  context.beginPath(); context.ellipse(275,320,135,105,0,0,Math.PI*2); context.stroke();
+  context.beginPath(); context.moveTo(190,290); context.quadraticCurveTo(150,215,195,170); context.quadraticCurveTo(250,120,325,150); context.quadraticCurveTo(360,170,370,215); context.stroke();
+  context.beginPath(); context.moveTo(308,135); context.lineTo(334,55); context.lineTo(352,140); context.stroke();
+  context.beginPath(); context.arc(328,210,48,0,Math.PI*2); context.stroke();
+  context.beginPath(); context.arc(345,205,6,0,Math.PI*2); context.stroke();
+  context.beginPath(); context.moveTo(315,225); context.quadraticCurveTo(332,238,347,225); context.stroke();
+  [220,260,310,350].forEach(x=>{context.beginPath();context.moveTo(x,410);context.lineTo(x-10,560);context.stroke();});
+  context.beginPath(); context.moveTo(145,325); context.quadraticCurveTo(100,280,90,240); context.quadraticCurveTo(130,280,150,350); context.stroke();
+  context.beginPath(); context.moveTo(390,300); context.quadraticCurveTo(455,270,465,215); context.quadraticCurveTo(490,295,450,345); context.stroke();
+  context.beginPath(); context.arc(450,125,18,0,Math.PI*2); context.stroke();
+}
+
+function drawCastle(context){
+  context.lineWidth=5; context.strokeStyle="#34243d"; context.lineCap="round"; context.lineJoin="round";
+  context.strokeRect(175,250,210,230);
+  context.strokeRect(130,190,60,290);
+  context.strokeRect(370,190,60,290);
+  context.beginPath(); context.moveTo(130,190); context.lineTo(160,145); context.lineTo(190,190); context.moveTo(370,190); context.lineTo(400,145); context.lineTo(430,190); context.stroke();
+  context.beginPath(); context.moveTo(240,250); context.lineTo(240,205); context.lineTo(280,160); context.lineTo(320,205); context.lineTo(320,250); context.stroke();
+  context.beginPath(); context.arc(280,395,52,Math.PI,0); context.stroke();
+  context.strokeRect(195,315,40,52); context.strokeRect(325,315,40,52); context.strokeRect(258,290,44,55);
+  for(let x=115;x<=445;x+=55){context.beginPath();context.arc(x,520,18,0,Math.PI*2);context.stroke();}
+}
+
+
+function drawTowerPrincess(context){
+  context.lineWidth=5;context.strokeStyle="#34243d";context.lineCap="round";context.lineJoin="round";
+  context.beginPath();context.arc(280,145,58,0,Math.PI*2);context.stroke();
+  context.beginPath();context.moveTo(225,135);context.quadraticCurveTo(205,40,280,62);context.quadraticCurveTo(370,55,350,190);context.quadraticCurveTo(380,300,330,405);context.stroke();
+  context.beginPath();context.moveTo(250,205);context.lineTo(205,500);context.lineTo(355,500);context.lineTo(310,205);context.closePath();context.stroke();
+  context.beginPath();context.moveTo(245,245);context.lineTo(170,335);context.moveTo(315,245);context.lineTo(390,335);context.stroke();
+  context.beginPath();context.moveTo(82,520);context.lineTo(82,180);context.lineTo(155,125);context.lineTo(155,520);context.stroke();
+  context.strokeRect(98,235,42,75);context.beginPath();context.arc(119,235,21,Math.PI,0);context.stroke();
+  context.beginPath();context.moveTo(235,93);context.lineTo(250,55);context.lineTo(280,83);context.lineTo(310,55);context.lineTo(325,95);context.stroke();
+}
+
+function drawBallPrincess(context){
+  context.lineWidth=5;context.strokeStyle="#34243d";context.lineCap="round";context.lineJoin="round";
+  context.beginPath();context.arc(280,135,55,0,Math.PI*2);context.stroke();
+  context.beginPath();context.arc(280,75,28,0,Math.PI*2);context.stroke();
+  context.beginPath();context.moveTo(230,125);context.quadraticCurveTo(245,75,280,85);context.quadraticCurveTo(330,75,338,145);context.stroke();
+  context.beginPath();context.moveTo(245,200);context.quadraticCurveTo(160,315,125,515);context.lineTo(435,515);context.quadraticCurveTo(400,315,315,200);context.closePath();context.stroke();
+  context.beginPath();context.moveTo(245,235);context.lineTo(165,325);context.moveTo(315,235);context.lineTo(395,325);context.stroke();
+  context.beginPath();context.arc(455,430,42,0,Math.PI*2);context.arc(385,430,42,0,Math.PI*2);context.stroke();
+  context.beginPath();context.moveTo(345,430);context.quadraticCurveTo(420,340,495,430);context.stroke();
+  context.beginPath();context.moveTo(450,505);context.quadraticCurveTo(475,490,500,505);context.quadraticCurveTo(475,530,450,505);context.stroke();
+}
+
+function drawStarUnicorn(context){
+  context.lineWidth=5;context.strokeStyle="#34243d";context.lineCap="round";context.lineJoin="round";
+  context.beginPath();context.ellipse(270,335,145,95,-.05,0,Math.PI*2);context.stroke();
+  context.beginPath();context.moveTo(165,310);context.quadraticCurveTo(135,220,200,165);context.quadraticCurveTo(255,115,330,160);context.stroke();
+  context.beginPath();context.arc(330,205,52,0,Math.PI*2);context.stroke();
+  context.beginPath();context.moveTo(315,152);context.lineTo(342,55);context.lineTo(360,158);context.stroke();
+  context.beginPath();context.arc(347,198,6,0,Math.PI*2);context.stroke();
+  [205,255,315,365].forEach(x=>{context.beginPath();context.moveTo(x,415);context.lineTo(x-8,555);context.stroke();});
+  context.beginPath();context.moveTo(120,335);context.quadraticCurveTo(75,285,85,220);context.quadraticCurveTo(145,270,150,355);context.stroke();
+  context.beginPath();context.ellipse(225,315,72,118,-.75,0,Math.PI*2);context.ellipse(325,315,72,118,.75,0,Math.PI*2);context.stroke();
+  [[90,105],[470,115],[455,390],[105,455],[430,535]].forEach(([x,y])=>{
+    context.beginPath();for(let i=0;i<10;i++){const angle=-Math.PI/2+i*Math.PI/5;const radius=i%2===0?18:7;const px=x+Math.cos(angle)*radius;const py=y+Math.sin(angle)*radius;i===0?context.moveTo(px,py):context.lineTo(px,py);}context.closePath();context.stroke();
+  });
+}
+
 function startColoringActivity(root,world,finish){
   const pages = [
-    {id:"snow",label:"Princesa Neve-Luz",draw:drawSnowPrincess},
-    {id:"ocean",label:"Exploradora do Oceano",draw:drawOceanExplorer},
+    {id:"ice-princess",label:"Princesa do Gelo",draw:drawIcePrincess},
+    {id:"sea-princess",label:"Princesa do Mar",draw:drawSeaPrincess},
+    {id:"tower-princess",label:"Princesa da Torre",draw:drawTowerPrincess},
+    {id:"ball-princess",label:"Princesa do Baile",draw:drawBallPrincess},
+    {id:"fairy",label:"Fada do Arco-Íris",draw:drawRainbowFairy},
+    {id:"unicorn",label:"Unicórnio Arco-Íris",draw:drawUnicorn},
+    {id:"star-unicorn",label:"Unicórnio Estelar",draw:drawStarUnicorn},
     {id:"lion",label:"Leão Corajoso",draw:drawBraveLion},
-    {id:"fairy",label:"Fada do Arco-Íris",draw:drawRainbowFairy}
+    {id:"castle",label:"Castelo Mágico",draw:drawCastle}
   ];
   let page = pages[0];
   let color = "#f062b2";
@@ -635,69 +935,198 @@ function startColoringActivity(root,world,finish){
   drawOutline();
 }
 
+function careBucketSvg(){
+  return `<svg viewBox="0 0 180 150" aria-hidden="true"><defs><linearGradient id="bucketMetal" x1="0" x2="1"><stop stop-color="#eef7ff"/><stop offset=".45" stop-color="#93b4cc"/><stop offset="1" stop-color="#dbeeff"/></linearGradient><linearGradient id="waterBlue" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#58d6ff"/><stop offset="1" stop-color="#148ac8"/></linearGradient></defs><path d="M42 48h96l-11 82H53z" fill="url(#bucketMetal)" stroke="#42687d" stroke-width="5"/><ellipse cx="90" cy="49" rx="49" ry="15" fill="url(#waterBlue)" stroke="#42687d" stroke-width="5"/><path d="M48 48C50 4 130 4 132 48" fill="none" stroke="#526f80" stroke-width="7"/><circle cx="61" cy="38" r="10" fill="#fff" opacity=".85"/><circle cx="83" cy="31" r="13" fill="#fff" opacity=".82"/><circle cx="107" cy="38" r="9" fill="#fff" opacity=".9"/><path d="M56 87h68" stroke="#fff" stroke-width="7" opacity=".45"/></svg>`;
+}
+
+function careDryerSvg(){
+  return `<svg viewBox="0 0 190 150" aria-hidden="true"><defs><linearGradient id="dryerBody" x1="0" x2="1"><stop stop-color="#ff94c8"/><stop offset=".55" stop-color="#d84594"/><stop offset="1" stop-color="#a92772"/></linearGradient></defs><path d="M38 48c0-18 15-33 33-33h52c20 0 36 16 36 36v20c0 15-12 27-27 27H72c-19 0-34-15-34-34z" fill="url(#dryerBody)" stroke="#732151" stroke-width="5"/><path d="M145 42h35v37h-35z" fill="#54354e" stroke="#2c1c2b" stroke-width="5"/><path d="M82 92l34 4-16 49H70z" fill="#c73682" stroke="#732151" stroke-width="5"/><circle cx="74" cy="57" r="24" fill="#ffe5f2" stroke="#732151" stroke-width="5"/><path d="M61 57h26M74 44v26M65 48l18 18M83 48L65 66" stroke="#b34481" stroke-width="4"/><path d="M181 52h8M181 65h8M181 78h8" stroke="#74d8ff" stroke-width="5" stroke-linecap="round"/></svg>`;
+}
+
+function careCombSvg(){
+  return `<svg viewBox="0 0 190 150" aria-hidden="true"><defs><linearGradient id="combPurple" x1="0" x2="1"><stop stop-color="#a889ff"/><stop offset="1" stop-color="#5b35b4"/></linearGradient></defs><path d="M20 34h150v36H20z" rx="12" fill="url(#combPurple)" stroke="#39206e" stroke-width="5"/><path d="M32 70v61M48 70v54M64 70v61M80 70v54M96 70v61M112 70v54M128 70v61M144 70v54M160 70v61" stroke="#5b35b4" stroke-width="8" stroke-linecap="round"/><circle cx="43" cy="52" r="9" fill="#d8cbff"/><path d="M62 52h90" stroke="#d8cbff" stroke-width="7" stroke-linecap="round"/></svg>`;
+}
+
+function careLamaSvg(){
+  return `<svg viewBox="0 0 320 330" aria-label="Lama cor-de-rosa"><defs><linearGradient id="lamaPink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd6eb"/><stop offset="1" stop-color="#ef87bd"/></linearGradient></defs><ellipse cx="160" cy="260" rx="92" ry="48" fill="url(#lamaPink)" stroke="#8e3b6b" stroke-width="5"/><path d="M110 258v56M145 270v48M195 270v48M225 254v60" stroke="#b8578b" stroke-width="17" stroke-linecap="round"/><path d="M205 248c-8-70-8-120 11-153" fill="none" stroke="#f3a7ca" stroke-width="62" stroke-linecap="round"/><ellipse cx="220" cy="78" rx="58" ry="50" fill="url(#lamaPink)" stroke="#8e3b6b" stroke-width="5"/><path d="M182 43l-18-39 42 25M248 35l20-34 11 47" fill="#f59ac4" stroke="#8e3b6b" stroke-width="5"/><path d="M178 35l-7-17 19 12M255 30l10-15 4 22" stroke="#62c9e8" stroke-width="8"/><circle cx="202" cy="70" r="6" fill="#34243d"/><circle cx="239" cy="70" r="6" fill="#34243d"/><path d="M207 91q14 13 28 0" fill="none" stroke="#5c2b4b" stroke-width="5" stroke-linecap="round"/><circle cx="191" cy="88" r="9" fill="#ff8daf" opacity=".7"/><circle cx="248" cy="88" r="9" fill="#ff8daf" opacity=".7"/><g fill="#ffddea" stroke="#8e3b6b" stroke-width="3"><circle cx="190" cy="121" r="22"/><circle cx="219" cy="126" r="23"/><circle cx="204" cy="151" r="24"/><circle cx="226" cy="170" r="20"/></g><path d="M85 235q-38-34-54 3q35-2 49 27" fill="#f59ac4" stroke="#8e3b6b" stroke-width="5"/></svg>`;
+}
+
+function careNinitaSvg(){
+  return `<svg viewBox="0 0 320 330" aria-label="Ninita"><defs><linearGradient id="dressPink" x1="0" x2="1"><stop stop-color="#ff8fc4"/><stop offset="1" stop-color="#d94a99"/></linearGradient></defs><circle cx="160" cy="92" r="62" fill="#f4c7a5" stroke="#7b4938" stroke-width="5"/><path d="M103 90q0-78 57-78q58 0 58 80q-22-35-58-30q-37-5-57 28" fill="#6b3e2b" stroke="#3f241b" stroke-width="5"/><circle cx="82" cy="83" r="34" fill="#6b3e2b" stroke="#3f241b" stroke-width="5"/><circle cx="238" cy="83" r="34" fill="#6b3e2b" stroke="#3f241b" stroke-width="5"/><path d="M94 68l-21-22M226 67l23-22" stroke="#ff78b3" stroke-width="11" stroke-linecap="round"/><circle cx="138" cy="92" r="6" fill="#3b2a26"/><circle cx="183" cy="92" r="6" fill="#3b2a26"/><path d="M142 119q18 14 36 0" fill="none" stroke="#b85465" stroke-width="5" stroke-linecap="round"/><circle cx="121" cy="112" r="10" fill="#f18da2" opacity=".45"/><circle cx="199" cy="112" r="10" fill="#f18da2" opacity=".45"/><path d="M110 168q50-35 100 0l38 146H72z" fill="url(#dressPink)" stroke="#7d2e66" stroke-width="5"/><path d="M111 184l-52 82M209 184l52 82" stroke="#f4c7a5" stroke-width="22" stroke-linecap="round"/><path d="M120 165q40 24 80 0" fill="none" stroke="#fff" stroke-width="13"/><path d="M113 286v34M207 286v34" stroke="#f4c7a5" stroke-width="22" stroke-linecap="round"/></svg>`;
+}
+
 function startCareActivity(root,world,finish){
-  const progress = {lamaWash:0,lamaDry:0,lamaComb:0,ninitaComb:0};
-  let tool = "sponge";
-  let pressing = false;
-  let lastAction = 0;
+  const progress = {
+    lamaWash:0,lamaDry:0,lamaComb:0,
+    ninitaWash:0,ninitaDry:0,ninitaComb:0
+  };
+  let selectedTool = "bucket";
+  let dragCleanup = null;
+  let completed = false;
+
+  const tools = [
+    {id:"bucket",name:"Balde com água",svg:careBucketSvg(),instruction:"Arrasta o balde para lavar."},
+    {id:"dryer",name:"Secador",svg:careDryerSvg(),instruction:"Depois de lavar, arrasta o secador para secar."},
+    {id:"comb",name:"Pente",svg:careCombSvg(),instruction:"Depois de secar, arrasta o pente para pentear."}
+  ];
 
   root.innerHTML = `
-    <div class="care-tools">
-      <button class="care-tool selected" data-care-tool="sponge">🧽 Lavar Lama</button>
-      <button class="care-tool" data-care-tool="towel">🧻 Secar Lama</button>
-      <button class="care-tool" data-care-tool="comb">🪮 Pentear</button>
-    </div>
-    <p class="mini-feedback" id="care-feedback">Escolhe uma ferramenta e passa-a sobre a personagem.</p>
-    <div class="care-characters">
-      <article class="care-character" data-care-character="lama">
-        <div class="care-avatar lama-avatar">🦙<span class="care-bubbles">🫧</span></div>
-        <h3>Lama</h3>
-        <label>Lavar <progress id="lama-wash" max="6" value="0"></progress></label>
-        <label>Secar <progress id="lama-dry" max="5" value="0"></progress></label>
-        <label>Pentear <progress id="lama-comb" max="6" value="0"></progress></label>
-      </article>
-      <article class="care-character" data-care-character="ninita">
-        <div class="care-avatar ninita-avatar">👧🏻</div>
-        <h3>Ninita</h3>
-        <label>Pentear <progress id="ninita-comb" max="6" value="0"></progress></label>
-      </article>
+    <div class="care-salon">
+      <div class="care-tool-shelf" aria-label="Utensílios para cuidar das personagens">
+        ${tools.map(tool=>`<button class="care-tool-object ${tool.id==="bucket"?"selected":""}" data-care-tool="${tool.id}" aria-label="${tool.name}"><span class="care-tool-art">${tool.svg}</span><strong>${tool.name}</strong><small>Arrastar</small></button>`).join("")}
+      </div>
+      <p class="mini-feedback" id="care-feedback">Arrasta primeiro o balde para Lama ou Ninita. Também podes selecionar o utensílio e tocar na personagem.</p>
+      <div class="care-stage">
+        <article class="care-person" data-care-target="lama">
+          <div class="care-figure">${careLamaSvg()}<span class="care-water-effect">💦</span><span class="care-bubble-effect">🫧</span><span class="care-shine-effect">✨</span></div>
+          <h3>Lama</h3>
+          <div class="care-progress-list">
+            <label><span>🪣 Lavar</span><progress id="lama-wash" max="3" value="0"></progress></label>
+            <label><span>💨 Secar</span><progress id="lama-dry" max="3" value="0"></progress></label>
+            <label><span>🪮 Pentear</span><progress id="lama-comb" max="3" value="0"></progress></label>
+          </div>
+        </article>
+        <article class="care-person" data-care-target="ninita">
+          <div class="care-figure">${careNinitaSvg()}<span class="care-water-effect">💦</span><span class="care-bubble-effect">🫧</span><span class="care-shine-effect">✨</span></div>
+          <h3>Ninita</h3>
+          <div class="care-progress-list">
+            <label><span>🪣 Lavar</span><progress id="ninita-wash" max="3" value="0"></progress></label>
+            <label><span>💨 Secar</span><progress id="ninita-dry" max="3" value="0"></progress></label>
+            <label><span>🪮 Pentear</span><progress id="ninita-comb" max="3" value="0"></progress></label>
+          </div>
+        </article>
+      </div>
     </div>
   `;
 
+  function keysFor(target){
+    return target === "lama"
+      ? {wash:"lamaWash",dry:"lamaDry",comb:"lamaComb"}
+      : {wash:"ninitaWash",dry:"ninitaDry",comb:"ninitaComb"};
+  }
+
   function update(){
-    root.querySelector("#lama-wash").value=progress.lamaWash;
-    root.querySelector("#lama-dry").value=progress.lamaDry;
-    root.querySelector("#lama-comb").value=progress.lamaComb;
-    root.querySelector("#ninita-comb").value=progress.ninitaComb;
-    root.querySelector(".lama-avatar").classList.toggle("washed",progress.lamaWash>=6);
-    root.querySelector(".lama-avatar").classList.toggle("dry",progress.lamaDry>=5);
-    root.querySelector(".ninita-avatar").classList.toggle("combed",progress.ninitaComb>=6);
-    if(progress.lamaWash>=6 && progress.lamaDry>=5 && progress.lamaComb>=6 && progress.ninitaComb>=6){
-      finish("Lama ficou lavada e penteada, e Ninita ficou com o cabelo muito bonito!");
+    for(const target of ["lama","ninita"]){
+      const keys = keysFor(target);
+      root.querySelector(`#${target}-wash`).value = progress[keys.wash];
+      root.querySelector(`#${target}-dry`).value = progress[keys.dry];
+      root.querySelector(`#${target}-comb`).value = progress[keys.comb];
+      const card = root.querySelector(`[data-care-target="${target}"]`);
+      card.classList.toggle("is-wet",progress[keys.wash]>0 && progress[keys.dry]<3);
+      card.classList.toggle("is-washed",progress[keys.wash]>=3);
+      card.classList.toggle("is-dry",progress[keys.dry]>=3);
+      card.classList.toggle("is-combed",progress[keys.comb]>=3);
+    }
+    if(!completed && Object.values(progress).every(value=>value>=3)){
+      completed = true;
+      finish("Arrastaste o balde, o secador e o pente. Lama e Ninita ficaram lavadas, secas e muito bem penteadas!");
     }
   }
-  function apply(target){
-    const now=Date.now();
-    if(now-lastAction<110) return;
-    lastAction=now;
-    if(target==="lama" && tool==="sponge") progress.lamaWash=Math.min(6,progress.lamaWash+1);
-    else if(target==="lama" && tool==="towel" && progress.lamaWash>=3) progress.lamaDry=Math.min(5,progress.lamaDry+1);
-    else if(target==="lama" && tool==="comb") progress.lamaComb=Math.min(6,progress.lamaComb+1);
-    else if(target==="ninita" && tool==="comb") progress.ninitaComb=Math.min(6,progress.ninitaComb+1);
-    else root.querySelector("#care-feedback").textContent = target==="ninita" ? "Para a Ninita, escolhe o pente." : "Usa a esponja, a toalha ou o pente na ordem certa.";
+
+  function applyTool(target,tool){
+    if(!target || !tool || completed) return;
+    const keys = keysFor(target);
+    const name = target === "lama" ? "Lama" : "Ninita";
+    const feedback = root.querySelector("#care-feedback");
+
+    if(tool === "bucket"){
+      if(progress[keys.wash] < 3){
+        progress[keys.wash]++;
+        feedback.textContent = `A lavar ${name} com o balde e água. Passagem ${progress[keys.wash]} de 3.`;
+      }else{
+        feedback.textContent = `${name} já está lavada. Agora usa o secador.`;
+      }
+    }else if(tool === "dryer"){
+      if(progress[keys.wash] < 3){
+        feedback.textContent = `Primeiro lava ${name} três vezes com o balde.`;
+        return;
+      }
+      if(progress[keys.dry] < 3){
+        progress[keys.dry]++;
+        feedback.textContent = `A secar ${name}. Passagem ${progress[keys.dry]} de 3.`;
+      }else{
+        feedback.textContent = `${name} já está seca. Agora usa o pente.`;
+      }
+    }else if(tool === "comb"){
+      if(progress[keys.dry] < 3){
+        feedback.textContent = `Primeiro seca ${name} com o secador.`;
+        return;
+      }
+      if(progress[keys.comb] < 3){
+        progress[keys.comb]++;
+        feedback.textContent = `A pentear ${name}. Passagem ${progress[keys.comb]} de 3.`;
+      }else{
+        feedback.textContent = `${name} já está muito bem penteada.`;
+      }
+    }
     audio.effect("place");
     update();
   }
-  root.querySelectorAll("[data-care-tool]").forEach(button=>button.addEventListener("click",()=>{
-    tool=button.dataset.careTool;
-    root.querySelectorAll(".care-tool").forEach(item=>item.classList.toggle("selected",item===button));
-  }));
-  root.querySelectorAll("[data-care-character]").forEach(card=>{
-    card.addEventListener("pointerdown",event=>{pressing=true;card.setPointerCapture(event.pointerId);apply(card.dataset.careCharacter);});
-    card.addEventListener("pointermove",()=>{if(pressing) apply(card.dataset.careCharacter);});
-    card.addEventListener("pointerup",()=>pressing=false);
-    card.addEventListener("pointercancel",()=>pressing=false);
+
+  function selectTool(button){
+    selectedTool = button.dataset.careTool;
+    root.querySelectorAll(".care-tool-object").forEach(item=>item.classList.toggle("selected",item===button));
+    const info = tools.find(item=>item.id===selectedTool);
+    root.querySelector("#care-feedback").textContent = info.instruction;
+  }
+
+  function startDrag(event,button){
+    if(event.button !== undefined && event.button !== 0) return;
+    event.preventDefault();
+    selectTool(button);
+    const ghost = button.cloneNode(true);
+    ghost.classList.add("care-tool-ghost");
+    document.body.appendChild(ghost);
+
+    function move(pointerEvent){
+      ghost.style.left = `${pointerEvent.clientX}px`;
+      ghost.style.top = `${pointerEvent.clientY}px`;
+      root.querySelectorAll("[data-care-target]").forEach(card=>{
+        const rect = card.getBoundingClientRect();
+        const over = pointerEvent.clientX>=rect.left && pointerEvent.clientX<=rect.right && pointerEvent.clientY>=rect.top && pointerEvent.clientY<=rect.bottom;
+        card.classList.toggle("drop-ready",over);
+      });
+    }
+
+    function end(pointerEvent){
+      window.removeEventListener("pointermove",move);
+      window.removeEventListener("pointerup",end);
+      window.removeEventListener("pointercancel",cancel);
+      root.querySelectorAll("[data-care-target]").forEach(card=>card.classList.remove("drop-ready"));
+      ghost.remove();
+      const element = document.elementFromPoint(pointerEvent.clientX,pointerEvent.clientY);
+      const targetCard = element?.closest?.("[data-care-target]");
+      if(targetCard && root.contains(targetCard)) applyTool(targetCard.dataset.careTarget,selectedTool);
+      dragCleanup = null;
+    }
+
+    function cancel(){
+      window.removeEventListener("pointermove",move);
+      window.removeEventListener("pointerup",end);
+      window.removeEventListener("pointercancel",cancel);
+      root.querySelectorAll("[data-care-target]").forEach(card=>card.classList.remove("drop-ready"));
+      ghost.remove();
+      dragCleanup = null;
+    }
+
+    dragCleanup = cancel;
+    window.addEventListener("pointermove",move,{passive:false});
+    window.addEventListener("pointerup",end,{once:true});
+    window.addEventListener("pointercancel",cancel,{once:true});
+    move(event);
+  }
+
+  root.querySelectorAll(".care-tool-object").forEach(button=>{
+    button.addEventListener("click",()=>selectTool(button));
+    button.addEventListener("pointerdown",event=>startDrag(event,button));
   });
+  root.querySelectorAll("[data-care-target]").forEach(card=>{
+    card.addEventListener("click",()=>applyTool(card.dataset.careTarget,selectedTool));
+  });
+
+  activeActivityModal._cleanup = ()=>{
+    if(dragCleanup) dragCleanup();
+  };
   update();
 }
 

@@ -645,9 +645,10 @@ img{display:block;max-width:100%}
 .care-characters{display:grid;grid-template-columns:repeat(2,minmax(220px,1fr));gap:16px;margin-top:18px}
 .care-character{padding:18px;border-radius:22px;background:#fff;text-align:center;box-shadow:0 10px 22px rgba(60,30,70,.12);touch-action:none;user-select:none}
 .care-avatar{position:relative;display:grid;place-items:center;min-height:230px;border-radius:20px;background:linear-gradient(180deg,#e7f9ff,#fff1f7);font-size:8rem;overflow:hidden}
+.care-item-hint{position:absolute;left:12px;bottom:10px;padding:6px 10px;border-radius:12px;background:rgba(255,255,255,.82);font-size:.92rem;color:#5e3a66;box-shadow:0 5px 12px rgba(60,30,70,.12)}
 .lama-avatar{background:linear-gradient(180deg,#ffd8ec,#fff)}
-.care-bubbles{position:absolute;font-size:4rem;opacity:1;transition:opacity .3s ease}.lama-avatar.washed .care-bubbles{opacity:.25}.lama-avatar.dry .care-bubbles{opacity:0}
-.ninita-avatar.combed::after{content:"✨";position:absolute;right:18px;top:18px;font-size:2.5rem}
+.care-bubbles{position:absolute;font-size:4rem;opacity:1;transition:opacity .3s ease}.lama-avatar.washed .care-bubbles,.ninita-avatar.washed .care-bubbles{opacity:.35}.lama-avatar.dry .care-bubbles,.ninita-avatar.dry .care-bubbles{opacity:0}
+.lama-avatar.combed::after,.ninita-avatar.combed::after{content:"✨";position:absolute;right:18px;top:18px;font-size:2.5rem}
 .care-character label{display:grid;grid-template-columns:70px 1fr;align-items:center;gap:8px;margin:8px;text-align:left;font-weight:800}
 .care-character progress{width:100%;height:18px}
 
@@ -671,4 +672,56 @@ img{display:block;max-width:100%}
   .care-characters{grid-template-columns:1fr}.care-avatar{min-height:190px;font-size:7rem}
   .activity-grid{grid-template-columns:1fr}.math-answers{grid-template-columns:repeat(2,1fr)}
   .page-buttons button{font-size:.78rem;padding:8px}.activity-hero-shade{padding:20px}
+}
+
+
+/* -------------------------------------------------------------
+   Atividades completas: letras, números e salão com utensílios
+   ------------------------------------------------------------- */
+.learning-score{text-align:center;font-size:1.25rem;font-weight:950;color:#6e397d;margin-bottom:12px}
+.letter-challenge,.number-challenge{max-width:760px;margin:0 auto;text-align:center}
+.letter-picture{font-size:clamp(5rem,18vw,9rem);min-height:130px;display:grid;place-items:center}
+.letter-word-display{display:flex;align-items:center;justify-content:center;gap:2px;font-size:clamp(2.2rem,9vw,4.6rem);font-weight:950;letter-spacing:.08em;color:#603273;margin:10px 0 18px}
+.letter-drop-zone,.number-drop-zone{display:grid;place-items:center;width:clamp(66px,16vw,94px);height:clamp(66px,16vw,94px);border:4px dashed #b85397;border-radius:22px;background:#fff;color:#b23883;box-shadow:0 8px 20px rgba(61,30,70,.14);transition:.18s ease}
+.letter-drop-zone.drop-ready,.number-drop-zone.drop-ready{transform:scale(1.08);background:#fff4a8;border-color:#74429a}
+.letter-drop-zone.correct,.number-drop-zone.correct{background:#dff8df;border-style:solid;border-color:#39a75b;color:#267a40}
+.letter-choice-grid,.number-choice-grid{display:grid;grid-template-columns:repeat(4,minmax(72px,130px));gap:12px;justify-content:center;margin:18px auto}
+.letter-choice,.number-choice{min-height:74px;border:0;border-radius:18px;background:linear-gradient(145deg,#fff,#ffe9f5);box-shadow:0 8px 18px rgba(60,30,70,.15);font-size:2.2rem;font-weight:950;color:#6b3479;cursor:grab;touch-action:none}
+.letter-choice:active,.number-choice:active{cursor:grabbing;transform:scale(.97)}
+.counting-objects{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;min-height:150px;padding:20px;border-radius:24px;background:linear-gradient(135deg,#fff8cf,#ffe8f7);font-size:clamp(2.8rem,10vw,5rem);box-shadow:inset 0 0 0 3px rgba(255,255,255,.8)}
+.counting-objects span{display:inline-block;animation:count-pop .28s ease both;animation-delay:calc(var(--delay)*35ms)}
+.number-drop-zone{margin:16px auto;font-size:2.5rem;font-weight:950}
+@keyframes count-pop{from{opacity:0;transform:scale(.3) rotate(-15deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+
+.care-salon{max-width:980px;margin:0 auto}
+.care-tool-shelf{display:grid;grid-template-columns:repeat(3,minmax(130px,190px));justify-content:center;gap:14px;margin-bottom:16px}
+.care-tool-object{border:3px solid transparent;border-radius:22px;padding:10px;background:linear-gradient(145deg,#fff,#f7eaff);box-shadow:0 10px 22px rgba(52,26,64,.15);color:#583162;cursor:grab;touch-action:none;user-select:none;transition:.18s ease}
+.care-tool-object:hover,.care-tool-object:focus-visible{transform:translateY(-3px);box-shadow:0 15px 28px rgba(52,26,64,.2)}
+.care-tool-object.selected{border-color:#c33d91;background:linear-gradient(145deg,#fff8ce,#ffe8f5)}
+.care-tool-object:active{cursor:grabbing}
+.care-tool-art{display:block;height:92px}
+.care-tool-art svg{width:100%;height:100%;filter:drop-shadow(0 8px 8px rgba(43,24,48,.18))}
+.care-tool-object strong,.care-tool-object small{display:block}.care-tool-object small{margin-top:3px;color:#8c6a92;font-weight:800}
+.care-tool-ghost{position:fixed!important;z-index:100000;width:150px;transform:translate(-50%,-50%) rotate(-4deg) scale(1.05);pointer-events:none;opacity:.94;box-shadow:0 20px 45px rgba(28,12,35,.35)!important}
+.care-stage{display:grid;grid-template-columns:repeat(2,minmax(270px,1fr));gap:18px;margin-top:18px}
+.care-person{position:relative;padding:16px;border-radius:26px;background:linear-gradient(180deg,#fff,#fff4fa);box-shadow:0 12px 26px rgba(53,27,65,.14);text-align:center;transition:.18s ease;cursor:pointer}
+.care-person.drop-ready{outline:6px solid #ffd54f;transform:scale(1.015);background:#fffbe4}
+.care-figure{position:relative;display:grid;place-items:center;min-height:330px;border-radius:22px;overflow:hidden;background:radial-gradient(circle at 50% 25%,#fff 0,#f0faff 48%,#ffeaf5 100%)}
+.care-figure>svg{width:min(95%,330px);height:320px;filter:drop-shadow(0 12px 10px rgba(73,37,67,.18));transition:.3s ease}
+.care-water-effect,.care-bubble-effect,.care-shine-effect{position:absolute;pointer-events:none;opacity:0;transition:.25s ease}
+.care-water-effect{font-size:5rem;left:16px;top:20px}.care-bubble-effect{font-size:5rem;right:16px;bottom:20px}.care-shine-effect{font-size:4.5rem;right:18px;top:18px}
+.care-person.is-wet .care-water-effect,.care-person.is-wet .care-bubble-effect{opacity:1;animation:care-bob 1s ease-in-out infinite alternate}
+.care-person.is-dry .care-water-effect,.care-person.is-dry .care-bubble-effect{opacity:0}
+.care-person.is-combed .care-shine-effect{opacity:1;animation:care-twinkle .8s ease-in-out infinite alternate}
+.care-person.is-combed .care-figure>svg{filter:drop-shadow(0 12px 10px rgba(73,37,67,.18)) saturate(1.12)}
+.care-progress-list{display:grid;gap:8px}.care-progress-list label{display:grid;grid-template-columns:110px 1fr;align-items:center;gap:10px;text-align:left;font-weight:850}.care-progress-list progress{width:100%;height:19px}
+@keyframes care-bob{to{transform:translateY(-9px) rotate(5deg)}}
+@keyframes care-twinkle{to{transform:scale(1.16) rotate(8deg)}}
+
+@media(max-width:720px){
+  .letter-choice-grid,.number-choice-grid{grid-template-columns:repeat(2,minmax(80px,1fr))}
+  .care-tool-shelf{grid-template-columns:repeat(3,1fr);gap:7px}
+  .care-tool-object{padding:6px;font-size:.72rem}.care-tool-art{height:62px}
+  .care-stage{grid-template-columns:1fr}.care-figure{min-height:270px}.care-figure>svg{height:260px}
+  .care-progress-list label{grid-template-columns:95px 1fr;font-size:.88rem}
 }
