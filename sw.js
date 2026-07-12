@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-musicas-aprovadas-v12";
+const CACHE = "ninita-lama-atividades-educativas-v13";
 const ASSETS = [
   "./",
   "./index.html",

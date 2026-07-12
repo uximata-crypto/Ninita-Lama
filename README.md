@@ -169,3 +169,28 @@ Mantêm-se:
 As quatro músicas enviadas funcionam localmente e ficam disponíveis
 depois da atualização da aplicação instalada. Wild Land e Bossa Nova
 continuam a necessitar de ligação à Internet.
+
+
+## Atualização — atividades educativas por nível
+
+Os desafios interativos originais foram mantidos. Cada um dos dez mundos
+passou a ter um botão **Atividades educativas deste nível**.
+
+Foram adicionados:
+
+- labirintos interativos;
+- puzzles deslizantes;
+- jogos de memória;
+- construção de palavras letra a letra;
+- exercícios de adição e subtração;
+- desenhos para colorir com paleta e tamanho de pincel;
+- lavagem e penteado de Lama;
+- penteado de Ninita;
+- preparação de receitas na cozinha;
+- Quinta Pedagógica com mamíferos, aves e répteis que podem ser alimentados.
+
+As páginas de colorir usam personagens originais de contos de fadas:
+Princesa Neve-Luz, Exploradora do Oceano, Leão Corajoso e Fada do Arco-Íris.
+
+A cache da aplicação foi atualizada para
+`ninita-lama-atividades-educativas-v13`.

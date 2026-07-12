@@ -478,3 +478,197 @@ img{display:block;max-width:100%}
     margin-top:-20px;
   }
 }
+
+
+/* ==========================================================
+   Atividades educativas por nível
+   ========================================================== */
+.btn-activity-level{
+  width:100%;
+  margin-top:16px;
+  background:linear-gradient(135deg,#ffcb4b,#ff7eb3);
+  color:#432240;
+  border:0;
+  box-shadow:0 10px 24px rgba(178,54,131,.22);
+}
+
+.activity-hub{padding-bottom:48px}
+.activity-hero{
+  min-height:280px;
+  border-radius:28px;
+  background-size:cover;
+  background-position:center;
+  overflow:hidden;
+  margin-bottom:20px;
+  box-shadow:0 18px 38px rgba(42,22,54,.18);
+}
+.activity-hero-shade{
+  min-height:280px;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  color:#fff;
+  background:linear-gradient(180deg,rgba(37,18,48,.08),rgba(37,18,48,.82));
+}
+.activity-hero h1{font-size:clamp(2rem,7vw,3.5rem);margin:.4rem 0}
+.activity-hero p{max-width:640px;margin:0;line-height:1.5}
+.activity-progress-summary{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-top:15px;
+  padding:10px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,.18);
+  width:max-content;
+  backdrop-filter:blur(8px);
+}
+.activity-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+.activity-card{
+  position:relative;
+  border:0;
+  border-radius:24px;
+  padding:22px;
+  text-align:left;
+  background:#fff;
+  color:var(--ink,#3c2945);
+  box-shadow:0 12px 28px rgba(55,25,68,.12);
+  cursor:pointer;
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.activity-card:hover,.activity-card:focus-visible{transform:translateY(-3px);box-shadow:0 17px 32px rgba(55,25,68,.18)}
+.activity-card.completed{outline:3px solid #ffd95a}
+.activity-icon{display:block;font-size:2.8rem;margin-bottom:10px}
+.activity-done{position:absolute;right:16px;top:14px;font-size:1.5rem}
+.activity-card h3{margin:.2rem 0 .5rem;font-size:1.18rem}
+.activity-card p{margin:0 0 16px;line-height:1.45;color:#6d5a75}
+.activity-play{font-weight:900;color:#b23683}
+.activity-note{margin-top:18px}
+.activity-return{margin:20px auto 0;display:flex}
+
+.activity-overlay{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+  background:rgba(30,14,38,.78);
+  backdrop-filter:blur(8px);
+}
+.activity-modal{
+  width:min(980px,100%);
+  max-height:calc(100vh - 24px);
+  overflow:auto;
+  background:linear-gradient(180deg,#fff,#fff6fb);
+  border-radius:28px;
+  box-shadow:0 30px 80px rgba(0,0,0,.38);
+}
+.activity-modal-header{
+  position:sticky;
+  top:0;
+  z-index:4;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  padding:18px 20px;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid #f0dce9;
+  backdrop-filter:blur(12px);
+}
+.activity-modal-header h2{margin:.35rem 0 .15rem;color:#632f73}
+.activity-modal-header p{margin:0;color:#745f7b}
+.activity-close{
+  flex:0 0 auto;
+  width:46px;height:46px;border:0;border-radius:50%;
+  background:#f4e4ef;color:#6b345f;font-size:2rem;cursor:pointer;
+}
+.activity-root{position:relative;padding:22px;min-height:420px}
+.mini-instruction,.mini-feedback{
+  padding:12px 16px;border-radius:16px;background:#fff1a8;color:#4c3c28;text-align:center;font-weight:800;
+}
+.mini-feedback{background:#f3e8ff;color:#5d3672}
+.mini-success{
+  position:absolute;inset:0;z-index:8;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:28px;background:rgba(255,255,255,.96);border-radius:20px;
+}
+.mini-success .big-star{font-size:5rem}
+
+.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:620px;margin:20px auto}
+.memory-card{aspect-ratio:1;border:0;border-radius:18px;background:linear-gradient(145deg,#b45bd0,#6842a8);color:#fff;font-size:2.2rem;font-weight:900;cursor:pointer;box-shadow:0 8px 16px rgba(68,34,87,.18)}
+.memory-card.flipped{background:#fff;color:#3e2747;outline:3px solid #ff88bd}
+.memory-card.matched{background:#fff7b6;outline:3px solid #f5c518}
+
+.word-game{text-align:center}
+.word-picture{font-size:6rem;margin:8px}
+.word-slots{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin:16px}
+.word-slots span{display:grid;place-items:center;width:44px;height:54px;border-bottom:5px solid #7b3d85;font-size:1.8rem;font-weight:900}
+.letter-bank{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:18px}
+.letter-tile{width:54px;height:58px;border:0;border-radius:14px;background:#fff;box-shadow:0 6px 14px rgba(60,30,70,.15);font-size:1.5rem;font-weight:900;color:#6c3276}
+.letter-tile.used{opacity:.25}.wrong{animation:wrongShake .3s ease;background:#ffd6dc!important}
+@keyframes wrongShake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+.math-score{text-align:center;font-size:1.3rem;font-weight:900}
+.math-question{text-align:center;font-size:clamp(3rem,12vw,6rem);font-weight:900;color:#69387a;margin:30px 0}
+.math-answers{display:grid;grid-template-columns:repeat(2,minmax(100px,220px));justify-content:center;gap:14px;margin-bottom:20px}
+.math-answer{min-height:80px;border:0;border-radius:20px;background:#fff;box-shadow:0 8px 18px rgba(60,30,70,.14);font-size:2rem;font-weight:900;color:#b23683}
+
+.maze-board{display:grid;grid-template-columns:repeat(var(--maze-size),1fr);width:min(560px,96vw);aspect-ratio:1;margin:18px auto;background:#fff;border:4px solid #6b3d7d}
+.maze-cell{display:grid;place-items:center;min-width:0;min-height:0;font-size:clamp(1rem,5vw,2rem);background:rgba(245,231,255,.54)}
+.maze-controls{text-align:center}.maze-controls button{width:62px;height:56px;margin:4px;border:0;border-radius:16px;background:#74429a;color:#fff;font-size:1.7rem;font-weight:900;box-shadow:0 7px 14px rgba(60,30,70,.2)}
+
+.puzzle-theme{text-align:center;font-size:4rem;margin:8px}
+.sliding-puzzle{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:min(520px,90vw);margin:16px auto;padding:8px;border-radius:24px;background:#6d3b80}
+.puzzle-tile{aspect-ratio:1;border:0;border-radius:16px;background:linear-gradient(145deg,#fff4a8,#ff88bd);font-size:2rem;font-weight:900;color:#4b2c55;box-shadow:inset 0 0 0 3px rgba(255,255,255,.55)}
+.puzzle-tile.empty{background:rgba(255,255,255,.12);box-shadow:none}
+
+.coloring-toolbar{display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+.page-buttons,.color-palette{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.page-buttons button,.care-tool,.recipe-choice button,.farm-foods button{border:0;border-radius:14px;padding:10px 12px;background:#fff;box-shadow:0 5px 12px rgba(60,30,70,.13);font-weight:800;color:#663b70}
+.color-swatch{width:38px;height:38px;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 1px #8f7797;cursor:pointer}
+.color-swatch.selected{box-shadow:0 0 0 4px #642f72}
+.brush-control{display:flex;align-items:center;justify-content:center;gap:12px;font-weight:800}
+.coloring-stage{position:relative;width:min(560px,100%);aspect-ratio:560/620;margin:0 auto 14px;border:4px solid #e8c8df;border-radius:20px;overflow:hidden;background:#fff;touch-action:none}
+.coloring-stage canvas{position:absolute;inset:0;width:100%;height:100%}
+#paint-canvas{touch-action:none}#outline-canvas{pointer-events:none}
+#finish-coloring{display:flex;margin:0 auto}
+
+.care-tools,.recipe-choice,.farm-foods{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:14px}
+.care-tool.selected,.recipe-choice button.selected,.farm-foods button.selected{background:#6c3b83;color:#fff}
+.care-characters{display:grid;grid-template-columns:repeat(2,minmax(220px,1fr));gap:16px;margin-top:18px}
+.care-character{padding:18px;border-radius:22px;background:#fff;text-align:center;box-shadow:0 10px 22px rgba(60,30,70,.12);touch-action:none;user-select:none}
+.care-avatar{position:relative;display:grid;place-items:center;min-height:230px;border-radius:20px;background:linear-gradient(180deg,#e7f9ff,#fff1f7);font-size:8rem;overflow:hidden}
+.lama-avatar{background:linear-gradient(180deg,#ffd8ec,#fff)}
+.care-bubbles{position:absolute;font-size:4rem;opacity:1;transition:opacity .3s ease}.lama-avatar.washed .care-bubbles{opacity:.25}.lama-avatar.dry .care-bubbles{opacity:0}
+.ninita-avatar.combed::after{content:"✨";position:absolute;right:18px;top:18px;font-size:2.5rem}
+.care-character label{display:grid;grid-template-columns:70px 1fr;align-items:center;gap:8px;margin:8px;text-align:left;font-weight:800}
+.care-character progress{width:100%;height:18px}
+
+.cooking-counter{text-align:center;max-width:680px;margin:0 auto}
+.cooking-bowl{font-size:7rem;margin:14px}
+.recipe-steps{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.recipe-steps span{padding:9px 12px;border-radius:14px;background:#fff;box-shadow:0 5px 12px rgba(60,30,70,.1);font-weight:800}
+.recipe-steps span.done{background:#d8fbd8;text-decoration:line-through}
+.ingredients{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:20px}
+.ingredient{width:76px;height:76px;border:0;border-radius:18px;background:#fff;font-size:2.7rem;box-shadow:0 7px 15px rgba(60,30,70,.14)}
+
+.farm-foods button{display:flex;flex-direction:column;align-items:center;min-width:94px}.farm-foods button span{font-size:2.2rem}
+.farm-animals{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px;margin:18px 0}
+.farm-animal{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:180px;padding:14px;border:0;border-radius:20px;background:#fff;box-shadow:0 8px 18px rgba(60,30,70,.12);color:#4c3154}
+.farm-animal-icon{font-size:4.2rem}.farm-animal small{color:#7d6983}.fed-badge{display:none;margin-top:auto;padding:5px 8px;border-radius:12px;background:#d7f8d8;color:#25652c;font-weight:900;font-size:.75rem}.farm-animal.fed{outline:3px solid #4bc366;background:#f3fff3}.farm-animal.fed .fed-badge{display:block}
+.animal-fact{padding:15px;border-radius:16px;background:#eaf7ff;line-height:1.45;text-align:center}
+
+@media (max-width:640px){
+  .activity-root{padding:14px}.activity-modal-header{padding:14px}.activity-modal-header p{font-size:.85rem}
+  .memory-grid{grid-template-columns:repeat(3,1fr)}
+  .care-characters{grid-template-columns:1fr}.care-avatar{min-height:190px;font-size:7rem}
+  .activity-grid{grid-template-columns:1fr}.math-answers{grid-template-columns:repeat(2,1fr)}
+  .page-buttons button{font-size:.78rem;padding:8px}.activity-hero-shade{padding:20px}
+}

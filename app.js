@@ -5,7 +5,7 @@ const worlds = [
   {id:4,title:"A Praia das Conchas",subtitle:"Proteger o oceano",emoji:"🏖️",image:"./assets/images/praia.webp",star:"Estrela do Oceano",intro:"Uma praia paradisíaca precisa de ficar limpa para que os animais marinhos voltem a sorrir.",tasks:["Recolher o lixo da areia","Separar plástico, papel e vidro","Encontrar conchas brilhantes","Ajudar uma tartaruga","Construir um castelo de areia"]},
   {id:5,title:"A Floresta Encantada",subtitle:"Cuidar da natureza",emoji:"🌳",image:"./assets/images/floresta.webp",star:"Estrela da Natureza",intro:"Na floresta, as flores brilham e os animais têm pequenas missões para Ninita e Lama.",tasks:["Plantar uma árvore","Regar as flores","Seguir as pegadas","Construir uma casa para pássaros","Encontrar a pedra mágica"]},
   {id:6,title:"A Piscina Tropical",subtitle:"Aprender com segurança",emoji:"🏊",image:"./assets/images/piscina.webp",star:"Estrela da Coragem",intro:"Lama tem algum receio da água. Ninita vai mostrar-lhe como brincar em segurança.",tasks:["Escolher o fato de banho","Colocar o colete","Tomar duche antes de entrar","Recolher bolas e boias","Ajudar Lama a brincar na água"]},
-  {id:7,title:"A Quinta Feliz",subtitle:"Amigos de todas as espécies",emoji:"🐓",image:"./assets/images/floresta.webp",star:"Estrela da Amizade",intro:"Na quinta, os animais esperam por comida, carinho e uma pequena ajuda.",tasks:["Alimentar as galinhas","Dar cenouras aos coelhos","Escovar o pónei","Regar a horta","Levar os animais para os abrigos"]},
+  {id:7,title:"A Quinta Pedagógica",subtitle:"Conhecer, cuidar e alimentar os animais",emoji:"🐘",image:"./assets/images/floresta.webp",star:"Estrela da Amizade",intro:"A quinta pedagógica reúne animais da quinta e de diferentes habitats. Ninita e Lama vão aprender a alimentá-los com cuidado.",tasks:["Alimentar as galinhas","Dar cenouras aos coelhos","Escovar o pónei","Regar a horta","Levar os animais para os abrigos"]},
   {id:8,title:"O Parque das Aventuras",subtitle:"Brincar e explorar",emoji:"🎠",image:"./assets/images/arcoiris.webp",star:"Estrela da Diversão",intro:"Escorregas, baloiços, pequenos veículos e bilhetes mágicos enchem este parque de alegria.",tasks:["Conduzir o carrinho","Desviar dos obstáculos","Andar no carrossel","Ajudar uma personagem perdida","Encontrar os bilhetes mágicos"]},
   {id:9,title:"A Cidade Colorida",subtitle:"Viver em comunidade",emoji:"🏙️",image:"./assets/images/sala.webp",star:"Estrela da Comunidade",intro:"A cidade está cheia de pessoas, lojas e jardins onde cada boa ação conta.",tasks:["Atravessar na passadeira","Reconhecer um sinal","Fazer uma pequena compra","Ajudar uma pessoa","Encontrar um animal perdido"]},
   {id:10,title:"A Ilha do Arco-Íris",subtitle:"A grande missão final",emoji:"🌈",image:"./assets/images/arcoiris.webp",star:"Estrela da Imaginação",intro:"Na ilha final, Ninita e Lama juntam tudo o que aprenderam para devolver as cores aos Mundos da Alegria.",tasks:["Resolver o grande puzzle","Recuperar as cores","Plantar flores","Ajudar a Nuvem Triste","Encontrar a última estrela"]}
@@ -25,6 +25,799 @@ const AUDIO_KEY = "ninita-lama-audio-aprovado-v4";
 const app = document.querySelector("#app");
 
 let activeGame = null;
+
+let activeActivityModal = null;
+const ACTIVITY_PROGRESS_KEY = "ninita-lama-activities-v1";
+
+const LEVEL_ACTIVITIES = {
+  1:[
+    {id:"care",type:"care",icon:"🫧",title:"Cuidar da Ninita e de Lama",description:"Lava e penteia Lama e penteia o cabelo da Ninita."},
+    {id:"memory-room",type:"memory",icon:"🧠",title:"Memória do Quarto",description:"Encontra os pares escondidos no quarto encantado."}
+  ],
+  2:[
+    {id:"cooking",type:"cooking",icon:"👩‍🍳",title:"Cozinhar na Casa das Surpresas",description:"Escolhe uma receita e junta os ingredientes pela ordem certa."},
+    {id:"word-home",type:"word",icon:"🔤",title:"Palavras de Casa",description:"Constrói palavras letra a letra."}
+  ],
+  3:[
+    {id:"word-school",type:"word",icon:"✏️",title:"Letras da Escola",description:"Forma palavras e reconhece cada letra."},
+    {id:"math-school",type:"math",icon:"➕",title:"Adição e Subtração",description:"Resolve contas simples e ganha estrelas."},
+    {id:"memory-school",type:"memory",icon:"🎒",title:"Memória Escolar",description:"Combina materiais iguais."}
+  ],
+  4:[
+    {id:"maze-beach",type:"maze",icon:"🌀",title:"Labirinto das Conchas",description:"Leva a tartaruga até ao mar."},
+    {id:"puzzle-beach",type:"puzzle",icon:"🧩",title:"Puzzle da Praia",description:"Ordena as peças do cenário tropical."},
+    {id:"color-beach",type:"coloring",icon:"🎨",title:"Colorir Contos Mágicos",description:"Pinta personagens originais de contos de fadas com a paleta de cores."}
+  ],
+  5:[
+    {id:"maze-forest",type:"maze",icon:"🌿",title:"Labirinto da Floresta",description:"Encontra o caminho até à árvore brilhante."},
+    {id:"memory-forest",type:"memory",icon:"🦋",title:"Memória da Natureza",description:"Descobre pares de plantas e animais."},
+    {id:"color-forest",type:"coloring",icon:"🖍️",title:"Ateliê Encantado",description:"Pinta a princesa da neve, a fada, o leão e a exploradora do oceano."}
+  ],
+  6:[
+    {id:"math-pool",type:"math",icon:"➖",title:"Contas da Piscina",description:"Soma e subtrai boias, bolas e conchas."},
+    {id:"maze-pool",type:"maze",icon:"🏊",title:"Percurso Seguro",description:"Ajuda Lama a chegar à boia pelo caminho correto."},
+    {id:"puzzle-pool",type:"puzzle",icon:"🧩",title:"Puzzle Tropical",description:"Desliza as peças até ficarem ordenadas."}
+  ],
+  7:[
+    {id:"farm-feed",type:"farm",icon:"🐘",title:"Alimentar a Quinta Pedagógica",description:"Alimenta elefantes, macacos, aves, répteis e animais da quinta."},
+    {id:"memory-farm",type:"memory",icon:"🐢",title:"Memória dos Animais",description:"Encontra pares de mamíferos, aves e répteis."},
+    {id:"word-farm",type:"word",icon:"🔤",title:"Nomes dos Animais",description:"Constrói os nomes letra a letra."}
+  ],
+  8:[
+    {id:"maze-park",type:"maze",icon:"🎠",title:"Labirinto do Parque",description:"Chega ao carrossel sem tocar nos caminhos fechados."},
+    {id:"puzzle-park",type:"puzzle",icon:"🧩",title:"Puzzle da Diversão",description:"Organiza as peças do parque."},
+    {id:"math-park",type:"math",icon:"🎟️",title:"Contar Bilhetes",description:"Resolve contas com bilhetes e brinquedos."}
+  ],
+  9:[
+    {id:"word-city",type:"word",icon:"🏙️",title:"Palavras da Cidade",description:"Constrói palavras ligadas à comunidade."},
+    {id:"math-city",type:"math",icon:"🛍️",title:"Compras e Trocos",description:"Resolve pequenas adições e subtrações."},
+    {id:"color-city",type:"coloring",icon:"🎨",title:"Galeria Colorida",description:"Escolhe a personagem e pinta livremente."}
+  ],
+  10:[
+    {id:"color-rainbow",type:"coloring",icon:"🌈",title:"Grande Tela do Arco-Íris",description:"Pinta o final mágico com muitas cores."},
+    {id:"memory-rainbow",type:"memory",icon:"⭐",title:"Memória das Estrelas",description:"Encontra todos os pares mágicos."},
+    {id:"puzzle-rainbow",type:"puzzle",icon:"🧩",title:"Puzzle Final",description:"Completa o último desafio da aventura."}
+  ]
+};
+
+function loadActivityProgress(){
+  try{
+    return JSON.parse(localStorage.getItem(ACTIVITY_PROGRESS_KEY)) || {};
+  }catch{
+    return {};
+  }
+}
+
+function markActivityComplete(worldId,activityId){
+  const progress = loadActivityProgress();
+  const key = String(worldId);
+  progress[key] = Array.isArray(progress[key]) ? progress[key] : [];
+  if(!progress[key].includes(activityId)) progress[key].push(activityId);
+  localStorage.setItem(ACTIVITY_PROGRESS_KEY,JSON.stringify(progress));
+}
+
+function completedActivitiesFor(worldId){
+  const progress = loadActivityProgress();
+  return progress[String(worldId)] || [];
+}
+
+function shuffleItems(items){
+  const copy = [...items];
+  for(let index=copy.length-1;index>0;index--){
+    const swap = Math.floor(Math.random()*(index+1));
+    [copy[index],copy[swap]] = [copy[swap],copy[index]];
+  }
+  return copy;
+}
+
+function renderActivityHub(worldId){
+  const world = worlds.find(item=>item.id === worldId) || worlds[0];
+  const activities = LEVEL_ACTIVITIES[world.id] || [];
+  const completed = completedActivitiesFor(world.id);
+
+  app.innerHTML = `
+    ${topbar(`🎮 Atividades — ${world.title}`,"Os desafios originais continuam disponíveis no cenário principal")}
+    <main class="content activity-hub">
+      <section class="activity-hero" style="background-image:url('${world.image}')">
+        <div class="activity-hero-shade">
+          <span class="badge">Mundo ${world.id}</span>
+          <h1>${world.emoji} ${world.title}</h1>
+          <p>Escolhe uma atividade educativa. Podes repetir cada jogo sempre que quiseres.</p>
+          <div class="activity-progress-summary">
+            <strong>${completed.length} de ${activities.length}</strong>
+            <span>atividades concluídas</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="activity-grid">
+        ${activities.map(activity=>{
+          const done = completed.includes(activity.id);
+          return `
+            <button class="activity-card ${done ? "completed" : ""}" data-activity="${activity.id}" data-world="${world.id}">
+              <span class="activity-icon">${activity.icon}</span>
+              ${done ? '<span class="activity-done">⭐</span>' : ''}
+              <h3>${activity.title}</h3>
+              <p>${activity.description}</p>
+              <span class="activity-play">${done ? "Jogar novamente" : "Começar"} →</span>
+            </button>
+          `;
+        }).join("")}
+      </section>
+
+      <section class="activity-note card">
+        <h3>Personagens para colorir</h3>
+        <p>As páginas de pintura usam personagens originais de contos de fadas: Princesa Neve-Luz, Exploradora do Oceano, Leão Corajoso e Fada do Arco-Íris.</p>
+      </section>
+
+      <button class="btn btn-primary activity-return" data-action="return-level" data-world="${world.id}">
+        ← Voltar ao desafio principal
+      </button>
+    </main>
+  `;
+}
+
+function closeActivityModal(){
+  if(!activeActivityModal) return;
+  if(typeof activeActivityModal._cleanup === "function") activeActivityModal._cleanup();
+  activeActivityModal.remove();
+  activeActivityModal = null;
+}
+
+function createActivityModal(world,activity){
+  closeActivityModal();
+  const modal = document.createElement("div");
+  modal.className = "activity-overlay";
+  modal.innerHTML = `
+    <section class="activity-modal" role="dialog" aria-modal="true" aria-label="${activity.title}">
+      <header class="activity-modal-header">
+        <div>
+          <span class="badge">${world.emoji} Mundo ${world.id}</span>
+          <h2>${activity.icon} ${activity.title}</h2>
+          <p>${activity.description}</p>
+        </div>
+        <button class="activity-close" data-close-activity aria-label="Fechar atividade">×</button>
+      </header>
+      <div id="activity-root" class="activity-root"></div>
+    </section>
+  `;
+  document.body.appendChild(modal);
+  activeActivityModal = modal;
+  modal.addEventListener("click",event=>{
+    if(event.target === modal || event.target.closest("[data-close-activity]")){
+      closeActivityModal();
+      renderActivityHub(world.id);
+    }
+  });
+  return modal.querySelector("#activity-root");
+}
+
+function finishActivity(world,activity,message){
+  markActivityComplete(world.id,activity.id);
+  audio.effect("success");
+  const root = document.querySelector("#activity-root");
+  if(!root || root.dataset.finished === "true") return;
+  root.dataset.finished = "true";
+  root.insertAdjacentHTML("beforeend",`
+    <div class="mini-success">
+      <div class="big-star">⭐</div>
+      <h2>Muito bem!</h2>
+      <p>${message}</p>
+      <button class="btn btn-primary" data-finish-activity>Voltar às atividades</button>
+    </div>
+  `);
+  root.querySelector("[data-finish-activity]").addEventListener("click",()=>{
+    closeActivityModal();
+    renderActivityHub(world.id);
+  });
+}
+
+function openActivity(worldId,activityId){
+  const world = worlds.find(item=>item.id === worldId) || worlds[0];
+  const activity = (LEVEL_ACTIVITIES[world.id] || []).find(item=>item.id === activityId);
+  if(!activity) return;
+  const root = createActivityModal(world,activity);
+  const finish = message=>finishActivity(world,activity,message);
+
+  if(activity.type === "memory") startMemoryActivity(root,world,finish);
+  if(activity.type === "word") startWordActivity(root,world,finish);
+  if(activity.type === "math") startMathActivity(root,world,finish);
+  if(activity.type === "maze") startMazeActivity(root,world,finish);
+  if(activity.type === "puzzle") startPuzzleActivity(root,world,finish);
+  if(activity.type === "coloring") startColoringActivity(root,world,finish);
+  if(activity.type === "care") startCareActivity(root,world,finish);
+  if(activity.type === "cooking") startCookingActivity(root,world,finish);
+  if(activity.type === "farm") startFarmActivity(root,world,finish);
+}
+
+function memorySymbolsFor(worldId){
+  return ({
+    1:["🛏️","🧸","📚","🎒","👟","🌙"],
+    3:["✏️","📘","🔢","🎨","🎒","📏"],
+    5:["🌳","🦋","🐦","🌸","🍄","🐿️"],
+    7:["🐘","🐒","🦜","🐢","🦎","🐇"],
+    10:["⭐","🌈","☁️","🦄","💎","🪄"]
+  })[worldId] || ["🦙","👧🏻","⭐","🌸","🎈","💖"];
+}
+
+function startMemoryActivity(root,world,finish){
+  const symbols = memorySymbolsFor(world.id);
+  const cards = shuffleItems(symbols.flatMap((symbol,pair)=>[
+    {symbol,pair,id:`${pair}-a`},{symbol,pair,id:`${pair}-b`}
+  ]));
+  let first = null;
+  let locked = false;
+  const matched = new Set();
+
+  root.innerHTML = `
+    <div class="mini-instruction">Toca em duas cartas para encontrar os pares.</div>
+    <div class="memory-grid">
+      ${cards.map((card,index)=>`<button class="memory-card" data-card="${index}" aria-label="Carta escondida"><span>?</span></button>`).join("")}
+    </div>
+    <p class="mini-feedback" id="memory-feedback">Encontra ${symbols.length} pares.</p>
+  `;
+
+  const buttons = [...root.querySelectorAll(".memory-card")];
+  buttons.forEach((button,index)=>button.addEventListener("click",()=>{
+    if(locked || matched.has(index) || first === index) return;
+    audio.effect("click");
+    button.classList.add("flipped");
+    button.querySelector("span").textContent = cards[index].symbol;
+    if(first === null){
+      first = index;
+      return;
+    }
+    if(cards[first].pair === cards[index].pair){
+      matched.add(first);
+      matched.add(index);
+      buttons[first].classList.add("matched");
+      button.classList.add("matched");
+      first = null;
+      audio.effect("place");
+      root.querySelector("#memory-feedback").textContent = `${matched.size/2} pares encontrados.`;
+      if(matched.size === cards.length) finish("Encontraste todos os pares do jogo da memória!");
+    }else{
+      locked = true;
+      const previous = first;
+      first = null;
+      setTimeout(()=>{
+        [previous,index].forEach(position=>{
+          buttons[position].classList.remove("flipped");
+          buttons[position].querySelector("span").textContent = "?";
+        });
+        locked = false;
+      },650);
+    }
+  }));
+}
+
+function wordsFor(worldId){
+  return ({
+    2:[{word:"CASA",emoji:"🏠"},{word:"MESA",emoji:"🍽️"},{word:"SOPA",emoji:"🥣"}],
+    3:[{word:"LIVRO",emoji:"📘"},{word:"LETRA",emoji:"🔤"},{word:"ESCOLA",emoji:"🏫"}],
+    7:[{word:"LAMA",emoji:"🦙"},{word:"MACACO",emoji:"🐒"},{word:"ELEFANTE",emoji:"🐘"}],
+    9:[{word:"CIDADE",emoji:"🏙️"},{word:"LOJA",emoji:"🏪"},{word:"AMIGO",emoji:"🤝"}]
+  })[worldId] || [{word:"NINITA",emoji:"👧🏻"},{word:"ESTRELA",emoji:"⭐"},{word:"ARCOIRIS",emoji:"🌈"}];
+}
+
+function startWordActivity(root,world,finish){
+  const words = wordsFor(world.id);
+  let round = 0;
+  let built = [];
+
+  root.innerHTML = `
+    <div class="word-game">
+      <div class="word-picture" id="word-picture"></div>
+      <div class="word-slots" id="word-slots"></div>
+      <div class="letter-bank" id="letter-bank"></div>
+      <p class="mini-feedback" id="word-feedback">Constrói a palavra letra a letra.</p>
+    </div>
+  `;
+
+  function drawRound(){
+    const current = words[round];
+    built = [];
+    root.querySelector("#word-picture").textContent = current.emoji;
+    root.querySelector("#word-slots").innerHTML = Array.from(current.word).map((_,index)=>`<span data-slot="${index}">_</span>`).join("");
+    const letters = shuffleItems(Array.from(current.word).map((letter,index)=>({letter,index})));
+    root.querySelector("#letter-bank").innerHTML = letters.map((item,index)=>`<button class="letter-tile" data-letter-index="${index}" data-letter="${item.letter}">${item.letter}</button>`).join("");
+    root.querySelector("#word-feedback").textContent = `Palavra ${round+1} de ${words.length}`;
+
+    root.querySelectorAll(".letter-tile").forEach(button=>button.addEventListener("click",()=>{
+      const expected = Array.from(current.word)[built.length];
+      if(button.dataset.letter === expected){
+        built.push(button.dataset.letter);
+        button.disabled = true;
+        button.classList.add("used");
+        root.querySelector(`[data-slot="${built.length-1}"]`).textContent = button.dataset.letter;
+        audio.effect("place");
+        if(built.length === current.word.length){
+          root.querySelector("#word-feedback").textContent = `Muito bem: ${current.word}!`;
+          setTimeout(()=>{
+            round++;
+            if(round >= words.length) finish("Construíste todas as palavras, uma letra de cada vez!");
+            else drawRound();
+          },700);
+        }
+      }else{
+        button.classList.add("wrong");
+        root.querySelector("#word-feedback").textContent = `Procura a letra ${expected}.`;
+        setTimeout(()=>button.classList.remove("wrong"),350);
+      }
+    }));
+  }
+  drawRound();
+}
+
+function startMathActivity(root,world,finish){
+  const max = world.id >= 8 ? 20 : 10;
+  let correct = 0;
+
+  root.innerHTML = `
+    <div class="math-score">⭐ <span id="math-score">0</span> de 5</div>
+    <div class="math-question" id="math-question"></div>
+    <div class="math-answers" id="math-answers"></div>
+    <p class="mini-feedback" id="math-feedback">Escolhe a resposta certa.</p>
+  `;
+
+  function nextQuestion(){
+    const subtraction = Math.random() < .5;
+    let a = 1 + Math.floor(Math.random()*max);
+    let b = 1 + Math.floor(Math.random()*max);
+    if(subtraction && b > a) [a,b] = [b,a];
+    const answer = subtraction ? a-b : a+b;
+    const symbol = subtraction ? "−" : "+";
+    const options = new Set([answer]);
+    while(options.size < 4){
+      const candidate = Math.max(0,answer + Math.floor(Math.random()*9)-4);
+      options.add(candidate);
+    }
+    root.querySelector("#math-question").textContent = `${a} ${symbol} ${b} = ?`;
+    root.querySelector("#math-answers").innerHTML = shuffleItems([...options]).map(value=>`<button class="math-answer" data-answer="${value}">${value}</button>`).join("");
+    root.querySelector("#math-feedback").textContent = "Escolhe a resposta certa.";
+    root.querySelectorAll(".math-answer").forEach(button=>button.addEventListener("click",()=>{
+      if(Number(button.dataset.answer) === answer){
+        correct++;
+        root.querySelector("#math-score").textContent = correct;
+        root.querySelector("#math-feedback").textContent = "Resposta certa!";
+        audio.effect("place");
+        root.querySelectorAll(".math-answer").forEach(item=>item.disabled=true);
+        setTimeout(()=>{
+          if(correct >= 5) finish("Resolveste cinco contas de adição e subtração!");
+          else nextQuestion();
+        },550);
+      }else{
+        button.classList.add("wrong");
+        root.querySelector("#math-feedback").textContent = "Vamos tentar outra resposta.";
+        setTimeout(()=>button.classList.remove("wrong"),350);
+      }
+    }));
+  }
+  nextQuestion();
+}
+
+function makeMaze(size){
+  const cells = Array.from({length:size*size},()=>({visited:false,walls:[true,true,true,true]}));
+  const stack = [0];
+  cells[0].visited = true;
+  const directions = [[-1,0,0,2],[0,1,1,3],[1,0,2,0],[0,-1,3,1]];
+  while(stack.length){
+    const current = stack[stack.length-1];
+    const row = Math.floor(current/size);
+    const col = current%size;
+    const neighbours = shuffleItems(directions).map(([dr,dc,wall,opposite])=>({
+      row:row+dr,col:col+dc,wall,opposite
+    })).filter(item=>item.row>=0 && item.row<size && item.col>=0 && item.col<size && !cells[item.row*size+item.col].visited);
+    if(!neighbours.length){
+      stack.pop();
+      continue;
+    }
+    const next = neighbours[0];
+    const nextIndex = next.row*size+next.col;
+    cells[current].walls[next.wall] = false;
+    cells[nextIndex].walls[next.opposite] = false;
+    cells[nextIndex].visited = true;
+    stack.push(nextIndex);
+  }
+  return cells;
+}
+
+function startMazeActivity(root,world,finish){
+  const size = 7;
+  const cells = makeMaze(size);
+  let player = 0;
+  const goal = size*size-1;
+  const hero = world.id === 4 ? "🐢" : world.id === 6 ? "🦙" : "👧🏻";
+  const destination = world.id === 4 ? "🌊" : world.id === 6 ? "🛟" : world.id === 8 ? "🎠" : "⭐";
+
+  root.innerHTML = `
+    <div class="mini-instruction">Usa as setas para chegar ao destino.</div>
+    <div class="maze-board" id="maze-board" style="--maze-size:${size}"></div>
+    <div class="maze-controls">
+      <button data-maze="up">↑</button>
+      <div><button data-maze="left">←</button><button data-maze="down">↓</button><button data-maze="right">→</button></div>
+    </div>
+  `;
+
+  function draw(){
+    root.querySelector("#maze-board").innerHTML = cells.map((cell,index)=>{
+      const [top,right,bottom,left] = cell.walls;
+      const content = index === player ? hero : index === goal ? destination : "";
+      return `<div class="maze-cell" style="border-top:${top?'3px':'0'} solid #6b3d7d;border-right:${right?'3px':'0'} solid #6b3d7d;border-bottom:${bottom?'3px':'0'} solid #6b3d7d;border-left:${left?'3px':'0'} solid #6b3d7d">${content}</div>`;
+    }).join("");
+  }
+
+  function move(direction){
+    const map = {up:0,right:1,down:2,left:3};
+    const wallIndex = map[direction];
+    if(cells[player].walls[wallIndex]){
+      audio.effect("click");
+      return;
+    }
+    if(direction === "up") player -= size;
+    if(direction === "right") player += 1;
+    if(direction === "down") player += size;
+    if(direction === "left") player -= 1;
+    draw();
+    audio.effect("place");
+    if(player === goal) finish("Encontraste a saída do labirinto!");
+  }
+
+  root.querySelectorAll("[data-maze]").forEach(button=>button.addEventListener("click",()=>move(button.dataset.maze)));
+  const keyHandler = event=>{
+    const direction = {ArrowUp:"up",ArrowRight:"right",ArrowDown:"down",ArrowLeft:"left"}[event.key];
+    if(direction){
+      event.preventDefault();
+      move(direction);
+    }
+  };
+  window.addEventListener("keydown",keyHandler);
+  activeActivityModal._cleanup = ()=>window.removeEventListener("keydown",keyHandler);
+  draw();
+}
+
+function startPuzzleActivity(root,world,finish){
+  let tiles = [1,2,3,4,5,6,7,8,0];
+  const neighbours = index=>{
+    const row = Math.floor(index/3), col=index%3;
+    return [[row-1,col],[row+1,col],[row,col-1],[row,col+1]].filter(([r,c])=>r>=0&&r<3&&c>=0&&c<3).map(([r,c])=>r*3+c);
+  };
+  for(let step=0;step<120;step++){
+    const blank = tiles.indexOf(0);
+    const move = neighbours(blank)[Math.floor(Math.random()*neighbours(blank).length)];
+    [tiles[blank],tiles[move]]=[tiles[move],tiles[blank]];
+  }
+  if(tiles.every((value,index)=>value === [1,2,3,4,5,6,7,8,0][index])) [tiles[7],tiles[8]]=[tiles[8],tiles[7]];
+  const theme = world.id === 4 ? "🏖️" : world.id === 6 ? "🏊" : world.id === 8 ? "🎠" : "🌈";
+
+  root.innerHTML = `
+    <div class="mini-instruction">Desliza uma peça para o espaço vazio e ordena os números.</div>
+    <div class="puzzle-theme">${theme}</div>
+    <div class="sliding-puzzle" id="sliding-puzzle"></div>
+    <p class="mini-feedback">Objetivo: 1 · 2 · 3 / 4 · 5 · 6 / 7 · 8</p>
+  `;
+
+  function draw(){
+    root.querySelector("#sliding-puzzle").innerHTML = tiles.map((tile,index)=>tile ? `<button class="puzzle-tile" data-tile-index="${index}"><span>${tile}</span></button>` : `<div class="puzzle-tile empty"></div>`).join("");
+    root.querySelectorAll("[data-tile-index]").forEach(button=>button.addEventListener("click",()=>{
+      const index = Number(button.dataset.tileIndex);
+      const blank = tiles.indexOf(0);
+      if(!neighbours(blank).includes(index)) return;
+      [tiles[blank],tiles[index]]=[tiles[index],tiles[blank]];
+      audio.effect("place");
+      draw();
+      if(tiles.every((value,position)=>value === [1,2,3,4,5,6,7,8,0][position])) finish("Completaste o puzzle e colocaste todas as peças no lugar!");
+    }));
+  }
+  draw();
+}
+
+function drawSnowPrincess(context){
+  context.lineWidth=5; context.strokeStyle="#34243d"; context.lineCap="round"; context.lineJoin="round";
+  context.beginPath(); context.arc(280,150,62,0,Math.PI*2); context.stroke();
+  context.beginPath(); context.moveTo(230,130); context.quadraticCurveTo(280,70,335,130); context.quadraticCurveTo(315,105,280,110); context.quadraticCurveTo(245,105,230,130); context.stroke();
+  context.beginPath(); context.moveTo(245,90); context.lineTo(255,55); context.lineTo(280,82); context.lineTo(305,55); context.lineTo(318,92); context.stroke();
+  context.beginPath(); context.moveTo(250,205); context.lineTo(205,500); context.lineTo(355,500); context.lineTo(310,205); context.closePath(); context.stroke();
+  context.beginPath(); context.moveTo(250,245); context.lineTo(185,330); context.moveTo(310,245); context.lineTo(375,330); context.stroke();
+  [[105,115],[450,120],[120,420],[445,425]].forEach(([x,y])=>{context.beginPath();context.moveTo(x-18,y);context.lineTo(x+18,y);context.moveTo(x,y-18);context.lineTo(x,y+18);context.moveTo(x-13,y-13);context.lineTo(x+13,y+13);context.moveTo(x+13,y-13);context.lineTo(x-13,y+13);context.stroke();});
+}
+
+function drawOceanExplorer(context){
+  context.lineWidth=5; context.strokeStyle="#34243d"; context.lineCap="round"; context.lineJoin="round";
+  context.beginPath(); context.arc(280,150,60,0,Math.PI*2); context.stroke();
+  context.beginPath(); context.moveTo(225,145); context.quadraticCurveTo(215,70,280,80); context.quadraticCurveTo(350,75,340,165); context.stroke();
+  context.beginPath(); context.moveTo(245,210); context.lineTo(220,405); context.lineTo(340,405); context.lineTo(315,210); context.closePath(); context.stroke();
+  context.beginPath(); context.moveTo(245,250); context.lineTo(165,330); context.moveTo(315,250); context.lineTo(395,330); context.stroke();
+  context.beginPath(); context.moveTo(85,490); context.quadraticCurveTo(150,445,215,490); context.quadraticCurveTo(280,535,345,490); context.quadraticCurveTo(410,445,475,490); context.stroke();
+  context.beginPath(); context.moveTo(375,330); context.lineTo(430,370); context.lineTo(390,405); context.closePath(); context.stroke();
+}
+
+function drawBraveLion(context){
+  context.lineWidth=5; context.strokeStyle="#34243d"; context.lineCap="round"; context.lineJoin="round";
+  context.beginPath(); context.arc(280,275,145,0,Math.PI*2); context.stroke();
+  context.beginPath(); context.arc(280,275,93,0,Math.PI*2); context.stroke();
+  context.beginPath(); context.arc(245,255,8,0,Math.PI*2); context.arc(315,255,8,0,Math.PI*2); context.stroke();
+  context.beginPath(); context.moveTo(260,295); context.quadraticCurveTo(280,315,300,295); context.quadraticCurveTo(280,275,260,295); context.stroke();
+  context.beginPath(); context.moveTo(280,315); context.lineTo(280,345); context.quadraticCurveTo(250,365,225,340); context.moveTo(280,345); context.quadraticCurveTo(310,365,335,340); context.stroke();
+  context.beginPath(); context.moveTo(220,190); context.lineTo(190,145); context.lineTo(250,165); context.moveTo(340,190); context.lineTo(370,145); context.lineTo(310,165); context.stroke();
+}
+
+function drawRainbowFairy(context){
+  context.lineWidth=5; context.strokeStyle="#34243d"; context.lineCap="round"; context.lineJoin="round";
+  context.beginPath(); context.arc(280,145,58,0,Math.PI*2); context.stroke();
+  context.beginPath(); context.moveTo(235,115); context.quadraticCurveTo(280,55,330,115); context.stroke();
+  context.beginPath(); context.moveTo(250,205); context.lineTo(210,445); context.lineTo(350,445); context.lineTo(310,205); context.closePath(); context.stroke();
+  context.beginPath(); context.ellipse(185,270,70,115,-.55,0,Math.PI*2); context.ellipse(375,270,70,115,.55,0,Math.PI*2); context.stroke();
+  context.beginPath(); context.moveTo(335,235); context.lineTo(440,125); context.stroke();
+  context.beginPath(); context.arc(450,115,18,0,Math.PI*2); context.stroke();
+  for(let radius=70;radius<=140;radius+=24){context.beginPath();context.arc(280,540,radius,Math.PI,Math.PI*2);context.stroke();}
+}
+
+function startColoringActivity(root,world,finish){
+  const pages = [
+    {id:"snow",label:"Princesa Neve-Luz",draw:drawSnowPrincess},
+    {id:"ocean",label:"Exploradora do Oceano",draw:drawOceanExplorer},
+    {id:"lion",label:"Leão Corajoso",draw:drawBraveLion},
+    {id:"fairy",label:"Fada do Arco-Íris",draw:drawRainbowFairy}
+  ];
+  let page = pages[0];
+  let color = "#f062b2";
+  let brush = 20;
+  let drawing = false;
+  let strokes = 0;
+
+  root.innerHTML = `
+    <div class="coloring-toolbar">
+      <div class="page-buttons">${pages.map(item=>`<button data-color-page="${item.id}">${item.label}</button>`).join("")}</div>
+      <div class="color-palette">
+        ${["#f062b2","#8b5cf6","#3b82f6","#22c55e","#facc15","#f97316","#ef4444","#6b4423","#111827","#ffffff"].map(value=>`<button class="color-swatch" data-color="${value}" style="background:${value}" aria-label="Cor ${value}"></button>`).join("")}
+      </div>
+      <label class="brush-control">Tamanho do pincel <input id="brush-size" type="range" min="8" max="42" value="20"></label>
+      <button class="btn btn-secondary" id="clear-coloring">Limpar tela</button>
+    </div>
+    <div class="coloring-stage">
+      <canvas id="paint-canvas" width="560" height="620"></canvas>
+      <canvas id="outline-canvas" width="560" height="620"></canvas>
+    </div>
+    <button class="btn btn-primary" id="finish-coloring">Terminar desenho</button>
+  `;
+
+  const paint = root.querySelector("#paint-canvas");
+  const outline = root.querySelector("#outline-canvas");
+  const pctx = paint.getContext("2d");
+  const octx = outline.getContext("2d");
+
+  function resetPaint(){
+    pctx.fillStyle="#fff";
+    pctx.fillRect(0,0,paint.width,paint.height);
+    strokes = 0;
+  }
+  function drawOutline(){
+    octx.clearRect(0,0,outline.width,outline.height);
+    page.draw(octx);
+  }
+  function position(event){
+    const rect = paint.getBoundingClientRect();
+    return {x:(event.clientX-rect.left)*paint.width/rect.width,y:(event.clientY-rect.top)*paint.height/rect.height};
+  }
+  function drawPoint(event){
+    const point = position(event);
+    pctx.fillStyle=color;
+    pctx.beginPath();
+    pctx.arc(point.x,point.y,brush/2,0,Math.PI*2);
+    pctx.fill();
+    strokes++;
+  }
+  paint.addEventListener("pointerdown",event=>{drawing=true;paint.setPointerCapture(event.pointerId);drawPoint(event);});
+  paint.addEventListener("pointermove",event=>{if(drawing) drawPoint(event);});
+  paint.addEventListener("pointerup",()=>drawing=false);
+  paint.addEventListener("pointercancel",()=>drawing=false);
+  root.querySelectorAll("[data-color]").forEach(button=>button.addEventListener("click",()=>{
+    color=button.dataset.color;
+    root.querySelectorAll(".color-swatch").forEach(item=>item.classList.toggle("selected",item===button));
+  }));
+  root.querySelectorAll("[data-color-page]").forEach(button=>button.addEventListener("click",()=>{
+    page=pages.find(item=>item.id===button.dataset.colorPage) || pages[0];
+    resetPaint();
+    drawOutline();
+  }));
+  root.querySelector("#brush-size").addEventListener("input",event=>brush=Number(event.target.value));
+  root.querySelector("#clear-coloring").addEventListener("click",resetPaint);
+  root.querySelector("#finish-coloring").addEventListener("click",()=>{
+    if(strokes < 6){
+      root.querySelector("#finish-coloring").textContent="Pinta um pouco mais ✨";
+      setTimeout(()=>root.querySelector("#finish-coloring").textContent="Terminar desenho",800);
+      return;
+    }
+    finish(`Terminaste o desenho da ${page.label}!`);
+  });
+  resetPaint();
+  drawOutline();
+}
+
+function startCareActivity(root,world,finish){
+  const progress = {lamaWash:0,lamaDry:0,lamaComb:0,ninitaComb:0};
+  let tool = "sponge";
+  let pressing = false;
+  let lastAction = 0;
+
+  root.innerHTML = `
+    <div class="care-tools">
+      <button class="care-tool selected" data-care-tool="sponge">🧽 Lavar Lama</button>
+      <button class="care-tool" data-care-tool="towel">🧻 Secar Lama</button>
+      <button class="care-tool" data-care-tool="comb">🪮 Pentear</button>
+    </div>
+    <p class="mini-feedback" id="care-feedback">Escolhe uma ferramenta e passa-a sobre a personagem.</p>
+    <div class="care-characters">
+      <article class="care-character" data-care-character="lama">
+        <div class="care-avatar lama-avatar">🦙<span class="care-bubbles">🫧</span></div>
+        <h3>Lama</h3>
+        <label>Lavar <progress id="lama-wash" max="6" value="0"></progress></label>
+        <label>Secar <progress id="lama-dry" max="5" value="0"></progress></label>
+        <label>Pentear <progress id="lama-comb" max="6" value="0"></progress></label>
+      </article>
+      <article class="care-character" data-care-character="ninita">
+        <div class="care-avatar ninita-avatar">👧🏻</div>
+        <h3>Ninita</h3>
+        <label>Pentear <progress id="ninita-comb" max="6" value="0"></progress></label>
+      </article>
+    </div>
+  `;
+
+  function update(){
+    root.querySelector("#lama-wash").value=progress.lamaWash;
+    root.querySelector("#lama-dry").value=progress.lamaDry;
+    root.querySelector("#lama-comb").value=progress.lamaComb;
+    root.querySelector("#ninita-comb").value=progress.ninitaComb;
+    root.querySelector(".lama-avatar").classList.toggle("washed",progress.lamaWash>=6);
+    root.querySelector(".lama-avatar").classList.toggle("dry",progress.lamaDry>=5);
+    root.querySelector(".ninita-avatar").classList.toggle("combed",progress.ninitaComb>=6);
+    if(progress.lamaWash>=6 && progress.lamaDry>=5 && progress.lamaComb>=6 && progress.ninitaComb>=6){
+      finish("Lama ficou lavada e penteada, e Ninita ficou com o cabelo muito bonito!");
+    }
+  }
+  function apply(target){
+    const now=Date.now();
+    if(now-lastAction<110) return;
+    lastAction=now;
+    if(target==="lama" && tool==="sponge") progress.lamaWash=Math.min(6,progress.lamaWash+1);
+    else if(target==="lama" && tool==="towel" && progress.lamaWash>=3) progress.lamaDry=Math.min(5,progress.lamaDry+1);
+    else if(target==="lama" && tool==="comb") progress.lamaComb=Math.min(6,progress.lamaComb+1);
+    else if(target==="ninita" && tool==="comb") progress.ninitaComb=Math.min(6,progress.ninitaComb+1);
+    else root.querySelector("#care-feedback").textContent = target==="ninita" ? "Para a Ninita, escolhe o pente." : "Usa a esponja, a toalha ou o pente na ordem certa.";
+    audio.effect("place");
+    update();
+  }
+  root.querySelectorAll("[data-care-tool]").forEach(button=>button.addEventListener("click",()=>{
+    tool=button.dataset.careTool;
+    root.querySelectorAll(".care-tool").forEach(item=>item.classList.toggle("selected",item===button));
+  }));
+  root.querySelectorAll("[data-care-character]").forEach(card=>{
+    card.addEventListener("pointerdown",event=>{pressing=true;card.setPointerCapture(event.pointerId);apply(card.dataset.careCharacter);});
+    card.addEventListener("pointermove",()=>{if(pressing) apply(card.dataset.careCharacter);});
+    card.addEventListener("pointerup",()=>pressing=false);
+    card.addEventListener("pointercancel",()=>pressing=false);
+  });
+  update();
+}
+
+function startCookingActivity(root,world,finish){
+  const recipes = [
+    {id:"fruit",title:"Salada de fruta",emoji:"🍓",steps:["🍎","🍌","🍓","🥝"]},
+    {id:"soup",title:"Sopa de legumes",emoji:"🥣",steps:["🥕","🥔","🧅","💧"]},
+    {id:"sandwich",title:"Sanduíche saudável",emoji:"🥪",steps:["🍞","🧀","🥬","🍅","🍞"]}
+  ];
+  let recipe = recipes[0];
+  let step = 0;
+
+  root.innerHTML = `
+    <div class="recipe-choice">${recipes.map(item=>`<button data-recipe="${item.id}">${item.emoji} ${item.title}</button>`).join("")}</div>
+    <div class="cooking-counter">
+      <div class="cooking-bowl" id="cooking-bowl">🥣</div>
+      <h3 id="recipe-title"></h3>
+      <div class="recipe-steps" id="recipe-steps"></div>
+      <div class="ingredients" id="ingredients"></div>
+      <p class="mini-feedback" id="cooking-feedback"></p>
+    </div>
+  `;
+
+  function drawRecipe(){
+    step=0;
+    root.querySelector("#recipe-title").textContent=recipe.title;
+    root.querySelector("#recipe-steps").innerHTML=recipe.steps.map((item,index)=>`<span data-recipe-step="${index}">${index+1}. ${item}</span>`).join("");
+    root.querySelector("#ingredients").innerHTML=shuffleItems([...new Set(recipe.steps)]).map(item=>`<button class="ingredient" data-ingredient="${item}">${item}</button>`).join("");
+    root.querySelector("#cooking-feedback").textContent="Junta os ingredientes pela ordem apresentada.";
+    bindIngredients();
+  }
+  function bindIngredients(){
+    root.querySelectorAll("[data-ingredient]").forEach(button=>button.addEventListener("click",()=>{
+      const expected=recipe.steps[step];
+      if(button.dataset.ingredient===expected){
+        root.querySelector(`[data-recipe-step="${step}"]`).classList.add("done");
+        step++;
+        root.querySelector("#cooking-bowl").textContent=step===recipe.steps.length ? recipe.emoji : "🥣✨";
+        audio.effect("place");
+        if(step===recipe.steps.length){
+          root.querySelector("#ingredients").innerHTML='<button class="btn btn-primary" id="mix-recipe">Misturar e servir</button>';
+          root.querySelector("#mix-recipe").addEventListener("click",()=>finish(`Preparaste uma deliciosa ${recipe.title.toLowerCase()}!`));
+        }
+      }else{
+        button.classList.add("wrong");
+        root.querySelector("#cooking-feedback").textContent=`Agora precisamos de ${expected}.`;
+        setTimeout(()=>button.classList.remove("wrong"),350);
+      }
+    }));
+  }
+  root.querySelectorAll("[data-recipe]").forEach(button=>button.addEventListener("click",()=>{
+    recipe=recipes.find(item=>item.id===button.dataset.recipe) || recipes[0];
+    root.querySelectorAll("[data-recipe]").forEach(item=>item.classList.toggle("selected",item===button));
+    drawRecipe();
+  }));
+  drawRecipe();
+}
+
+function startFarmActivity(root,world,finish){
+  const animals = [
+    {id:"elephant",icon:"🐘",name:"Elefante",group:"Mamífero",food:"leaves",fact:"Os elefantes usam a tromba para agarrar folhas e beber água."},
+    {id:"monkey",icon:"🐒",name:"Macaco",group:"Mamífero",food:"banana",fact:"Os macacos comem frutos, folhas e outros alimentos variados."},
+    {id:"parrot",icon:"🦜",name:"Papagaio",group:"Ave",food:"seeds",fact:"Muitas aves usam o bico para partir sementes e frutos."},
+    {id:"flamingo",icon:"🦩",name:"Flamingo",group:"Ave",food:"shrimp",fact:"Os flamingos filtram pequenos animais e algas da água."},
+    {id:"tortoise",icon:"🐢",name:"Tartaruga",group:"Réptil",food:"lettuce",fact:"As tartarugas terrestres gostam de folhas e legumes adequados."},
+    {id:"lizard",icon:"🦎",name:"Lagarto",group:"Réptil",food:"insects",fact:"Muitos lagartos comem insetos e ajudam a controlar pequenas pragas."},
+    {id:"hen",icon:"🐔",name:"Galinha",group:"Ave",food:"corn",fact:"As galinhas debicam grãos no chão."},
+    {id:"rabbit",icon:"🐇",name:"Coelho",group:"Mamífero",food:"carrot",fact:"Os coelhos precisam sobretudo de feno e folhas; a cenoura é apenas um petisco."}
+  ];
+  const foods = [
+    {id:"leaves",icon:"🌿",name:"Folhas"},{id:"banana",icon:"🍌",name:"Banana"},
+    {id:"seeds",icon:"🌻",name:"Sementes"},{id:"shrimp",icon:"🦐",name:"Pequenos crustáceos"},
+    {id:"lettuce",icon:"🥬",name:"Folhas verdes"},{id:"insects",icon:"🪱",name:"Insetos"},
+    {id:"corn",icon:"🌽",name:"Grãos"},{id:"carrot",icon:"🥕",name:"Cenoura"}
+  ];
+  let selectedFood = null;
+  const fed = new Set();
+
+  root.innerHTML = `
+    <div class="mini-instruction">Primeiro escolhe a comida. Depois toca no animal certo.</div>
+    <div class="farm-foods">${foods.map(food=>`<button data-food="${food.id}"><span>${food.icon}</span>${food.name}</button>`).join("")}</div>
+    <p class="mini-feedback" id="farm-feedback">Escolhe um alimento.</p>
+    <div class="farm-animals">${animals.map(animal=>`
+      <button class="farm-animal" data-animal="${animal.id}">
+        <span class="farm-animal-icon">${animal.icon}</span>
+        <strong>${animal.name}</strong>
+        <small>${animal.group}</small>
+        <span class="fed-badge">Alimentado ✓</span>
+      </button>
+    `).join("")}</div>
+    <article class="animal-fact" id="animal-fact">Aqui vais aprender uma curiosidade sobre cada animal.</article>
+  `;
+
+  root.querySelectorAll("[data-food]").forEach(button=>button.addEventListener("click",()=>{
+    selectedFood=button.dataset.food;
+    root.querySelectorAll("[data-food]").forEach(item=>item.classList.toggle("selected",item===button));
+    root.querySelector("#farm-feedback").textContent=`Selecionaste ${foods.find(food=>food.id===selectedFood).name}. Agora escolhe o animal.`;
+  }));
+  root.querySelectorAll("[data-animal]").forEach(button=>button.addEventListener("click",()=>{
+    const animal=animals.find(item=>item.id===button.dataset.animal);
+    if(fed.has(animal.id)) return;
+    if(!selectedFood){
+      root.querySelector("#farm-feedback").textContent="Escolhe primeiro a comida.";
+      return;
+    }
+    if(selectedFood===animal.food){
+      fed.add(animal.id);
+      button.classList.add("fed");
+      root.querySelector("#animal-fact").innerHTML=`<strong>${animal.icon} ${animal.name}</strong><p>${animal.fact}</p>`;
+      root.querySelector("#farm-feedback").textContent=`Muito bem! Alimentaste ${animal.name}.`;
+      audio.effect("place");
+      if(fed.size===animals.length) finish("Alimentaste mamíferos, aves e répteis da quinta pedagógica!");
+    }else{
+      root.querySelector("#farm-feedback").textContent=`Esse alimento não é o indicado para ${animal.name}. Tenta outro.`;
+      button.classList.add("wrong");
+      setTimeout(()=>button.classList.remove("wrong"),400);
+    }
+  }));
+}
+
 
 // -------------------------------------------------------------
 // Progresso
@@ -223,6 +1016,13 @@ class AudioManager{
     if(route.name === "worlds" || route.name === "gallery") return "magicoLivre";
     if(route.name === "story") return "aventuraLivre";
 
+    if(route.name === "activities"){
+      return {
+        1:"magicoLivre",2:"cidadeLivre",3:"aventuraLivre",4:"tropicalLivre",5:"naturezaLivre",
+        6:"tropicalLivre",7:"naturezaLivre",8:"aventuraLivre",9:"cidadeLivre",10:"magicoLivre"
+      }[route.param] || "introAbertura";
+    }
+
     if(route.name === "level"){
       return {
         1:"magicoLivre",
@@ -299,6 +1099,7 @@ function destroyActiveGame(){
     activeGame.destroy();
     activeGame = null;
   }
+  closeActivityModal();
 }
 
 function render(name,param){
@@ -309,6 +1110,7 @@ function render(name,param){
   else if(name === "story") renderStory();
   else if(name === "gallery") renderGallery();
   else if(name === "level") renderLevel(param);
+  else if(name === "activities") renderActivityHub(param);
   else renderHome();
 
   window.scrollTo(0,0);
@@ -333,13 +1135,13 @@ function renderHome(){
         <button class="btn btn-secondary" data-action="story">📖 Ler a história</button>
         <button class="btn btn-secondary" data-action="gallery">🖼️ Ver cenários</button>
         <div class="progress-summary">
-          <strong>${progress.completed.length} de 10</strong>
+          <strong>${progress.completed.length} de ${worlds.length}</strong>
           <span>mundos concluídos</span>
         </div>
         <button class="btn btn-text danger" data-action="reset">↻ Recomeçar</button>
       </section>
 
-      <p class="footer-note">Dez mundos interativos com movimento, objetos, tarefas, música e efeitos.</p>
+      <p class="footer-note">Dez mundos interativos com desafios, atividades educativas, música e efeitos.</p>
     </main>
   `;
 }
@@ -348,7 +1150,7 @@ function renderWorlds(){
   const progress = loadProgress();
 
   app.innerHTML = `
-    ${topbar("Mapa dos Mundos","Todos os 10 mundos são agora interativos")}
+    ${topbar("Mapa dos Mundos","10 mundos interativos com novas atividades educativas")}
     <main class="content">
       <section class="world-grid">
         ${worlds.map(world=>{
@@ -1742,6 +2544,10 @@ function renderInteractiveWorld(world,configuration){
           <div class="lama-tip">
             Lama segue a Ninita e ajuda a encontrar cada missão.
           </div>
+
+          <button class="btn btn-activity-level" data-action="activities" data-world="${world.id}">
+            🎮 Atividades educativas deste nível
+          </button>
         </aside>
       </section>
     </main>
@@ -2738,12 +3544,18 @@ document.addEventListener("click",event=>{
   if(element.dataset.action === "story") routeTo("story");
   if(element.dataset.action === "gallery") routeTo("gallery");
   if(element.dataset.action === "reset") showResetDialog();
+  if(element.dataset.action === "activities") routeTo("activities",Number(element.dataset.world));
+  if(element.dataset.action === "return-level") routeTo("level",Number(element.dataset.world));
+
+  if(element.dataset.activity){
+    openActivity(Number(element.dataset.world),element.dataset.activity);
+  }
 
   if(element.dataset.action === "back"){
     history.length > 1 ? history.back() : routeTo("home");
   }
 
-  if(element.dataset.world && !element.disabled && !element.dataset.action){
+  if(element.dataset.world && !element.disabled && !element.dataset.action && !element.dataset.activity){
     routeTo("level",Number(element.dataset.world));
   }
 
