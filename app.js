@@ -31,8 +31,8 @@ const ACTIVITY_PROGRESS_KEY = "ninita-lama-activities-v3";
 
 const LEVEL_ACTIVITIES = {
   1:[
-    {id:"care",type:"care",icon:"🧴",title:"Salão da Ninita e de Lama",description:"Arrasta o balde, o secador e o pente para lavar, secar e pentear as duas personagens."},
-    {id:"maze-room",type:"maze",icon:"🌀",title:"Labirinto do Sonho",description:"Ajuda Ninita a encontrar a lua mágica no quarto."},
+    {id:"care",type:"care",icon:"🧴",title:"Salão da Ninita e de Lama",description:"Retira a esponja do balde e arrasta-a para lavar. Depois usa o secador e o pente, com sons reais e a música mais baixa."},
+    {id:"maze-room",type:"maze",icon:"🌀",title:"Ninita encontra Lama",description:"Move a Ninita pelo labirinto até encontrar Lama."},
     {id:"letter-room",type:"letter",icon:"🔠",title:"Caça às Letras",description:"Escolhe a letra inicial correta para cada objeto do quarto."},
     {id:"number-room",type:"number",icon:"🔢",title:"Contar Brinquedos",description:"Conta estrelas, livros e brinquedos e escolhe o número certo."},
     {id:"word-room",type:"word",icon:"🔤",title:"Palavras do Quarto",description:"Constrói palavras simples, letra a letra."},
@@ -42,7 +42,7 @@ const LEVEL_ACTIVITIES = {
   ],
   2:[
     {id:"cooking",type:"cooking",icon:"👩‍🍳",title:"Cozinhar na Casa das Surpresas",description:"Escolhe uma receita e junta os ingredientes pela ordem certa."},
-    {id:"maze-home",type:"maze",icon:"🌀",title:"Labirinto da Casa",description:"Leva Lama da sala até à cozinha."},
+    {id:"maze-home",type:"maze",icon:"🌀",title:"Labirinto da Casa Mágica",description:"Ajuda Ninita a encontrar a Família da Casa Mágica."},
     {id:"letter-home",type:"letter",icon:"🔠",title:"Letras da Casa",description:"Descobre as letras iniciais de objetos domésticos."},
     {id:"number-home",type:"number",icon:"🔢",title:"Contar na Cozinha",description:"Conta pratos, frutas e copos."},
     {id:"word-home",type:"word",icon:"🔤",title:"Palavras de Casa",description:"Constrói palavras letra a letra."},
@@ -56,13 +56,13 @@ const LEVEL_ACTIVITIES = {
     {id:"number-school",type:"number",icon:"🔢",title:"Contar Materiais",description:"Conta lápis, livros e réguas."},
     {id:"word-school",type:"word",icon:"✏️",title:"Letras da Escola",description:"Forma palavras, letra a letra."},
     {id:"math-school",type:"math",icon:"➕",title:"Adição e Subtração",description:"Resolve contas simples e ganha estrelas."},
-    {id:"maze-school",type:"maze",icon:"🌀",title:"Labirinto da Biblioteca",description:"Encontra o caminho até ao livro mágico."},
+    {id:"maze-school",type:"maze",icon:"🌀",title:"Labirinto da Princesa do Gelo",description:"Ajuda Ninita a encontrar a princesa entre os cristais."},
     {id:"memory-school",type:"memory",icon:"🎒",title:"Memória Escolar",description:"Combina materiais iguais."},
     {id:"puzzle-school",type:"puzzle",icon:"🧩",title:"Puzzle da Escola",description:"Completa o quadro escolar em peças."},
     {id:"color-school",type:"coloring",icon:"🎨",title:"Desenhos Mágicos",description:"Pinta princesas, fadas, castelos e unicórnios."}
   ],
   4:[
-    {id:"maze-beach",type:"maze",icon:"🌀",title:"Labirinto das Conchas",description:"Leva a tartaruga até ao mar."},
+    {id:"maze-beach",type:"maze",icon:"🌀",title:"Labirinto da Princesa do Oceano",description:"Ajuda Ninita a chegar à princesa junto ao mar."},
     {id:"letter-beach",type:"letter",icon:"🔠",title:"Letras da Praia",description:"Descobre a letra inicial de palavras do mar."},
     {id:"number-beach",type:"number",icon:"🔢",title:"Contar Conchas",description:"Conta conchas, peixes e estrelas-do-mar."},
     {id:"word-beach",type:"word",icon:"🔤",title:"Palavras da Praia",description:"Forma palavras sobre o mar, a areia e as férias."},
@@ -72,7 +72,7 @@ const LEVEL_ACTIVITIES = {
     {id:"memory-beach",type:"memory",icon:"🧠",title:"Memória do Oceano",description:"Encontra pares de animais e objetos marinhos."}
   ],
   5:[
-    {id:"maze-forest",type:"maze",icon:"🌿",title:"Labirinto da Floresta",description:"Encontra o caminho até à árvore brilhante."},
+    {id:"maze-forest",type:"maze",icon:"🌿",title:"Labirinto do Unicórnio",description:"Ajuda Ninita a encontrar o Unicórnio Arco-Íris."},
     {id:"letter-forest",type:"letter",icon:"🔠",title:"Letras da Natureza",description:"Escolhe a letra inicial de plantas e animais."},
     {id:"number-forest",type:"number",icon:"🔢",title:"Contar na Floresta",description:"Conta flores, folhas e borboletas."},
     {id:"word-forest",type:"word",icon:"🔤",title:"Palavras da Floresta",description:"Constrói palavras ligadas à natureza."},
@@ -81,7 +81,7 @@ const LEVEL_ACTIVITIES = {
     {id:"color-forest",type:"coloring",icon:"🖍️",title:"Ateliê Encantado",description:"Pinta páginas de magia gelada, fadas e unicórnios."}
   ],
   6:[
-    {id:"maze-pool",type:"maze",icon:"🏊",title:"Percurso Seguro",description:"Ajuda Lama a chegar à boia pelo caminho correto."},
+    {id:"maze-pool",type:"maze",icon:"🏊",title:"Labirinto do Unicórnio Estelar",description:"Ajuda Ninita a encontrar o unicórnio junto à piscina."},
     {id:"letter-pool",type:"letter",icon:"🔠",title:"Letras da Piscina",description:"Descobre as letras de objetos de água e verão."},
     {id:"number-pool",type:"number",icon:"🔢",title:"Contar Boias",description:"Conta boias, bolas e chapéus."},
     {id:"word-pool",type:"word",icon:"🔤",title:"Palavras da Piscina",description:"Forma palavras do mundo aquático."},
@@ -92,7 +92,7 @@ const LEVEL_ACTIVITIES = {
   ],
   7:[
     {id:"farm-feed",type:"farm",icon:"🐘",title:"Alimentar a Quinta Pedagógica",description:"Alimenta elefantes, macacos, aves, répteis e animais da quinta."},
-    {id:"maze-farm",type:"maze",icon:"🌀",title:"Labirinto dos Animais",description:"Ajuda Ninita a chegar ao celeiro."},
+    {id:"maze-farm",type:"maze",icon:"🌀",title:"Labirinto da Quinta",description:"Ajuda Ninita a encontrar Lama entre os animais."},
     {id:"letter-farm",type:"letter",icon:"🔠",title:"Letras dos Animais",description:"Escolhe a letra inicial de cada animal."},
     {id:"number-farm",type:"number",icon:"🔢",title:"Contar Animais",description:"Conta aves, coelhos, macacos e tartarugas."},
     {id:"word-farm",type:"word",icon:"🔤",title:"Nomes dos Animais",description:"Constrói os nomes letra a letra."},
@@ -101,7 +101,7 @@ const LEVEL_ACTIVITIES = {
     {id:"color-farm",type:"coloring",icon:"🎨",title:"Animais e Unicórnios",description:"Pinta animais, princesas e unicórnios."}
   ],
   8:[
-    {id:"maze-park",type:"maze",icon:"🎠",title:"Labirinto do Parque",description:"Chega ao carrossel sem tocar nos caminhos fechados."},
+    {id:"maze-park",type:"maze",icon:"🎠",title:"Labirinto do Castelo",description:"Ajuda Ninita a encontrar o Castelo Encantado."},
     {id:"letter-park",type:"letter",icon:"🔠",title:"Letras do Parque",description:"Reconhece as letras dos brinquedos."},
     {id:"number-park",type:"number",icon:"🔢",title:"Contar Brinquedos",description:"Conta bolas, bilhetes e balões."},
     {id:"word-park",type:"word",icon:"🔤",title:"Palavras da Diversão",description:"Forma palavras do parque."},
@@ -111,7 +111,7 @@ const LEVEL_ACTIVITIES = {
     {id:"color-park",type:"coloring",icon:"🎨",title:"Festa de Princesas e Unicórnios",description:"Pinta páginas de fantasia e diversão."}
   ],
   9:[
-    {id:"maze-city",type:"maze",icon:"🌀",title:"Labirinto da Cidade",description:"Ajuda Ninita a chegar à praça colorida."},
+    {id:"maze-city",type:"maze",icon:"🌀",title:"Labirinto da Princesa da Torre",description:"Ajuda Ninita a encontrar a princesa na cidade."},
     {id:"letter-city",type:"letter",icon:"🔠",title:"Letras da Cidade",description:"Escolhe a letra inicial de lojas e transportes."},
     {id:"number-city",type:"number",icon:"🔢",title:"Contar na Cidade",description:"Conta carros, sinais e edifícios."},
     {id:"word-city",type:"word",icon:"🏙️",title:"Palavras da Cidade",description:"Constrói palavras ligadas à comunidade."},
@@ -120,7 +120,7 @@ const LEVEL_ACTIVITIES = {
     {id:"color-city",type:"coloring",icon:"🎨",title:"Galeria Mágica",description:"Escolhe uma princesa, uma fada ou um unicórnio e pinta livremente."}
   ],
   10:[
-    {id:"maze-rainbow",type:"maze",icon:"🌀",title:"Labirinto do Arco-Íris",description:"Encontra a última estrela da aventura."},
+    {id:"maze-rainbow",type:"maze",icon:"🌀",title:"Labirinto Final dos Unicórnios",description:"Ajuda Ninita a encontrar o Unicórnio Arco-Íris."},
     {id:"letter-rainbow",type:"letter",icon:"🔠",title:"Letras Mágicas",description:"Descobre as letras iniciais do mundo final."},
     {id:"number-rainbow",type:"number",icon:"🔢",title:"Contar Estrelas",description:"Conta estrelas, nuvens, cristais e unicórnios."},
     {id:"word-rainbow",type:"word",icon:"🔤",title:"Palavras Mágicas",description:"Constrói palavras do mundo final."},
@@ -198,7 +198,7 @@ function renderActivityHub(worldId){
 
       <section class="activity-note card">
         <h3>Desenhos para colorir</h3>
-        <p>As páginas de pintura incluem personagens originais inspiradas em contos mágicos de gelo, aventuras do mar, fadas, unicórnios e castelos encantados. Não usam personagens oficiais da Disney, mas mantêm um ambiente semelhante de fantasia infantil.</p>
+        <p>As páginas incluem imagens completas e contornos para pintar: Princesa do Gelo, Família da Casa Mágica, Princesa do Oceano, Princesa da Torre, fadas, castelos e unicórnios. São ilustrações originais de fantasia familiar.</p>
       </section>
 
       <button class="btn btn-primary activity-return" data-action="return-level" data-world="${world.id}">
@@ -658,50 +658,113 @@ function startMazeActivity(root,world,finish){
   const cells = makeMaze(size);
   let player = 0;
   const goal = size*size-1;
-  const hero = world.id === 4 ? "🐢" : world.id === 6 ? "🦙" : world.id === 7 ? "🐇" : "👧🏻";
-  const destination = ({1:"🌙",2:"🍳",3:"📘",4:"🌊",5:"🌳",6:"🛟",7:"🏡",8:"🎠",9:"⛲",10:"⭐"})[world.id] || "⭐";
+
+  const destinations = {
+    1:{label:"Lama",image:"./assets/images/activities/lama-labirinto.jpg"},
+    2:{label:"a Família da Casa Mágica",image:"./assets/images/activities/familia-casa-magica.jpg"},
+    3:{label:"a Princesa do Gelo",image:"./assets/images/activities/princesa-gelo.jpg"},
+    4:{label:"a Princesa do Oceano",image:"./assets/images/activities/princesa-oceano.jpg"},
+    5:{label:"o Unicórnio Arco-Íris",image:"./assets/images/activities/unicornio-arcoiris.jpg"},
+    6:{label:"o Unicórnio Estelar",image:"./assets/images/activities/unicornio-estelar.jpg"},
+    7:{label:"Lama",image:"./assets/images/activities/lama-labirinto.jpg"},
+    8:{label:"o Castelo Encantado",image:"./assets/images/activities/castelo-encantado.jpg"},
+    9:{label:"a Princesa da Torre",image:"./assets/images/activities/princesa-torre.jpg"},
+    10:{label:"o Unicórnio Arco-Íris",image:"./assets/images/activities/unicornio-arcoiris.jpg"}
+  };
+
+  const destination = destinations[world.id] || destinations[1];
+  const heroImage = "./assets/images/activities/ninita-labirinto.jpg";
 
   root.innerHTML = `
-    <div class="mini-instruction">Usa as setas para chegar ao destino.</div>
-    <div class="maze-board" id="maze-board" style="--maze-size:${size}"></div>
-    <div class="maze-controls">
-      <button data-maze="up">↑</button>
-      <div><button data-maze="left">←</button><button data-maze="down">↓</button><button data-maze="right">→</button></div>
+    <div class="maze-story">
+      <div class="maze-story-person">
+        <img src="${heroImage}" alt="Ninita">
+        <strong>Ninita</strong>
+      </div>
+      <div>
+        <span class="maze-story-arrow">➡</span>
+        <p>Ajuda a Ninita a encontrar <strong>${destination.label}</strong>.</p>
+        <small>Usa as setas do ecrã ou do teclado.</small>
+      </div>
+      <div class="maze-story-person">
+        <img src="${destination.image}" alt="${destination.label}">
+        <strong>${destination.label}</strong>
+      </div>
+    </div>
+
+    <div class="maze-board maze-board-picture" id="maze-board"
+         style="--maze-size:${size};--maze-bg:url('./assets/images/activities/fundo-labirinto.jpg')"></div>
+
+    <div class="maze-controls" aria-label="Controlos do labirinto">
+      <button data-maze="up" aria-label="Subir">↑</button>
+      <div>
+        <button data-maze="left" aria-label="Esquerda">←</button>
+        <button data-maze="down" aria-label="Descer">↓</button>
+        <button data-maze="right" aria-label="Direita">→</button>
+      </div>
     </div>
   `;
 
   function draw(){
     root.querySelector("#maze-board").innerHTML = cells.map((cell,index)=>{
       const [top,right,bottom,left] = cell.walls;
-      const content = index === player ? hero : index === goal ? destination : "";
-      return `<div class="maze-cell" style="border-top:${top?'3px':'0'} solid #6b3d7d;border-right:${right?'3px':'0'} solid #6b3d7d;border-bottom:${bottom?'3px':'0'} solid #6b3d7d;border-left:${left?'3px':'0'} solid #6b3d7d">${content}</div>`;
+      let content = "";
+      if(index === player){
+        content = `<img class="maze-character maze-hero" src="${heroImage}" alt="Ninita">`;
+      }else if(index === goal){
+        content = `<img class="maze-character maze-goal" src="${destination.image}" alt="${destination.label}">`;
+      }
+
+      return `<div class="maze-cell" style="
+        border-top:${top?'3px':'0'} solid #61316f;
+        border-right:${right?'3px':'0'} solid #61316f;
+        border-bottom:${bottom?'3px':'0'} solid #61316f;
+        border-left:${left?'3px':'0'} solid #61316f
+      ">${content}</div>`;
     }).join("");
   }
 
   function move(direction){
     const map = {up:0,right:1,down:2,left:3};
     const wallIndex = map[direction];
+
     if(cells[player].walls[wallIndex]){
       audio.effect("click");
+      root.querySelector("#maze-board").classList.add("maze-bump");
+      setTimeout(()=>root.querySelector("#maze-board")?.classList.remove("maze-bump"),180);
       return;
     }
+
     if(direction === "up") player -= size;
     if(direction === "right") player += 1;
     if(direction === "down") player += size;
     if(direction === "left") player -= 1;
+
     draw();
     audio.effect("place");
-    if(player === goal) finish("Encontraste a saída do labirinto!");
+
+    if(player === goal){
+      finish(`A Ninita encontrou ${destination.label}!`);
+    }
   }
 
-  root.querySelectorAll("[data-maze]").forEach(button=>button.addEventListener("click",()=>move(button.dataset.maze)));
+  root.querySelectorAll("[data-maze]").forEach(button=>{
+    button.addEventListener("click",()=>move(button.dataset.maze));
+  });
+
   const keyHandler = event=>{
-    const direction = {ArrowUp:"up",ArrowRight:"right",ArrowDown:"down",ArrowLeft:"left"}[event.key];
+    const direction = {
+      ArrowUp:"up",ArrowRight:"right",ArrowDown:"down",ArrowLeft:"left",
+      w:"up",d:"right",s:"down",a:"left",
+      W:"up",D:"right",S:"down",A:"left"
+    }[event.key];
+
     if(direction){
       event.preventDefault();
       move(direction);
     }
   };
+
   window.addEventListener("keydown",keyHandler);
   activeActivityModal._cleanup = ()=>window.removeEventListener("keydown",keyHandler);
   draw();
@@ -850,89 +913,253 @@ function drawStarUnicorn(context){
 
 function startColoringActivity(root,world,finish){
   const pages = [
-    {id:"ice-princess",label:"Princesa do Gelo",draw:drawIcePrincess},
-    {id:"sea-princess",label:"Princesa do Mar",draw:drawSeaPrincess},
-    {id:"tower-princess",label:"Princesa da Torre",draw:drawTowerPrincess},
-    {id:"ball-princess",label:"Princesa do Baile",draw:drawBallPrincess},
-    {id:"fairy",label:"Fada do Arco-Íris",draw:drawRainbowFairy},
-    {id:"unicorn",label:"Unicórnio Arco-Íris",draw:drawUnicorn},
-    {id:"star-unicorn",label:"Unicórnio Estelar",draw:drawStarUnicorn},
-    {id:"lion",label:"Leão Corajoso",draw:drawBraveLion},
-    {id:"castle",label:"Castelo Mágico",draw:drawCastle}
+    {
+      id:"ice-princess",
+      label:"Princesa do Gelo",
+      subtitle:"Magia de neve e cristais",
+      image:"./assets/images/activities/princesa-gelo.jpg",
+      outline:"./assets/images/activities/princesa-gelo-contorno.png"
+    },
+    {
+      id:"magic-family",
+      label:"Família da Casa Mágica",
+      subtitle:"Uma família original cheia de dons",
+      image:"./assets/images/activities/familia-casa-magica.jpg",
+      outline:"./assets/images/activities/familia-casa-magica-contorno.png"
+    },
+    {
+      id:"sea-princess",
+      label:"Princesa do Oceano",
+      subtitle:"Coragem, mar e aventura",
+      image:"./assets/images/activities/princesa-oceano.jpg",
+      outline:"./assets/images/activities/princesa-oceano-contorno.png"
+    },
+    {
+      id:"tower-princess",
+      label:"Princesa da Torre",
+      subtitle:"Luzes, flores e cabelos longos",
+      image:"./assets/images/activities/princesa-torre.jpg",
+      outline:"./assets/images/activities/princesa-torre-contorno.png"
+    },
+    {
+      id:"rainbow-unicorn",
+      label:"Unicórnio Arco-Íris",
+      subtitle:"Cores e fantasia",
+      image:"./assets/images/activities/unicornio-arcoiris.jpg",
+      outline:"./assets/images/activities/unicornio-arcoiris-contorno.png"
+    },
+    {
+      id:"star-unicorn",
+      label:"Unicórnio Estelar",
+      subtitle:"Uma viagem entre as estrelas",
+      image:"./assets/images/activities/unicornio-estelar.jpg",
+      outline:"./assets/images/activities/unicornio-estelar-contorno.png"
+    },
+    {
+      id:"rainbow-fairy",
+      label:"Fada do Arco-Íris",
+      subtitle:"Asas mágicas e amizade",
+      image:"./assets/images/activities/fada-arcoiris.jpg",
+      outline:"./assets/images/activities/fada-arcoiris-contorno.png"
+    },
+    {
+      id:"castle",
+      label:"Castelo Encantado",
+      subtitle:"O grande reino da imaginação",
+      image:"./assets/images/activities/castelo-encantado.jpg",
+      outline:"./assets/images/activities/castelo-encantado-contorno.png"
+    }
   ];
+
   let page = pages[0];
   let color = "#f062b2";
-  let brush = 20;
+  let brush = 28;
   let drawing = false;
   let strokes = 0;
+  let previousPoint = null;
 
   root.innerHTML = `
-    <div class="coloring-toolbar">
-      <div class="page-buttons">${pages.map(item=>`<button data-color-page="${item.id}">${item.label}</button>`).join("")}</div>
-      <div class="color-palette">
-        ${["#f062b2","#8b5cf6","#3b82f6","#22c55e","#facc15","#f97316","#ef4444","#6b4423","#111827","#ffffff"].map(value=>`<button class="color-swatch" data-color="${value}" style="background:${value}" aria-label="Cor ${value}"></button>`).join("")}
-      </div>
-      <label class="brush-control">Tamanho do pincel <input id="brush-size" type="range" min="8" max="42" value="20"></label>
-      <button class="btn btn-secondary" id="clear-coloring">Limpar tela</button>
+    <div class="coloring-picture-picker" id="coloring-picture-picker">
+      ${pages.map(item=>`
+        <button class="coloring-picture-button" data-color-page="${item.id}">
+          <img src="${item.image}" alt="${item.label}">
+          <span>${item.label}</span>
+        </button>
+      `).join("")}
     </div>
-    <div class="coloring-stage">
-      <canvas id="paint-canvas" width="560" height="620"></canvas>
-      <canvas id="outline-canvas" width="560" height="620"></canvas>
+
+    <div class="coloring-workspace">
+      <aside class="coloring-reference-card">
+        <img id="coloring-reference-image" src="${page.image}" alt="${page.label}">
+        <h3 id="coloring-reference-title">${page.label}</h3>
+        <p id="coloring-reference-subtitle">${page.subtitle}</p>
+        <small>Observa a imagem colorida e pinta o desenho ao teu gosto.</small>
+      </aside>
+
+      <section>
+        <div class="coloring-toolbar">
+          <div class="color-palette" aria-label="Paleta completa de cores">
+            ${[
+              "#f062b2","#ff9ac9","#8b5cf6","#5b36c9","#3b82f6","#38bdf8",
+              "#22c55e","#86d64b","#facc15","#f59e0b","#f97316","#ef4444",
+              "#9f5233","#6b4423","#111827","#64748b","#ffffff"
+            ].map(value=>`
+              <button class="color-swatch" data-color="${value}" style="background:${value}" aria-label="Cor ${value}"></button>
+            `).join("")}
+          </div>
+
+          <div class="coloring-controls-row">
+            <label class="brush-control">
+              Tamanho do pincel
+              <input id="brush-size" type="range" min="10" max="65" value="28">
+            </label>
+            <button class="btn btn-secondary" id="clear-coloring">Limpar tela</button>
+          </div>
+        </div>
+
+        <div class="coloring-stage coloring-stage-picture">
+          <canvas id="paint-canvas" width="768" height="1024"></canvas>
+          <img id="outline-image" class="coloring-outline-image" src="${page.outline}" alt="Contorno para colorir">
+        </div>
+
+        <button class="btn btn-primary" id="finish-coloring">Terminar desenho</button>
+      </section>
     </div>
-    <button class="btn btn-primary" id="finish-coloring">Terminar desenho</button>
   `;
 
   const paint = root.querySelector("#paint-canvas");
-  const outline = root.querySelector("#outline-canvas");
   const pctx = paint.getContext("2d");
-  const octx = outline.getContext("2d");
 
   function resetPaint(){
-    pctx.fillStyle="#fff";
-    pctx.fillRect(0,0,paint.width,paint.height);
+    pctx.clearRect(0,0,paint.width,paint.height);
     strokes = 0;
   }
-  function drawOutline(){
-    octx.clearRect(0,0,outline.width,outline.height);
-    page.draw(octx);
-  }
+
   function position(event){
     const rect = paint.getBoundingClientRect();
-    return {x:(event.clientX-rect.left)*paint.width/rect.width,y:(event.clientY-rect.top)*paint.height/rect.height};
+    return {
+      x:(event.clientX-rect.left)*paint.width/rect.width,
+      y:(event.clientY-rect.top)*paint.height/rect.height
+    };
   }
-  function drawPoint(event){
-    const point = position(event);
-    pctx.fillStyle=color;
-    pctx.beginPath();
-    pctx.arc(point.x,point.y,brush/2,0,Math.PI*2);
-    pctx.fill();
+
+  function drawTo(point){
+    pctx.lineCap = "round";
+    pctx.lineJoin = "round";
+    pctx.strokeStyle = color;
+    pctx.fillStyle = color;
+    pctx.lineWidth = brush;
+
+    if(previousPoint){
+      pctx.beginPath();
+      pctx.moveTo(previousPoint.x,previousPoint.y);
+      pctx.lineTo(point.x,point.y);
+      pctx.stroke();
+    }else{
+      pctx.beginPath();
+      pctx.arc(point.x,point.y,brush/2,0,Math.PI*2);
+      pctx.fill();
+    }
+
+    previousPoint = point;
     strokes++;
   }
-  paint.addEventListener("pointerdown",event=>{drawing=true;paint.setPointerCapture(event.pointerId);drawPoint(event);});
-  paint.addEventListener("pointermove",event=>{if(drawing) drawPoint(event);});
-  paint.addEventListener("pointerup",()=>drawing=false);
-  paint.addEventListener("pointercancel",()=>drawing=false);
-  root.querySelectorAll("[data-color]").forEach(button=>button.addEventListener("click",()=>{
-    color=button.dataset.color;
-    root.querySelectorAll(".color-swatch").forEach(item=>item.classList.toggle("selected",item===button));
-  }));
-  root.querySelectorAll("[data-color-page]").forEach(button=>button.addEventListener("click",()=>{
-    page=pages.find(item=>item.id===button.dataset.colorPage) || pages[0];
-    resetPaint();
-    drawOutline();
-  }));
-  root.querySelector("#brush-size").addEventListener("input",event=>brush=Number(event.target.value));
+
+  paint.addEventListener("pointerdown",event=>{
+    drawing = true;
+    previousPoint = null;
+    paint.setPointerCapture(event.pointerId);
+    drawTo(position(event));
+  });
+
+  paint.addEventListener("pointermove",event=>{
+    if(drawing) drawTo(position(event));
+  });
+
+  const stopDrawing = ()=>{
+    drawing = false;
+    previousPoint = null;
+  };
+
+  paint.addEventListener("pointerup",stopDrawing);
+  paint.addEventListener("pointercancel",stopDrawing);
+  paint.addEventListener("pointerleave",event=>{
+    if(event.buttons === 0) stopDrawing();
+  });
+
+  root.querySelectorAll("[data-color]").forEach(button=>{
+    button.addEventListener("click",()=>{
+      color = button.dataset.color;
+      root.querySelectorAll(".color-swatch").forEach(item=>{
+        item.classList.toggle("selected",item === button);
+      });
+    });
+  });
+
+  root.querySelectorAll("[data-color-page]").forEach(button=>{
+    button.addEventListener("click",()=>{
+      page = pages.find(item=>item.id === button.dataset.colorPage) || pages[0];
+
+      root.querySelector("#coloring-reference-image").src = page.image;
+      root.querySelector("#coloring-reference-image").alt = page.label;
+      root.querySelector("#coloring-reference-title").textContent = page.label;
+      root.querySelector("#coloring-reference-subtitle").textContent = page.subtitle;
+      root.querySelector("#outline-image").src = page.outline;
+
+      root.querySelectorAll(".coloring-picture-button").forEach(item=>{
+        item.classList.toggle("selected",item === button);
+      });
+
+      resetPaint();
+      audio.effect("click");
+    });
+  });
+
+  root.querySelector(".coloring-picture-button")?.classList.add("selected");
+  root.querySelector(".color-swatch")?.classList.add("selected");
+
+  root.querySelector("#brush-size").addEventListener("input",event=>{
+    brush = Number(event.target.value);
+  });
+
   root.querySelector("#clear-coloring").addEventListener("click",resetPaint);
+
   root.querySelector("#finish-coloring").addEventListener("click",()=>{
-    if(strokes < 6){
-      root.querySelector("#finish-coloring").textContent="Pinta um pouco mais ✨";
-      setTimeout(()=>root.querySelector("#finish-coloring").textContent="Terminar desenho",800);
+    if(strokes < 15){
+      root.querySelector("#finish-coloring").textContent = "Pinta um pouco mais ✨";
+      setTimeout(()=>{
+        const button = root.querySelector("#finish-coloring");
+        if(button) button.textContent = "Terminar desenho";
+      },850);
       return;
     }
-    finish(`Terminaste o desenho da ${page.label}!`);
+
+    finish(`Terminaste o desenho: ${page.label}!`);
   });
+
   resetPaint();
-  drawOutline();
+}
+
+function careSpongeSvg(){
+  return `<svg viewBox="0 0 190 150" aria-hidden="true">
+    <defs>
+      <linearGradient id="spongeYellow" x1="0" y1="0" x2="1" y2="1">
+        <stop stop-color="#fff9a8"/>
+        <stop offset=".6" stop-color="#f6ca39"/>
+        <stop offset="1" stop-color="#e59c19"/>
+      </linearGradient>
+    </defs>
+    <path d="M30 42q0-18 18-18h92q20 0 20 19v62q0 21-20 21H49q-19 0-19-20z"
+          fill="url(#spongeYellow)" stroke="#8d641a" stroke-width="5"/>
+    <g fill="#c99821" opacity=".62">
+      <circle cx="58" cy="54" r="7"/><circle cx="90" cy="45" r="6"/>
+      <circle cx="128" cy="58" r="8"/><circle cx="69" cy="92" r="8"/>
+      <circle cx="112" cy="99" r="6"/><circle cx="142" cy="86" r="5"/>
+    </g>
+    <path d="M38 103q56 22 114 0" fill="none" stroke="#48b7df" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="40" cy="25" r="10" fill="#a8edff" opacity=".9"/>
+    <circle cx="65" cy="18" r="8" fill="#d9f8ff" opacity=".95"/>
+  </svg>`;
 }
 
 function careBucketSvg(){
@@ -960,39 +1187,98 @@ function startCareActivity(root,world,finish){
     lamaWash:0,lamaDry:0,lamaComb:0,
     ninitaWash:0,ninitaDry:0,ninitaComb:0
   };
-  let selectedTool = "bucket";
+
+  const maximum = 5;
+  let selectedTool = "sponge";
   let dragCleanup = null;
   let completed = false;
+  let lastAppliedAt = 0;
+  let currentTarget = null;
 
   const tools = [
-    {id:"bucket",name:"Balde com água",svg:careBucketSvg(),instruction:"Arrasta o balde para lavar."},
-    {id:"dryer",name:"Secador",svg:careDryerSvg(),instruction:"Depois de lavar, arrasta o secador para secar."},
-    {id:"comb",name:"Pente",svg:careCombSvg(),instruction:"Depois de secar, arrasta o pente para pentear."}
+    {
+      id:"sponge",
+      sound:"spongeWash",
+      name:"Esponja molhada",
+      svg:careSpongeSvg(),
+      instruction:"Agarra a esponja que está no balde e passa-a sobre Lama ou Ninita."
+    },
+    {
+      id:"dryer",
+      sound:"hairDryer",
+      name:"Secador",
+      svg:careDryerSvg(),
+      instruction:"Depois de lavar, agarra o secador e move-o sobre a personagem."
+    },
+    {
+      id:"comb",
+      sound:"combBrush",
+      name:"Pente",
+      svg:careCombSvg(),
+      instruction:"Depois de secar, agarra o pente e passa-o pelo cabelo ou pelo pelo."
+    }
   ];
 
   root.innerHTML = `
-    <div class="care-salon">
-      <div class="care-tool-shelf" aria-label="Utensílios para cuidar das personagens">
-        ${tools.map(tool=>`<button class="care-tool-object ${tool.id==="bucket"?"selected":""}" data-care-tool="${tool.id}" aria-label="${tool.name}"><span class="care-tool-art">${tool.svg}</span><strong>${tool.name}</strong><small>Arrastar</small></button>`).join("")}
+    <div class="care-salon care-salon-real">
+      <div class="care-bath-station">
+        <div class="care-bucket-station">
+          <span class="care-bucket-art">${careBucketSvg()}</span>
+          <div>
+            <strong>Balde com água e espuma</strong>
+            <small>A esponja está dentro do balde. Agarra-a para começar.</small>
+          </div>
+        </div>
+
+        <div class="care-tool-shelf care-tool-shelf-four" aria-label="Utensílios para cuidar das personagens">
+          ${tools.map(tool=>`
+            <button class="care-tool-object ${tool.id==="sponge"?"selected":""}"
+                    data-care-tool="${tool.id}" aria-label="${tool.name}">
+              <span class="care-tool-art">${tool.svg}</span>
+              <strong>${tool.name}</strong>
+              <small>Agarrar e mover</small>
+            </button>
+          `).join("")}
+        </div>
       </div>
-      <p class="mini-feedback" id="care-feedback">Arrasta primeiro o balde para Lama ou Ninita. Também podes selecionar o utensílio e tocar na personagem.</p>
+
+      <p class="mini-feedback care-sound-hint" id="care-feedback">
+        Agarra a esponja do balde e move-a sobre Lama ou Ninita.
+        Enquanto usas um utensílio, a música baixa automaticamente para ouvires o som.
+      </p>
+
       <div class="care-stage">
         <article class="care-person" data-care-target="lama">
-          <div class="care-figure">${careLamaSvg()}<span class="care-water-effect">💦</span><span class="care-bubble-effect">🫧</span><span class="care-shine-effect">✨</span></div>
+          <div class="care-figure">
+            ${careLamaSvg()}
+            <span class="care-water-effect">💦</span>
+            <span class="care-bubble-effect">🫧</span>
+            <span class="care-air-effect">💨</span>
+            <span class="care-comb-effect">〰️</span>
+            <span class="care-shine-effect">✨</span>
+          </div>
           <h3>Lama</h3>
           <div class="care-progress-list">
-            <label><span>🪣 Lavar</span><progress id="lama-wash" max="3" value="0"></progress></label>
-            <label><span>💨 Secar</span><progress id="lama-dry" max="3" value="0"></progress></label>
-            <label><span>🪮 Pentear</span><progress id="lama-comb" max="3" value="0"></progress></label>
+            <label><span>🧽 Lavar</span><progress id="lama-wash" max="${maximum}" value="0"></progress></label>
+            <label><span>💨 Secar</span><progress id="lama-dry" max="${maximum}" value="0"></progress></label>
+            <label><span>🪮 Pentear</span><progress id="lama-comb" max="${maximum}" value="0"></progress></label>
           </div>
         </article>
+
         <article class="care-person" data-care-target="ninita">
-          <div class="care-figure">${careNinitaSvg()}<span class="care-water-effect">💦</span><span class="care-bubble-effect">🫧</span><span class="care-shine-effect">✨</span></div>
+          <div class="care-figure">
+            ${careNinitaSvg()}
+            <span class="care-water-effect">💦</span>
+            <span class="care-bubble-effect">🫧</span>
+            <span class="care-air-effect">💨</span>
+            <span class="care-comb-effect">〰️</span>
+            <span class="care-shine-effect">✨</span>
+          </div>
           <h3>Ninita</h3>
           <div class="care-progress-list">
-            <label><span>🪣 Lavar</span><progress id="ninita-wash" max="3" value="0"></progress></label>
-            <label><span>💨 Secar</span><progress id="ninita-dry" max="3" value="0"></progress></label>
-            <label><span>🪮 Pentear</span><progress id="ninita-comb" max="3" value="0"></progress></label>
+            <label><span>🧽 Lavar</span><progress id="ninita-wash" max="${maximum}" value="0"></progress></label>
+            <label><span>💨 Secar</span><progress id="ninita-dry" max="${maximum}" value="0"></progress></label>
+            <label><span>🪮 Pentear</span><progress id="ninita-comb" max="${maximum}" value="0"></progress></label>
           </div>
         </article>
       </div>
@@ -1005,128 +1291,202 @@ function startCareActivity(root,world,finish){
       : {wash:"ninitaWash",dry:"ninitaDry",comb:"ninitaComb"};
   }
 
+  function toolInfo(toolId){
+    return tools.find(item=>item.id === toolId) || tools[0];
+  }
+
   function update(){
     for(const target of ["lama","ninita"]){
       const keys = keysFor(target);
       root.querySelector(`#${target}-wash`).value = progress[keys.wash];
       root.querySelector(`#${target}-dry`).value = progress[keys.dry];
       root.querySelector(`#${target}-comb`).value = progress[keys.comb];
+
       const card = root.querySelector(`[data-care-target="${target}"]`);
-      card.classList.toggle("is-wet",progress[keys.wash]>0 && progress[keys.dry]<3);
-      card.classList.toggle("is-washed",progress[keys.wash]>=3);
-      card.classList.toggle("is-dry",progress[keys.dry]>=3);
-      card.classList.toggle("is-combed",progress[keys.comb]>=3);
+      card.classList.toggle("is-wet",progress[keys.wash]>0 && progress[keys.dry]<maximum);
+      card.classList.toggle("is-washed",progress[keys.wash]>=maximum);
+      card.classList.toggle("is-dry",progress[keys.dry]>=maximum);
+      card.classList.toggle("is-combed",progress[keys.comb]>=maximum);
+      card.dataset.activeTool = currentTarget === target ? selectedTool : "";
     }
-    if(!completed && Object.values(progress).every(value=>value>=3)){
+
+    if(!completed && Object.values(progress).every(value=>value>=maximum)){
       completed = true;
-      finish("Arrastaste o balde, o secador e o pente. Lama e Ninita ficaram lavadas, secas e muito bem penteadas!");
+      audio.stopLoopEffect();
+      finish("Lavaste com a esponja, secaste com o secador e penteaste Lama e Ninita!");
     }
   }
 
-  function applyTool(target,tool){
+  function applyTool(target,tool,continuous=false){
     if(!target || !tool || completed) return;
+
+    const now = performance.now();
+    if(continuous && now-lastAppliedAt < 320) return;
+    lastAppliedAt = now;
+
     const keys = keysFor(target);
     const name = target === "lama" ? "Lama" : "Ninita";
     const feedback = root.querySelector("#care-feedback");
 
-    if(tool === "bucket"){
-      if(progress[keys.wash] < 3){
+    if(tool === "sponge"){
+      if(progress[keys.wash] < maximum){
         progress[keys.wash]++;
-        feedback.textContent = `A lavar ${name} com o balde e água. Passagem ${progress[keys.wash]} de 3.`;
+        feedback.textContent = `A lavar ${name} com a esponja molhada: ${progress[keys.wash]} de ${maximum}.`;
       }else{
-        feedback.textContent = `${name} já está lavada. Agora usa o secador.`;
+        feedback.textContent = `${name} já está bem lavada. Agora usa o secador.`;
       }
-    }else if(tool === "dryer"){
-      if(progress[keys.wash] < 3){
-        feedback.textContent = `Primeiro lava ${name} três vezes com o balde.`;
+    }
+
+    if(tool === "dryer"){
+      if(progress[keys.wash] < maximum){
+        feedback.textContent = `Primeiro lava ${name} com a esponja até completar a barra.`;
         return;
       }
-      if(progress[keys.dry] < 3){
+
+      if(progress[keys.dry] < maximum){
         progress[keys.dry]++;
-        feedback.textContent = `A secar ${name}. Passagem ${progress[keys.dry]} de 3.`;
+        feedback.textContent = `A secar ${name} com o secador: ${progress[keys.dry]} de ${maximum}.`;
       }else{
         feedback.textContent = `${name} já está seca. Agora usa o pente.`;
       }
-    }else if(tool === "comb"){
-      if(progress[keys.dry] < 3){
-        feedback.textContent = `Primeiro seca ${name} com o secador.`;
+    }
+
+    if(tool === "comb"){
+      if(progress[keys.dry] < maximum){
+        feedback.textContent = `Primeiro seca ${name} com o secador até completar a barra.`;
         return;
       }
-      if(progress[keys.comb] < 3){
+
+      if(progress[keys.comb] < maximum){
         progress[keys.comb]++;
-        feedback.textContent = `A pentear ${name}. Passagem ${progress[keys.comb]} de 3.`;
+        feedback.textContent = `A pentear ${name}: ${progress[keys.comb]} de ${maximum}.`;
       }else{
         feedback.textContent = `${name} já está muito bem penteada.`;
       }
     }
-    audio.effect("place");
+
     update();
   }
 
   function selectTool(button){
     selectedTool = button.dataset.careTool;
-    root.querySelectorAll(".care-tool-object").forEach(item=>item.classList.toggle("selected",item===button));
-    const info = tools.find(item=>item.id===selectedTool);
+
+    root.querySelectorAll(".care-tool-object").forEach(item=>{
+      item.classList.toggle("selected",item === button);
+    });
+
+    const info = toolInfo(selectedTool);
     root.querySelector("#care-feedback").textContent = info.instruction;
   }
 
   function startDrag(event,button){
     if(event.button !== undefined && event.button !== 0) return;
+
     event.preventDefault();
     selectTool(button);
+
+    const info = toolInfo(selectedTool);
+    audio.startLoopEffect(info.sound,selectedTool === "dryer" ? .72 : .88,.16);
+
     const ghost = button.cloneNode(true);
     ghost.classList.add("care-tool-ghost");
+    ghost.setAttribute("aria-hidden","true");
     document.body.appendChild(ghost);
 
     function move(pointerEvent){
       ghost.style.left = `${pointerEvent.clientX}px`;
       ghost.style.top = `${pointerEvent.clientY}px`;
+
+      currentTarget = null;
+
       root.querySelectorAll("[data-care-target]").forEach(card=>{
         const rect = card.getBoundingClientRect();
-        const over = pointerEvent.clientX>=rect.left && pointerEvent.clientX<=rect.right && pointerEvent.clientY>=rect.top && pointerEvent.clientY<=rect.bottom;
+        const over =
+          pointerEvent.clientX >= rect.left &&
+          pointerEvent.clientX <= rect.right &&
+          pointerEvent.clientY >= rect.top &&
+          pointerEvent.clientY <= rect.bottom;
+
         card.classList.toggle("drop-ready",over);
+
+        if(over){
+          currentTarget = card.dataset.careTarget;
+          applyTool(currentTarget,selectedTool,true);
+        }
       });
+
+      update();
     }
 
-    function end(pointerEvent){
+    function finishDrag(pointerEvent){
       window.removeEventListener("pointermove",move);
-      window.removeEventListener("pointerup",end);
-      window.removeEventListener("pointercancel",cancel);
-      root.querySelectorAll("[data-care-target]").forEach(card=>card.classList.remove("drop-ready"));
+      window.removeEventListener("pointerup",finishDrag);
+      window.removeEventListener("pointercancel",cancelDrag);
+
+      root.querySelectorAll("[data-care-target]").forEach(card=>{
+        card.classList.remove("drop-ready");
+      });
+
       ghost.remove();
-      const element = document.elementFromPoint(pointerEvent.clientX,pointerEvent.clientY);
-      const targetCard = element?.closest?.("[data-care-target]");
-      if(targetCard && root.contains(targetCard)) applyTool(targetCard.dataset.careTarget,selectedTool);
+      currentTarget = null;
+      audio.stopLoopEffect();
+      update();
       dragCleanup = null;
     }
 
-    function cancel(){
+    function cancelDrag(){
       window.removeEventListener("pointermove",move);
-      window.removeEventListener("pointerup",end);
-      window.removeEventListener("pointercancel",cancel);
-      root.querySelectorAll("[data-care-target]").forEach(card=>card.classList.remove("drop-ready"));
+      window.removeEventListener("pointerup",finishDrag);
+      window.removeEventListener("pointercancel",cancelDrag);
+
+      root.querySelectorAll("[data-care-target]").forEach(card=>{
+        card.classList.remove("drop-ready");
+      });
+
       ghost.remove();
+      currentTarget = null;
+      audio.stopLoopEffect();
+      update();
       dragCleanup = null;
     }
 
-    dragCleanup = cancel;
+    dragCleanup = cancelDrag;
+
     window.addEventListener("pointermove",move,{passive:false});
-    window.addEventListener("pointerup",end,{once:true});
-    window.addEventListener("pointercancel",cancel,{once:true});
+    window.addEventListener("pointerup",finishDrag,{once:true});
+    window.addEventListener("pointercancel",cancelDrag,{once:true});
+
     move(event);
+  }
+
+  function applyWithClick(target){
+    const info = toolInfo(selectedTool);
+    audio.startLoopEffect(info.sound,selectedTool === "dryer" ? .72 : .88,.16);
+    currentTarget = target;
+    update();
+    applyTool(target,selectedTool,false);
+
+    setTimeout(()=>{
+      currentTarget = null;
+      audio.stopLoopEffect();
+      update();
+    },650);
   }
 
   root.querySelectorAll(".care-tool-object").forEach(button=>{
     button.addEventListener("click",()=>selectTool(button));
     button.addEventListener("pointerdown",event=>startDrag(event,button));
   });
+
   root.querySelectorAll("[data-care-target]").forEach(card=>{
-    card.addEventListener("click",()=>applyTool(card.dataset.careTarget,selectedTool));
+    card.addEventListener("click",()=>applyWithClick(card.dataset.careTarget));
   });
 
   activeActivityModal._cleanup = ()=>{
     if(dragCleanup) dragCleanup();
+    audio.stopLoopEffect();
   };
+
   update();
 }
 
@@ -1295,7 +1655,10 @@ const REAL_AUDIO = {
     pickup: "https://raw.githubusercontent.com/Calinou/kenney-ui-audio/master/addons/kenney_ui_audio/switch10.wav",
     place: "https://raw.githubusercontent.com/Calinou/kenney-ui-audio/master/addons/kenney_ui_audio/switch20.wav",
     success: "https://opengameart.org/sites/default/files/gem-gather-stereo.wav",
-    footsteps: "https://opengameart.org/sites/default/files/steps%20in%20wood%20floor.wav"
+    footsteps: "https://opengameart.org/sites/default/files/steps%20in%20wood%20floor.wav",
+    spongeWash: "./assets/audio/effects/esponja_agua.wav",
+    hairDryer: "./assets/audio/effects/secador.wav",
+    combBrush: "./assets/audio/effects/pente.wav"
   }
 };
 
@@ -1315,6 +1678,10 @@ class AudioManager{
     this.unlocked = false;
     this.footsteps = null;
     this.footstepsPlaying = false;
+    this.loopEffect = null;
+    this.loopEffectName = "";
+    this.musicDucked = false;
+    this.musicDuckFactor = 1;
   }
 
   persist(){
@@ -1369,7 +1736,9 @@ class AudioManager{
 
     this.currentTrack = track;
     this.music = this.createAudio(url,loop);
-    this.music.volume = this.musicVolume;
+    this.music.volume = this.musicDucked
+      ? Math.max(.015,this.musicVolume * this.musicDuckFactor)
+      : this.musicVolume;
 
     if(nextTrack){
       this.music.addEventListener("ended",()=>{
@@ -1405,6 +1774,58 @@ class AudioManager{
     sound.play().catch(error=>{
       console.warn(`Não foi possível reproduzir o efeito ${name}:`,error);
     });
+  }
+
+
+  duckMusic(factor=.18){
+    this.musicDucked = true;
+    this.musicDuckFactor = factor;
+
+    if(this.music){
+      this.music.volume = Math.max(.015,this.musicVolume * factor);
+    }
+  }
+
+  restoreMusicVolume(){
+    this.musicDucked = false;
+    this.musicDuckFactor = 1;
+
+    if(this.music){
+      this.music.volume = this.musicVolume;
+    }
+  }
+
+  startLoopEffect(name,volumeMultiplier=.85,duckFactor=.18){
+    if(!this.enabled || !this.unlocked) return;
+
+    const url = REAL_AUDIO.effects[name];
+    if(!url) return;
+
+    this.stopLoopEffect(false);
+
+    this.loopEffectName = name;
+    this.loopEffect = this.createAudio(url,true);
+    this.loopEffect.volume = Math.min(1,this.effectsVolume * volumeMultiplier);
+    this.duckMusic(duckFactor);
+
+    this.loopEffect.play().catch(error=>{
+      console.warn(`Não foi possível reproduzir o som contínuo ${name}:`,error);
+      this.stopLoopEffect();
+    });
+  }
+
+  stopLoopEffect(restoreMusic=true){
+    if(this.loopEffect){
+      this.loopEffect.pause();
+      this.loopEffect.currentTime = 0;
+    }
+
+    this.loopEffect = null;
+    this.loopEffectName = "";
+
+    if(restoreMusic){
+      this.restoreMusicVolume();
+    }
   }
 
   startFootsteps(){
@@ -1472,6 +1893,7 @@ class AudioManager{
 
   refreshForRoute(){
     this.stopFootsteps(true);
+    this.stopLoopEffect();
 
     if(!this.enabled){
       this.stopMusic();
@@ -4020,7 +4442,9 @@ audioButton.addEventListener("click",()=>{
 musicVolume.addEventListener("input",()=>{
   audio.musicVolume = Number(musicVolume.value);
   if(audio.music){
-    audio.music.volume = audio.musicVolume;
+    audio.music.volume = audio.musicDucked
+      ? Math.max(.015,audio.musicVolume * audio.musicDuckFactor)
+      : audio.musicVolume;
   }
   audio.persist();
 });
@@ -4029,10 +4453,11 @@ effectsVolume.addEventListener("input",()=>{
   audio.effectsVolume = Number(effectsVolume.value);
 
   if(audio.footsteps){
-    audio.footsteps.volume = Math.min(
-      0.48,
-      audio.effectsVolume * 0.62
-    );
+    audio.footsteps.volume = Math.min(0.48,audio.effectsVolume * 0.62);
+  }
+
+  if(audio.loopEffect){
+    audio.loopEffect.volume = Math.min(1,audio.effectsVolume * .82);
   }
 
   audio.persist();

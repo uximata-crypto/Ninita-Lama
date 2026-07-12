@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-atividades-completas-v14";
+const CACHE = "ninita-lama-salao-labirintos-imagens-v15";
 const ASSETS = [
   "./",
   "./index.html",
@@ -21,6 +21,28 @@ const ASSETS = [
   "./assets/audio/best_adventure_ever.mp3",
   "./assets/audio/joyful_fun_tropical_music.mp3",
   "./assets/audio/magic_world.mp3",
+  "./assets/audio/effects/esponja_agua.wav",
+  "./assets/audio/effects/secador.wav",
+  "./assets/audio/effects/pente.wav",
+  "./assets/images/activities/ninita-labirinto.jpg",
+  "./assets/images/activities/lama-labirinto.jpg",
+  "./assets/images/activities/fundo-labirinto.jpg",
+  "./assets/images/activities/princesa-gelo.jpg",
+  "./assets/images/activities/princesa-gelo-contorno.png",
+  "./assets/images/activities/familia-casa-magica.jpg",
+  "./assets/images/activities/familia-casa-magica-contorno.png",
+  "./assets/images/activities/princesa-oceano.jpg",
+  "./assets/images/activities/princesa-oceano-contorno.png",
+  "./assets/images/activities/princesa-torre.jpg",
+  "./assets/images/activities/princesa-torre-contorno.png",
+  "./assets/images/activities/unicornio-arcoiris.jpg",
+  "./assets/images/activities/unicornio-arcoiris-contorno.png",
+  "./assets/images/activities/unicornio-estelar.jpg",
+  "./assets/images/activities/unicornio-estelar-contorno.png",
+  "./assets/images/activities/fada-arcoiris.jpg",
+  "./assets/images/activities/fada-arcoiris-contorno.png",
+  "./assets/images/activities/castelo-encantado.jpg",
+  "./assets/images/activities/castelo-encantado-contorno.png",
 ];
 
 self.addEventListener("install", event => {

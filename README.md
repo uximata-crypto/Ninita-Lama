@@ -220,3 +220,17 @@ As páginas de pintura usam personagens originais inspiradas em fantasia infanti
 - A galeria inclui Princesa do Gelo, Princesa do Mar, Princesa da Torre, Princesa do Baile, Fada do Arco-Íris, castelo e dois unicórnios.
 - As personagens de pintura são originais e inspiradas em contos de fadas; não são personagens oficiais de terceiros.
 - Cache atualizada para `ninita-lama-atividades-completas-v14`.
+
+
+## Atualização: salão, labirintos e imagens de fantasia
+
+- O labirinto passou a mostrar a Ninita como personagem móvel.
+- No primeiro mundo, a Ninita tem de encontrar Lama.
+- Nos outros mundos, encontra personagens e locais de fantasia originais:
+  Princesa do Gelo, Família da Casa Mágica, Princesa do Oceano,
+  Princesa da Torre, unicórnios e castelo.
+- A pintura tem imagens completas de referência e versões de contorno.
+- O salão inclui esponja retirada do balde, secador e pente arrastáveis.
+- Enquanto a esponja, o secador ou o pente são utilizados, a música baixa.
+- Foram adicionados sons locais de água/esponja, secador e pente.
+- Nova cache PWA: ninita-lama-salao-labirintos-imagens-v15.
