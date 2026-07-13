@@ -302,3 +302,14 @@ Foi efetuada uma revisão completa de todas as atividades:
 - o service worker foi refeito porque a versão anterior tinha um erro de sintaxe que podia impedir a atualização da aplicação instalada.
 
 Nova cache PWA: `ninita-lama-imagens-atividades-revistas-v22`.
+
+
+## Atualização v23 — aplausos e voz de erro
+
+- Resposta certa: aplauso mais forte.
+- Atividade concluída: aplauso final mais longo.
+- Resposta errada: som seguido da voz em português de Portugal:
+  **“Tenta outra vez!”**
+- A música baixa automaticamente enquanto o aplauso ou a voz está a tocar.
+- Página de teste: `teste-sons.html`.
+- Nova cache PWA: `ninita-lama-aplausos-voz-v23`.

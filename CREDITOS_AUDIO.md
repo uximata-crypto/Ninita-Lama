@@ -47,3 +47,10 @@
 - Fonte: OpenGameArt
 
 Guarde os comprovativos de download e licença das faixas obtidas no Pixabay.
+
+
+## Efeitos de resposta educativa
+
+- Aplauso de resposta certa: efeito local processado para o projeto.
+- Aplauso de conclusão: efeito local processado para o projeto.
+- Voz “Tenta outra vez!”: voz sintética em português de Portugal, criada localmente para o projeto.

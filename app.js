@@ -318,16 +318,16 @@ function createActivityModal(world,activity){
 
 
 function playCorrectAnswer(){
-  audio.effect("applauseCorrect");
+  audio.feedback("applauseCorrect",1.0,.08);
 }
 
 function playWrongAnswer(){
-  audio.effect("wrongAnswer");
+  audio.feedback("wrongAnswer",1.0,.06);
 }
 
 function finishActivity(world,activity,message){
   markActivityComplete(world.id,activity.id);
-  audio.effect("applauseFinal");
+  audio.feedback("applauseFinal",1.0,.05);
   const root = document.querySelector("#activity-root");
   if(!root || root.dataset.finished === "true") return;
   root.dataset.finished = "true";
@@ -1903,9 +1903,9 @@ const REAL_AUDIO = {
     spongeWash: "./assets/audio/effects/esponja_agua.wav",
     hairDryer: "./assets/audio/effects/secador.wav",
     combBrush: "./assets/audio/effects/pente.wav",
-    applauseCorrect: "./assets/audio/effects/aplauso_certo.wav",
-    applauseFinal: "./assets/audio/effects/aplauso_final.wav",
-    wrongAnswer: "./assets/audio/effects/resposta_errada.wav"
+    applauseCorrect: "./assets/audio/effects/aplauso_certo_forte.wav",
+    applauseFinal: "./assets/audio/effects/aplauso_final_forte.wav",
+    wrongAnswer: "./assets/audio/effects/resposta_errada_com_voz.wav"
   }
 };
 
@@ -1929,6 +1929,8 @@ class AudioManager{
     this.loopEffectName = "";
     this.musicDucked = false;
     this.musicDuckFactor = 1;
+    this.feedbackAudio = null;
+    this.feedbackRestoreTimer = null;
   }
 
   persist(){
@@ -2020,6 +2022,48 @@ class AudioManager{
     sound.volume = this.effectsVolume;
     sound.play().catch(error=>{
       console.warn(`Não foi possível reproduzir o efeito ${name}:`,error);
+    });
+  }
+
+  feedback(name,volumeMultiplier=1,duckFactor=.08){
+    if(!this.enabled || !this.unlocked) return;
+
+    const url = REAL_AUDIO.effects[name];
+    if(!url) return;
+
+    if(this.feedbackAudio){
+      this.feedbackAudio.pause();
+      this.feedbackAudio.currentTime = 0;
+    }
+
+    if(this.feedbackRestoreTimer){
+      clearTimeout(this.feedbackRestoreTimer);
+      this.feedbackRestoreTimer = null;
+    }
+
+    const sound = this.createAudio(url,false);
+    this.feedbackAudio = sound;
+    sound.volume = Math.min(1,Math.max(.78,this.effectsVolume) * volumeMultiplier);
+
+    this.duckMusic(duckFactor);
+
+    const restore = ()=>{
+      if(this.feedbackAudio === sound){
+        this.feedbackAudio = null;
+      }
+
+      this.feedbackRestoreTimer = setTimeout(()=>{
+        this.restoreMusicVolume();
+        this.feedbackRestoreTimer = null;
+      },120);
+    };
+
+    sound.addEventListener("ended",restore,{once:true});
+    sound.addEventListener("error",restore,{once:true});
+
+    sound.play().catch(error=>{
+      console.warn(`Não foi possível reproduzir o feedback ${name}:`,error);
+      restore();
     });
   }
 
@@ -2141,6 +2185,19 @@ class AudioManager{
   refreshForRoute(){
     this.stopFootsteps(true);
     this.stopLoopEffect();
+
+    if(this.feedbackAudio){
+      this.feedbackAudio.pause();
+      this.feedbackAudio.currentTime = 0;
+      this.feedbackAudio = null;
+    }
+
+    if(this.feedbackRestoreTimer){
+      clearTimeout(this.feedbackRestoreTimer);
+      this.feedbackRestoreTimer = null;
+    }
+
+    this.restoreMusicVolume();
 
     if(!this.enabled){
       this.stopMusic();
@@ -4846,6 +4903,10 @@ effectsVolume.addEventListener("input",()=>{
 
   if(audio.loopEffect){
     audio.loopEffect.volume = Math.min(1,audio.effectsVolume * .82);
+  }
+
+  if(audio.feedbackAudio){
+    audio.feedbackAudio.volume = Math.min(1,Math.max(.78,audio.effectsVolume));
   }
 
   audio.persist();

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Teste de sons — Ninita e Lama</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;padding:22px;background:#26132f;color:#fff;font-family:system-ui}
+    main{max-width:720px;margin:auto}
+    .card{margin:14px 0;padding:18px;border-radius:20px;background:#fff;color:#4b2857}
+    audio{width:100%}
+    h1{margin-top:0}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Teste dos sons de resposta</h1>
+
+    <article class="card">
+      <h2>Resposta certa — aplauso</h2>
+      <audio controls preload="auto">
+        <source src="./assets/audio/effects/aplauso_certo_forte.wav" type="audio/wav">
+      </audio>
+    </article>
+
+    <article class="card">
+      <h2>Atividade concluída — aplauso final</h2>
+      <audio controls preload="auto">
+        <source src="./assets/audio/effects/aplauso_final_forte.wav" type="audio/wav">
+      </audio>
+    </article>
+
+    <article class="card">
+      <h2>Resposta errada — voz</h2>
+      <p>A voz diz: <strong>“Tenta outra vez!”</strong></p>
+      <audio controls preload="auto">
+        <source src="./assets/audio/effects/resposta_errada_com_voz.wav" type="audio/wav">
+      </audio>
+    </article>
+  </main>
+</body>
+</html>
