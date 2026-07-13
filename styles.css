@@ -1988,3 +1988,224 @@ img{display:block;max-width:100%}
     display:none;
   }
 }
+
+
+/* ==========================================================
+   v22 — revisão integral das imagens das atividades
+   ========================================================== */
+
+.activity-card-with-image{
+  overflow:hidden;
+  padding-top:10px;
+}
+
+.activity-image-frame{
+  position:relative;
+  display:block;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(255,255,255,.22),rgba(255,255,255,.22)),
+    var(--activity-fallback-image);
+  background-size:cover;
+  background-position:center;
+}
+
+.activity-image-frame>img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  opacity:0;
+  transition:opacity .18s ease;
+}
+
+.activity-image-frame.image-loaded>img{
+  opacity:1;
+}
+
+.activity-image-card{
+  width:100%;
+  aspect-ratio:16/9;
+  margin-bottom:9px;
+  border-radius:17px;
+  box-shadow:0 7px 17px rgba(50,24,65,.14);
+}
+
+.activity-image-modal{
+  width:100%;
+  height:150px;
+  border-radius:0;
+  background-position:center;
+}
+
+.activity-image-fallback{
+  position:absolute;
+  inset:0;
+  display:none;
+  place-items:center;
+  align-content:center;
+  gap:4px;
+  padding:12px;
+  color:#fff;
+  text-align:center;
+  background:
+    linear-gradient(135deg,rgba(84,38,104,.72),rgba(197,58,141,.72));
+}
+
+.activity-image-fallback b{
+  font-size:2rem;
+}
+
+.activity-image-fallback small{
+  font-weight:850;
+}
+
+.activity-image-frame.image-error .activity-image-fallback,
+[data-image-frame].image-error>.activity-image-fallback{
+  display:grid;
+}
+
+.activity-modal-visual{
+  border-bottom:1px solid #eaddea;
+  background:#f7edf8;
+}
+
+.activity-modal-visual .activity-image-frame{
+  width:100%;
+}
+
+.memory-image-grid{
+  grid-template-columns:repeat(4,minmax(70px,1fr));
+}
+
+.memory-image-card{
+  position:relative;
+  overflow:hidden;
+  padding:0;
+}
+
+.memory-card-back,
+.memory-card-picture{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+}
+
+.memory-card-picture{
+  opacity:0;
+  background:#fff;
+  transition:opacity .18s ease;
+}
+
+.memory-card-picture img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.memory-image-card.flipped .memory-card-back,
+.memory-image-card.matched .memory-card-back{
+  opacity:0;
+}
+
+.memory-image-card.flipped .memory-card-picture,
+.memory-image-card.matched .memory-card-picture{
+  opacity:1;
+}
+
+.puzzle-picture-intro{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  align-items:center;
+  gap:15px;
+  margin-bottom:12px;
+  overflow:hidden;
+}
+
+.puzzle-picture-intro>img{
+  width:150px;
+  height:105px;
+  object-fit:cover;
+  border-radius:15px;
+  display:block;
+}
+
+.puzzle-picture-intro h3,
+.puzzle-picture-intro p{
+  margin:0;
+}
+
+.puzzle-picture-intro p{
+  margin-top:4px;
+  color:#6d5a75;
+}
+
+.picture-sliding-puzzle{
+  background:#5f3470;
+}
+
+.picture-puzzle-tile{
+  position:relative;
+  overflow:hidden;
+  background-image:var(--puzzle-picture);
+  background-size:300% 300%;
+  background-position:
+    calc(var(--tile-x) * 50%)
+    calc(var(--tile-y) * 50%);
+  border:3px solid rgba(255,255,255,.88);
+}
+
+.picture-puzzle-tile>span{
+  position:absolute;
+  right:5px;
+  bottom:5px;
+  display:grid;
+  place-items:center;
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:rgba(45,20,57,.72);
+  color:#fff;
+  font-size:.72rem;
+}
+
+.picture-puzzle-tile.empty{
+  background-image:none;
+  border-color:transparent;
+}
+
+@media(max-width:760px){
+  .activity-image-modal{
+    height:112px;
+  }
+
+  .activity-image-card{
+    aspect-ratio:2/1;
+  }
+
+  .memory-image-grid{
+    grid-template-columns:repeat(3,minmax(64px,1fr));
+    gap:8px;
+  }
+
+  .puzzle-picture-intro{
+    grid-template-columns:92px 1fr;
+    gap:9px;
+    padding:9px;
+  }
+
+  .puzzle-picture-intro>img{
+    width:92px;
+    height:75px;
+  }
+
+  .puzzle-picture-intro h3{
+    font-size:.90rem;
+  }
+
+  .puzzle-picture-intro p{
+    font-size:.70rem;
+  }
+}

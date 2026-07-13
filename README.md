@@ -287,3 +287,18 @@ Nova cache PWA: `ninita-lama-menu-jogo-atividades-historia-v20`.
 - No salão, a esponja, o secador e o pente ficam num conjunto fixo na parte inferior do ecrã.
 - Os utensílios permanecem visíveis enquanto se cuida de Lama e de Ninita.
 - Nova cache PWA: `ninita-lama-instrucoes-header-salao-fixo-v21`.
+
+
+## Atualização v22 — revisão integral das imagens
+
+Foi efetuada uma revisão completa de todas as atividades:
+
+- todas as atividades apresentam uma imagem no cartão;
+- todas as atividades apresentam uma imagem no início do jogo;
+- as imagens têm fallback visual caso haja falha de carregamento;
+- o jogo da memória usa imagens locais;
+- os puzzles usam uma imagem real dividida em peças;
+- foi criada a página `teste-imagens.html`;
+- o service worker foi refeito porque a versão anterior tinha um erro de sintaxe que podia impedir a atualização da aplicação instalada.
+
+Nova cache PWA: `ninita-lama-imagens-atividades-revistas-v22`.

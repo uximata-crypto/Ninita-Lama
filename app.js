@@ -63,7 +63,7 @@ const LEVEL_ACTIVITIES = {
   7:[
     {id:"farm-feed",type:"farm",icon:"🐘",title:"Alimentar a Quinta Pedagógica",description:"Alimenta mamíferos, aves e répteis da quinta."},
     {id:"number-farm",type:"number",icon:"🔢",title:"Contar Animais",description:"Conta animais e alimentos da quinta pedagógica."},
-    {id:"memory-farm",type:"memory",icon:"🐢",title:"Memória dos Animais",description:"Encontra os pares dos animais."}
+    {id:"memory-farm",type:"memory",icon:"🐢",title:"Memória da Quinta e dos Amigos",description:"Encontra os pares de imagens da quinta e dos amigos mágicos."}
   ],
   8:[
     {id:"maze-park",type:"maze",icon:"🎠",title:"Labirinto do Castelo",description:"Ajuda Ninita a encontrar o castelo encantado."},
@@ -112,6 +112,114 @@ function shuffleItems(items){
   return copy;
 }
 
+
+function activityVisualFor(world,activity){
+  const byId = {
+    care:"./assets/images/activities/lama-labirinto.jpg",
+    "maze-room":"./assets/images/activities/fundo-labirinto.jpg",
+    "color-room":"./assets/images/activities/princesa-maca.jpg",
+
+    "kitchen-play":"./assets/images/activities/cozinha-ninita.webp",
+    "number-home":"./assets/images/activities/cozinha-ninita.webp",
+    "memory-home":"./assets/images/activities/cozinha-ninita.webp",
+
+    "board-school":"./assets/images/activities/quadro-ninita.webp",
+    "puzzle-school":"./assets/images/activities/quadro-ninita.webp",
+    "color-school":"./assets/images/activities/unicornio-com-asas.jpg",
+
+    "maze-beach":"./assets/images/activities/princesa-oceano.jpg",
+    "number-beach":"./assets/images/praia.webp",
+    "color-beach":"./assets/images/activities/unicornio-coracoes.jpg",
+
+    "maze-forest":"./assets/images/activities/unicornio-arcoiris.jpg",
+    "word-forest":"./assets/images/floresta.webp",
+    "color-forest":"./assets/images/activities/unicornio-arcoiris-sonho.jpg",
+
+    "maze-pool":"./assets/images/activities/unicornio-estelar.jpg",
+    "number-pool":"./assets/images/piscina.webp",
+    "color-pool":"./assets/images/activities/unicornio-com-asas.jpg",
+
+    "farm-feed":"./assets/images/floresta.webp",
+    "number-farm":"./assets/images/activities/counting/lama.webp",
+    "memory-farm":"./assets/images/floresta.webp",
+
+    "maze-park":"./assets/images/activities/castelo-encantado.jpg",
+    "number-park":"./assets/images/arcoiris.webp",
+    "puzzle-park":"./assets/images/arcoiris.webp",
+
+    "maze-city":"./assets/images/activities/princesa-torre.jpg",
+    "math-city":"./assets/images/sala.webp",
+    "color-city":"./assets/images/activities/princesa-maca.jpg",
+
+    "maze-rainbow":"./assets/images/activities/unicornio-arcoiris-sonho.jpg",
+    "math-rainbow":"./assets/images/arcoiris.webp",
+    "color-rainbow":"./assets/images/activities/unicornio-coracoes.jpg"
+  };
+
+  const byType = {
+    care:"./assets/images/activities/lama-labirinto.jpg",
+    maze:"./assets/images/activities/fundo-labirinto.jpg",
+    coloring:"./assets/images/activities/unicornio-arcoiris-sonho.jpg",
+    cooking:"./assets/images/activities/cozinha-ninita.webp",
+    board:"./assets/images/activities/quadro-ninita.webp",
+    puzzle:"./assets/images/activities/quadro-ninita.webp",
+    number:"./assets/images/activities/counting/ninita.webp",
+    memory:"./assets/images/activities/counting/lama.webp",
+    word:"./assets/images/activities/quadro-ninita.webp",
+    math:"./assets/images/activities/quadro-ninita.webp",
+    farm:"./assets/images/floresta.webp"
+  };
+
+  return byId[activity.id] || byType[activity.type] || world.image;
+}
+
+function bindLocalImageFallbacks(scope=document){
+  scope.querySelectorAll("img[data-local-activity-image]").forEach(image=>{
+    const frame = image.closest("[data-image-frame]");
+
+    const markLoaded = ()=>{
+      frame?.classList.remove("image-error");
+      frame?.classList.add("image-loaded");
+    };
+
+    const markError = ()=>{
+      frame?.classList.remove("image-loaded");
+      frame?.classList.add("image-error");
+    };
+
+    image.addEventListener("load",markLoaded,{once:true});
+    image.addEventListener("error",markError,{once:true});
+
+    if(image.complete){
+      image.naturalWidth > 0 ? markLoaded() : markError();
+    }
+  });
+}
+
+function activityImageFrame(world,activity,variant="card"){
+  const image = activityVisualFor(world,activity);
+
+  return `
+    <span
+      class="activity-image-frame activity-image-${variant}"
+      data-image-frame
+      style="--activity-fallback-image:url('${world.image}')"
+    >
+      <img
+        data-local-activity-image
+        src="${image}"
+        alt="Imagem de ${activity.title}"
+        loading="${variant === "card" ? "lazy" : "eager"}"
+        decoding="async"
+      >
+      <span class="activity-image-fallback" aria-hidden="true">
+        <b>${activity.icon}</b>
+        <small>${activity.title}</small>
+      </span>
+    </span>
+  `;
+}
+
 function renderActivityHub(worldId){
   const world = worlds.find(item=>item.id === worldId) || worlds[0];
   const activities = LEVEL_ACTIVITIES[world.id] || [];
@@ -136,7 +244,8 @@ function renderActivityHub(worldId){
         ${activities.map(activity=>{
           const done = completed.includes(activity.id);
           return `
-            <button class="activity-card ${done ? "completed" : ""}" data-activity="${activity.id}" data-world="${world.id}">
+            <button class="activity-card activity-card-with-image ${done ? "completed" : ""}" data-activity="${activity.id}" data-world="${world.id}">
+              ${activityImageFrame(world,activity,"card")}
               <span class="activity-icon">${activity.icon}</span>
               ${done ? '<span class="activity-done">⭐</span>' : ''}
               <h3>${activity.title}</h3>
@@ -157,6 +266,8 @@ function renderActivityHub(worldId){
       </button>
     </main>
   `;
+
+  bindLocalImageFallbacks(app);
 }
 
 function closeActivityModal(){
@@ -180,6 +291,11 @@ function createActivityModal(world,activity){
         </div>
         <button class="activity-close" data-close-activity aria-label="Fechar atividade">×</button>
       </header>
+
+      <div class="activity-modal-visual">
+        ${activityImageFrame(world,activity,"modal")}
+      </div>
+
       <div id="activity-root" class="activity-root"></div>
     </section>
   `;
@@ -191,7 +307,13 @@ function createActivityModal(world,activity){
       renderActivityHub(world.id);
     }
   });
-  return modal.querySelector("#activity-root");
+
+  bindLocalImageFallbacks(modal);
+
+  const activityRoot = modal.querySelector("#activity-root");
+  activityRoot.dataset.activityId = activity.id;
+  activityRoot.dataset.activityType = activity.type;
+  return activityRoot;
 }
 
 
@@ -244,46 +366,82 @@ function openActivity(worldId,activityId){
   if(activity.type === "farm") startFarmActivity(root,world,finish);
 }
 
-function memorySymbolsFor(worldId){
-  return ({
-    1:["🛏️","🧸","📚","🎒","👟","🌙"],
-    3:["✏️","📘","🔢","🎨","🎒","📏"],
-    5:["🌳","🦋","🐦","🌸","🍄","🐿️"],
-    6:["🩱","🛟","🏖️","🩴","💦","🐠"],
-    7:["🐘","🐒","🦜","🐢","🦎","🐇"],
-    8:["🎠","🎡","🎟️","🚗","🎈","🍭"],
-    9:["🚦","🏪","🚌","🌳","👫","🛍️"],
-    10:["⭐","🌈","☁️","🦄","💎","🪄"]
-  })[worldId] || ["🦙","👧🏻","⭐","🌸","🎈","💖"];
+function memoryItemsFor(worldId){
+  const kitchen = [
+    {label:"Cozinha da Ninita",image:"./assets/images/activities/cozinha-ninita.webp"},
+    {label:"Quadro da Ninita",image:"./assets/images/activities/quadro-ninita.webp"},
+    {label:"Ninita",image:"./assets/images/activities/counting/ninita.webp"},
+    {label:"Lama",image:"./assets/images/activities/counting/lama.webp"},
+    {label:"Princesa da Maçã",image:"./assets/images/activities/princesa-maca.jpg"},
+    {label:"Unicórnio",image:"./assets/images/activities/unicornio-com-asas.jpg"}
+  ];
+
+  const farm = [
+    {label:"Lama",image:"./assets/images/activities/counting/lama.webp"},
+    {label:"Ninita",image:"./assets/images/activities/counting/ninita.webp"},
+    {label:"Unicórnio Arco-Íris",image:"./assets/images/activities/counting/unicornio-arcoiris.webp"},
+    {label:"Unicórnio Estelar",image:"./assets/images/activities/counting/unicornio-estelar.webp"},
+    {label:"Família Mágica",image:"./assets/images/activities/counting/familia-magica.webp"},
+    {label:"Castelo",image:"./assets/images/activities/counting/castelo.webp"}
+  ];
+
+  return worldId === 2 ? kitchen : farm;
 }
 
 function startMemoryActivity(root,world,finish){
-  const symbols = memorySymbolsFor(world.id);
-  const cards = shuffleItems(symbols.flatMap((symbol,pair)=>[
-    {symbol,pair,id:`${pair}-a`},{symbol,pair,id:`${pair}-b`}
+  const items = memoryItemsFor(world.id);
+  const cards = shuffleItems(items.flatMap((item,pair)=>[
+    {...item,pair,id:`${pair}-a`},
+    {...item,pair,id:`${pair}-b`}
   ]));
+
   let first = null;
   let locked = false;
   const matched = new Set();
 
   root.innerHTML = `
-    <div class="mini-instruction">Toca em duas cartas para encontrar os pares.</div>
-    <div class="memory-grid">
-      ${cards.map((card,index)=>`<button class="memory-card" data-card="${index}" aria-label="Carta escondida"><span>?</span></button>`).join("")}
+    <div class="mini-instruction">
+      Toca em duas cartas e encontra os pares de imagens.
     </div>
-    <p class="mini-feedback" id="memory-feedback">Encontra ${symbols.length} pares.</p>
+
+    <div class="memory-grid memory-image-grid">
+      ${cards.map((card,index)=>`
+        <button class="memory-card memory-image-card" data-card="${index}" aria-label="Carta escondida">
+          <span class="memory-card-back">?</span>
+          <span class="memory-card-picture" data-image-frame>
+            <img
+              data-local-activity-image
+              src="${card.image}"
+              alt="${card.label}"
+              loading="eager"
+              decoding="async"
+            >
+            <span class="activity-image-fallback" aria-hidden="true">⭐</span>
+          </span>
+        </button>
+      `).join("")}
+    </div>
+
+    <p class="mini-feedback" id="memory-feedback">
+      Encontra ${items.length} pares de imagens.
+    </p>
   `;
 
+  bindLocalImageFallbacks(root);
+
   const buttons = [...root.querySelectorAll(".memory-card")];
+
   buttons.forEach((button,index)=>button.addEventListener("click",()=>{
     if(locked || matched.has(index) || first === index) return;
+
     audio.effect("click");
     button.classList.add("flipped");
-    button.querySelector("span").textContent = cards[index].symbol;
+
     if(first === null){
       first = index;
       return;
     }
+
     if(cards[first].pair === cards[index].pair){
       matched.add(first);
       matched.add(index);
@@ -291,20 +449,26 @@ function startMemoryActivity(root,world,finish){
       button.classList.add("matched");
       first = null;
       playCorrectAnswer();
-      root.querySelector("#memory-feedback").textContent = `${matched.size/2} pares encontrados.`;
-      if(matched.size === cards.length) finish("Encontraste todos os pares do jogo da memória!");
+
+      root.querySelector("#memory-feedback").textContent =
+        `${matched.size/2} pares encontrados.`;
+
+      if(matched.size === cards.length){
+        finish("Encontraste todos os pares de imagens!");
+      }
     }else{
       playWrongAnswer();
       locked = true;
       const previous = first;
       first = null;
+
       setTimeout(()=>{
         [previous,index].forEach(position=>{
           buttons[position].classList.remove("flipped");
-          buttons[position].querySelector("span").textContent = "?";
         });
+
         locked = false;
-      },650);
+      },700);
     }
   }));
 }
@@ -903,40 +1067,116 @@ function startMazeActivity(root,world,finish){
 
 function startPuzzleActivity(root,world,finish){
   let tiles = [1,2,3,4,5,6,7,8,0];
-  const neighbours = index=>{
-    const row = Math.floor(index/3), col=index%3;
-    return [[row-1,col],[row+1,col],[row,col-1],[row,col+1]].filter(([r,c])=>r>=0&&r<3&&c>=0&&c<3).map(([r,c])=>r*3+c);
+
+  const activity = {
+    id:root.dataset.activityId || "puzzle",
+    type:"puzzle",
+    icon:"🧩",
+    title:"Puzzle"
   };
+
+  const puzzleImage = activityVisualFor(world,activity);
+
+  const neighbours = index=>{
+    const row = Math.floor(index/3);
+    const col = index%3;
+
+    return [
+      [row-1,col],[row+1,col],[row,col-1],[row,col+1]
+    ]
+      .filter(([r,c])=>r>=0&&r<3&&c>=0&&c<3)
+      .map(([r,c])=>r*3+c);
+  };
+
   for(let step=0;step<120;step++){
     const blank = tiles.indexOf(0);
-    const move = neighbours(blank)[Math.floor(Math.random()*neighbours(blank).length)];
+    const choices = neighbours(blank);
+    const move = choices[Math.floor(Math.random()*choices.length)];
     [tiles[blank],tiles[move]]=[tiles[move],tiles[blank]];
   }
-  if(tiles.every((value,index)=>value === [1,2,3,4,5,6,7,8,0][index])) [tiles[7],tiles[8]]=[tiles[8],tiles[7]];
-  const theme = world.id === 4 ? "🏖️" : world.id === 6 ? "🏊" : world.id === 8 ? "🎠" : "🌈";
+
+  if(tiles.every((value,index)=>value === [1,2,3,4,5,6,7,8,0][index])){
+    [tiles[7],tiles[8]]=[tiles[8],tiles[7]];
+  }
 
   root.innerHTML = `
-    <div class="mini-instruction">Desliza uma peça para o espaço vazio e ordena os números.</div>
-    <div class="puzzle-theme">${theme}</div>
-    <div class="sliding-puzzle" id="sliding-puzzle"></div>
-    <p class="mini-feedback">Objetivo: 1 · 2 · 3 / 4 · 5 · 6 / 7 · 8</p>
+    <div class="puzzle-picture-intro card" data-image-frame>
+      <img
+        data-local-activity-image
+        src="${puzzleImage}"
+        alt="Imagem completa do puzzle"
+        loading="eager"
+      >
+      <div>
+        <h3>Observa a imagem</h3>
+        <p>Desliza as peças para reconstruíres esta imagem.</p>
+      </div>
+      <span class="activity-image-fallback" aria-hidden="true">🧩</span>
+    </div>
+
+    <div
+      class="sliding-puzzle picture-sliding-puzzle"
+      id="sliding-puzzle"
+      style="--puzzle-picture:url('${puzzleImage}')"
+    ></div>
+
+    <p class="mini-feedback" id="puzzle-feedback">
+      Toca numa peça junto ao espaço vazio.
+    </p>
   `;
 
+  bindLocalImageFallbacks(root);
+
   function draw(){
-    root.querySelector("#sliding-puzzle").innerHTML = tiles.map((tile,index)=>tile ? `<button class="puzzle-tile" data-tile-index="${index}"><span>${tile}</span></button>` : `<div class="puzzle-tile empty"></div>`).join("");
-    root.querySelectorAll("[data-tile-index]").forEach(button=>button.addEventListener("click",()=>{
-      const index = Number(button.dataset.tileIndex);
-      const blank = tiles.indexOf(0);
-      if(!neighbours(blank).includes(index)) return;
-      [tiles[blank],tiles[index]]=[tiles[index],tiles[blank]];
-      audio.effect("place");
-      draw();
-      if(tiles.every((value,position)=>value === [1,2,3,4,5,6,7,8,0][position])) finish("Completaste o puzzle e colocaste todas as peças no lugar!");
-    }));
+    root.querySelector("#sliding-puzzle").innerHTML = tiles.map((tile,index)=>{
+      if(!tile){
+        return `<div class="puzzle-tile picture-puzzle-tile empty"></div>`;
+      }
+
+      const sourceIndex = tile-1;
+      const row = Math.floor(sourceIndex/3);
+      const col = sourceIndex%3;
+
+      return `
+        <button
+          class="puzzle-tile picture-puzzle-tile"
+          data-tile-index="${index}"
+          style="
+            --tile-x:${col};
+            --tile-y:${row};
+          "
+          aria-label="Peça ${tile}"
+        >
+          <span>${tile}</span>
+        </button>
+      `;
+    }).join("");
+
+    root.querySelectorAll("[data-tile-index]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        const index = Number(button.dataset.tileIndex);
+        const blank = tiles.indexOf(0);
+
+        if(!neighbours(blank).includes(index)){
+          playWrongAnswer();
+          root.querySelector("#puzzle-feedback").textContent =
+            "Essa peça não está junto ao espaço vazio.";
+          return;
+        }
+
+        [tiles[blank],tiles[index]]=[tiles[index],tiles[blank]];
+        audio.effect("place");
+        draw();
+
+        if(tiles.every((value,position)=>value === [1,2,3,4,5,6,7,8,0][position])){
+          finish("Completaste o puzzle e reconstruíste a imagem!");
+        }
+      });
+    });
   }
+
   draw();
 }
-
 function drawIcePrincess(context){
   context.lineWidth=5; context.strokeStyle="#34243d"; context.lineCap="round"; context.lineJoin="round";
   context.beginPath(); context.arc(280,150,62,0,Math.PI*2); context.stroke();
