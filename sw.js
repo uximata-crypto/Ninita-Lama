@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-aplausos-voz-v23";
+const CACHE = "ninita-lama-pack-completo-desenhos-v25";
 
 const ASSETS = [
   "./",

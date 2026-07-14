@@ -33,52 +33,52 @@ const LEVEL_ACTIVITIES = {
   1:[
     {id:"care",type:"care",icon:"🧴",title:"Salão da Ninita e de Lama",description:"Lava, seca e penteia Lama e a Ninita com esponja, secador e pente."},
     {id:"maze-room",type:"maze",icon:"🌀",title:"Ninita encontra Lama",description:"Move a Ninita no labirinto até encontrar Lama."},
-    {id:"color-room",type:"coloring",icon:"🦄",title:"Princesas e Unicórnios",description:"Pinta desenhos inspirados em princesas e unicórnios."}
+    {id:"puzzle-room",type:"puzzle",icon:"🧩",title:"Puzzle dos Números",description:"Ordena os números pela ordem certa no quarto encantado."}
   ],
   2:[
     {id:"kitchen-play",type:"cooking",icon:"🍳",title:"Cozinha da Ninita",description:"Faz comida de faz de conta na cozinha da Ninita, inspirada na cozinha de brincar."},
     {id:"number-home",type:"number",icon:"🔢",title:"Contar na Cozinha",description:"Conta frutas, copos e outros objetos da cozinha."},
-    {id:"memory-home",type:"memory",icon:"🧠",title:"Memória da Casa",description:"Encontra os pares dos objetos da casa."}
+    {id:"puzzle-home",type:"puzzle",icon:"🧩",title:"Sequência do Alfabeto",description:"Ordena as letras de A a H na casa das surpresas."}
   ],
   3:[
     {id:"board-school",type:"board",icon:"🧮",title:"Quadro Escolar da Ninita",description:"Letras, números e pequenas sequências num quadro escolar mágico."},
-    {id:"puzzle-school",type:"puzzle",icon:"🧩",title:"Puzzle da Escola",description:"Completa o puzzle do quadro escolar e dos materiais."},
+    {id:"puzzle-school",type:"puzzle",icon:"🧩",title:"Puzzle da Escola",description:"Completa o puzzle da escola e ordena a imagem."},
     {id:"color-school",type:"coloring",icon:"🎨",title:"Desenhos Mágicos",description:"Pinta princesas, unicórnios e outras figuras inspiradas nas imagens."}
   ],
   4:[
     {id:"maze-beach",type:"maze",icon:"🌀",title:"Labirinto da Princesa do Oceano",description:"Ajuda Ninita a chegar à princesa junto ao mar."},
-    {id:"number-beach",type:"number",icon:"🔢",title:"Contar Conchas",description:"Conta conchas, peixes e estrelas-do-mar."},
+    {id:"puzzle-beach",type:"puzzle",icon:"🧩",title:"Puzzle da Praia",description:"Ordena a palavra PRAIA e os símbolos do mar."},
     {id:"color-beach",type:"coloring",icon:"🎨",title:"Princesas do Mar e Unicórnios",description:"Pinta páginas mágicas com uma paleta completa."}
   ],
   5:[
-    {id:"maze-forest",type:"maze",icon:"🌿",title:"Labirinto do Unicórnio",description:"Ajuda Ninita a encontrar o unicórnio mágico."},
     {id:"word-forest",type:"word",icon:"🔤",title:"Palavras da Floresta",description:"Constrói palavras da natureza, letra a letra."},
+    {id:"puzzle-forest",type:"puzzle",icon:"🧩",title:"Puzzle da Floresta",description:"Ordena as letras da palavra FLORESTA."},
     {id:"color-forest",type:"coloring",icon:"🖍️",title:"Ateliê Encantado",description:"Pinta unicórnios, princesas e fantasia."}
   ],
   6:[
     {id:"maze-pool",type:"maze",icon:"🏊",title:"Labirinto do Unicórnio Estelar",description:"Ajuda Ninita a encontrar o unicórnio junto à piscina."},
-    {id:"number-pool",type:"number",icon:"🔢",title:"Contar Boias",description:"Conta boias, bolas e gotas de água."},
+    {id:"puzzle-pool",type:"puzzle",icon:"🧩",title:"Puzzle da Piscina",description:"Ordena a contagem de 2 em 2 na piscina tropical."},
     {id:"color-pool",type:"coloring",icon:"🎨",title:"Colorir o Verão Mágico",description:"Pinta princesas, castelos e unicórnios."}
   ],
   7:[
     {id:"farm-feed",type:"farm",icon:"🐘",title:"Alimentar a Quinta Pedagógica",description:"Alimenta mamíferos, aves e répteis da quinta."},
-    {id:"number-farm",type:"number",icon:"🔢",title:"Contar Animais",description:"Conta animais e alimentos da quinta pedagógica."},
-    {id:"memory-farm",type:"memory",icon:"🐢",title:"Memória da Quinta e dos Amigos",description:"Encontra os pares de imagens da quinta e dos amigos mágicos."}
+    {id:"memory-farm",type:"memory",icon:"🐢",title:"Memória da Quinta e dos Amigos",description:"Encontra os pares de imagens da quinta e dos amigos mágicos."},
+    {id:"puzzle-farm",type:"puzzle",icon:"🧩",title:"Puzzle da Quinta",description:"Ordena as letras da palavra GALINHAS."}
   ],
   8:[
     {id:"maze-park",type:"maze",icon:"🎠",title:"Labirinto do Castelo",description:"Ajuda Ninita a encontrar o castelo encantado."},
     {id:"number-park",type:"number",icon:"🔢",title:"Contar Brinquedos",description:"Conta bilhetes, balões e brinquedos do parque."},
-    {id:"puzzle-park",type:"puzzle",icon:"🧩",title:"Puzzle da Diversão",description:"Organiza as peças do parque e conclui a imagem."}
+    {id:"puzzle-park",type:"puzzle",icon:"🧩",title:"Puzzle da Diversão",description:"Reconstrói a imagem do parque das aventuras."}
   ],
   9:[
-    {id:"maze-city",type:"maze",icon:"🌀",title:"Labirinto da Princesa da Torre",description:"Ajuda Ninita a chegar à princesa na cidade."},
     {id:"math-city",type:"math",icon:"🛍️",title:"Compras e Trocos",description:"Resolve pequenas contas na cidade colorida."},
-    {id:"color-city",type:"coloring",icon:"🎨",title:"Galeria Mágica",description:"Pinta princesas e unicórnios ao teu gosto."}
+    {id:"color-city",type:"coloring",icon:"🎨",title:"Galeria Mágica",description:"Pinta princesas e unicórnios ao teu gosto."},
+    {id:"puzzle-city",type:"puzzle",icon:"🧩",title:"Puzzle da Cidade",description:"Ordena as letras da palavra TRANSITO."}
   ],
   10:[
-    {id:"maze-rainbow",type:"maze",icon:"🌀",title:"Labirinto Final dos Unicórnios",description:"Ajuda Ninita a encontrar o unicórnio final."},
     {id:"math-rainbow",type:"math",icon:"➕",title:"Números do Arco-Íris",description:"Resolve as contas finais com estrelas, nuvens e cristais."},
-    {id:"color-rainbow",type:"coloring",icon:"🌈",title:"Grande Tela do Arco-Íris",description:"Pinta o grande final com princesas e unicórnios."}
+    {id:"color-rainbow",type:"coloring",icon:"🌈",title:"Grande Tela do Arco-Íris",description:"Pinta o grande final com princesas e unicórnios."},
+    {id:"puzzle-rainbow",type:"puzzle",icon:"🧩",title:"Puzzle Final do Arco-Íris",description:"Ordena as letras da palavra ARCOIRIS."}
   ]
 };
 
@@ -117,43 +117,34 @@ function activityVisualFor(world,activity){
   const byId = {
     care:"./assets/images/activities/lama-labirinto.jpg",
     "maze-room":"./assets/images/activities/fundo-labirinto.jpg",
-    "color-room":"./assets/images/activities/princesa-maca.jpg",
-
+    "puzzle-room":"./assets/images/quarto.webp",
     "kitchen-play":"./assets/images/activities/cozinha-ninita.webp",
     "number-home":"./assets/images/activities/cozinha-ninita.webp",
-    "memory-home":"./assets/images/activities/cozinha-ninita.webp",
-
+    "puzzle-home":"./assets/images/activities/cozinha-ninita.webp",
     "board-school":"./assets/images/activities/quadro-ninita.webp",
     "puzzle-school":"./assets/images/activities/quadro-ninita.webp",
     "color-school":"./assets/images/activities/unicornio-com-asas.jpg",
-
     "maze-beach":"./assets/images/activities/princesa-oceano.jpg",
-    "number-beach":"./assets/images/praia.webp",
+    "puzzle-beach":"./assets/images/praia.webp",
     "color-beach":"./assets/images/activities/unicornio-coracoes.jpg",
-
-    "maze-forest":"./assets/images/activities/unicornio-arcoiris.jpg",
     "word-forest":"./assets/images/floresta.webp",
+    "puzzle-forest":"./assets/images/floresta.webp",
     "color-forest":"./assets/images/activities/unicornio-arcoiris-sonho.jpg",
-
     "maze-pool":"./assets/images/activities/unicornio-estelar.jpg",
-    "number-pool":"./assets/images/piscina.webp",
+    "puzzle-pool":"./assets/images/piscina.webp",
     "color-pool":"./assets/images/activities/unicornio-com-asas.jpg",
-
     "farm-feed":"./assets/images/floresta.webp",
-    "number-farm":"./assets/images/activities/counting/lama.webp",
-    "memory-farm":"./assets/images/floresta.webp",
-
+    "memory-farm":"./assets/images/activities/counting/lama.webp",
+    "puzzle-farm":"./assets/images/floresta.webp",
     "maze-park":"./assets/images/activities/castelo-encantado.jpg",
     "number-park":"./assets/images/arcoiris.webp",
     "puzzle-park":"./assets/images/arcoiris.webp",
-
-    "maze-city":"./assets/images/activities/princesa-torre.jpg",
     "math-city":"./assets/images/sala.webp",
     "color-city":"./assets/images/activities/princesa-maca.jpg",
-
-    "maze-rainbow":"./assets/images/activities/unicornio-arcoiris-sonho.jpg",
+    "puzzle-city":"./assets/images/sala.webp",
     "math-rainbow":"./assets/images/arcoiris.webp",
-    "color-rainbow":"./assets/images/activities/unicornio-coracoes.jpg"
+    "color-rainbow":"./assets/images/activities/unicornio-coracoes.jpg",
+    "puzzle-rainbow":"./assets/images/arcoiris.webp"
   };
 
   const byType = {
@@ -1065,89 +1056,109 @@ function startMazeActivity(root,world,finish){
   draw();
 }
 
-function startPuzzleActivity(root,world,finish){
-  let tiles = [1,2,3,4,5,6,7,8,0];
 
-  const activity = {
-    id:root.dataset.activityId || "puzzle",
-    type:"puzzle",
-    icon:"🧩",
-    title:"Puzzle"
+const PUZZLE_CONFIGS = {
+  "puzzle-room":{mode:"sequence",heading:"Puzzle dos Números",intro:"Desliza uma peça para o espaço vazio e coloca os números por ordem.",objective:"1 · 2 · 3 / 4 · 5 · 6 / 7 · 8",pieces:["1","2","3","4","5","6","7","8"]},
+  "puzzle-home":{mode:"sequence",heading:"Sequência do Alfabeto",intro:"Ordena as letras do alfabeto de A até H.",objective:"A · B · C / D · E · F / G · H",pieces:["A","B","C","D","E","F","G","H"]},
+  "puzzle-school":{mode:"picture",heading:"Puzzle da Escola",intro:"Reconstrói a imagem do quadro escolar e dos materiais.",objective:"Reconstruir a imagem completa"},
+  "puzzle-beach":{mode:"sequence",heading:"Puzzle da Praia",intro:"Ordena a palavra PRAIA e os símbolos do mar.",objective:"P · R · A / I · A · 🌊 / ☀️ · 🐚",pieces:["P","R","A","I","A","🌊","☀️","🐚"]},
+  "puzzle-forest":{mode:"sequence",heading:"Puzzle da Floresta",intro:"Ordena as letras da palavra FLORESTA.",objective:"F · L · O / R · E · S / T · A",pieces:["F","L","O","R","E","S","T","A"]},
+  "puzzle-pool":{mode:"sequence",heading:"Puzzle da Piscina",intro:"Conta de 2 em 2 e ordena os números na piscina tropical.",objective:"2 · 4 · 6 / 8 · 10 · 12 / 14 · 16",pieces:["2","4","6","8","10","12","14","16"]},
+  "puzzle-farm":{mode:"sequence",heading:"Puzzle da Quinta",intro:"Ordena as letras da palavra GALINHAS.",objective:"G · A · L / I · N · H / A · S",pieces:["G","A","L","I","N","H","A","S"]},
+  "puzzle-park":{mode:"picture",heading:"Puzzle da Diversão",intro:"Reconstrói a imagem do parque das aventuras.",objective:"Reconstruir a imagem completa"},
+  "puzzle-city":{mode:"sequence",heading:"Puzzle da Cidade",intro:"Ordena as letras da palavra TRANSITO.",objective:"T · R · A / N · S · I / T · O",pieces:["T","R","A","N","S","I","T","O"]},
+  "puzzle-rainbow":{mode:"sequence",heading:"Puzzle Final do Arco-Íris",intro:"Ordena as letras da palavra ARCOIRIS.",objective:"A · R · C / O · I · R / I · S",pieces:["A","R","C","O","I","R","I","S"]}
+};
+
+function startPuzzleActivity(root,world,finish){
+  const activityId = root.dataset.activityId || "puzzle";
+  const config = PUZZLE_CONFIGS[activityId] || {
+    mode:"sequence",
+    heading:"Puzzle",
+    intro:"Desliza uma peça para o espaço vazio.",
+    objective:"1 · 2 · 3 / 4 · 5 · 6 / 7 · 8",
+    pieces:["1","2","3","4","5","6","7","8"]
   };
 
-  const puzzleImage = activityVisualFor(world,activity);
+  const puzzleImage = activityVisualFor(world,{id:activityId,type:"puzzle",icon:"🧩",title:config.heading});
+  let values = config.mode === "picture" ? [1,2,3,4,5,6,7,8,0] : [...config.pieces,0];
+  const solved = [...values];
 
   const neighbours = index=>{
     const row = Math.floor(index/3);
     const col = index%3;
-
-    return [
-      [row-1,col],[row+1,col],[row,col-1],[row,col+1]
-    ]
+    return [[row-1,col],[row+1,col],[row,col-1],[row,col+1]]
       .filter(([r,c])=>r>=0&&r<3&&c>=0&&c<3)
       .map(([r,c])=>r*3+c);
   };
 
-  for(let step=0;step<120;step++){
-    const blank = tiles.indexOf(0);
+  for(let step=0;step<140;step++){
+    const blank = values.indexOf(0);
     const choices = neighbours(blank);
     const move = choices[Math.floor(Math.random()*choices.length)];
-    [tiles[blank],tiles[move]]=[tiles[move],tiles[blank]];
+    [values[blank],values[move]] = [values[move],values[blank]];
   }
 
-  if(tiles.every((value,index)=>value === [1,2,3,4,5,6,7,8,0][index])){
-    [tiles[7],tiles[8]]=[tiles[8],tiles[7]];
+  if(values.every((value,index)=>value === solved[index])){
+    [values[7],values[8]] = [values[8],values[7]];
   }
 
   root.innerHTML = `
-    <div class="puzzle-picture-intro card" data-image-frame>
-      <img
-        data-local-activity-image
-        src="${puzzleImage}"
-        alt="Imagem completa do puzzle"
-        loading="eager"
-      >
-      <div>
-        <h3>Observa a imagem</h3>
-        <p>Desliza as peças para reconstruíres esta imagem.</p>
+    ${config.mode === "picture" ? `
+      <div class="puzzle-picture-intro card" data-image-frame>
+        <img data-local-activity-image src="${puzzleImage}" alt="Imagem completa do puzzle" loading="eager">
+        <div>
+          <h3>${config.heading}</h3>
+          <p>${config.intro}</p>
+        </div>
+        <span class="activity-image-fallback" aria-hidden="true">🧩</span>
       </div>
-      <span class="activity-image-fallback" aria-hidden="true">🧩</span>
-    </div>
+    ` : `
+      <div class="sequence-puzzle-intro card">
+        <div class="sequence-puzzle-icon">🧩</div>
+        <div>
+          <h3>${config.heading}</h3>
+          <p>${config.intro}</p>
+        </div>
+      </div>
+    `}
 
-    <div
-      class="sliding-puzzle picture-sliding-puzzle"
-      id="sliding-puzzle"
-      style="--puzzle-picture:url('${puzzleImage}')"
-    ></div>
+    <div class="sliding-puzzle ${config.mode === "picture" ? "picture-sliding-puzzle" : "sequence-sliding-puzzle"}" id="sliding-puzzle" style="${config.mode === "picture" ? `--puzzle-picture:url('${puzzleImage}')` : ""}"></div>
 
     <p class="mini-feedback" id="puzzle-feedback">
-      Toca numa peça junto ao espaço vazio.
+      ${config.mode === "picture" ? "Toca numa peça junto ao espaço vazio." : "Desliza as peças até completares a sequência certa."}
     </p>
+
+    <div class="puzzle-target"><strong>Objetivo:</strong> ${config.objective}</div>
   `;
 
   bindLocalImageFallbacks(root);
 
+  function isSolved(){
+    return values.every((value,index)=>value === solved[index]);
+  }
+
   function draw(){
-    root.querySelector("#sliding-puzzle").innerHTML = tiles.map((tile,index)=>{
-      if(!tile){
-        return `<div class="puzzle-tile picture-puzzle-tile empty"></div>`;
+    root.querySelector("#sliding-puzzle").innerHTML = values.map((value,index)=>{
+      if(value === 0){
+        return `<div class="puzzle-tile ${config.mode === "picture" ? "picture-puzzle-tile" : "sequence-puzzle-tile"} empty"></div>`;
       }
 
-      const sourceIndex = tile-1;
-      const row = Math.floor(sourceIndex/3);
-      const col = sourceIndex%3;
+      if(config.mode === "picture"){
+        const sourceIndex = value - 1;
+        const row = Math.floor(sourceIndex / 3);
+        const col = sourceIndex % 3;
+
+        return `
+          <button class="puzzle-tile picture-puzzle-tile" data-tile-index="${index}" style="--tile-x:${col};--tile-y:${row};" aria-label="Peça ${value}">
+            <span>${value}</span>
+          </button>
+        `;
+      }
 
       return `
-        <button
-          class="puzzle-tile picture-puzzle-tile"
-          data-tile-index="${index}"
-          style="
-            --tile-x:${col};
-            --tile-y:${row};
-          "
-          aria-label="Peça ${tile}"
-        >
-          <span>${tile}</span>
+        <button class="puzzle-tile sequence-puzzle-tile" data-tile-index="${index}" aria-label="Peça ${value}">
+          <span class="sequence-piece-label">${value}</span>
         </button>
       `;
     }).join("");
@@ -1155,21 +1166,20 @@ function startPuzzleActivity(root,world,finish){
     root.querySelectorAll("[data-tile-index]").forEach(button=>{
       button.addEventListener("click",()=>{
         const index = Number(button.dataset.tileIndex);
-        const blank = tiles.indexOf(0);
+        const blank = values.indexOf(0);
 
         if(!neighbours(blank).includes(index)){
           playWrongAnswer();
-          root.querySelector("#puzzle-feedback").textContent =
-            "Essa peça não está junto ao espaço vazio.";
+          root.querySelector("#puzzle-feedback").textContent = "Essa peça não está junto ao espaço vazio.";
           return;
         }
 
-        [tiles[blank],tiles[index]]=[tiles[index],tiles[blank]];
+        [values[blank],values[index]] = [values[index],values[blank]];
         audio.effect("place");
         draw();
 
-        if(tiles.every((value,position)=>value === [1,2,3,4,5,6,7,8,0][position])){
-          finish("Completaste o puzzle e reconstruíste a imagem!");
+        if(isSolved()){
+          finish(config.mode === "picture" ? "Concluíste o puzzle e reconstruíste a imagem!" : "Muito bem! Organizaste a sequência corretamente!");
         }
       });
     });
@@ -1333,11 +1343,12 @@ function startBoardActivity(root,world,finish){
 
 function startColoringActivity(root,world,finish){
   const pages = [
-    {id:"princesa-maca",label:"Princesa da Maçã",subtitle:"Inspirada no desenho clássico da princesa com a maçã",image:"./assets/images/activities/princesa-maca.jpg",outline:"./assets/images/activities/princesa-maca-contorno.png"},
-    {id:"unicornio-com-asas",label:"Unicórnio com Asas",subtitle:"Um pequeno unicórnio mágico pronto para ganhar cor",image:"./assets/images/activities/unicornio-com-asas.jpg",outline:"./assets/images/activities/unicornio-com-asas-contorno.png"},
-    {id:"unicornio-coracoes",label:"Unicórnio de Corações",subtitle:"Corações e fantasia para pintar livremente",image:"./assets/images/activities/unicornio-coracoes.jpg",outline:"./assets/images/activities/unicornio-coracoes-contorno.png"},
+    {id:"princesa-arcoiris",label:"Princesa do Arco-Íris",subtitle:"Princesa inspirada no desenho enviado, agora com cenário de arco-íris",image:"./assets/images/activities/princesa_arcoiris_ref.png",outline:"./assets/images/activities/princesa_arcoiris_outline.png"},
+    {id:"unicornio-grande-arcoiris",label:"Unicórnio Encantado",subtitle:"Inspirado no desenho enviado, com arco-íris mágico",image:"./assets/images/activities/unicornio_grande_arcoiris_ref.png",outline:"./assets/images/activities/unicornio_grande_arcoiris_outline.png"},
+    {id:"unicornio-jardim-arcoiris",label:"Unicórnio no Jardim do Arco-Íris",subtitle:"Flores, estrelas e arco-íris para pintar",image:"./assets/images/activities/unicornio_jardim_arcoiris_ref.png",outline:"./assets/images/activities/unicornio_jardim_arcoiris_outline.png"},
+    {id:"princesa-maca",label:"Princesa da Maçã",subtitle:"Inspirada no desenho clássico da princesa, com toque de arco-íris",image:"./assets/images/activities/princesa-maca.jpg",outline:"./assets/images/activities/princesa-maca-contorno.png"},
     {id:"unicornio-arcoiris-sonho",label:"Unicórnio do Arco-Íris",subtitle:"Um unicórnio sob o arco-íris e as estrelas",image:"./assets/images/activities/unicornio-arcoiris-sonho.jpg",outline:"./assets/images/activities/unicornio-arcoiris-sonho-contorno.png"},
-    {id:"castle",label:"Castelo Encantado",subtitle:"O grande reino da imaginação",image:"./assets/images/activities/castelo-encantado.jpg",outline:"./assets/images/activities/castelo-encantado-contorno.png"}
+    {id:"castle",label:"Castelo Encantado do Arco-Íris",subtitle:"O grande reino da imaginação com arco-íris",image:"./assets/images/activities/castelo-encantado.jpg",outline:"./assets/images/activities/castelo-encantado-contorno.png"}
   ];
   let page = pages[0];
   let color = "#f062b2";

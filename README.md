@@ -313,3 +313,30 @@ Nova cache PWA: `ninita-lama-imagens-atividades-revistas-v22`.
 - A música baixa automaticamente enquanto o aplauso ou a voz está a tocar.
 - Página de teste: `teste-sons.html`.
 - Nova cache PWA: `ninita-lama-aplausos-voz-v23`.
+
+
+## Atualização v24 — puzzles por nível
+
+Foi acrescentado um puzzle do tipo deslizante em todos os 10 níveis, mantendo 3 atividades por nível:
+
+- nível 1: números;
+- nível 2: alfabeto A-H;
+- nível 3: puzzle da escola;
+- nível 4: palavra PRAIA;
+- nível 5: palavra FLORESTA;
+- nível 6: contagem de 2 em 2;
+- nível 7: palavra GALINHAS;
+- nível 8: puzzle do parque;
+- nível 9: palavra TRANSITO;
+- nível 10: palavra ARCOIRIS.
+
+
+## Atualização — pack completo dos desenhos para pintar
+
+Foram incluídos no jogo os novos desenhos para colorir inspirados nas imagens enviadas pelo utilizador:
+
+- Princesa do Arco-Íris
+- Unicórnio Encantado
+- Unicórnio no Jardim do Arco-Íris
+
+Todos os novos desenhos incluem o tema do **arco-íris**.

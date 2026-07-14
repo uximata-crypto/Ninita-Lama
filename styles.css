@@ -2209,3 +2209,67 @@ img{display:block;max-width:100%}
     font-size:.70rem;
   }
 }
+
+
+/* v24 — puzzles por nível */
+.sequence-puzzle-intro{
+  display:grid;
+  grid-template-columns:78px 1fr;
+  align-items:center;
+  gap:14px;
+  margin-bottom:12px;
+}
+.sequence-puzzle-icon{
+  width:78px;
+  height:78px;
+  display:grid;
+  place-items:center;
+  font-size:2.3rem;
+  border-radius:20px;
+  background:linear-gradient(135deg,#ffe7a8,#f7a0bd);
+}
+.sequence-sliding-puzzle{
+  background:#6b3a7c;
+}
+.sequence-puzzle-tile{
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  font-size:clamp(1.1rem,4vw,2rem);
+  color:#532d64;
+  background:linear-gradient(180deg,#ffe9ad,#f4a2c3);
+  border:3px solid rgba(255,255,255,.88);
+  box-shadow:inset 0 0 0 2px rgba(104,51,118,.08);
+}
+.sequence-puzzle-tile.empty{
+  background:#83589a;
+  border-color:transparent;
+  box-shadow:none;
+}
+.sequence-piece-label{
+  padding:.2rem .35rem;
+  line-height:1;
+  text-align:center;
+}
+.puzzle-target{
+  margin-top:12px;
+  padding:14px 16px;
+  border-radius:18px;
+  background:#efe3fa;
+  color:#59356a;
+  font-weight:800;
+  text-align:center;
+}
+@media(max-width:760px){
+  .sequence-puzzle-intro{
+    grid-template-columns:58px 1fr;
+    gap:10px;
+    padding:10px;
+  }
+  .sequence-puzzle-icon{
+    width:58px;
+    height:58px;
+    font-size:1.8rem;
+    border-radius:16px;
+  }
+}
