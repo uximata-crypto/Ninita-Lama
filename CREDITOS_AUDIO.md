@@ -54,3 +54,16 @@ Guarde os comprovativos de download e licença das faixas obtidas no Pixabay.
 - Aplauso de resposta certa: efeito local processado para o projeto.
 - Aplauso de conclusão: efeito local processado para o projeto.
 - Voz “Tenta outra vez!”: voz sintética em português de Portugal, criada localmente para o projeto.
+
+
+## Efeitos realistas v30
+
+- Palmas: efeito original criado e misturado especificamente para o projeto.
+- Erro: buzzer original criado e misturado especificamente para o projeto.
+- Voz “Tenta outra vez!”: português de Portugal.
+
+
+## Efeitos v33
+- Aplausos gravados: ficheiro de áudio real incluído localmente.
+- Efeito de erro gravado: ficheiro de áudio real incluído localmente.
+- Frase “Tenta outra vez!”: voz nativa `pt-PT` do sistema através da Web Speech API.

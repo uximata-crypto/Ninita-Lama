@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-interacoes-v31";
+const CACHE = "ninita-lama-palmas-voz-real-v33";
 
 const ASSETS = [
   "./",
@@ -73,8 +73,12 @@ const ASSETS = [
   "./assets/audio/effects/resposta_errada_com_voz.wav",
   "./teste-sons-reais.html",
   "./assets/audio/effects/aplausos_reais.wav",
+  "./assets/audio/effects/aplausos_reais_v2.wav",
   "./assets/audio/effects/erro_real_buzzer.wav",
   "./assets/audio/effects/erro_real_tenta_outra_vez.wav",
+  "./assets/audio/effects/erro_real_tenta_outra_vez_v2.wav",,
+  "./assets/audio/effects/aplausos_gravados_reais.wav",
+  "./assets/audio/effects/erro_gravado_real.wav"
 ];
 
 async function cacheAssetsIndividually(){

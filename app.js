@@ -320,8 +320,29 @@ function playCorrectAnswer(){
   audio.feedback("applauseCorrect",1.0,.08);
 }
 
+function speakTryAgain(){
+  if(!("speechSynthesis" in window)) return;
+
+  window.speechSynthesis.cancel();
+  const message = new SpeechSynthesisUtterance("Tenta outra vez!");
+  message.lang = "pt-PT";
+  message.rate = 0.92;
+  message.pitch = 1.08;
+  message.volume = 1;
+
+  const voices = window.speechSynthesis.getVoices();
+  const portugueseVoice = voices.find(voice=>
+    /^pt-PT$/i.test(voice.lang) && /female|femin|helena|joana|catarina|maria/i.test(voice.name)
+  ) || voices.find(voice=>/^pt-PT$/i.test(voice.lang))
+    || voices.find(voice=>/^pt/i.test(voice.lang));
+
+  if(portugueseVoice) message.voice = portugueseVoice;
+  window.speechSynthesis.speak(message);
+}
+
 function playWrongAnswer(){
-  audio.feedback("wrongAnswer",1.0,.06);
+  audio.feedback("wrongAnswer",1.0,.05);
+  setTimeout(speakTryAgain,520);
 }
 
 function finishActivity(world,activity,message){
@@ -2116,9 +2137,9 @@ const REAL_AUDIO = {
     spongeWash: "./assets/audio/effects/esponja_agua.wav",
     hairDryer: "./assets/audio/effects/secador.wav",
     combBrush: "./assets/audio/effects/pente.wav",
-    applauseCorrect: "./assets/audio/effects/aplausos_reais.wav",
-    applauseFinal: "./assets/audio/effects/aplausos_reais.wav",
-    wrongAnswer: "./assets/audio/effects/erro_real_tenta_outra_vez.wav"
+    applauseCorrect: "./assets/audio/effects/aplausos_gravados_reais.wav",
+    applauseFinal: "./assets/audio/effects/aplausos_gravados_reais.wav",
+    wrongAnswer: "./assets/audio/effects/erro_gravado_real.wav"
   }
 };
 

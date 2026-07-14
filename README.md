@@ -394,3 +394,16 @@ A imagem da família deixou de usar o modo `cover` em ecrãs largos. Agora mant�
 - **Cozinha da Ninita**: agora os ingredientes vão para a tigela com interação e a receita é mexida com a colher 3 vezes.
 - **Quinta Pedagógica**: agora a **Ninita dá a comida na boca** dos animais, com alimento selecionado e zona de boca em cada animal.
 - Nova cache: `ninita-lama-interacoes-v31`.
+
+
+## Atualização v32 — efeitos sonoros mais reais
+- Novo som de **palmas/aplausos mais realista**: `aplausos_reais_v2.wav`.
+- Novo som de **erro com voz** mais realista: `erro_real_tenta_outra_vez_v2.wav`.
+- Atualizada a cache do service worker para forçar renovação dos sons.
+
+
+## Atualização v33 — palmas gravadas e voz nativa
+- O acerto usa agora um ficheiro de **aplausos gravados**, sem síntese.
+- O erro usa um efeito gravado curto e, de seguida, a voz nativa do dispositivo em português de Portugal a dizer **“Tenta outra vez!”**.
+- A aplicação procura primeiro uma voz feminina `pt-PT`; quando não existir, usa outra voz portuguesa disponível no telemóvel ou computador.
+- Nova cache: `ninita-lama-palmas-voz-real-v33`.
