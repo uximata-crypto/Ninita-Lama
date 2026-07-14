@@ -2317,12 +2317,6 @@ function renderHome(){
     <main class="screen home-screen">
       <div class="home-overlay"></div>
 
-      <section class="hero-panel home-hero-panel">
-        <div class="logo-badge" aria-hidden="true">🦙</div>
-        <h1>Ninita e Lama</h1>
-        <p class="subtitle">A Viagem dos Mundos Mágicos</p>
-      </section>
-
       <section class="home-main-menu" aria-label="Menu principal">
         <button class="home-menu-option home-menu-game" data-action="play">
           <span class="home-menu-icon" aria-hidden="true">🎮</span>
@@ -2381,6 +2375,12 @@ function renderHome(){
           Aproxima a Ninita dos objetos, agarra-os e leva-os às zonas iluminadas.
           No telemóvel também podes arrastar os objetos diretamente.
         </p>
+      </section>
+
+      <section class="hero-panel home-hero-panel home-hero-footer">
+        <div class="logo-badge" aria-hidden="true">🦙</div>
+        <h1>Ninita e Lama</h1>
+        <p class="subtitle">A Viagem dos Mundos Mágicos</p>
       </section>
 
       <div class="footer-note-block">

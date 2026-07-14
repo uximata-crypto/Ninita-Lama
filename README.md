@@ -371,3 +371,10 @@ A imagem da família deixou de usar o modo `cover` em ecrãs largos. Agora mant�
 - O botão também aparece nas janelas das atividades.
 - No telemóvel, o botão fica compacto e mostra apenas o ícone da casa.
 - Nova cache PWA: `ninita-lama-botao-menu-inicial-v28`.
+
+
+## Atualização v29 — título no rodapé
+
+- O painel com o título **Ninita e Lama** foi retirado do topo e colocado no **rodapé** da página inicial.
+- O painel ficou mais compacto, mantendo o mesmo estilo visual do jogo.
+- Nova cache PWA: `ninita-lama-titulo-no-rodape-v29`.

@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-botao-menu-inicial-v28";
+const CACHE = "ninita-lama-titulo-no-rodape-v29";
 
 const ASSETS = [
   "./",

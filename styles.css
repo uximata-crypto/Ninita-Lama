@@ -2481,3 +2481,65 @@ img{display:block;max-width:100%}
     animation:none!important;
   }
 }
+
+
+/* ==========================================================
+   v29 — painel do título movido para o rodapé
+   ========================================================== */
+.home-hero-footer{
+  position:relative;
+  z-index:2;
+  width:min(100%,640px);
+  margin:18px 0 10px auto;
+  padding:20px 24px;
+  text-align:left;
+  background:rgba(255,255,255,.12);
+  border:2px solid rgba(255,255,255,.22);
+  border-radius:28px;
+  box-shadow:0 14px 34px rgba(24,12,38,.28);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.home-hero-footer .logo-badge{
+  width:80px;
+  height:80px;
+  margin:0 0 12px;
+  font-size:40px;
+}
+.home-hero-footer h1{
+  font-size:clamp(2.3rem,4.6vw,4rem);
+}
+.home-hero-footer .subtitle{
+  font-size:clamp(1.05rem,2vw,1.45rem);
+}
+@media (min-width:980px){
+  .home-hero-footer,
+  .footer-note-block{
+    width:min(48vw,660px);
+    margin-left:auto;
+    margin-right:0;
+  }
+}
+@media (max-width:979px){
+  .home-hero-footer{
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+@media (max-width:640px){
+  .home-hero-footer{
+    padding:16px 18px;
+    border-radius:24px;
+  }
+  .home-hero-footer .logo-badge{
+    width:72px;
+    height:72px;
+    font-size:34px;
+  }
+  .home-hero-footer h1{
+    font-size:clamp(1.95rem,9vw,3rem);
+  }
+  .home-hero-footer .subtitle{
+    font-size:clamp(.98rem,4vw,1.2rem);
+  }
+}
