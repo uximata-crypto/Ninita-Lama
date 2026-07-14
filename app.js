@@ -43,6 +43,7 @@ const LEVEL_ACTIVITIES = {
   3:[
     {id:"board-school",type:"board",icon:"🧮",title:"Quadro Escolar da Ninita",description:"Letras, números e pequenas sequências num quadro escolar mágico."},
     {id:"puzzle-school",type:"puzzle",icon:"🧩",title:"Puzzle da Escola",description:"Completa o puzzle da escola e ordena a imagem."},
+    {id:"puzzle-school-numbers",type:"puzzle",icon:"🔢",title:"Puzzle dos Números",description:"Ordena os números de 1 a 8 no puzzle da escola."},
     {id:"color-school",type:"coloring",icon:"🎨",title:"Desenhos Mágicos",description:"Pinta princesas, unicórnios e outras figuras inspiradas nas imagens."}
   ],
   4:[
@@ -123,6 +124,7 @@ function activityVisualFor(world,activity){
     "puzzle-home":"./assets/images/activities/cozinha-ninita.webp",
     "board-school":"./assets/images/activities/quadro-ninita.webp",
     "puzzle-school":"./assets/images/activities/quadro-ninita.webp",
+    "puzzle-school-numbers":"./assets/images/activities/quadro-ninita.webp",
     "color-school":"./assets/images/activities/unicornio-com-asas.jpg",
     "maze-beach":"./assets/images/activities/princesa-oceano.jpg",
     "puzzle-beach":"./assets/images/praia.webp",
@@ -1061,6 +1063,7 @@ const PUZZLE_CONFIGS = {
   "puzzle-room":{mode:"sequence",heading:"Puzzle dos Números",intro:"Desliza uma peça para o espaço vazio e coloca os números por ordem.",objective:"1 · 2 · 3 / 4 · 5 · 6 / 7 · 8",pieces:["1","2","3","4","5","6","7","8"]},
   "puzzle-home":{mode:"sequence",heading:"Sequência do Alfabeto",intro:"Ordena as letras do alfabeto de A até H.",objective:"A · B · C / D · E · F / G · H",pieces:["A","B","C","D","E","F","G","H"]},
   "puzzle-school":{mode:"picture",heading:"Puzzle da Escola",intro:"Reconstrói a imagem do quadro escolar e dos materiais.",objective:"Reconstruir a imagem completa"},
+  "puzzle-school-numbers":{mode:"sequence",heading:"Puzzle dos Números da Escola",intro:"Desliza uma peça para o espaço vazio e ordena os números.",objective:"1 · 2 · 3 / 4 · 5 · 6 / 7 · 8",pieces:["1","2","3","4","5","6","7","8"]},
   "puzzle-beach":{mode:"sequence",heading:"Puzzle da Praia",intro:"Ordena a palavra PRAIA e os símbolos do mar.",objective:"P · R · A / I · A · 🌊 / ☀️ · 🐚",pieces:["P","R","A","I","A","🌊","☀️","🐚"]},
   "puzzle-forest":{mode:"sequence",heading:"Puzzle da Floresta",intro:"Ordena as letras da palavra FLORESTA.",objective:"F · L · O / R · E · S / T · A",pieces:["F","L","O","R","E","S","T","A"]},
   "puzzle-pool":{mode:"sequence",heading:"Puzzle da Piscina",intro:"Conta de 2 em 2 e ordena os números na piscina tropical.",objective:"2 · 4 · 6 / 8 · 10 · 12 / 14 · 16",pieces:["2","4","6","8","10","12","14","16"]},
@@ -2371,7 +2374,7 @@ function renderHome(){
 
       <div class="footer-note-block">
         <p class="footer-note">Jogo, atividades educativas, história, música e efeitos.</p>
-        <p class="footer-credit">©2026 PAI - Fernando Pereira</p>
+        <p class="footer-credit">©2026 PAI - Fernando Pereira   MÃE - Neusa</p>
       </div>
     </main>
   `;

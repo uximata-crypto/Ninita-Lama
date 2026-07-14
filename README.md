@@ -340,3 +340,21 @@ Foram incluídos no jogo os novos desenhos para colorir inspirados nas imagens e
 - Unicórnio no Jardim do Arco-Íris
 
 Todos os novos desenhos incluem o tema do **arco-íris**.
+
+
+## Atualização — Escola com mais um puzzle
+
+No **Mundo 3 — Escola** foi acrescentada mais uma atividade: **Puzzle dos Números da Escola**, mantendo também o **Puzzle da Escola** por imagem.
+
+Assim, a escola passa a ter 4 atividades:
+- Quadro Escolar da Ninita
+- Puzzle da Escola
+- Puzzle dos Números
+- Desenhos Mágicos
+
+
+## Atualização final
+- Ecrã inicial com cenário de boa-noite em estilo do jogo.
+- Menu principal deslocado para a direita em ecrãs largos.
+- Créditos atualizados para: ©2026 PAI - Fernando Pereira   MÃE - Neusa.
+- Fundo novo em `assets/images/home_family.webp`.

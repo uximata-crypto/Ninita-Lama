@@ -216,7 +216,7 @@ img{display:block;max-width:100%}
 /* --- Ajustes da versão realista vertical --- */
 .home-screen{
   background:linear-gradient(to bottom,rgba(38,16,47,.15),rgba(38,16,47,.84)),
-  url("./assets/images/quarto.webp") center/cover no-repeat;
+  url("./assets/images/home_family.webp") center/cover no-repeat;
 }
 
 .story-hero,
@@ -2271,5 +2271,65 @@ img{display:block;max-width:100%}
     height:58px;
     font-size:1.8rem;
     border-radius:16px;
+  }
+}
+
+
+/* --- vFinal: menu inicial com fundo família e menu à direita --- */
+.home-screen{
+  align-items:stretch;
+}
+.home-hero-panel{
+  width:min(100%,560px);
+  margin:0 auto 18px;
+}
+.home-main-menu,
+.home-progress-panel,
+.home-how-to-play{
+  width:min(100%,640px);
+  margin-left:auto;
+  margin-right:0;
+}
+.footer-note-block{
+  width:min(100%,640px);
+  margin-left:auto;
+  margin-right:0;
+  text-align:center;
+}
+@media (min-width: 980px){
+  .home-screen{
+    padding-left:56px;
+    padding-right:56px;
+  }
+  .home-hero-panel{
+    margin-left:0;
+    margin-right:auto;
+    text-align:left;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(10px);
+    border-radius:28px;
+    padding:22px 26px;
+  }
+  .home-hero-panel .logo-badge{
+    margin-left:0;
+    margin-right:0;
+  }
+  .home-main-menu,
+  .home-progress-panel,
+  .home-how-to-play,
+  .footer-note-block{
+    width:min(48vw,660px);
+    margin-left:auto;
+    margin-right:0;
+  }
+}
+@media (max-width: 979px){
+  .home-main-menu,
+  .home-progress-panel,
+  .home-how-to-play,
+  .footer-note-block,
+  .home-hero-panel{
+    margin-left:auto;
+    margin-right:auto;
   }
 }
