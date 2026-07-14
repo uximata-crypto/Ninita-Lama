@@ -358,3 +358,16 @@ Assim, a escola passa a ter 4 atividades:
 - Menu principal deslocado para a direita em ecrãs largos.
 - Créditos atualizados para: ©2026 PAI - Fernando Pereira   MÃE - Neusa.
 - Fundo novo em `assets/images/home_family.webp`.
+
+
+## Atualização v27 — imagem inicial redimensionada
+
+A imagem da família deixou de usar o modo `cover` em ecrãs largos. Agora mantém a altura total, alinhada à esquerda, sem ampliar excessivamente os rostos.
+
+
+## Atualização v28 — botão para o menu inicial
+
+- Foi acrescentado um botão animado **🏠 Menu inicial** em todos os cabeçalhos.
+- O botão também aparece nas janelas das atividades.
+- No telemóvel, o botão fica compacto e mostra apenas o ícone da casa.
+- Nova cache PWA: `ninita-lama-botao-menu-inicial-v28`.

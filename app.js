@@ -282,7 +282,13 @@ function createActivityModal(world,activity){
           <h2>${activity.icon} ${activity.title}</h2>
           <p>${activity.description}</p>
         </div>
-        <button class="activity-close" data-close-activity aria-label="Fechar atividade">×</button>
+        <div class="activity-modal-actions">
+          <button class="home-return-btn home-return-animated activity-home-return" data-action="home-menu" aria-label="Voltar ao menu inicial">
+            <span class="home-return-icon" aria-hidden="true">🏠</span>
+            <span class="home-return-text">Menu inicial</span>
+          </button>
+          <button class="activity-close" data-close-activity aria-label="Fechar atividade">×</button>
+        </div>
       </header>
 
       <div class="activity-modal-visual">
@@ -2255,6 +2261,11 @@ function topbar(title,subtitle="",actions=""){
   return `
     <header class="topbar">
       <button class="icon-btn" data-action="back" aria-label="Voltar">←</button>
+
+      <button class="home-return-btn home-return-animated" data-action="home-menu" aria-label="Voltar ao menu inicial">
+        <span class="home-return-icon" aria-hidden="true">🏠</span>
+        <span class="home-return-text">Menu inicial</span>
+      </button>
 
       <div class="topbar-main">
         <h2>${title}</h2>
@@ -4847,6 +4858,12 @@ document.addEventListener("click",event=>{
     && element.dataset.action !== "finish-interactive"
   ){
     audio.effect("click");
+  }
+
+  if(element.dataset.action === "home-menu"){
+    closeActivityModal();
+    routeTo("home");
+    return;
   }
 
   if(element.dataset.action === "play") routeTo("worlds");
