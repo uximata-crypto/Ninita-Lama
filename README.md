@@ -378,3 +378,19 @@ A imagem da família deixou de usar o modo `cover` em ecrãs largos. Agora mant�
 - O painel com o título **Ninita e Lama** foi retirado do topo e colocado no **rodapé** da página inicial.
 - O painel ficou mais compacto, mantendo o mesmo estilo visual do jogo.
 - Nova cache PWA: `ninita-lama-titulo-no-rodape-v29`.
+
+
+## Atualização v30 — novos efeitos realistas
+
+- As palmas foram totalmente refeitas, com várias pessoas, ritmos diferentes, profundidade estéreo e reverberação de sala.
+- O som de resposta errada foi substituído por um buzzer de concurso mais realista.
+- Depois do buzzer continua a ouvir-se: **“Tenta outra vez!”**
+- Página de teste: `teste-sons-reais.html`.
+- Nova cache: `ninita-lama-efeitos-reais-v30`.
+
+
+## Atualização v31 — cozinha e quinta mais interativas
+
+- **Cozinha da Ninita**: agora os ingredientes vão para a tigela com interação e a receita é mexida com a colher 3 vezes.
+- **Quinta Pedagógica**: agora a **Ninita dá a comida na boca** dos animais, com alimento selecionado e zona de boca em cada animal.
+- Nova cache: `ninita-lama-interacoes-v31`.

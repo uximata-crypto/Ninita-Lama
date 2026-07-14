@@ -1,4 +1,4 @@
-const CACHE = "ninita-lama-titulo-no-rodape-v29";
+const CACHE = "ninita-lama-interacoes-v31";
 
 const ASSETS = [
   "./",
@@ -71,6 +71,10 @@ const ASSETS = [
   "./assets/audio/effects/aplauso_final_forte.wav",
   "./assets/audio/effects/tenta_outra_vez.wav",
   "./assets/audio/effects/resposta_errada_com_voz.wav",
+  "./teste-sons-reais.html",
+  "./assets/audio/effects/aplausos_reais.wav",
+  "./assets/audio/effects/erro_real_buzzer.wav",
+  "./assets/audio/effects/erro_real_tenta_outra_vez.wav",
 ];
 
 async function cacheAssetsIndividually(){

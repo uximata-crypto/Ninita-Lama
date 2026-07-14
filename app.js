@@ -1771,6 +1771,7 @@ function startCareActivity(root,world,finish){
   update();
 }
 
+
 function startCookingActivity(root,world,finish){
   const recipes = [
     {id:"fruit",title:"Salada de fruta",emoji:"🍓",steps:["🍎","🍌","🍓","🥝"],serve:"Numa tigela colorida"},
@@ -1779,32 +1780,177 @@ function startCookingActivity(root,world,finish){
   ];
   let recipe = recipes[0];
   let step = 0;
+  let selectedToken = "";
+  let mixCount = 0;
+  let activeTokens = [];
+
   root.innerHTML = `
     <div class="kitchen-hero card">
       <img src="./assets/images/activities/cozinha-ninita.webp" alt="Cozinha da Ninita">
-      <div><h3>Cozinha da Ninita</h3><p>Inspirada na cozinha de brincar. Escolhe uma receita e junta os ingredientes pela ordem certa.</p></div>
+      <div><h3>Cozinha da Ninita</h3><p>Agora a Ninita vai cozinhar contigo. Arrasta os ingredientes para a tigela e, no fim, mexe a receita com interação.</p></div>
     </div>
     <div class="recipe-choice">${recipes.map(item=>`<button data-recipe="${item.id}">${item.emoji} ${item.title}</button>`).join("")}</div>
     <div class="cooking-counter cooking-counter-play">
-      <div class="kitchen-board-note">Hoje vamos cozinhar de faz de conta com a Ninita!</div>
-      <div class="cooking-bowl" id="cooking-bowl">🥣</div>
+      <div class="kitchen-board-note">Escolhe a receita, coloca os ingredientes na tigela e depois mexe com a colher.</div>
       <h3 id="recipe-title"></h3>
       <p class="recipe-serve" id="recipe-serve"></p>
       <div class="recipe-steps" id="recipe-steps"></div>
-      <div class="ingredients" id="ingredients"></div>
+      <div class="cooking-play-area">
+        <section class="ingredient-station">
+          <h4>Ingredientes</h4>
+          <div class="ingredients drag-ingredients" id="ingredients"></div>
+        </section>
+        <section class="bowl-station">
+          <div class="cooking-bowl interactive-bowl" id="cooking-bowl" tabindex="0">🥣</div>
+          <div class="bowl-contents" id="bowl-contents"></div>
+          <p class="bowl-hint" id="bowl-hint">Arrasta o ingrediente certo para a tigela ou toca no ingrediente e depois na tigela.</p>
+          <div class="mix-zone hidden" id="mix-zone">
+            <button class="mix-tool" id="mix-tool" draggable="true">🥄</button>
+            <span id="mix-label">Quando a tigela estiver cheia, mexe 3 vezes.</span>
+          </div>
+        </section>
+      </div>
       <p class="mini-feedback" id="cooking-feedback"></p>
     </div>`;
+
+  const ingredientsContainer = root.querySelector("#ingredients");
+  const bowl = root.querySelector("#cooking-bowl");
+  const bowlContents = root.querySelector("#bowl-contents");
+  const mixZone = root.querySelector("#mix-zone");
+  const mixLabel = root.querySelector("#mix-label");
+
+  function recipeTokens(){
+    return recipe.steps.map((item,index)=>({token:`${recipe.id}-${index}-${item}`,item,index}));
+  }
+
+  function renderIngredients(){
+    ingredientsContainer.innerHTML = activeTokens.map(entry=>`
+      <button class="ingredient draggable-food" draggable="true" data-token="${entry.token}" data-ingredient="${entry.item}">${entry.item}</button>
+    `).join("");
+
+    ingredientsContainer.querySelectorAll("[data-token]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        selectedToken = button.dataset.token;
+        ingredientsContainer.querySelectorAll("[data-token]").forEach(item=>item.classList.toggle("selected",item===button));
+        root.querySelector("#cooking-feedback").textContent = `Selecionaste ${button.dataset.ingredient}. Agora coloca-o na tigela.`;
+      });
+      button.addEventListener("dragstart",event=>{
+        selectedToken = button.dataset.token;
+        event.dataTransfer.setData("text/plain", button.dataset.token);
+        event.dataTransfer.effectAllowed = "move";
+      });
+    });
+  }
+
+  function updateBowl(){
+    bowlContents.innerHTML = recipe.steps.map((item,index)=>`<span class="bowl-slot ${index < step ? 'filled' : ''}">${index < step ? item : '·'}</span>`).join("");
+    bowl.classList.toggle("ready", step === recipe.steps.length);
+  }
+
+  function resetSelection(){
+    selectedToken = "";
+    ingredientsContainer.querySelectorAll("[data-token]").forEach(item=>item.classList.remove("selected"));
+  }
+
+  function animateBowl(){
+    bowl.classList.remove("stir");
+    void bowl.offsetWidth;
+    bowl.classList.add("stir");
+  }
+
+  function addIngredient(token){
+    const entry = activeTokens.find(item=>item.token===token);
+    if(!entry) return;
+    const expected = recipe.steps[step];
+    if(entry.item !== expected){
+      playWrongAnswer();
+      root.querySelector("#cooking-feedback").textContent = `Agora precisamos de ${expected}.`;
+      const wrongButton = ingredientsContainer.querySelector(`[data-token="${token}"]`);
+      if(wrongButton){
+        wrongButton.classList.add("wrong");
+        setTimeout(()=>wrongButton.classList.remove("wrong"),350);
+      }
+      return;
+    }
+    activeTokens = activeTokens.filter(item=>item.token!==token);
+    root.querySelector(`[data-recipe-step="${step}"]`).classList.add("done");
+    step++;
+    renderIngredients();
+    updateBowl();
+    resetSelection();
+    playCorrectAnswer();
+    animateBowl();
+
+    if(step === recipe.steps.length){
+      bowl.textContent = recipe.emoji;
+      mixZone.classList.remove("hidden");
+      mixLabel.textContent = "Receita pronta! Arrasta ou toca na colher para mexer 3 vezes.";
+      root.querySelector("#cooking-feedback").textContent = "Muito bem! Agora mexe a tigela 3 vezes.";
+      setupMixing();
+    }else{
+      bowl.textContent = "🥣✨";
+      root.querySelector("#cooking-feedback").textContent = `Muito bem! Agora junta ${recipe.steps[step]}.`;
+    }
+  }
+
+  function stirOnce(){
+    if(step !== recipe.steps.length) return;
+    mixCount++;
+    animateBowl();
+    playCorrectAnswer();
+    mixLabel.textContent = `A mexer... ${mixCount}/3`;
+    root.querySelector("#cooking-feedback").textContent = `A Ninita está a mexer a ${recipe.title.toLowerCase()} (${mixCount}/3).`;
+    if(mixCount >= 3){
+      finish(`Preparaste e mexeste uma deliciosa ${recipe.title.toLowerCase()} na Cozinha da Ninita!`);
+    }
+  }
+
+  function setupMixing(){
+    const mixTool = root.querySelector("#mix-tool");
+    if(!mixTool) return;
+    mixTool.addEventListener("click", stirOnce);
+    mixTool.addEventListener("dragstart", event=>{
+      event.dataTransfer.setData("text/plain", "mix-tool");
+      event.dataTransfer.effectAllowed = "move";
+    });
+  }
+
+  bowl.addEventListener("dragover", event=>event.preventDefault());
+  bowl.addEventListener("drop", event=>{
+    event.preventDefault();
+    const token = event.dataTransfer.getData("text/plain") || selectedToken;
+    if(token === "mix-tool") stirOnce();
+    else addIngredient(token);
+  });
+  bowl.addEventListener("click", ()=>{
+    if(step === recipe.steps.length) return;
+    if(selectedToken) addIngredient(selectedToken);
+  });
+
   function drawRecipe(){
-    step=0; root.querySelector("#recipe-title").textContent=recipe.title; root.querySelector("#recipe-serve").textContent=recipe.serve; root.querySelector("#recipe-steps").innerHTML=recipe.steps.map((item,index)=>`<span data-recipe-step="${index}">${index+1}. ${item}</span>`).join(""); root.querySelector("#ingredients").innerHTML=shuffleItems([...new Set(recipe.steps)]).map(item=>`<button class="ingredient" data-ingredient="${item}">${item}</button>`).join(""); root.querySelector("#cooking-feedback").textContent="Junta os ingredientes pela ordem apresentada."; root.querySelector("#cooking-bowl").textContent = "🥣"; bindIngredients();
+    step = 0;
+    selectedToken = "";
+    mixCount = 0;
+    activeTokens = recipeTokens();
+    root.querySelector("#recipe-title").textContent = recipe.title;
+    root.querySelector("#recipe-serve").textContent = recipe.serve;
+    root.querySelector("#recipe-steps").innerHTML = recipe.steps.map((item,index)=>`<span data-recipe-step="${index}">${index+1}. ${item}</span>`).join("");
+    bowl.textContent = "🥣";
+    root.querySelector("#cooking-feedback").textContent = "Junta os ingredientes pela ordem apresentada e coloca-os na tigela.";
+    mixZone.classList.add("hidden");
+    mixLabel.textContent = "Quando a tigela estiver cheia, mexe 3 vezes.";
+    renderIngredients();
+    updateBowl();
   }
-  function bindIngredients(){
-    root.querySelectorAll("[data-ingredient]").forEach(button=>button.addEventListener("click",()=>{
-      const expected=recipe.steps[step];
-      if(button.dataset.ingredient===expected){ root.querySelector(`[data-recipe-step="${step}"]`).classList.add("done"); step++; root.querySelector("#cooking-bowl").textContent=step===recipe.steps.length ? recipe.emoji : "🥣✨"; playCorrectAnswer(); if(step===recipe.steps.length){ root.querySelector("#ingredients").innerHTML='<button class="btn btn-primary" id="mix-recipe">Misturar e servir</button>'; root.querySelector("#cooking-feedback").textContent='Receita pronta! Agora serve-a.'; root.querySelector("#mix-recipe").addEventListener("click",()=>finish(`Preparaste uma deliciosa ${recipe.title.toLowerCase()} na Cozinha da Ninita!`)); } }
-      else { playWrongAnswer(); button.classList.add("wrong"); root.querySelector("#cooking-feedback").textContent=`Agora precisamos de ${expected}.`; setTimeout(()=>button.classList.remove("wrong"),350); }
-    }));
-  }
-  root.querySelectorAll("[data-recipe]").forEach(button=>button.addEventListener("click",()=>{ recipe=recipes.find(item=>item.id===button.dataset.recipe) || recipes[0]; root.querySelectorAll("[data-recipe]").forEach(item=>item.classList.toggle("selected",item===button)); drawRecipe(); }));
+
+  root.querySelectorAll("[data-recipe]").forEach(button=>button.addEventListener("click",()=>{
+    recipe = recipes.find(item=>item.id===button.dataset.recipe) || recipes[0];
+    root.querySelectorAll("[data-recipe]").forEach(item=>item.classList.toggle("selected",item===button));
+    drawRecipe();
+  }));
+
+  const firstRecipeButton = root.querySelector('[data-recipe="fruit"]');
+  if(firstRecipeButton) firstRecipeButton.classList.add("selected");
   drawRecipe();
 }
 
@@ -1829,48 +1975,95 @@ function startFarmActivity(root,world,finish){
   const fed = new Set();
 
   root.innerHTML = `
-    <div class="mini-instruction">Primeiro escolhe a comida. Depois toca no animal certo.</div>
-    <div class="farm-foods">${foods.map(food=>`<button data-food="${food.id}"><span>${food.icon}</span>${food.name}</button>`).join("")}</div>
-    <p class="mini-feedback" id="farm-feedback">Escolhe um alimento.</p>
-    <div class="farm-animals">${animals.map(animal=>`
-      <button class="farm-animal" data-animal="${animal.id}">
-        <span class="farm-animal-icon">${animal.icon}</span>
-        <strong>${animal.name}</strong>
-        <small>${animal.group}</small>
-        <span class="fed-badge">Alimentado ✓</span>
-      </button>
-    `).join("")}</div>
+    <div class="mini-instruction">Escolhe a comida, coloca-a na mão da Ninita e leva-a até à boca do animal certo.</div>
+    <div class="farm-layout">
+      <section class="ninita-feeder card">
+        <div class="ninita-feeder-scene">
+          <img class="ninita-feeder-image" src="./assets/images/activities/counting/ninita.webp" alt="Ninita pronta para alimentar os animais">
+          <div class="ninita-hand" id="ninita-hand" title="Comida na mão da Ninita">🍽️</div>
+        </div>
+        <p class="mini-feedback" id="farm-feedback">Escolhe um alimento para a Ninita dar na boca ao animal.</p>
+        <div class="farm-foods">${foods.map(food=>`<button draggable="true" data-food="${food.id}"><span>${food.icon}</span>${food.name}</button>`).join("")}</div>
+      </section>
+      <section class="farm-stage-panel">
+        <div class="farm-animals">${animals.map(animal=>`
+          <div class="farm-animal" data-animal="${animal.id}">
+            <span class="farm-animal-icon">${animal.icon}</span>
+            <strong>${animal.name}</strong>
+            <small>${animal.group}</small>
+            <button class="animal-mouth" data-mouth="${animal.id}">👄 Boca</button>
+            <span class="fed-badge">Alimentado ✓</span>
+          </div>
+        `).join("")}</div>
+      </section>
+    </div>
     <article class="animal-fact" id="animal-fact">Aqui vais aprender uma curiosidade sobre cada animal.</article>
   `;
 
-  root.querySelectorAll("[data-food]").forEach(button=>button.addEventListener("click",()=>{
-    selectedFood=button.dataset.food;
-    root.querySelectorAll("[data-food]").forEach(item=>item.classList.toggle("selected",item===button));
-    root.querySelector("#farm-feedback").textContent=`Selecionaste ${foods.find(food=>food.id===selectedFood).name}. Agora escolhe o animal.`;
-  }));
-  root.querySelectorAll("[data-animal]").forEach(button=>button.addEventListener("click",()=>{
-    const animal=animals.find(item=>item.id===button.dataset.animal);
-    if(fed.has(animal.id)) return;
+  const hand = root.querySelector("#ninita-hand");
+
+  function showSelectedFood(){
+    const chosen = foods.find(food=>food.id===selectedFood);
+    hand.innerHTML = chosen ? `<span class="hand-food">${chosen.icon}</span><small>${chosen.name}</small>` : "🍽️";
+  }
+
+  function feedAnimal(animalId){
+    const animal = animals.find(item=>item.id===animalId);
+    const card = root.querySelector(`[data-animal="${animalId}"]`);
+    if(!animal || !card || fed.has(animal.id)) return;
     if(!selectedFood){
-      root.querySelector("#farm-feedback").textContent="Escolhe primeiro a comida.";
+      root.querySelector("#farm-feedback").textContent = "Escolhe primeiro a comida para a Ninita.";
       return;
     }
-    if(selectedFood===animal.food){
+    const food = foods.find(item=>item.id===selectedFood);
+    if(selectedFood === animal.food){
       fed.add(animal.id);
-      button.classList.add("fed");
-      root.querySelector("#animal-fact").innerHTML=`<strong>${animal.icon} ${animal.name}</strong><p>${animal.fact}</p>`;
-      root.querySelector("#farm-feedback").textContent=`Muito bem! Alimentaste ${animal.name}.`;
+      card.classList.add("fed","eating");
+      root.querySelector("#animal-fact").innerHTML = `<strong>${animal.icon} ${animal.name}</strong><p>${animal.fact}</p>`;
+      root.querySelector("#farm-feedback").textContent = `Muito bem! A Ninita deu ${food.name.toLowerCase()} na boca de ${animal.name}.`;
       playCorrectAnswer();
-      if(fed.size===animals.length) finish("Alimentaste mamíferos, aves e répteis da quinta pedagógica!");
+      selectedFood = null;
+      root.querySelectorAll("[data-food]").forEach(item=>item.classList.remove("selected"));
+      showSelectedFood();
+      setTimeout(()=>card.classList.remove("eating"),600);
+      if(fed.size===animals.length) finish("A Ninita alimentou todos os animais da quinta pedagógica!");
     }else{
       playWrongAnswer();
-      root.querySelector("#farm-feedback").textContent=`Esse alimento não é o indicado para ${animal.name}. Tenta outro.`;
-      button.classList.add("wrong");
-      setTimeout(()=>button.classList.remove("wrong"),400);
+      root.querySelector("#farm-feedback").textContent = `${food.name} não é o alimento indicado para ${animal.name}. Tenta outro.`;
+      card.classList.add("wrong");
+      setTimeout(()=>card.classList.remove("wrong"),400);
     }
-  }));
-}
+  }
 
+  root.querySelectorAll("[data-food]").forEach(button=>{
+    button.addEventListener("click",()=>{
+      selectedFood = button.dataset.food;
+      root.querySelectorAll("[data-food]").forEach(item=>item.classList.toggle("selected",item===button));
+      const choice = foods.find(food=>food.id===selectedFood);
+      root.querySelector("#farm-feedback").textContent = `A Ninita pegou em ${choice.name.toLowerCase()}. Agora leva-o à boca do animal certo.`;
+      showSelectedFood();
+    });
+    button.addEventListener("dragstart",event=>{
+      selectedFood = button.dataset.food;
+      event.dataTransfer.setData("text/plain", button.dataset.food);
+      event.dataTransfer.effectAllowed = "move";
+      root.querySelectorAll("[data-food]").forEach(item=>item.classList.toggle("selected",item===button));
+      showSelectedFood();
+    });
+  });
+
+  root.querySelectorAll("[data-mouth]").forEach(button=>{
+    button.addEventListener("click",()=>feedAnimal(button.dataset.mouth));
+    button.addEventListener("dragover",event=>event.preventDefault());
+    button.addEventListener("drop",event=>{
+      event.preventDefault();
+      selectedFood = event.dataTransfer.getData("text/plain") || selectedFood;
+      feedAnimal(button.dataset.mouth);
+    });
+  });
+
+  showSelectedFood();
+}
 
 // -------------------------------------------------------------
 // Progresso
@@ -1923,9 +2116,9 @@ const REAL_AUDIO = {
     spongeWash: "./assets/audio/effects/esponja_agua.wav",
     hairDryer: "./assets/audio/effects/secador.wav",
     combBrush: "./assets/audio/effects/pente.wav",
-    applauseCorrect: "./assets/audio/effects/aplauso_certo_forte.wav",
-    applauseFinal: "./assets/audio/effects/aplauso_final_forte.wav",
-    wrongAnswer: "./assets/audio/effects/resposta_errada_com_voz.wav"
+    applauseCorrect: "./assets/audio/effects/aplausos_reais.wav",
+    applauseFinal: "./assets/audio/effects/aplausos_reais.wav",
+    wrongAnswer: "./assets/audio/effects/erro_real_tenta_outra_vez.wav"
   }
 };
 
