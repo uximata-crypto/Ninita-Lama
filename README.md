@@ -414,3 +414,12 @@ A imagem da família deixou de usar o modo `cover` em ecrãs largos. Agora mant�
 - Movimento lento, efeito de profundidade, brilho pulsante e estrelas a cintilar.
 - Adaptação para computador e telemóvel.
 - Nova cache: `ninita-lama-centro-animado-v34`.
+
+
+## Atualização v35 — imagem central expandida
+
+- A nova paisagem mágica panorâmica foi expandida desde o centro até ao limite direito.
+- A imagem passa agora por trás dos botões **Jogo**, **Atividades** e **História**.
+- Foi aplicado um sombreado gradual por baixo dos menus para manter o texto legível.
+- Permanecem os movimentos, o brilho pulsante e as estrelas cintilantes.
+- Nova cache PWA: `ninita-lama-imagem-central-expandida-v35`.

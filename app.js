@@ -2533,7 +2533,7 @@ function renderHome(){
 
       <section class="home-magic-middle" aria-hidden="true">
         <div class="home-magic-glow"></div>
-        <img src="./assets/images/home_magic_middle.webp" alt="" loading="eager">
+        <img src="./assets/images/home_magic_wide.webp" alt="" loading="eager">
         <span class="magic-spark magic-spark-1">✦</span>
         <span class="magic-spark magic-spark-2">✧</span>
         <span class="magic-spark magic-spark-3">✦</span>

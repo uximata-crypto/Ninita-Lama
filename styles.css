@@ -2664,3 +2664,137 @@ img{display:block;max-width:100%}
 @media (prefers-reduced-motion:reduce){
   .home-magic-middle img,.home-magic-glow,.magic-spark{animation:none!important}
 }
+
+
+/* ==========================================================
+   v35 — imagem mágica expandida por trás dos menus
+   ========================================================== */
+.home-magic-middle{
+  z-index:0;
+  left:31%;
+  right:0;
+  width:auto;
+  top:0;
+  bottom:0;
+  border-radius:0;
+  mask-image:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0,0,0,.72) 8%,
+    #000 17%,
+    #000 100%
+  );
+  -webkit-mask-image:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0,0,0,.72) 8%,
+    #000 17%,
+    #000 100%
+  );
+}
+
+.home-magic-middle img{
+  inset:-3%;
+  width:106%;
+  height:106%;
+  object-fit:cover;
+  object-position:center center;
+  filter:saturate(1.16) brightness(.96)
+    drop-shadow(0 0 28px rgba(255,119,236,.32));
+}
+
+/* Escurecimento apenas atrás dos menus para manter a leitura. */
+.home-magic-middle::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(31,10,43,.05) 38%,
+      rgba(31,10,43,.34) 63%,
+      rgba(31,10,43,.72) 84%,
+      rgba(31,10,43,.88) 100%
+    ),
+    radial-gradient(
+      circle at 70% 46%,
+      transparent 0%,
+      rgba(30,9,42,.08) 42%,
+      rgba(30,9,42,.34) 100%
+    );
+}
+
+/* Todos os blocos do menu ficam claramente acima da imagem. */
+.home-main-menu,
+.home-progress-panel,
+.home-how-to-play,
+.home-hero-footer,
+.footer-note-block{
+  position:relative;
+  z-index:6;
+}
+
+/* Um pouco mais de transparência para a paisagem continuar visível. */
+.home-progress-panel,
+.home-how-to-play{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+}
+
+.home-hero-footer{
+  background:rgba(52,31,62,.78);
+  backdrop-filter:blur(11px);
+  -webkit-backdrop-filter:blur(11px);
+}
+
+@media (min-width:1400px){
+  .home-magic-middle{
+    left:29%;
+  }
+  .home-magic-middle img{
+    object-position:48% center;
+  }
+}
+
+@media (max-width:979px){
+  .home-magic-middle{
+    position:relative;
+    left:auto;
+    right:auto;
+    top:auto;
+    bottom:auto;
+    width:min(94%,720px);
+    height:360px;
+    margin:12px auto 18px;
+    border-radius:28px;
+    mask-image:none;
+    -webkit-mask-image:none;
+    overflow:hidden;
+  }
+
+  .home-magic-middle::after{
+    background:linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(32,10,44,.12) 66%,
+      rgba(32,10,44,.42) 100%
+    );
+  }
+
+  .home-magic-middle img{
+    inset:-2%;
+    width:104%;
+    height:104%;
+    object-position:center center;
+  }
+}
+
+@media (max-width:560px){
+  .home-magic-middle{
+    height:285px;
+  }
+}
