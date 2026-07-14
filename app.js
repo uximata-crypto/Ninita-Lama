@@ -2531,6 +2531,17 @@ function renderHome(){
     <main class="screen home-screen">
       <div class="home-overlay"></div>
 
+      <section class="home-magic-middle" aria-hidden="true">
+        <div class="home-magic-glow"></div>
+        <img src="./assets/images/home_magic_middle.webp" alt="" loading="eager">
+        <span class="magic-spark magic-spark-1">✦</span>
+        <span class="magic-spark magic-spark-2">✧</span>
+        <span class="magic-spark magic-spark-3">✦</span>
+        <span class="magic-spark magic-spark-4">✧</span>
+        <span class="magic-spark magic-spark-5">✦</span>
+        <span class="magic-spark magic-spark-6">✧</span>
+      </section>
+
       <section class="home-main-menu" aria-label="Menu principal">
         <button class="home-menu-option home-menu-game" data-action="play">
           <span class="home-menu-icon" aria-hidden="true">🎮</span>

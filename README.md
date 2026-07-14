@@ -407,3 +407,10 @@ A imagem da família deixou de usar o modo `cover` em ecrãs largos. Agora mant�
 - O erro usa um efeito gravado curto e, de seguida, a voz nativa do dispositivo em português de Portugal a dizer **“Tenta outra vez!”**.
 - A aplicação procura primeiro uma voz feminina `pt-PT`; quando não existir, usa outra voz portuguesa disponível no telemóvel ou computador.
 - Nova cache: `ninita-lama-palmas-voz-real-v33`.
+
+
+## Atualização v34 — centro mágico animado
+- O espaço central do menu inicial foi preenchido com o cenário mágico enviado.
+- Movimento lento, efeito de profundidade, brilho pulsante e estrelas a cintilar.
+- Adaptação para computador e telemóvel.
+- Nova cache: `ninita-lama-centro-animado-v34`.
